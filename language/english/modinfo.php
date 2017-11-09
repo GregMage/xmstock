@@ -22,6 +22,7 @@ define('_MI_XMSTOCK_DESC', 'Stock management');
 
 // Menu
 define('_MI_XMSTOCK_MENU_HOME', 'Index');
+define('_MI_XMSTOCK_MENU_AREA', 'Area');
 define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 
 // Sub menu

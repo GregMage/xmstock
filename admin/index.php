@@ -30,6 +30,11 @@ if (is_dir(XOOPS_ROOT_PATH . '/modules/xmarticle')) {
 } else {
     $moduleAdmin->addConfigError(_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR);
 }
+$folder[] = $path_logo_area;
+foreach (array_keys( $folder) as $i) {
+    $moduleAdmin->addConfigBoxLine($folder[$i], 'folder');
+    $moduleAdmin->addConfigBoxLine(array($folder[$i], '777'), 'chmod');
+}
 $moduleAdmin->displayIndex();
 
 require __DIR__ . '/admin_footer.php';

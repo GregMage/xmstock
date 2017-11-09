@@ -40,14 +40,17 @@ $modversion['adminindex']  = 'admin/index.php';
 $modversion['adminmenu']   = 'admin/menu.php';
 
 // Install and update
-//$modversion['onInstall']        = 'include/install.php';
+$modversion['onInstall']        = 'include/install.php';
 //$modversion['onUpdate']         = 'include/update.php';
 
 // Tables
-//$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
+
+$modversion['tables'][1] = 'xmstock_area';
 
 
 // Admin Templates
+$modversion['templates'][] = array('file' => 'xmstock_admin_area.tpl', 'description' => '', 'type' => 'admin');
 
 // User Templates
 
