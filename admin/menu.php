@@ -32,12 +32,18 @@ $adminmenu[] = [
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . 'home.png'
 ];
-
+//area
 $adminmenu[] = [
     'title' => _MI_XMSTOCK_MENU_AREA,
     'link'  => 'admin/area.php',
     'icon'  => $pathIcon32 . 'delivery.png'
 ];
+// Permission
+$adminmenu[] = array(
+    'title' => _MI_XMSTOCK_MENU_PERMISSION ,
+    'link'  => 'admin/permission.php' ,
+    'icon'  => $pathIcon32 . 'permissions.png'
+) ;
 
 // About
 $adminmenu[] = [

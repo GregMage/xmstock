@@ -48,6 +48,20 @@ define('_MA_XMSTOCK_AREA_UPLOAD', 'Upload');
 define('_MA_XMSTOCK_AREA_UPLOADSIZE', 'Maximum size: %s kB');
 define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
 
+// permission
+define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');
+define('_MA_XMSTOCK_PERMISSION_MANAGE_DSC', 'Select groups that can manage this area');
+define('_MA_XMSTOCK_PERMISSION_SUPERVISE', 'Supervisor Permissions');
+define('_MA_XMSTOCK_PERMISSION_SUPERVISE_DSC', 'Select groups that can supervise this area');
+define('_MA_XMSTOCK_PERMISSION_VIEW', 'View Permissions');
+define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this area');
+define('_MA_XMSTOCK_PERMISSION_REQUEST', 'request permission');
+define('_MA_XMSTOCK_PERMISSION_REQUEST_DSC', 'Select groups that can request an article in this area');
+define('_MA_XMSTOCK_PERMISSION_OTHER', 'Other permissions');
+define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Select groups that can:');
+define('_MA_XMSTOCK_PERMISSION_OTHER_4', '');
+define('_MA_XMSTOCK_PERMISSION_OTHER_8', '');
+
 // Admin
 define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
 
