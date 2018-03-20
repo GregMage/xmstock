@@ -32,7 +32,6 @@ $modversion['image']       = 'assets/images/xmstock_logo.png';
 
 // Menu
 
-
 // Admin things
 $modversion['hasAdmin']    = 1;
 $modversion['system_menu'] = 1;
