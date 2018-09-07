@@ -46,6 +46,9 @@ $modversion['onInstall']        = 'include/install.php';
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 $modversion['tables'][1] = 'xmstock_area';
+$modversion['tables'][2] = 'xmstock_transfer';
+$modversion['tables'][3] = 'xmstock_stock';
+$modversion['tables'][4] = 'xmstock_output';
 
 
 // Admin Templates
