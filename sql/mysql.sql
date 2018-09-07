@@ -13,7 +13,7 @@ CREATE TABLE `xmstock_area` (
 
 CREATE TABLE `xmstock_transfer` (
   `transfer_id`             int(11) unsigned    	NOT NULL AUTO_INCREMENT,
-  `area_description`    	text,
+  `transfer_description`    	text,
   `transfer_articleid`      int(11) unsigned    	NOT NULL,
   `transfer_st_areaid`      int(11) unsigned   		NOT NULL,
   `transfer_ar_areaid`      int(11) unsigned    	NOT NULL,
