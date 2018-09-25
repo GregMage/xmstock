@@ -60,7 +60,7 @@ class xmstock_transfer extends XoopsObject
 }
 
 /**
- * Classxmstockxmstock_areaHandler
+ * Classxmstockxmstock_transferHandler
  */
 class xmstockxmstock_transferHandler extends XoopsPersistableObjectHandler
 {
