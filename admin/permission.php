@@ -46,7 +46,7 @@ if (isset($tab_perm)){
     switch ($permission) {
         case 1:    // manage permission
             $formTitle = _MA_XMSTOCK_PERMISSION_MANAGE;
-            $permissionName = 'xmdoc_manage';
+            $permissionName = 'xmstock_manage';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_MANAGE_DSC;
             foreach (array_keys($area_arr) as $i) {
                 $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
@@ -54,7 +54,7 @@ if (isset($tab_perm)){
             break;
 		case 2:    // supervisor permission
             $formTitle = _MA_XMSTOCK_PERMISSION_SUPERVISE;
-            $permissionName = 'xmdoc_submit';
+            $permissionName = 'xmstock_supervisor';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_SUPERVISE_DSC;
             foreach (array_keys($area_arr) as $i) {
                 $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
@@ -62,7 +62,7 @@ if (isset($tab_perm)){
             break;
 		case 3:    // view permission
             $formTitle = _MA_XMSTOCK_PERMISSION_VIEW;
-            $permissionName = 'xmdoc_submit';
+            $permissionName = 'xmstock_view';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_VIEW_DSC;
             foreach (array_keys($area_arr) as $i) {
                 $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
@@ -71,7 +71,7 @@ if (isset($tab_perm)){
 
         case 4:    // request permission
             $formTitle = _MA_XMSTOCK_PERMISSION_REQUEST;
-            $permissionName = 'xmdoc_submit';
+            $permissionName = 'xmstock_request';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_REQUEST_DSC;
             foreach (array_keys($area_arr) as $i) {
                 $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
@@ -79,7 +79,7 @@ if (isset($tab_perm)){
             break;
 		case 5:    // Other permission
 			$formTitle = _MA_XMSTOCK_PERMISSION_OTHER;
-			$permissionName = 'xmdoc_other';
+			$permissionName = 'xmstock_other';
 			$permissionDescription = _MA_XMSTOCK_PERMISSION_OTHER_DSC;
 			$global_perms_array    = [
 				'4' => _MA_XMSTOCK_PERMISSION_OTHER_4 ,
