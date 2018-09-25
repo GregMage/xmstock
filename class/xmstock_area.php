@@ -183,6 +183,13 @@ class xmstock_area extends XoopsObject
         $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA,);
         $form_status->addOptionArray($options);
         $form->addElement($form_status);
+		
+		// permission
+        $permHelper = new \Xmf\Module\Helper\Permission();
+        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_manage', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_VIEW_THIS, 'xmstock_manage_perms', true));
+        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_supervisor', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_SUBMIT_THIS, 'xmstock_supervisor_perms', true));
+		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_view', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_SUBMIT_THIS, 'xmstock_view_perms', true));
+		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_request', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_SUBMIT_THIS, 'xmstock_request_perms', true));
 
         $form->addElement(new XoopsFormHidden('op', 'save'));
         // submit
