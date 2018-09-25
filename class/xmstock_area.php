@@ -186,10 +186,10 @@ class xmstock_area extends XoopsObject
 		
 		// permission
         $permHelper = new \Xmf\Module\Helper\Permission();
-        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_manage', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_VIEW_THIS, 'xmstock_manage_perms', true));
-        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_supervisor', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_SUBMIT_THIS, 'xmstock_supervisor_perms', true));
-		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_view', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_SUBMIT_THIS, 'xmstock_view_perms', true));
-		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_request', $this->getVar('area_id'), _MA_XMARTICLE_PERMISSION_SUBMIT_THIS, 'xmstock_request_perms', true));
+        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_manage', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_MANAGE_DSC, 'xmstock_manage_perms', true));
+        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_supervisor', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_SUPERVISE, 'xmstock_supervisor_perms', true));
+		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_view', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_VIEW, 'xmstock_view_perms', true));
+		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_request', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_REQUEST, 'xmstock_request_perms', true));
 
         $form->addElement(new XoopsFormHidden('op', 'save'));
         // submit
