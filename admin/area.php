@@ -145,6 +145,10 @@ switch ($op) {
                     }
                     // Del permissions
                     $permHelper = new \Xmf\Module\Helper\Permission();
+					$permHelper->deletePermissionForItem('xmstock_manage', $area_id);
+                    $permHelper->deletePermissionForItem('xmstock_supervisor', $area_id);
+                    $permHelper->deletePermissionForItem('xmstock_view', $area_id);
+                    $permHelper->deletePermissionForItem('xmstock_request', $area_id);					
                     redirect_header('area.php', 2, _MA_XMSTOCK_REDIRECT_SAVE);
                 } else {
                     $xoopsTpl->assign('error_message', $obj->getHtmlErrors());

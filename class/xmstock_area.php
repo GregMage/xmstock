@@ -100,8 +100,18 @@ class xmstock_area extends XoopsObject
 					$perm_id = $this->get_new_enreg();
 				}
                 $permHelper = new \Xmf\Module\Helper\Permission();
-				// permission a faire!!
-
+                // permission manage
+                $groups_manage = \Xmf\Request::getArray('xmstock_manage_perms', array(), 'POST');
+                $permHelper->savePermissionForItem('xmstock_manage', $perm_id, $groups_manage);
+				// permission supervisor
+                $groups_supervisor = \Xmf\Request::getArray('xmstock_supervisor_perms', array(), 'POST');
+                $permHelper->savePermissionForItem('xmstock_supervisor', $perm_id, $groups_supervisor);
+				// permission view
+                $groups_view = \Xmf\Request::getArray('xmstock_view_perms', array(), 'POST');
+                $permHelper->savePermissionForItem('xmstock_view', $perm_id, $groups_view);
+				// permission request
+                $groups_request = \Xmf\Request::getArray('xmstock_request_perms', array(), 'POST');
+                $permHelper->savePermissionForItem('xmstock_request', $perm_id, $groups_request);
                 redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
             } else {
                 $error_message =  $this->getHtmlErrors();
@@ -187,9 +197,9 @@ class xmstock_area extends XoopsObject
 		// permission
         $permHelper = new \Xmf\Module\Helper\Permission();
         $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_manage', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_MANAGE_DSC, 'xmstock_manage_perms', true));
-        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_supervisor', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_SUPERVISE, 'xmstock_supervisor_perms', true));
-		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_view', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_VIEW, 'xmstock_view_perms', true));
-		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_request', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_REQUEST, 'xmstock_request_perms', true));
+        $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_supervisor', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_SUPERVISE_DSC, 'xmstock_supervisor_perms', true));
+		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_view', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_VIEW_DSC, 'xmstock_view_perms', true));
+		$form->addElement($permHelper->getGroupSelectFormForItem('xmstock_request', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_REQUEST_DSC, 'xmstock_request_perms', true));
 
         $form->addElement(new XoopsFormHidden('op', 'save'));
         // submit
