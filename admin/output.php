@@ -47,25 +47,23 @@ switch ($op) {
         $xoopsTpl->assign('output_count', $output_count);
         if ($output_count > 0) {
             foreach (array_keys($output_arr) as $i) {
-                $output_id                 = $output_arr[$i]->getVar('output_id');
-                $output['id']              = $output_id;
-                $output['name']            = $area_arr[$i]->getVar('area_name');
-                $output['description']     = \Xmf\Metagen::generateDescription($output_arr[$i]->getVar('output_description', 'show'), 30);
-				$area['location']            = $area_arr[$i]->getVar('area_location');
-                $area['weight']          = $area_arr[$i]->getVar('area_weight');
-                $area['status']          = $area_arr[$i]->getVar('area_status');
-                $area_img                = $area_arr[$i]->getVar('area_logo') ?: 'blank.gif';
-                $area['logo']            = '<img src="' . $url_logo_area .  $area_img . '" alt="' . $area_img . '" />';
-                $xoopsTpl->append_by_ref('area', $area);
+                $output_id               = $output_arr[$i]->getVar('output_id');
+                $output['id']            = $output_id;
+                $output['name']          = $output_arr[$i]->getVar('output_name');
+                $output['description']   = \Xmf\Metagen::generateDescription($output_arr[$i]->getVar('output_description', 'show'), 30);
+				$output['receiver']      = XoopsUser::getUnameFromId($output_arr[$i]->getVar('output_userid'));
+                $output['weight']        = $output_arr[$i]->getVar('output_weight');
+                $output['status']        = $output_arr[$i]->getVar('output_status');
+                $xoopsTpl->append_by_ref('output', $output);
                 unset($area);
             }
             // Display Page Navigation
-            if ($area_count > $nb_limit) {
-                $nav = new XoopsPageNav($area_count, $nb_limit, $start, 'start');
+            if ($output_count > $nb_limit) {
+                $nav = new XoopsPageNav($output_count, $nb_limit, $start, 'start');
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         } else {
-            $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOAREA);
+            $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOOUTPUT);
         }
         break;
     
@@ -107,7 +105,7 @@ switch ($op) {
         } else {
             $obj = $outputHandler->get($output_id);
         }
-        $error_message = $obj->saveArea($outputHandler, 'output.php');
+        $error_message = $obj->saveOutput($outputHandler, 'output.php');
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
             $form = $obj->getForm();

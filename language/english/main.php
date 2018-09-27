@@ -20,6 +20,8 @@
 // Button
 define('_MA_XMSTOCK_AREA_ADD', 'Add area');
 define('_MA_XMSTOCK_AREA_LIST', 'Area list');
+define('_MA_XMSTOCK_OUTPUT_ADD', 'Add Output');
+define('_MA_XMSTOCK_OUTPUT_LIST', 'Output list');
 
 // Shared
 define('_MA_XMSTOCK_ADD', 'Add');
@@ -34,6 +36,8 @@ define('_MA_XMSTOCK_VIEW', 'View');
 
 // Error message
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
+define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
+define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
 
 // area
 define('_MA_XMSTOCK_AREA_DESC', 'Description');
@@ -47,6 +51,14 @@ define('_MA_XMSTOCK_AREA_SUREDEL', 'Sure to delete this area? %s');
 define('_MA_XMSTOCK_AREA_UPLOAD', 'Upload');
 define('_MA_XMSTOCK_AREA_UPLOADSIZE', 'Maximum size: %s kB');
 define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
+
+//output
+define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
+define('_MA_XMSTOCK_OUTPUT_NAME', 'Name');
+define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Sure to delete this output? %s');
+define('_MA_XMSTOCK_OUTPUT_USERID', 'Receiver');
+define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Weight');
+
 
 // permission
 define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');

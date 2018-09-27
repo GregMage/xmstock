@@ -51,6 +51,37 @@ class xmstock_output extends XoopsObject
         $new_enreg = $xoopsDB->getInsertId();
         return $new_enreg;
     }
+
+    /**
+     * @return mixed
+     */
+    public function saveOutput($areaHandler, $action = false)
+    {
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        include __DIR__ . '/../include/common.php';
+        
+        $error_message = '';
+        // test error
+        if ((int)$_REQUEST['output_weight'] == 0 && $_REQUEST['output_weight'] != '0') {
+            $error_message .= _MA_XMSTOCK_ERROR_WEIGHT . '<br>';
+            $this->setVar('output_weight', 0);
+        }
+        $this->setVar('output_name', Xmf\Request::getString('output_name', ''));
+        $this->setVar('output_description',  Xmf\Request::getText('output_description', ''));
+        $this->setVar('output_userid', Xmf\Request::getInt('output_userid', 0));
+        $this->setVar('output_status', Xmf\Request::getInt('output_status', 1));
+        if ($error_message == '') {
+            $this->setVar('output_weight', Xmf\Request::getInt('output_weight', 0));
+            if ($outputHandler->insert($this)) {
+                redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+            } else {
+                $error_message =  $this->getHtmlErrors();
+            }
+        }
+        return $error_message;
+    }
 	
 	/**
      * @param bool $action
@@ -63,7 +94,7 @@ class xmstock_output extends XoopsObject
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        //include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         include __DIR__ . '/../include/common.php';
 
         //form title
@@ -96,13 +127,13 @@ class xmstock_output extends XoopsObject
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_OUTPUT_DESC, 'output_description', $editor_configs), false);
 		
 		// user
-        $form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_OUTPUT_NAME, 'output_userid', true, $this->getVar('output_userid')), true);
+        $form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_OUTPUT_USERID, 'output_userid', true, $this->getVar('output_userid')), true);
 
         // weight
-        $form->addElement(new XoopsFormText(_MA_XMSTOCK_OUTPUT_WEIGHT, 'area_weight', 5, 5, $weight));
+        $form->addElement(new XoopsFormText(_MA_XMSTOCK_OUTPUT_WEIGHT, 'output_weight', 5, 5, $weight));
 
 		// status
-        $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'area_status', $status);
+        $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'output_status', $status);
         $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA,);
         $form_status->addOptionArray($options);
         $form->addElement($form_status);

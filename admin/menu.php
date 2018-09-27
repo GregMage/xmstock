@@ -38,6 +38,12 @@ $adminmenu[] = [
     'link'  => 'admin/area.php',
     'icon'  => $pathIcon32 . 'delivery.png'
 ];
+//output
+$adminmenu[] = [
+    'title' => _MI_XMSTOCK_MENU_OUTPUT,
+    'link'  => 'admin/output.php',
+    'icon'  => $pathIcon32 . 'users.png'
+];
 // Permission
 $adminmenu[] = array(
     'title' => _MI_XMSTOCK_MENU_PERMISSION ,
