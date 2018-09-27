@@ -41,7 +41,10 @@ CREATE TABLE `xmstock_stock` (
 CREATE TABLE `xmstock_output` (
   `output_id`            int(11) unsigned    	NOT NULL AUTO_INCREMENT,
   `output_name`          varchar(255)        	NOT NULL DEFAULT '',
+  `output_description`   text,
   `output_userid`        mediumint(8) unsigned  NOT NULL default '0',
+  `output_weight`        int(5)             	NOT NULL DEFAULT '0',
+  `output_status`        tinyint(1) unsigned NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`output_id`),
   KEY `output_name` (`output_userid`)

@@ -34,7 +34,12 @@ class xmstock_output extends XoopsObject
     {
         $this->initVar('output_id', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('output_name', XOBJ_DTYPE_TXTBOX, null, false);
+		$this->initVar('output_description', XOBJ_DTYPE_TXTAREA, null, false);
+        // use html
+        $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
 		$this->initVar('output_userid', XOBJ_DTYPE_INT, null, false, 8);
+		$this->initVar('output_weight', XOBJ_DTYPE_INT, null, false, 11);
+        $this->initVar('output_status', XOBJ_DTYPE_INT, null, false, 1);
     }
 
     /**
@@ -45,6 +50,68 @@ class xmstock_output extends XoopsObject
         global $xoopsDB;
         $new_enreg = $xoopsDB->getInsertId();
         return $new_enreg;
+    }
+	
+	/**
+     * @param bool $action
+     * @return XoopsThemeForm
+     */
+    public function getForm($action = false)
+    {
+        $upload_size = 512000;
+        $helper = \Xmf\Module\Helper::getHelper('xmstock');
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        //include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        include __DIR__ . '/../include/common.php';
+
+        //form title
+        $title = $this->isNew() ? sprintf(_MA_XMSTOCK_ADD) : sprintf(_MA_XMSTOCK_EDIT);
+
+        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        //$form->setExtra('enctype="multipart/form-data"');
+
+        if (!$this->isNew()) {
+            $form->addElement(new XoopsFormHidden('output_id', $this->getVar('output_id')));
+            $status = $this->getVar('output_status');
+            $weight = $this->getVar('output_weight');
+        } else {
+            $status = 1;
+            $weight = 0;
+        }
+
+        // name
+        $form->addElement(new XoopsFormText(_MA_XMSTOCK_OUTPUT_NAME, 'output_name', 50, 255, $this->getVar('output_name')), true);
+
+        // description
+        $editor_configs           =array();
+        $editor_configs['name']   = 'output_description';
+        $editor_configs['value']  = $this->getVar('output_description', 'e');
+        $editor_configs['rows']   = 20;
+        $editor_configs['cols']   = 160;
+        $editor_configs['width']  = '100%';
+        $editor_configs['height'] = '400px';
+        $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
+        $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_OUTPUT_DESC, 'output_description', $editor_configs), false);
+		
+		// user
+        $form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_OUTPUT_NAME, 'output_userid', true, $this->getVar('output_userid')), true);
+
+        // weight
+        $form->addElement(new XoopsFormText(_MA_XMSTOCK_OUTPUT_WEIGHT, 'area_weight', 5, 5, $weight));
+
+		// status
+        $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'area_status', $status);
+        $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA,);
+        $form_status->addOptionArray($options);
+        $form->addElement($form_status);
+
+        $form->addElement(new XoopsFormHidden('op', 'save'));
+        // submit
+        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+
+        return $form;
     }
 
 }
