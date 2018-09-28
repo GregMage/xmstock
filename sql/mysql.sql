@@ -23,6 +23,7 @@ CREATE TABLE `xmstock_transfer` (
   `transfer_userid`         mediumint(8) unsigned   NOT NULL default '0',
   `transfer_type`           int(2) unsigned 		NOT NULL DEFAULT '1',
   `transfer_ref`            varchar(255)        	NOT NULL DEFAULT '',
+  `transfer_status`         tinyint(1) unsigned NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`transfer_id`),
   KEY `transfer_articleid` (`transfer_amound`)
