@@ -55,7 +55,7 @@ switch ($op) {
                 $output['weight']        = $output_arr[$i]->getVar('output_weight');
                 $output['status']        = $output_arr[$i]->getVar('output_status');
                 $xoopsTpl->append_by_ref('output', $output);
-                unset($area);
+                unset($output);
             }
             // Display Page Navigation
             if ($output_count > $nb_limit) {
