@@ -44,6 +44,12 @@ $adminmenu[] = [
     'link'  => 'admin/output.php',
     'icon'  => $pathIcon32 . 'users.png'
 ];
+//stock
+$adminmenu[] = [
+    'title' => _MI_XMSTOCK_MENU_STOCK,
+    'link'  => 'admin/stock.php',
+    'icon'  => $pathIcon32 . 'poll.png'
+];
 // Permission
 $adminmenu[] = array(
     'title' => _MI_XMSTOCK_MENU_PERMISSION ,

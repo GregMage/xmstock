@@ -54,6 +54,7 @@ $modversion['tables'][4] = 'xmstock_output';
 // Admin Templates
 $modversion['templates'][] = array('file' => 'xmstock_admin_area.tpl', 'description' => '', 'type' => 'admin');
 $modversion['templates'][] = array('file' => 'xmstock_admin_output.tpl', 'description' => '', 'type' => 'admin');
+$modversion['templates'][] = array('file' => 'xmstock_admin_stock.tpl', 'description' => '', 'type' => 'admin');
 
 // User Templates
 
