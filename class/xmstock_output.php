@@ -89,7 +89,6 @@ class xmstock_output extends XoopsObject
      */
     public function getForm($action = false)
     {
-        $upload_size = 512000;
         $helper = \Xmf\Module\Helper::getHelper('xmstock');
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
@@ -101,7 +100,6 @@ class xmstock_output extends XoopsObject
         $title = $this->isNew() ? sprintf(_MA_XMSTOCK_ADD) : sprintf(_MA_XMSTOCK_EDIT);
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
-        //$form->setExtra('enctype="multipart/form-data"');
 
         if (!$this->isNew()) {
             $form->addElement(new XoopsFormHidden('output_id', $this->getVar('output_id')));
