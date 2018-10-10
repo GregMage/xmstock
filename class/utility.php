@@ -22,5 +22,22 @@
  */
 class XmstockUtility
 {
-   
+    public static function getAreaList()
+    {
+        include __DIR__ . '/../include/common.php';
+		$arealist = array();
+
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('area_status', 1));
+		$criteria->setSort('area_weight ASC, area_name');
+        $criteria->setOrder('ASC');
+		$area_arr = $areaHandler->getall($criteria);
+        $area_count = $areaHandler->getCount($criteria);
+		if ($area_count > 0) {
+			foreach (array_keys($area_arr) as $i) {
+				$arealist[$i] = $area_arr[$i]->getVar('area_name');
+			}
+		}
+        return $arealist;
+    }
 }
