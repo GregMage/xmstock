@@ -22,7 +22,7 @@
  */
 class XmstockUtility
 {
-    public static function getAreaList()
+    public static function getAreaList($efl = false)
     {
         include __DIR__ . '/../include/common.php';
 		$arealist = array();
@@ -32,12 +32,35 @@ class XmstockUtility
 		$criteria->setSort('area_weight ASC, area_name');
         $criteria->setOrder('ASC');
 		$area_arr = $areaHandler->getall($criteria);
-        $area_count = $areaHandler->getCount($criteria);
-		if ($area_count > 0) {
+		if ($efl == true){
+			$arealist[0] = "-";
+		}
+		if (count($area_arr) > 0) {
 			foreach (array_keys($area_arr) as $i) {
 				$arealist[$i] = $area_arr[$i]->getVar('area_name');
 			}
 		}
         return $arealist;
+    }
+	
+	public static function getOutputList($efl = false)
+    {
+        include __DIR__ . '/../include/common.php';
+		$outputlist = array();
+
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('output_status', 1));
+		$criteria->setSort('output_weight ASC, output_name');
+        $criteria->setOrder('ASC');
+		$output_arr = $outputHandler->getall($criteria);
+		if ($efl == true){
+			$outputlist[0] = "-";
+		}
+		if (count($output_arr) > 0) {
+			foreach (array_keys($output_arr) as $i) {
+				$outputlist[$i] = $output_arr[$i]->getVar('output_name');
+			}
+		}
+        return $outputlist;
     }
 }

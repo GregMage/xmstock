@@ -50,6 +50,12 @@ $adminmenu[] = [
     'link'  => 'admin/stock.php',
     'icon'  => $pathIcon32 . 'poll.png'
 ];
+//transfer
+$adminmenu[] = [
+    'title' => _MI_XMSTOCK_MENU_TRANSFER,
+    'link'  => 'admin/transfer.php',
+    'icon'  => $pathIcon32 . 'database_go.png'
+];
 // Permission
 $adminmenu[] = array(
     'title' => _MI_XMSTOCK_MENU_PERMISSION ,

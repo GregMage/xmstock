@@ -25,6 +25,7 @@ define('_MI_XMSTOCK_MENU_HOME', 'Index');
 define('_MI_XMSTOCK_MENU_AREA', 'Area');
 define('_MI_XMSTOCK_MENU_OUTPUT', 'Output');
 define('_MI_XMSTOCK_MENU_STOCK', 'Stock');
+define('_MI_XMSTOCK_MENU_TRANSFER', 'Transfer');
 define('_MI_XMSTOCK_MENU_PERMISSION', 'Permission');
 define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 

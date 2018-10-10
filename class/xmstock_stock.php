@@ -47,6 +47,42 @@ class xmstock_stock extends XoopsObject
         $new_enreg = $xoopsDB->getInsertId();
         return $new_enreg;
     }
+	
+	/**
+     * @param bool $action
+     * @return XoopsThemeForm
+     */
+    public function getForm($action = false)
+    {
+        $helper = \Xmf\Module\Helper::getHelper('xmstock');
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        include __DIR__ . '/../include/common.php';
+		include __DIR__ . '/formselectarea.php';
+
+        //form title
+        $title = $this->isNew() ? sprintf(_MA_XMSTOCK_ADD) : sprintf(_MA_XMSTOCK_EDIT);
+
+        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+
+        if (!$this->isNew()) {
+            $form->addElement(new XoopsFormHidden('stock_id', $this->getVar('stock_id')));
+        }
+
+		// area
+        $form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_OUTPUT_USERID, 'stock_areaid', $this->getVar('stock_areaid')), true);
+		
+        // amound
+        $form->addElement(new XoopsFormText(_MA_XMSTOCK_STOCK_AMOUND, 'stock_amound', 10, 10, $this->getVar('stock_amound')), true);
+
+        $form->addElement(new XoopsFormHidden('op', 'save'));
+        // submit
+        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+
+        return $form;
+    }
 
 }
 

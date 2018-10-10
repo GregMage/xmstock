@@ -24,6 +24,7 @@ $helper = Helper::getHelper(basename(dirname(__DIR__)));
 $areaHandler = $helper->getHandler('xmstock_area');
 $outputHandler = $helper->getHandler('xmstock_output');
 $stockHandler = $helper->getHandler('xmstock_stock');
+$transferHandler = $helper->getHandler('xmstock_transfer');
 
 // Path & url Config
 $url_logo_area = XOOPS_UPLOAD_URL . '/xmstock/images/area/';

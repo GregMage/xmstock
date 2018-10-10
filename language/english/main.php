@@ -22,6 +22,10 @@ define('_MA_XMSTOCK_AREA_ADD', 'Add area');
 define('_MA_XMSTOCK_AREA_LIST', 'Area list');
 define('_MA_XMSTOCK_OUTPUT_ADD', 'Add Output');
 define('_MA_XMSTOCK_OUTPUT_LIST', 'Output list');
+define('_MA_XMSTOCK_TRANSFER_ENTRYINSTOCK', 'Entry in stock');
+define('_MA_XMSTOCK_TRANSFER_LIST', 'Transfer list');
+define('_MA_XMSTOCK_TRANSFER_OUTOFSTOCK', 'Out of stock');
+define('_MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK', 'Transfer of stock');
 
 // Shared
 define('_MA_XMSTOCK_ADD', 'Add');
@@ -32,11 +36,15 @@ define('_MA_XMSTOCK_REDIRECT_SAVE', 'Successfully saved');
 define('_MA_XMSTOCK_STATUS', 'Status');
 define('_MA_XMSTOCK_STATUS_A', 'Active');
 define('_MA_XMSTOCK_STATUS_NA', 'Disabled');
+define('_MA_XMSTOCK_STATUS_EXECUTED', 'Executed');
+define('_MA_XMSTOCK_STATUS_WAITING', 'Waiting');
+
 define('_MA_XMSTOCK_VIEW', 'View');
 
 // Error message
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
 define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
+define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
 define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
 
 // area
@@ -58,6 +66,10 @@ define('_MA_XMSTOCK_OUTPUT_NAME', 'Name');
 define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Sure to delete this output? %s');
 define('_MA_XMSTOCK_OUTPUT_USERID', 'Receiver');
 define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Weight');
+
+//transfer
+
+
 
 
 // permission
