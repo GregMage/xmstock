@@ -49,6 +49,8 @@ define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
 define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
 define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
 define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
+define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
+define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
 
 // area
 define('_MA_XMSTOCK_AREA_DESC', 'Description');

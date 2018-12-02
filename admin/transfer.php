@@ -99,21 +99,20 @@ switch ($op) {
     // Save
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('stock.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+            redirect_header('transfer.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        $stock_id = Request::getInt('stock_id', 0);
-        if ($stock_id == 0) {
-            $obj = $stockHandler->create();            
+        $transfer_id = Request::getInt('transfer_id', 0);
+        if ($transfer_id == 0) {
+            $obj = $transferHandler->create();            
         } else {
-            $obj = $stockHandler->get($stock_id);
+            $obj = $transferHandler->get($transfer_id);
         }
-        $error_message = $obj->savestock($stockHandler, 'stock.php');
+        $error_message = $obj->saveTransfer($transferHandler, 'transfer.php');
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
             $form = $obj->getForm();
             $xoopsTpl->assign('form', $form->render());
-        }
-        
+        }        
         break;
 }
 
