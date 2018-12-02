@@ -40,7 +40,7 @@ class xmstock_transfer extends XoopsObject
 		$this->initVar('transfer_st_areaid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_ar_areaid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_outputid', XOBJ_DTYPE_INT, null, false, 11);
-		$this->initVar('transfer_amound', XOBJ_DTYPE_INT, null, false, 11);
+		$this->initVar('transfer_amount', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_date', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('transfer_userid', XOBJ_DTYPE_INT, null, false, 8);
 		$this->initVar('transfer_type', XOBJ_DTYPE_INT, null, false, 2);
@@ -97,21 +97,31 @@ class xmstock_transfer extends XoopsObject
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_TRANSFER_DESC, 'transfer_description', $editor_configs), false);
-
-		// st_areaid
-        $form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true), true);
 		
-		// ar_areaid
-        $form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_ARAREA, 'transfer_ar_areaid', $this->getVar('transfer_ar_areaid'), true), true);
+		if ($type != 'E'){
+			// st_areaid
+			$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true), true);
+		} else {
+			$form->addElement(new XoopsFormHidden('transfer_st_areaid', ''));
+		}
+		if ($type != 'O'){
+			// ar_areaid
+			$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_ARAREA, 'transfer_ar_areaid', $this->getVar('transfer_ar_areaid'), true), true);
+		} else {
+			$form->addElement(new XoopsFormHidden('transfer_st_areaid', ''));
+		}
 		
-		// outputid
-        $form->addElement(new XmstockFormSelectOutput(_MA_XMSTOCK_TRANSFER_OUTPUT, 'transfer_outputid', $this->getVar('transfer_outputid'), true), true);
+		if ($type == 'O'){
+			// outputid
+			$form->addElement(new XmstockFormSelectOutput(_MA_XMSTOCK_TRANSFER_OUTPUT, 'transfer_outputid', $this->getVar('transfer_outputid'), true), true);
+		} else {
+			$form->addElement(new XoopsFormHidden('transfer_st_areaid', ''));
+		}
+        // amount
+        $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUNT, 'transfer_amount', 10, 10, $this->getVar('transfer_amount')), true);
 		
-        // amound
-        $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUND, 'transfer_amound', 10, 10, $this->getVar('transfer_amound')), true);
-		
-		// amound
-        $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUND, 'transfer_ref', 20, 20, $this->getVar('transfer_ref')), true);
+		// ref
+        $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
 		
 		// status
         $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', $status);
