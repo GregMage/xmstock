@@ -80,6 +80,9 @@ define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Amount');
 define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Destination stock');
 define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Output');
+define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');
+define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
+define('_MA_XMSTOCK_TRANSFER_USER', 'User');
 
 
 

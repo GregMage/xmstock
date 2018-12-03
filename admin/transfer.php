@@ -39,28 +39,32 @@ switch ($op) {
         $start = Request::getInt('start', 0);
         // Criteria
         $criteria = new CriteriaCompo();
-        $criteria->setSort('output_weight ASC, output_name');
-        $criteria->setOrder('ASC');
+        $criteria->setSort('transfer_date');
+        $criteria->setOrder('DESC');
         $criteria->setStart($start);
         $criteria->setLimit($nb_limit);
-        $output_arr = $outputHandler->getall($criteria);
-        $output_count = $outputHandler->getCount($criteria);
-        $xoopsTpl->assign('output_count', $output_count);
-        if ($output_count > 0) {
-            foreach (array_keys($output_arr) as $i) {
-                $output_id               = $output_arr[$i]->getVar('output_id');
-                $output['id']            = $output_id;
-                $output['name']          = $output_arr[$i]->getVar('output_name');
-                $output['description']   = \Xmf\Metagen::generateDescription($output_arr[$i]->getVar('output_description', 'show'), 30);
-				$output['receiver']      = XoopsUser::getUnameFromId($output_arr[$i]->getVar('output_userid'));
-                $output['weight']        = $output_arr[$i]->getVar('output_weight');
-                $output['status']        = $output_arr[$i]->getVar('output_status');
-                $xoopsTpl->append_by_ref('output', $output);
-                unset($area);
+		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
+        $transferHandler->field_link = "article_id";
+        $transferHandler->field_object = "transfer_articleid";
+        $transfer_arr = $transferHandler->getByLink($criteria);
+        $transfer_count = $transferHandler->getCount($criteria);
+        $xoopsTpl->assign('transfer_count', $transfer_count);
+        if ($transfer_count > 0) {
+            foreach (array_keys($transfer_arr) as $i) {
+                $transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
+                $transfer['id']            = $transfer_id;
+                $transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
+                $transfer['article']       = $transfer_arr[$i]->getVar('article_name') . ' (' . $transfer_arr[$i]->getVar('article_reference') . ')';
+                $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
+                $transfer['user']        = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'));
+                $transfer['type']          = $transfer_arr[$i]->getVar('transfer_type');
+                $transfer['status']        = $transfer_arr[$i]->getVar('transfer_status');
+                $xoopsTpl->append_by_ref('transfer', $transfer);
+                unset($transfer);
             }
             // Display Page Navigation
-            if ($output_count > $nb_limit) {
-                $nav = new XoopsPageNav($output_count, $nb_limit, $start, 'start');
+            if ($transfer_count > $nb_limit) {
+                $nav = new XoopsPageNav($transfer_count, $nb_limit, $start, 'start');
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         } else {
@@ -91,8 +95,10 @@ switch ($op) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOTRANSFER);
         } else {
             $obj = $transferHandler->get($transfer_id);
-            $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render()); 
+			if ($obj->getVar('transfer_status') == 0){
+				$form = $obj->getForm();
+				$xoopsTpl->assign('form', $form->render());
+			}				
         }
 
         break;
@@ -113,6 +119,22 @@ switch ($op) {
             $form = $obj->getForm();
             $xoopsTpl->assign('form', $form->render());
         }        
+        break;
+		
+	// Update status
+    case 'update_status':
+        $transfer_id = Request::getInt('transfer_id', 0);
+        if ($transfer_id > 0) {
+            $obj = $transferHandler->get($transfer_id);
+            $status = $obj->getVar('transfer_status');
+			if ($status == 0) {
+				$obj->setVar('transfer_status', 1);
+				if ($transferHandler->insert($obj)) {
+					redirect_header('transfer.php', 2, _MA_XMSTOCK_REDIRECT_SAVE);
+				}
+				$xoopsTpl->assign('error_message', $obj->getHtmlErrors());
+			}
+        }
         break;
 }
 

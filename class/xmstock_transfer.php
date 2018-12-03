@@ -46,6 +46,8 @@ class xmstock_transfer extends XoopsObject
 		$this->initVar('transfer_type', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('transfer_ref', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('transfer_status', XOBJ_DTYPE_INT, null, false, 1);
+		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);		
+		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
     }
 
     /**
