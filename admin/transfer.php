@@ -56,8 +56,21 @@ switch ($op) {
                 $transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
                 $transfer['article']       = $transfer_arr[$i]->getVar('article_name') . ' (' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
-                $transfer['user']        = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'));
-                $transfer['type']          = $transfer_arr[$i]->getVar('transfer_type');
+                $transfer['user']          = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'));
+				switch ($transfer_arr[$i]->getVar('transfer_type')) {
+					default:
+					case 'E':
+						$transfer['type'] = _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
+						break;
+						
+					case 'O':
+						$transfer['type'] = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
+						break;
+						
+					case 'T':
+						$transfer['type'] = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
+						break;
+				}
                 $transfer['status']        = $transfer_arr[$i]->getVar('transfer_status');
                 $xoopsTpl->append_by_ref('transfer', $transfer);
                 unset($transfer);
