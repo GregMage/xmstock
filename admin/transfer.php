@@ -121,6 +121,32 @@ switch ($op) {
         }        
         break;
 		
+	// del
+    case 'del':    
+        $transfer_id = Request::getInt('transfer_id', 0);
+        if ($transfer_id == 0) {
+            $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOTRANSFER);
+        } else {
+			$obj = $transferHandler->get($transfer_id);
+			if ($obj->getVar('transfer_status') == 0){
+				$surdel = Request::getBool('surdel', false);
+				if ($surdel === true) {
+					if (!$GLOBALS['xoopsSecurity']->check()) {
+						redirect_header('transfer.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+					}
+					if ($transferHandler->delete($obj)) {					
+						redirect_header('transfer.php', 2, _MA_XMSTOCK_REDIRECT_SAVE);
+					} else {
+						$xoopsTpl->assign('error_message', $obj->getHtmlErrors());
+					}
+				} else {
+					xoops_confirm(array('surdel' => true, 'transfer_id' => $transfer_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
+										sprintf(_MA_XMSTOCK_TRANSFER_SUREDEL, $obj->getVar('transfer_ref')));
+				}
+			}
+        }        
+        break;
+		
 	// Update status
     case 'update_status':
         $transfer_id = Request::getInt('transfer_id', 0);
