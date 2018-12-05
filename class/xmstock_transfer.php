@@ -87,7 +87,7 @@ class xmstock_transfer extends XoopsObject
 		}		
 		$this->setVar('transfer_description',  Xmf\Request::getText('transfer_description', ''));
 		$this->setVar('transfer_type', Xmf\Request::getString('transfer_type', 'E'));
-		$this->setVar('transfer_st_areaid', Xmf\Request::getInt('ransfer_st_areaid', 0));
+		$this->setVar('transfer_st_areaid', Xmf\Request::getInt('transfer_st_areaid', 0));
 		$this->setVar('transfer_ar_areaid', Xmf\Request::getInt('transfer_ar_areaid', 0));
 		$this->setVar('transfer_outputid', Xmf\Request::getInt('transfer_outputid', 0));
         $this->setVar('transfer_ref', Xmf\Request::getString('transfer_ref', ''));
