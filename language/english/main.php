@@ -42,6 +42,8 @@ define('_MA_XMSTOCK_STATUS_EXECUTED', 'Executed');
 define('_MA_XMSTOCK_STATUS_WAITING', 'Waiting');
 
 define('_MA_XMSTOCK_VIEW', 'View');
+define('_MA_XMSTOCK_TITLE', 'Title');
+define('_MA_XMSTOCK_INFORMATION', 'Informations');
 
 // Error message
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
@@ -84,6 +86,7 @@ define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');
 define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
 define('_MA_XMSTOCK_TRANSFER_USER', 'User');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
+define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
 
 
 

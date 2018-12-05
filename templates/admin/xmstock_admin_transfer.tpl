@@ -14,7 +14,8 @@
         <thead>
         <tr>
             <th class="txtleft width15"><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></th>
-            <th class="txtleft"><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
+            <th class="txtleft width20"><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
+            <th class="txtleft"><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></th>
             <th class="txtleft width5"><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></th>            
             <th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_TRANSFER_USER}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></th>
@@ -27,6 +28,7 @@
             <tr class="<{cycle values='even,odd'}> alignmiddle">
                 <td class="txtleft"><{$transfer.date}></td>
                 <td class="txtleft"><{$transfer.article}></td>
+                <td class="txtleft"><{$transfer.ref}></td>
                 <td class="txtleft"><{$transfer.amount}></td>
                 <td class="txtcenter"><{$transfer.user}></td>
                 <td class="txtcenter"><{$transfer.type}></td>
@@ -62,4 +64,22 @@
         <div class="floatright"><{$nav_menu}></div>
         <div class="clear spacer"></div>
     <{/if}>
+<{/if}>
+<{if $view}>
+    <table id="xo-xmcontact-sorter" cellspacing="1" class="outer tablesorter">
+        <thead>
+        <tr>
+            <th class="txtleft width20"><{$smarty.const._MA_XMSTOCK_TITLE}></th>
+            <th class="txtleft"><{$smarty.const._MA_XMSTOCK_INFORMATION}></th>
+        </tr>
+        </thead>
+        <tbody>
+        <{foreach from=$transfer_arr key=title item=information}>
+            <tr class="<{cycle values='even,odd'}> alignmiddle">
+                <td class="txtleft"><{$title}></td>
+                <td class="txtleft"><{$information}></td>
+            </tr>
+        <{/foreach}>
+        </tbody>
+    </table>
 <{/if}>

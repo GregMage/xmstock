@@ -54,7 +54,8 @@ switch ($op) {
                 $transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
                 $transfer['id']            = $transfer_id;
                 $transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
-                $transfer['article']       = $transfer_arr[$i]->getVar('article_name') . ' (' . $transfer_arr[$i]->getVar('article_reference') . ')';
+                $transfer['article']       = '<a href="../../xmarticle/viewarticle.php?category_id=' . $transfer_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
+                $transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
                 $transfer['user']          = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'));
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
@@ -158,6 +159,56 @@ switch ($op) {
 				}
 			}
         }        
+        break;
+	
+	// view transfer
+    case 'view':
+		// Module admin
+        $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_LIST, 'transfer.php', 'list');
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton()); 
+        // Define Stylesheet
+        $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
+        $xoopsTpl->assign('view', 'view');
+        $transfer_id = Request::getInt('transfer_id', 0);
+        $transfer    = $transferHandler->get($transfer_id);
+        if (0 == $transfer->getVar('transfer_status')) {
+            redirect_header('transfer.php', 2, _MA_XMSTOCK_ERROR_NOTRANSFER);
+        }
+		switch ($transfer->getVar('transfer_type')) {
+			default:
+			case 'E':
+				$type = _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
+				$area = $areaHandler->get($transfer->getVar('transfer_ar_areaid'));
+				$information = _MA_XMSTOCK_TRANSFER_ARAREA . ': <b>' . $area->getVar('area_name') . '</b>';
+				break;
+				
+			case 'O':
+				$type = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
+				$area = $areaHandler->get($transfer->getVar('transfer_st_areaid'));
+				$information = _MA_XMSTOCK_TRANSFER_STAREA . ': <b>' . $area->getVar('area_name') . '</b><br>';
+				$output = $outputHandler->get($transfer->getVar('transfer_outputid'));
+				$information .= _MA_XMSTOCK_TRANSFER_OUTPUT . ': <b>' . $output->getVar('output_name') . '</b>';
+				break;
+				
+			case 'T':
+				$type = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
+				$area = $areaHandler->get($transfer->getVar('transfer_st_areaid'));
+				$information = _MA_XMSTOCK_TRANSFER_STAREA . ': <b>' . $area->getVar('area_name') . '</b><br>';
+				$area = $areaHandler->get($transfer->getVar('transfer_ar_areaid'));;
+				$information .= _MA_XMSTOCK_TRANSFER_ARAREA . ': <b>' . $area->getVar('area_name') . '</b>';
+				break;
+		}
+		xoops_load('utility', 'xmarticle');
+        $transfer_arr = array(
+            _MA_XMSTOCK_TRANSFER_ARTICLE      => XmarticleUtility::getArticleName($transfer->getVar('transfer_articleid'), true, true),
+            _MA_XMSTOCK_TRANSFER_DESC         => $transfer->getVar('transfer_description', 'show'),
+            _MA_XMSTOCK_TRANSFER_TYPE         => $type,
+            _MA_XMSTOCK_TRANSFER_INFORMATION  => $information,
+            _MA_XMSTOCK_TRANSFER_AMOUNT       => $transfer->getVar('transfer_amount'),
+            _MA_XMSTOCK_TRANSFER_REF          => $transfer->getVar('transfer_ref'),
+            _MA_XMSTOCK_STATUS      		  => '<span style="color: green; font-weight:bold;">' . _MA_XMSTOCK_STATUS_EXECUTED . '</span>',
+        );
+        $xoopsTpl->assign('transfer_arr', $transfer_arr);
         break;
 		
 	// Update status
