@@ -130,7 +130,7 @@ switch ($op) {
         $error_message = $obj->saveTransfer($transferHandler, 'transfer.php');
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
-            $form = $obj->getForm();
+            $form = $obj->getForm($obj->getVar('transfer_type'), $obj->getVar('transfer_status'));
             $xoopsTpl->assign('form', $form->render());
         }        
         break;

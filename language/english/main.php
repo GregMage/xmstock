@@ -52,7 +52,11 @@ define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
 define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
 define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
+define('_MA_XMSTOCK_ERROR_AMOUNTNOTZERO', 'The amount can not be 0');
 define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
+define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'There is no destination stock selected');
+define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'There is no starting stock selected');
+define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'There is no output selected');
 
 // area
 define('_MA_XMSTOCK_AREA_DESC', 'Description');
