@@ -166,6 +166,12 @@ class xmstock_transfer extends XoopsObject
 		// articleid
         $form->addElement(new XmstockFormSelectArticle(_MA_XMSTOCK_TRANSFER_ARTICLE, 'transfer_articleid', $this->getVar('transfer_articleid'), true), true);
 		
+		//xmarticle
+        if (xoops_isActiveModule('xmarticle')){
+            xoops_load('utility', 'xmarticle');
+            XmarticleUtility::renderArticleForm($form, _MA_XMSTOCK_TRANSFER_ARTICLE, 'transfer_articleid_test', $this->getVar('transfer_articleid')); //enlever 'test' par la suite
+        }
+		
 		// description
         $editor_configs           = array();
         $editor_configs['name']   = 'transfer_description';
