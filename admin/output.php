@@ -19,8 +19,10 @@
 use Xmf\Module\Admin;
 use Xmf\Request;
 
-
 require __DIR__ . '/admin_header.php';
+if (!xoops_isActiveModule('xmarticle')) {
+	redirect_header('index.php', 5, _MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR);
+}
 $moduleAdmin = Admin::getInstance();
 $moduleAdmin->displayNavigation('output.php');
 

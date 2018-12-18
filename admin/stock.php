@@ -19,8 +19,10 @@
 use Xmf\Module\Admin;
 use Xmf\Request;
 
-
 require __DIR__ . '/admin_header.php';
+if (!xoops_isActiveModule('xmarticle')) {
+	redirect_header('index.php', 5, _MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR);
+}
 $moduleAdmin = Admin::getInstance();
 $moduleAdmin->displayNavigation('stock.php');
 
@@ -31,7 +33,7 @@ switch ($op) {
         // Define Stylesheet
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
         // Module admin
-        $moduleAdmin->addItemButton(_MA_XMSTOCK_OUTPUT_ADD, 'stock.php?op=add', 'add');
+        $moduleAdmin->addItemButton(_MA_XMSTOCK_STOCK_ADD, 'stock.php?op=add', 'add');
         $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
         // Get start pager
         $start = Request::getInt('start', 0);
@@ -62,14 +64,14 @@ switch ($op) {
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         } else {
-            $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOOUTPUT);
+            $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
         }
         break;
     
     // Add
     case 'add':
         // Module admin
-        $moduleAdmin->addItemButton(_MA_XMSTOCK_OUTPUT_LIST, 'stock.php', 'list');
+        $moduleAdmin->addItemButton(_MA_XMSTOCK_STOCK_LIST, 'stock.php', 'list');
         $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
         // Form
         $obj  = $stockHandler->create();
@@ -80,7 +82,7 @@ switch ($op) {
     // Edit
     case 'edit':
         // Module admin
-        $moduleAdmin->addItemButton(_MA_XMSTOCK_OUTPUT_LIST, 'stock.php', 'list');
+        $moduleAdmin->addItemButton(_MA_XMSTOCK_STOCK_LIST, 'stock.php', 'list');
         $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
         // Form
         $stock_id = Request::getInt('stock_id', 0);
