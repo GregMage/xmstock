@@ -131,7 +131,11 @@ class xmstock_transfer extends XoopsObject
 			} else {
 				$this->setVar('transfer_articleid', $transfer_articleid);
 				if ($transferHandler->insert($this)) {
-					redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+					if (XmstockUtility::addArticleStock($transfer_ar_areaid, $transfer_articleid, $transfer_amount)){
+						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+					} else {
+						$error_message .=  'problème ...';
+					}
 				} else {
 					$error_message .=  $this->getHtmlErrors();
 				}
