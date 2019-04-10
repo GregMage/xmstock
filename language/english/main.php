@@ -71,6 +71,11 @@ define('_MA_XMSTOCK_AREA_UPLOAD', 'Upload');
 define('_MA_XMSTOCK_AREA_UPLOADSIZE', 'Maximum size: %s kB');
 define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
 
+// stock
+define('_MA_XMSTOCK_STOCK_AREA', 'Area');
+define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
+define('_MA_XMSTOCK_STOCK_AMOUNT', 'Amount in stock');
+
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
 define('_MA_XMSTOCK_OUTPUT_NAME', 'Name');

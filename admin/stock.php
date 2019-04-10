@@ -33,91 +33,33 @@ switch ($op) {
         // Define Stylesheet
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
         // Module admin
-        $moduleAdmin->addItemButton(_MA_XMSTOCK_STOCK_ADD, 'stock.php?op=add', 'add');
         $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
         // Get start pager
         $start = Request::getInt('start', 0);
-        // Criteria
-        $criteria = new CriteriaCompo();
-        $criteria->setSort('output_weight ASC, output_name');
-        $criteria->setOrder('ASC');
-        $criteria->setStart($start);
-        $criteria->setLimit($nb_limit);
-        $output_arr = $outputHandler->getall($criteria);
-        $output_count = $outputHandler->getCount($criteria);
-        $xoopsTpl->assign('output_count', $output_count);
-        if ($output_count > 0) {
-            foreach (array_keys($output_arr) as $i) {
-                $output_id               = $output_arr[$i]->getVar('output_id');
-                $output['id']            = $output_id;
-                $output['name']          = $output_arr[$i]->getVar('output_name');
-                $output['description']   = \Xmf\Metagen::generateDescription($output_arr[$i]->getVar('output_description', 'show'), 30);
-				$output['receiver']      = XoopsUser::getUnameFromId($output_arr[$i]->getVar('output_userid'));
-                $output['weight']        = $output_arr[$i]->getVar('output_weight');
-                $output['status']        = $output_arr[$i]->getVar('output_status');
-                $xoopsTpl->append_by_ref('output', $output);
-                unset($area);
-            }
-            // Display Page Navigation
-            if ($output_count > $nb_limit) {
-                $nav = new XoopsPageNav($output_count, $nb_limit, $start, 'start');
+		$stock_count = $stockHandler->getCount();
+		$sql = "SELECT o.*, l.* , k.* FROM " . $xoopsDB->prefix('xmstock_stock') . " AS o LEFT JOIN " . $xoopsDB->prefix('xmarticle_article') . " AS l ON o.stock_articleid = l.article_id";
+		$sql .= " LEFT JOIN " . $xoopsDB->prefix('xmstock_area') . " AS k ON o.stock_areaid = k.area_id";
+		$sql .= " ORDER BY area_name ASC LIMIT " . $start . ", " . $nb_limit;
+		$xoopsTpl->assign('stock_count', $stock_count);
+		$stock_arr = $xoopsDB->query($sql);
+		if ($stock_count > 0) {
+			while($myrow = $xoopsDB->fetchArray($stock_arr)){
+					$stock_id               = $myrow['stock_id'];
+					$stock['id']            = $stock_id;
+					$stock['area']          = $myrow['area_name'];
+					$stock['article']       = '<a href="../../xmarticle/viewarticle.php?category_id=' . $myrow['article_cid'] . '&article_id=' . $myrow['article_id'] . '" title="' . $myrow['article_name'] . '" target="_blank">' . $myrow['article_name'] . '</a> (' . $myrow['article_reference'] . ')';
+					$stock['amount']        = $myrow['stock_amount'];
+					$xoopsTpl->append_by_ref('stock', $stock);
+					unset($stock);
+			}
+			// Display Page Navigation
+            if ($stock_count > $nb_limit) {
+                $nav = new XoopsPageNav($stock_count, $nb_limit, $start, 'start');
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
-        } else {
+		} else {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
         }
-        break;
-    
-    // Add
-    case 'add':
-        // Module admin
-        $moduleAdmin->addItemButton(_MA_XMSTOCK_STOCK_LIST, 'stock.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
-        // Form
-        $obj  = $stockHandler->create();
-        $form = $obj->getForm();
-        $xoopsTpl->assign('form', $form->render());
-        break;
-        
-    // Edit
-    case 'edit':
-        // Module admin
-        $moduleAdmin->addItemButton(_MA_XMSTOCK_STOCK_LIST, 'stock.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
-        // Form
-        $stock_id = Request::getInt('stock_id', 0);
-        if ($stock_id == 0) {
-            $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
-        } else {
-            $obj = $stockHandler->get($stock_id);
-            $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render()); 
-        }
-
-        break;
-    // Save
-    case 'save':
-        if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('stock.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-        }
-        $stock_id = Request::getInt('stock_id', 0);
-        if ($stock_id == 0) {
-            $obj = $stockHandler->create();            
-        } else {
-            $obj = $stockHandler->get($stock_id);
-        }
-        $error_message = $obj->savestock($stockHandler, 'stock.php');
-        if ($error_message != ''){
-            $xoopsTpl->assign('error_message', $error_message);
-            $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render());
-        }
-        
-        break;
-        
-    // del
-    case 'del':    
-        
         break;
 }
 
