@@ -64,9 +64,9 @@ class XmstockUtility
         return $outputlist;
     }
 	
-	public static function addArticleStock($areaid, $articleid, $amound)
+	public static function addArticleStock($areaid, $articleid, $amount)
     {
-        if ($areaid == 0 || $articleid == 0 || $amound == 0){
+        if ($areaid == 0 || $articleid == 0 || $amount == 0){
 			return false;
 		}
 		include __DIR__ . '/../include/common.php';
@@ -79,7 +79,7 @@ class XmstockUtility
 			$obj = $stockHandler->create();
 			$obj->setVar('stock_areaid', $areaid);
 			$obj->setVar('stock_articleid', $articleid);
-			$obj->setVar('stock_amound', $amound);
+			$obj->setVar('stock_amount', $amount);
 			if ($stockHandler->insert($obj)) {
                 return true;
             } else {
@@ -89,8 +89,8 @@ class XmstockUtility
 			foreach (array_keys($stock_arr) as $i) {
 				$obj = $stockHandler->get($i);
 			}
-			$old_amound = $obj->getVar('stock_amound');
-			$obj->setVar('stock_amound', $old_amound + $amound);
+			$old_amount = $obj->getVar('stock_amount');
+			$obj->setVar('stock_amount', $old_amount + $amount);
 			if ($stockHandler->insert($obj)) {
                 return true;
             } else {
