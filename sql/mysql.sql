@@ -33,7 +33,7 @@ CREATE TABLE `xmstock_stock` (
   `stock_id`            int(11) unsigned    	NOT NULL AUTO_INCREMENT,
   `stock_areaid`      	int(11) unsigned   		NOT NULL,
   `stock_articleid`     int(11) unsigned    	NOT NULL,
-  `stock_amound`      	int(11) unsigned   		NOT NULL,
+  `stock_amount`      	int(11) unsigned   		NOT NULL,
   
   PRIMARY KEY (`stock_id`),
   KEY `stock_areaid` (`stock_articleid`)

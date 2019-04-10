@@ -35,7 +35,7 @@ class xmstock_stock extends XoopsObject
         $this->initVar('stock_id', XOBJ_DTYPE_INT, null, false, 11);
         $this->initVar('stock_areaid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('stock_articleid', XOBJ_DTYPE_INT, null, false, 11);
-		$this->initVar('stock_amound', XOBJ_DTYPE_INT, null, false, 11);
+		$this->initVar('stock_amount', XOBJ_DTYPE_INT, null, false, 11);		
     }
 
     /**
