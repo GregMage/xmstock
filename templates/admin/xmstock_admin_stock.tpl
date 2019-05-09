@@ -6,9 +6,21 @@
         <{$error_message}>
     </div>
 <{/if}>
-<div>
-    <{$form}>
-</div>
+<{if $form}>
+    <div>
+        <{$form}>
+    </div>
+<{/if}>
+<{if $filter}>
+	<div align="right">
+		<form id="form_stock_tri" name="form_stock_tri" method="get" action="stock.php">
+			<{$smarty.const._MA_XMSTOCK_STOCK_AREA}>
+			<select name="stock_filter" id="stock_filter" onchange="location='stock.php?start=<{$start}>&article_area='+this.options[this.selectedIndex].value">
+				<{$article_area_options}>
+			<select>
+		</form>
+	</div>
+<{/if}>
 <{if $stock_count != 0}>
     <table id="xo-xmdoc-sorter" cellspacing="1" class="outer tablesorter">
         <thead>

@@ -36,13 +36,34 @@ switch ($op) {
         $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
         // Get start pager
         $start = Request::getInt('start', 0);
-		$stock_count = $stockHandler->getCount();
+		//filter area
+		$article_area = Request::getInt('article_area', 0);
+        $xoopsTpl->assign('article_area', $article_area);
+        $criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('area_status', 1));
+        $criteria->setSort('area_weight ASC, area_name');
+        $criteria->setOrder('ASC');
+        $area_arr = $areaHandler->getall($criteria);
+		if (count($area_arr) > 0) {
+			$article_area_options = '<option value="0"' . ($article_area == 0 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
+			foreach (array_keys($area_arr) as $i) {
+				$article_area_options .= '<option value="' . $i . '"' . ($article_area == $i ? ' selected="selected"' : '') . '>' . $area_arr[$i]->getVar('area_name') . '</option>';
+			}
+			$xoopsTpl->assign('article_area_options', $article_area_options);
+		}
+		$criteria = new CriteriaCompo();
 		$sql = "SELECT o.*, l.* , k.* FROM " . $xoopsDB->prefix('xmstock_stock') . " AS o LEFT JOIN " . $xoopsDB->prefix('xmarticle_article') . " AS l ON o.stock_articleid = l.article_id";
 		$sql .= " LEFT JOIN " . $xoopsDB->prefix('xmstock_area') . " AS k ON o.stock_areaid = k.area_id";
-		$sql .= " ORDER BY area_name ASC LIMIT " . $start . ", " . $nb_limit;
-		$xoopsTpl->assign('stock_count', $stock_count);
+		if ($article_area != 0){
+			$sql .= " WHERE (`area_id` = '" . $article_area . "')  ";
+			$criteria->add(new Criteria('stock_areaid', $article_area));
+		}		
+		$sql .= " ORDER BY area_name ASC LIMIT " . $start . ", " . $nb_limit;		
 		$stock_arr = $xoopsDB->query($sql);
+		$stock_count = $stockHandler->getCount($criteria);
+		$xoopsTpl->assign('stock_count', $stock_count);
 		if ($stock_count > 0) {
+			$xoopsTpl->assign('filter', true);
 			while($myrow = $xoopsDB->fetchArray($stock_arr)){
 					$stock_id               = $myrow['stock_id'];
 					$stock['id']            = $stock_id;
@@ -54,7 +75,7 @@ switch ($op) {
 			}
 			// Display Page Navigation
             if ($stock_count > $nb_limit) {
-                $nav = new XoopsPageNav($stock_count, $nb_limit, $start, 'start');
+                $nav = new XoopsPageNav($stock_count, $nb_limit, $start, 'start', 'article_area=' . $article_area);
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
 		} else {
