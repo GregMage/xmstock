@@ -26,7 +26,7 @@ CREATE TABLE `xmstock_transfer` (
   `transfer_status`         tinyint(1) unsigned 	NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`transfer_id`),
-  KEY `transfer_articleid` (`transfer_amound`)
+  KEY `transfer_articleid` (`transfer_amount`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_stock` (
