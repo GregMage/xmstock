@@ -63,39 +63,105 @@ class XmstockUtility
 		}
         return $outputlist;
     }
-	
-	public static function addArticleStock($areaid, $articleid, $amount)
-    {
-        if ($areaid == 0 || $articleid == 0 || $amount == 0){
-			return false;
-		}
-		include __DIR__ . '/../include/common.php';
 
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('stock_areaid', $areaid));
-        $criteria->add(new Criteria('stock_articleid', $articleid));
-		$stock_arr = $stockHandler->getall($criteria);
-		if (count($stock_arr) == 0){
-			$obj = $stockHandler->create();
-			$obj->setVar('stock_areaid', $areaid);
-			$obj->setVar('stock_articleid', $articleid);
-			$obj->setVar('stock_amount', $amount);
-			if ($stockHandler->insert($obj)) {
-                return true;
-            } else {
-                return false;
-            }
-		} else {
-			foreach (array_keys($stock_arr) as $i) {
-				$obj = $stockHandler->get($i);
-			}
-			$old_amount = $obj->getVar('stock_amount');
-			$obj->setVar('stock_amount', $old_amount + $amount);
-			if ($stockHandler->insert($obj)) {
-                return true;
-            } else {
-                return false;
-            }
+	public static function checkTransfert($type, $articleid, $amount, $areaid)
+    {
+		include __DIR__ . '/../include/common.php';
+		switch ($type) {
+			case 'E':
+			 default:
+				return '';
+				break;
+							
+			case 'O':
+			case 'T':
+				//test si l'article est bien dans le stock
+				$criteria = new CriteriaCompo();
+				$criteria->add(new Criteria('stock_areaid', $areaid));
+				$criteria->add(new Criteria('stock_articleid', $articleid));
+				$stock_arr = $stockHandler->getall($criteria);
+				if (count($stock_arr) == 0){
+					// l'article n'est pas en stock					
+					return _MA_XMSTOCK_ERROR_TRANSFERT_NOARTICLE;
+				} else {
+					foreach (array_keys($stock_arr) as $i) {
+						$obj = $stockHandler->get($i);
+					}
+					$old_amount = $obj->getVar('stock_amount');
+					if ($old_amount < $amount){
+						// la quantité demandée est plus grande que celle disponible
+						return sprintf(_MA_XMSTOCK_ERROR_TRANSFERT_TBAMOUNT, $amount, $old_amount);
+					} else {
+						return '';
+					}
+				}
+				break;
+		}
+    }
+
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid, $outputid)
+    {
+		include __DIR__ . '/../include/common.php';
+		switch ($type) {
+			case 'E':
+			default:
+				$criteria = new CriteriaCompo();
+				$criteria->add(new Criteria('stock_areaid', $ar_areaid));
+				$criteria->add(new Criteria('stock_articleid', $articleid));
+				$stock_arr = $stockHandler->getall($criteria);
+				if (count($stock_arr) == 0){
+					$obj = $stockHandler->create();
+					$obj->setVar('stock_areaid', $ar_areaid);
+					$obj->setVar('stock_articleid', $articleid);
+					$obj->setVar('stock_amount', $amount);
+					if ($stockHandler->insert($obj)) {
+						return '';
+					} else {
+						return $obj->getHtmlErrors();
+					}
+				} else {
+					foreach (array_keys($stock_arr) as $i) {
+						$obj = $stockHandler->get($i);
+					}
+					$old_amount = $obj->getVar('stock_amount');
+					$obj->setVar('stock_amount', $old_amount + $amount);
+					if ($stockHandler->insert($obj)) {
+						return '';
+					} else {
+						return $obj->getHtmlErrors();
+					}
+				}
+				break;
+							
+			case 'O':
+				$criteria = new CriteriaCompo();
+				$criteria->add(new Criteria('stock_areaid', $st_areaid));
+				$criteria->add(new Criteria('stock_articleid', $articleid));
+				$stock_arr = $stockHandler->getall($criteria);
+				foreach (array_keys($stock_arr) as $i) {
+					$obj = $stockHandler->get($i);
+				}
+				$old_amount = $obj->getVar('stock_amount');
+				
+				if ($old_amount == $amount){
+					if ($stockHandler->delete($obj)) {
+						return '';
+					} else {
+						return $obj->getHtmlErrors();
+					}
+				} else {
+					$obj->setVar('stock_amount', $old_amount - $amount);
+					if ($stockHandler->insert($obj)) {
+						return '';
+					} else {
+						return $obj->getHtmlErrors();
+					}
+				}
+		
+				break;
+			case 'T':
+				return 'A faire!! donc erreur';
+				break;
 		}
     }
 }

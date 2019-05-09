@@ -111,8 +111,11 @@ class xmstock_transfer extends XoopsObject
 				$error_message .= _MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID . '<br>';
 				$transfer_ar_areaid = 0;
 			}
-		}		
-		
+		}
+		xoops_load('utility', 'xmarticle');
+		$transfer_articleid = XmarticleUtility::renderArticleIdSave();
+		$error_message .= XmstockUtility::checkTransfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid);
+		$this->setVar('transfer_articleid', $transfer_articleid);
 		$this->setVar('transfer_amount', $transfer_amount);
 		$this->setVar('transfer_type', $transfer_type);
 		$this->setVar('transfer_ar_areaid', $transfer_ar_areaid);
@@ -124,20 +127,17 @@ class xmstock_transfer extends XoopsObject
 		$this->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 		$this->setVar('transfer_date', time());		
         if ($error_message == '') {
-			xoops_load('utility', 'xmarticle');
-			$transfer_articleid = XmarticleUtility::renderArticleIdSave();
 			if ($transfer_articleid == 0){
 				$error_message .= _MA_XMSTOCK_ERROR_ARTICLEID . '<br>';
 			} else {
 				$this->setVar('transfer_articleid', $transfer_articleid);
-				if ($transferHandler->insert($this)) {
-					if (XmstockUtility::addArticleStock($transfer_ar_areaid, $transfer_articleid, $transfer_amount)){
+				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $transfer_outputid);
+				if ($error_message == '') {
+					if ($transferHandler->insert($this)) {
 						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					} else {
-						$error_message .=  'problème ...';
+						$error_message .=  $this->getHtmlErrors();
 					}
-				} else {
-					$error_message .=  $this->getHtmlErrors();
 				}
 			}
         }
