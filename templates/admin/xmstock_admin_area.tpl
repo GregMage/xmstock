@@ -43,6 +43,9 @@
                     title="<{if $area.status}><{$smarty.const._MA_XMSTOCK_STATUS_NA}><{else}><{$smarty.const._MA_XMSTOCK_STATUS_A}><{/if}>"/>
                 </td>
                 <td class="xo-actions txtcenter">
+					<a class="tooltip" href="stock.php?op=list&amp;article_area=<{$area.id}>" title="<{$smarty.const._MA_XMSTOCK_VIEW}>">
+                        <img src="<{xoAdminIcons view.png}>" alt="<{$smarty.const._MA_XMSTOCK_VIEW}>">
+					</a>
                     <a class="tooltip" href="area.php?op=edit&amp;area_id=<{$area.id}>" title="<{$smarty.const._MA_XMSTOCK_EDIT}>">
                         <img src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._MA_XMSTOCK_EDIT}>"/>
                     </a>
