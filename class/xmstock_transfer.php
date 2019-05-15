@@ -131,7 +131,7 @@ class xmstock_transfer extends XoopsObject
 				$error_message .= _MA_XMSTOCK_ERROR_ARTICLEID . '<br>';
 			} else {
 				$this->setVar('transfer_articleid', $transfer_articleid);
-				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $transfer_outputid);
+				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid);
 				if ($error_message == '') {
 					if ($transferHandler->insert($this)) {
 						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);

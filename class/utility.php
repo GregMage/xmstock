@@ -99,7 +99,7 @@ class XmstockUtility
 		}
     }
 
-	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid, $outputid)
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid)
     {
 		include __DIR__ . '/../include/common.php';
 		switch ($type) {
@@ -160,7 +160,55 @@ class XmstockUtility
 		
 				break;
 			case 'T':
-				return 'A faire!! donc erreur';
+				$criteria = new CriteriaCompo();
+				$criteria->add(new Criteria('stock_areaid', $st_areaid));
+				$criteria->add(new Criteria('stock_articleid', $articleid));
+				$stock_arr = $stockHandler->getall($criteria);
+				foreach (array_keys($stock_arr) as $i) {
+					$obj = $stockHandler->get($i);
+				}
+				$old_amount = $obj->getVar('stock_amount');
+				
+				if ($old_amount == $amount){
+					if ($stockHandler->delete($obj)) {
+						return '';
+					} else {
+						return $obj->getHtmlErrors();
+					}
+				} else {
+					$obj->setVar('stock_amount', $old_amount - $amount);
+					if ($stockHandler->insert($obj)) {
+						$criteria = new CriteriaCompo();
+						$criteria->add(new Criteria('stock_areaid', $ar_areaid));
+						$criteria->add(new Criteria('stock_articleid', $articleid));
+						$stock_arr = $stockHandler->getall($criteria);
+						if (count($stock_arr) == 0){
+							$obj = $stockHandler->create();
+							$obj->setVar('stock_areaid', $ar_areaid);
+							$obj->setVar('stock_articleid', $articleid);
+							$obj->setVar('stock_amount', $amount);
+							if ($stockHandler->insert($obj)) {
+								return '';
+							} else {
+								return $obj->getHtmlErrors();
+							}
+						} else {
+							foreach (array_keys($stock_arr) as $i) {
+								$obj = $stockHandler->get($i);
+							}
+							$old_amount = $obj->getVar('stock_amount');
+							$obj->setVar('stock_amount', $old_amount + $amount);
+							if ($stockHandler->insert($obj)) {
+								return '';
+							} else {
+								return $obj->getHtmlErrors();
+							}
+						}
+						return '';
+					} else {
+						return $obj->getHtmlErrors();
+					}
+				}
 				break;
 		}
     }
