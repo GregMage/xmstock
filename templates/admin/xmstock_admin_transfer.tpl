@@ -29,7 +29,7 @@
                 <td class="txtleft"><{$transfer.date}></td>
                 <td class="txtleft"><{$transfer.article}></td>
                 <td class="txtleft"><{$transfer.ref}></td>
-                <td class="txtleft"><{$transfer.amount}></td>
+                <td class="txtcenter"><{$transfer.amount}></td>
                 <td class="txtcenter"><{$transfer.user}></td>
                 <td class="txtcenter"><{$transfer.type}></td>
                 <td class="xo-actions txtcenter">
