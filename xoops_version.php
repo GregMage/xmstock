@@ -31,6 +31,7 @@ $modversion['official']    = 0;
 $modversion['image']       = 'assets/images/xmstock_logo.png';
 
 // Menu
+$modversion['hasMain'] = 1;
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -58,6 +59,7 @@ $modversion['templates'][] = array('file' => 'xmstock_admin_stock.tpl', 'descrip
 $modversion['templates'][] = array('file' => 'xmstock_admin_transfer.tpl', 'description' => '', 'type' => 'admin');
 
 // User Templates
+$modversion['templates'][] = ['file' => 'xmstock_viewstocks.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];

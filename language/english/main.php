@@ -40,6 +40,7 @@ define('_MA_XMSTOCK_STATUS_A', 'Active');
 define('_MA_XMSTOCK_STATUS_NA', 'Disabled');
 define('_MA_XMSTOCK_STATUS_EXECUTED', 'Executed');
 define('_MA_XMSTOCK_STATUS_WAITING', 'Waiting');
+define('_MA_XMSTOCK_ORDER', 'Order');
 
 define('_MA_XMSTOCK_VIEW', 'View');
 define('_MA_XMSTOCK_TITLE', 'Title');
@@ -99,8 +100,6 @@ define('_MA_XMSTOCK_TRANSFER_USER', 'User');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
 
-
-
 // permission
 define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');
 define('_MA_XMSTOCK_PERMISSION_MANAGE_DSC', 'Select groups that can manage this area');
@@ -114,6 +113,9 @@ define('_MA_XMSTOCK_PERMISSION_OTHER', 'Other permissions');
 define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Select groups that can:');
 define('_MA_XMSTOCK_PERMISSION_OTHER_4', '');
 define('_MA_XMSTOCK_PERMISSION_OTHER_8', '');
+
+// renderStocks
+define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
 
 // Admin
 define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
