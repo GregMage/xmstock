@@ -252,6 +252,7 @@ class XmstockUtility
         if (count($stock_arr) > 0 && !empty($viewPermissionArea)) {
 			$total_amount = 0;
 			foreach (array_keys($stock_arr) as $i) {
+				$stock['area_id']       = $stock_arr[$i]->getVar('area_id');
                 $stock['name']       = $stock_arr[$i]->getVar('area_name');
                 $stock['location']   = $stock_arr[$i]->getVar('area_location');
                 $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
