@@ -60,6 +60,7 @@ $modversion['templates'][] = array('file' => 'xmstock_admin_transfer.tpl', 'desc
 
 // User Templates
 $modversion['templates'][] = ['file' => 'xmstock_viewstocks.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_viewarea.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];
@@ -71,6 +72,15 @@ $modversion['config'][] = [
     'formtype'    => 'line_break',
     'valuetype'   => 'text',
     'default'     => 'head',
+];
+
+$modversion['config'][] = [
+    'name'        => 'general_perpage',
+    'title'       => '_MI_XMSTOCK_PREF_GENERALITEMPERPAGE',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 15
 ];
 
 xoops_load('xoopseditorhandler');

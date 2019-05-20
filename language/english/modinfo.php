@@ -34,6 +34,7 @@ define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-weight: bold;'>General</span>");
+define('_MI_XMSTOCK_PREF_GENERALITEMPERPAGE', 'Number of items per page in the general view');
 define('_MI_XMSTOCK_PREF_EDITOR', 'Text Editor');
 define('_MI_XMSTOCK_PREF_HEAD_ADMIN', "<span style='font-weight: bold;'>Administration</span>");
 define('_MI_XMSTOCK_PREF_ITEMPERPAGE', 'Number of items per page in the administration view');

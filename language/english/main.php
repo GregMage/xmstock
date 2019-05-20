@@ -47,6 +47,7 @@ define('_MA_XMSTOCK_TITLE', 'Title');
 define('_MA_XMSTOCK_INFORMATION', 'Informations');
 
 // Error message
+define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
 define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
 define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
@@ -73,6 +74,20 @@ define('_MA_XMSTOCK_AREA_SUREDEL', 'Sure to delete this area? %s');
 define('_MA_XMSTOCK_AREA_UPLOAD', 'Upload');
 define('_MA_XMSTOCK_AREA_UPLOADSIZE', 'Maximum size: %s kB');
 define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
+define('_MA_XMSTOCK_AREA_FILTERFORM', 'Filter');
+define('_MA_XMSTOCK_AREA_ARTICLENAME', 'Name');
+define('_MA_XMSTOCK_AREA_ARTICLEREFERENCE', 'Reference');
+define('_MA_XMSTOCK_AREA_AMOUNT', 'Amount');
+define('_MA_XMSTOCK_AREA_AMOUNTTYPE1', '<');
+define('_MA_XMSTOCK_AREA_AMOUNTTYPE2', '≤');
+define('_MA_XMSTOCK_AREA_AMOUNTTYPE3', '=');
+define('_MA_XMSTOCK_AREA_AMOUNTTYPE4', '>');
+define('_MA_XMSTOCK_AREA_AMOUNTTYPE5', '≥');
+define('_MA_XMSTOCK_AREA_SORT', 'Sort');
+define('_MA_XMSTOCK_AREA_SORT1', 'Name Up');
+define('_MA_XMSTOCK_AREA_SORT2', 'Name Down');
+define('_MA_XMSTOCK_AREA_SORT3', 'Amount Up');
+define('_MA_XMSTOCK_AREA_SORT4', 'Amount Down');
 
 // stock
 define('_MA_XMSTOCK_STOCK_AREA', 'Area');
