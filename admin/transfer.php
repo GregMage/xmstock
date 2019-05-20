@@ -49,7 +49,7 @@ switch ($op) {
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
         $transfer_arr = $transferHandler->getByLink($criteria);
-        $transfer_count = $transferHandler->getCount($criteria);
+        $transfer_count = $transferHandler->getCountByLink($criteria);
         $xoopsTpl->assign('transfer_count', $transfer_count);
         if ($transfer_count > 0) {
             foreach (array_keys($transfer_arr) as $i) {
