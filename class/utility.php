@@ -244,6 +244,9 @@ class XmstockUtility
         $criteria->setSort('area_weight');
         $criteria->setOrder('ASC');
 		$criteria->add(new Criteria('stock_articleid', $itemid));
+		if (!empty($viewPermissionArea)) {
+			$criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
+		}
 		$criteria->add(new Criteria('area_status', 1));
         $stockHandler->table_link = $stockHandler->db->prefix("xmstock_area");
         $stockHandler->field_link = "area_id";
