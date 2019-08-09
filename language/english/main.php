@@ -135,4 +135,8 @@ define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
 // Admin
 define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
 
+// user
+define('_MA_XMSTOCK_HOME', 'Home page');
+define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
+
  

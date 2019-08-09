@@ -267,4 +267,15 @@ class XmstockUtility
             $xoopsTpl->assign('xmstock_viewstocks', true);
         }
     }
+	
+	public static function articlePerArea($area_id, $article_arr)
+    {
+        $count = 0;
+        foreach (array_keys($article_arr) as $i) {
+            if ($article_arr[$i]->getVar('stock_areaid') == $area_id) {
+                $count++;
+            }
+        }
+        return $count;
+    }
 }
