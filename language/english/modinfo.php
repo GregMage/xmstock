@@ -30,6 +30,7 @@ define('_MI_XMSTOCK_MENU_PERMISSION', 'Permission');
 define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 
 // Sub menu
+define('_MI_XMSTOCK_SUB_CADDY', 'Caddy');
 
 
 // Pref

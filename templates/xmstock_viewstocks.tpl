@@ -13,7 +13,7 @@
 	</div>
 	<div class="xm-stock-general-button">
 		<div class="btn-group" role="group" aria-label="...">
-			<a href="<{$xoops_url}>/modules/xmstock/action.php?op=order&amp;article_id=<{$article_id}>">
+			<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>">
 				<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></button>
 			</a>
 		</div>

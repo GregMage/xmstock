@@ -32,6 +32,10 @@ $modversion['image']       = 'assets/images/xmstock_logo.png';
 
 // Menu
 $modversion['hasMain'] = 1;
+$modversion['sub'][]   = [
+    'name' => _MI_XMSTOCK_SUB_CADDY,
+    'url'  => 'caddy.php'
+];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -62,6 +66,7 @@ $modversion['templates'][] = array('file' => 'xmstock_admin_transfer.tpl', 'desc
 $modversion['templates'][] = ['file' => 'xmstock_index.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_viewstocks.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_viewarea.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_caddy.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];

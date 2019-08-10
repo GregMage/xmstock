@@ -137,6 +137,8 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticl
 
 // user
 define('_MA_XMSTOCK_HOME', 'Home page');
+define('_MA_XMSTOCK_CADDY', 'Caddy');
+define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 
  
