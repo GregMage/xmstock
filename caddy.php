@@ -27,15 +27,31 @@ $sessionHelper = new \Xmf\Module\Helper\Session();
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 
+$article_id = Request::getInt('article_id', 0);
+
 
 // ********************************************************************************************************************
 // Liste le contenu du caddy
 // ********************************************************************************************************************
-function listCart($sessionHelper, $session_name)
+function listCart($sessionHelper, $session_name, $article_id = 0)
 {
-	\Xmf\Debug::dump($_SESSION);
-	//$sessionHelper = new \Xmf\Module\Helper\Session();
+	global $xoopsTpl;
+	if ($article_id == 0){
+		$return_url = XOOPS_URL . '/modules/xmarticle';
+	} else {
+		$helper = Xmf\Module\Helper::getHelper('xmarticle');
+		$articleHandler   = $helper->getHandler('xmarticle_article');
+		$article  = $articleHandler->get($article_id);
+		$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $article->getVar('article_cid') . '&article_id=' . $article_id;
+	}
+	$xoopsTpl->assign('article_id', $article_id);
+	$xoopsTpl->assign('return_url', $return_url);
 	$arr_selectionArticles = $sessionHelper->get($session_name);
+	$xoopsTpl->assign('articles', $arr_selectionArticles);
+	
+	
+	\Xmf\Debug::dump($_SESSION);
+	//$arr_selectionArticles = $sessionHelper->get($session_name);
 	foreach ($arr_selectionArticles as $datas) {
 		echo $datas['id'] . ' - ' . $datas['qty'] . '<br>';
 	}
@@ -45,7 +61,6 @@ $op = Request::getCmd('op', 'list');
 switch ($op) {
 	// Add
 	case 'add':
-		$article_id = Request::getInt('article_id', 0);
 		//TODO: Vérifier que l'article existe dans xmstock		
 		if ($sessionHelper->get($session_name) != false){
 			$arr_selectionArticles = $sessionHelper->get($session_name);			
@@ -70,12 +85,17 @@ switch ($op) {
 		} else {
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name);
+		listCart($sessionHelper, $session_name, $article_id);
 		break;
 		
 	// List: Liste des articles dans le caddy
 	case 'list':
-		listCart($sessionHelper, $session_name);	
+		listCart($sessionHelper, $session_name, $article_id);	
+		break;
+		
+	// Update: recalcul les quantités des articles dans le caddy
+	case 'update':
+		listCart($sessionHelper, $session_name, $article_id);	
 		break;
 
 	// empty: Vide le panier
@@ -86,7 +106,7 @@ switch ($op) {
 	
 	// del: Supprime un article
 	case 'del':
-		listCart($sessionHelper, $session_name);	
+		listCart($sessionHelper, $session_name, $article_id);	
 		break;
 }
 

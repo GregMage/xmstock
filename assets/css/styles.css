@@ -32,3 +32,28 @@ a.xm-area-image {
 	padding-top: 0px;
 	padding-right: 18px;
 }
+
+.xmstock_step_body {
+    width: 98%;
+    padding: 10px;
+    margin: 10px;
+}
+
+.xmstock_step_img, .oledrion_step_img img {
+    width: 16px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+}
+
+.xmstock_step_active {
+    padding: 6px;
+    font-weight: bold;
+    background-color: #ccc;
+}
+
+.xmstock_step {
+    padding: 6px;
+    font-weight: bold;
+    background-color: #eee;
+}
