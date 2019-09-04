@@ -147,6 +147,8 @@ define('_MA_XMSTOCK_CADDY_UPDATE', 'Update quantity');
 define('_MA_XMSTOCK_CADDY_STEP1_2', 'Next (Input information)');
 define('_MA_XMSTOCK_CADDY_QUANTITY', 'Quantity');
 define('_MA_XMSTOCK_CADDY_ITMES', 'Items');
+define('_MA_XMSTOCK_CADDY_ERROR_EMPTY', 'Your cart is empty');
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
+
 
  

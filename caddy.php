@@ -44,17 +44,32 @@ function listCart($sessionHelper, $session_name, $article_id = 0)
 		$article  = $articleHandler->get($article_id);
 		$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $article->getVar('article_cid') . '&article_id=' . $article_id;
 	}
-	$xoopsTpl->assign('article_id', $article_id);
+	//$xoopsTpl->assign('article_id', $article_id);
 	$xoopsTpl->assign('return_url', $return_url);
 	$arr_selectionArticles = $sessionHelper->get($session_name);
-	$xoopsTpl->assign('articles', $arr_selectionArticles);
+	$total = 0;
+	if (is_array($arr_selectionArticles) == true){
+		xoops_load('utility', 'xmarticle');
+		foreach ($arr_selectionArticles as $datas) {
+			$articles['id']   = $datas['id'];
+			$articles['name'] = XmarticleUtility::getArticleName($datas['id']);
+			$articles['qty']  = $datas['qty'];
+			$total += $datas['qty'];
+			$xoopsTpl->append_by_ref('articles', $articles);
+			unset($articles);
+		}
+		$xoopsTpl->assign('total', $total);
+	} else {
+		$xoopsTpl->assign('error_message', _MA_XMSTOCK_CADDY_ERROR_EMPTY);
+	}
 	
 	
-	\Xmf\Debug::dump($_SESSION);
+	
+	/*\Xmf\Debug::dump($_SESSION);
 	//$arr_selectionArticles = $sessionHelper->get($session_name);
 	foreach ($arr_selectionArticles as $datas) {
 		echo $datas['id'] . ' - ' . $datas['qty'] . '<br>';
-	}
+	}*/
 }
 
 $op = Request::getCmd('op', 'list');
@@ -95,6 +110,18 @@ switch ($op) {
 		
 	// Update: recalcul les quantités des articles dans le caddy
 	case 'update':
+		$arr_selectionArticles = $sessionHelper->get($session_name);
+		if (is_array($arr_selectionArticles) == true){
+			$datasUpdate = $article = array();
+			foreach ($arr_selectionArticles as $datas) {
+				$name   = 'qty_' . $datas['id'];
+				$valeur = \Xmf\Request::getInt($name, 0, 'POST');
+				$article['id']  = $datas['id'];
+				$article['qty'] = $valeur;					
+				$datasUpdate[] = $article;
+			}
+			$sessionHelper->set($session_name, $datasUpdate);
+		}
 		listCart($sessionHelper, $session_name, $article_id);	
 		break;
 
@@ -106,6 +133,22 @@ switch ($op) {
 	
 	// del: Supprime un article
 	case 'del':
+		if ($article_id != 0){
+			$arr_selectionArticles = $sessionHelper->get($session_name);
+			if (is_array($arr_selectionArticles) == true){
+				$datasUpdate = array();
+				foreach ($arr_selectionArticles as $datas) {
+					if ($datas['id'] != $article_id){						
+						$datasUpdate[] = $datas;
+					}
+				}
+				if (count($datasUpdate) > 0) {
+					$sessionHelper->set($session_name, $datasUpdate);
+				} else {
+					$sessionHelper->del($session_name);
+				}
+			}
+		}	
 		listCart($sessionHelper, $session_name, $article_id);	
 		break;
 }
