@@ -40,11 +40,7 @@
 					<a href="<{$return_url}>" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"></span> <{$smarty.const._MA_XMSTOCK_CADDY_CONTINUE}></a>
 				</div>
 			</div>
-		</form>
-
-
-
-		
+		</form>		
 		<div class="xm-stock-general-button">
 			<a href="<{$xoops_url}>/modules/xmstock/caddy.php" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>	
 		</div>

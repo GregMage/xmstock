@@ -42,7 +42,11 @@ function listCart($sessionHelper, $session_name, $article_id = 0)
 		$helper = Xmf\Module\Helper::getHelper('xmarticle');
 		$articleHandler   = $helper->getHandler('xmarticle_article');
 		$article  = $articleHandler->get($article_id);
-		$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $article->getVar('article_cid') . '&article_id=' . $article_id;
+		if (isset($article)){
+			$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $article->getVar('article_cid') . '&article_id=' . $article_id;
+		} else {
+			$return_url = XOOPS_URL . '/modules/xmarticle';
+		}
 	}
 	//$xoopsTpl->assign('article_id', $article_id);
 	$xoopsTpl->assign('return_url', $return_url);
@@ -76,6 +80,14 @@ $op = Request::getCmd('op', 'list');
 switch ($op) {
 	// Add
 	case 'add':
+		// Vérification si l'article existe.
+		$helper = Xmf\Module\Helper::getHelper('xmarticle');
+		$articleHandler   = $helper->getHandler('xmarticle_article');
+		$article  = $articleHandler->get($article_id);
+		if (!isset($article)){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+		}
+	
 		//TODO: Vérifier que l'article existe dans xmstock		
 		if ($sessionHelper->get($session_name) != false){
 			$arr_selectionArticles = $sessionHelper->get($session_name);			
