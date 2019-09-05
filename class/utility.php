@@ -22,6 +22,11 @@
  */
 class XmstockUtility
 {
+	/**
+     * Fonction qui génère une liste des areas (id et nom)
+     * @param boolean  $efl			Ajout d'un entrée nul en première position (-)
+     * @return array   $arealist
+     */
     public static function getAreaList($efl = false)
     {
         include __DIR__ . '/../include/common.php';
@@ -43,6 +48,11 @@ class XmstockUtility
         return $arealist;
     }
 	
+	/**
+     * Fonction qui génère une liste des outputs (id et nom)
+     * @param boolean  $efl			Ajout d'un entrée nul en première position (-)
+     * @return array   $outputlist
+     */	
 	public static function getOutputList($efl = false)
     {
         include __DIR__ . '/../include/common.php';
@@ -64,6 +74,14 @@ class XmstockUtility
         return $outputlist;
     }
 
+	/**
+     * Fonction qui génère vérifie si l'article à transférer est présent dans la quantité demandée
+     * @param string   $type		Type de transfert (E: entrée, O: sortie, T: Transfert)
+     * @param int      $articleid	Id de l'article
+     * @param int      $amount		montant
+     * @param int      $areaid	    Id de l'area
+     * @return string   			Vide ou message d'erreur.	
+     */
 	public static function checkTransfert($type, $articleid, $amount, $areaid)
     {
 		include __DIR__ . '/../include/common.php';
@@ -99,6 +117,15 @@ class XmstockUtility
 		}
     }
 
+	/**
+     * Fonction qui effectue le transfert de l'artile (dans la quantité demandée)dans le lieu voulu
+     * @param string   $type		Type de transfert (E: entrée, O: sortie, T: Transfert)
+     * @param int      $articleid	Id de l'article
+     * @param int      $amount		montant
+     * @param int      $areaid	    Id de l'area de départ
+     * @param int      $areaid	    Id de l'area d'arrivée
+     * @return string   			Vide ou message d'erreur.	
+     */
 	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid)
     {
 		include __DIR__ . '/../include/common.php';
@@ -212,7 +239,12 @@ class XmstockUtility
 				break;
 		}
     }
-	
+
+	/**
+     * Fonction qui liste les areas qui respectent la permission demandées
+     * @param string   $permtype	Type de permission
+     * @return array   $areas		Liste des areas qui correspondent à la permission
+     */
 	public static function getPermissionArea($permtype = 'xmstock_view')
     {
         global $xoopsUser;
@@ -225,8 +257,14 @@ class XmstockUtility
 
         return $areas;
     }
-
-	public static function renderStocks($xoopsTpl, $xoTheme, $itemid = 0)
+	
+	/**
+     * Fonction qui permet d'afficher les areas par rapport à un article
+     * @param          $xoopsTpl
+     * @param      	   $xoTheme
+     * @param int      $articleid	Id de l'article
+     */
+	public static function renderStocks($xoopsTpl, $xoTheme, $article_id = 0)
     {
         include __DIR__ . '/../include/common.php';
         
@@ -243,7 +281,7 @@ class XmstockUtility
         $criteria = new CriteriaCompo();
         $criteria->setSort('area_weight');
         $criteria->setOrder('ASC');
-		$criteria->add(new Criteria('stock_articleid', $itemid));
+		$criteria->add(new Criteria('stock_articleid', $article_id));
 		if (!empty($viewPermissionArea)) {
 			$criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
 		}
@@ -267,7 +305,13 @@ class XmstockUtility
             $xoopsTpl->assign('xmstock_viewstocks', true);
         }
     }
-	
+
+	/**
+     * Fonction qui compte le nombre d'article contenu dans un area
+     * @param int      $area_id 	Id de l'area
+     * @param array    $article_arr Tableau des artices
+     * @return int     $count		Nombre d'article
+     */
 	public static function articlePerArea($area_id, $article_arr)
     {
         $count = 0;
