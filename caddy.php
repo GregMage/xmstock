@@ -197,5 +197,5 @@ switch ($op) {
 
 //SEO
 // pagetitle
-$xoopsTpl->assign('xoops_pagetitle', \Xmf\Metagen::generateSeoTitle('Caddy' . '-' . $xoopsModule->name()));
+$xoopsTpl->assign('xoops_pagetitle', \Xmf\Metagen::generateSeoTitle(_MA_XMSTOCK_CADDY . '-' . $xoopsModule->name()));
 include XOOPS_ROOT_PATH . '/footer.php';
