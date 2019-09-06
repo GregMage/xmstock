@@ -307,19 +307,20 @@ class XmstockUtility
     }
 
 	/**
-     * Fonction qui compte le nombre d'article contenu dans un area
-     * @param int      $area_id 	Id de l'area
-     * @param array    $article_arr Tableau des artices
+     * Fonction qui compte le nombre d'article contenu dans un lieu de stockage
+     * @param int      $area_id 	Id du lieu de stockage
+     * @param array    $stock_arr Tableau des artices
      * @return int     $count		Nombre d'article
      */
-	public static function articlePerArea($area_id, $article_arr)
+	public static function articlePerArea($area_id, $stock_arr)
     {
         $count = 0;
-        foreach (array_keys($article_arr) as $i) {
-            if ($article_arr[$i]->getVar('stock_areaid') == $area_id) {
+        foreach (array_keys($stock_arr) as $i) {
+            if ($stock_arr[$i]->getVar('stock_areaid') == $area_id) {
                 $count++;
             }
         }
         return $count;
     }
+	
 }

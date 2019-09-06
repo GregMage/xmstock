@@ -28,9 +28,9 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 // Get Permission to view
 $viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
 
-// Get article
+// Get stock
 $criteria = new CriteriaCompo();
-$article_arr = $stockHandler->getall($criteria);
+$stock_arr = $stockHandler->getall($criteria);
 
 // Get start pager
 $start = Request::getInt('start', 0);
@@ -55,7 +55,7 @@ if ($area_count > 0 && !empty($viewPermissionArea)) {
 		$area['name']            = $area_arr[$i]->getVar('area_name');
 		$area['description']     = \Xmf\Metagen::generateDescription($area_arr[$i]->getVar('area_description', 'show'), 30);
 		$area['location']        = $area_arr[$i]->getVar('area_location');
-		$area['totalarticle']    = sprintf(_MA_XMSTOCK_AREA_THEREAREARTICLE, XmstockUtility::articlePerArea($area_id, $article_arr));
+		$area['totalarticle']    = sprintf(_MA_XMSTOCK_AREA_THEREAREARTICLE, XmstockUtility::articlePerArea($area_id, $stock_arr));
 		$area_img                = $area_arr[$i]->getVar('area_logo') ?: 'blank.gif';
 		$area['logo']            = $url_logo_area .  $area_img;
 		$xoopsTpl->append_by_ref('areas', $area);
