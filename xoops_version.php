@@ -54,6 +54,8 @@ $modversion['tables'][1] = 'xmstock_area';
 $modversion['tables'][2] = 'xmstock_transfer';
 $modversion['tables'][3] = 'xmstock_stock';
 $modversion['tables'][4] = 'xmstock_output';
+$modversion['tables'][6] = 'xmstock_order';
+$modversion['tables'][7] = 'xmstock_itemorder';
 
 
 // Admin Templates

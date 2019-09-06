@@ -50,3 +50,29 @@ CREATE TABLE `xmstock_output` (
   PRIMARY KEY (`output_id`),
   KEY `output_name` (`output_userid`)
 ) ENGINE=MyISAM;
+
+CREATE TABLE `xmstock_order` (
+  `order_id`             int(11) unsigned    	NOT NULL AUTO_INCREMENT,
+  `order_description`    text,
+  `order_userid`         smallint(5)  unsigned  NOT NULL default '0',
+  `order_date`           int(10) unsigned    	NOT NULL DEFAULT '0',
+  `order_status`         tinyint(1) unsigned 	NOT NULL DEFAULT '1',
+  
+  PRIMARY KEY (`order_id`),
+  KEY `order_date` (`order_date`)
+) ENGINE=MyISAM;
+
+CREATE TABLE `xmstock_itemorder` (
+  `itemorder_id`          int(11) unsigned    	NOT NULL AUTO_INCREMENT,
+  `itemorder_orderid`     int(11) unsigned    	NOT NULL, 
+  `itemorder_articleid`   int(11) unsigned    	NOT NULL,
+  `itemorder_areaid`      int(11) unsigned    	NOT NULL,
+  `itemorder_amount`      int(11) unsigned    	NOT NULL,
+  `itemorder_dvalidated`  int(10) unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_davailable`  int(10) unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_dwithdrawal` int(10) unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_status`      tinyint(1) unsigned 	NOT NULL DEFAULT '1',
+  
+  PRIMARY KEY (`itemorder_id`),
+  KEY `itemorder_orderid` (`itemorder_articleid`)
+) ENGINE=MyISAM;
