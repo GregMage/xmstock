@@ -104,13 +104,17 @@ switch ($op) {
 		}
 		if ($article->getVar('article_status') == 0){
 			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
-		}
-	
+		}	
 		//Vérification que l'article existe dans le lieu de stockage
 		$criteria = new CriteriaCompo();
 		$stock_arr = $stockHandler->getall($criteria);
 		if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0){
 			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+		}	
+		//Vérification si l'article peut être commandé (permission order)
+		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
+		if (in_array($area_id, $orderPermissionArea) == false){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOPERMISSION);
 		}		
 		
 		if ($sessionHelper->get($session_name) != false){

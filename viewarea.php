@@ -32,6 +32,8 @@ if ($area_id == 0) {
 }
 // permission to view
 $permHelper->checkPermissionRedirect('xmstock_view', $area_id, 'index.php', 2, _NOPERM);
+// Get Permission to order
+$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
 
 $area  = $areaHandler->get($area_id);
 
@@ -46,6 +48,11 @@ if ($helper->isUserAdmin() != true){
 }
 
 // Area
+if (in_array($area_id, $orderPermissionArea) == true){
+	$xoopsTpl->assign('order', true);
+} else {
+	$xoopsTpl->assign('order', false);
+}
 $xoopsTpl->assign('area_id', $area_id);
 $xoopsTpl->assign('name', $area->getVar('area_name'));
 $xoopsTpl->assign('description', $area->getVar('area_description'));

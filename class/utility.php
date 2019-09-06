@@ -276,6 +276,8 @@ class XmstockUtility
 		
 		// Get Permission to view
 		$viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
+		// Get Permission to order
+		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
 		
 		// Criteria
         $criteria = new CriteriaCompo();
@@ -293,10 +295,15 @@ class XmstockUtility
         if (count($stock_arr) > 0 && !empty($viewPermissionArea)) {
 			$total_amount = 0;
 			foreach (array_keys($stock_arr) as $i) {
-				$stock['area_id']       = $stock_arr[$i]->getVar('area_id');
+				$stock['area_id']    = $stock_arr[$i]->getVar('area_id');
                 $stock['name']       = $stock_arr[$i]->getVar('area_name');
                 $stock['location']   = $stock_arr[$i]->getVar('area_location');
                 $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
+				if (in_array($stock['area_id'], $orderPermissionArea) == true){
+					$stock['order']  = true;
+				} else {
+					$stock['order']  = false;
+				}
 				$total_amount += $stock['amount'];
                 $xoopsTpl->append_by_ref('stock', $stock);
                 unset($stock);

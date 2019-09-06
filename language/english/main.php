@@ -122,8 +122,8 @@ define('_MA_XMSTOCK_PERMISSION_SUPERVISE', 'Supervisor Permissions');
 define('_MA_XMSTOCK_PERMISSION_SUPERVISE_DSC', 'Select groups that can supervise this area');
 define('_MA_XMSTOCK_PERMISSION_VIEW', 'View Permissions');
 define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this area');
-define('_MA_XMSTOCK_PERMISSION_REQUEST', 'request permission');
-define('_MA_XMSTOCK_PERMISSION_REQUEST_DSC', 'Select groups that can request an article in this area');
+define('_MA_XMSTOCK_PERMISSION_ORDER', 'Order permission');
+define('_MA_XMSTOCK_PERMISSION_ORDER_DSC', 'Select groups that can order an article in this area');
 define('_MA_XMSTOCK_PERMISSION_OTHER', 'Other permissions');
 define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Select groups that can:');
 define('_MA_XMSTOCK_PERMISSION_OTHER_4', '');
@@ -151,6 +151,7 @@ define('_MA_XMSTOCK_CADDY_ITMES', 'Items');
 define('_MA_XMSTOCK_CADDY_ERROR_EMPTY', 'Your cart is empty');
 define('_MA_XMSTOCK_CADDY_ERROR_NOARTICLE', 'The requested item does not exist or is not activated!');
 define('_MA_XMSTOCK_CADDY_ERROR_NOAREA', 'The requested area does not exist or is not activated!');
+define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to order in this area');
 
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 
