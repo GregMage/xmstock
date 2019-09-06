@@ -11,6 +11,7 @@
 			<table class="table table-striped">
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
+					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
 					<th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}></th>
 					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 				</tr>
@@ -18,16 +19,21 @@
 					<tr>
 						<td><{$article.name}></td>
 						<td>
-							<input class="form-control" type="number" name="qty_<{$article.id}>" id="qty_<{$article.id}>" value="<{$article.qty}>">
+							<{$article.area}>
+							<input type="hidden" name="area_<{$article.count}>" id="area_<{$article.count}>" value="<{$article.areaid}>">
+							<span class="badge"><{$article.amount}></span>							
+						</td>       
+						<td>
+							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" max="<{$article.amount}>">
 						</td>
 						<td class="txtcenter width10">
-							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
 						</td>
 					</tr>
-				
+					
 				<{/foreach}>
 				<tr>
-					<td class="txtright"><h3>Total</h3></td>
+					<td class="txtright" colspan="2"><h3>Total</h3></td>
 					<td class="txtcenter"><h3><{$total}></h3></td>
 					<td>&nbsp;</td>
 				</tr>		

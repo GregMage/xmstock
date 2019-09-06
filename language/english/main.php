@@ -139,6 +139,7 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticl
 define('_MA_XMSTOCK_HOME', 'Home page');
 define('_MA_XMSTOCK_CADDY', 'Caddy');
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
+define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');
 define('_MA_XMSTOCK_CADDY_STEP2', '2- Input information');
 define('_MA_XMSTOCK_CADDY_STEP3', '3- Confirm information');
@@ -149,6 +150,8 @@ define('_MA_XMSTOCK_CADDY_QUANTITY', 'Quantity');
 define('_MA_XMSTOCK_CADDY_ITMES', 'Items');
 define('_MA_XMSTOCK_CADDY_ERROR_EMPTY', 'Your cart is empty');
 define('_MA_XMSTOCK_CADDY_ERROR_NOARTICLE', 'The requested item does not exist or is not activated!');
+define('_MA_XMSTOCK_CADDY_ERROR_NOAREA', 'The requested area does not exist or is not activated!');
+
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 
 

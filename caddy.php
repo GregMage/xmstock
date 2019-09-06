@@ -28,12 +28,13 @@ $sessionHelper = new \Xmf\Module\Helper\Session();
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 
 $article_id = Request::getInt('article_id', 0);
+$area_id = Request::getInt('area_id', 0);
 
 
 // ********************************************************************************************************************
 // Liste le contenu du caddy
 // ********************************************************************************************************************
-function listCart($sessionHelper, $session_name, $article_id = 0)
+function listCart($sessionHelper, $session_name, $article_id = 0, $stockHandler)
 {
 	global $xoopsTpl;
 	if ($article_id == 0){
@@ -48,16 +49,24 @@ function listCart($sessionHelper, $session_name, $article_id = 0)
 			$return_url = XOOPS_URL . '/modules/xmarticle';
 		}
 	}
-	//$xoopsTpl->assign('article_id', $article_id);
 	$xoopsTpl->assign('return_url', $return_url);
 	$arr_selectionArticles = $sessionHelper->get($session_name);
 	$total = 0;
 	if (is_array($arr_selectionArticles) == true){
+		// Get stock
+		$criteria = new CriteriaCompo();
+		$stock_arr = $stockHandler->getall($criteria);
 		xoops_load('utility', 'xmarticle');
+		$count = 1;
 		foreach ($arr_selectionArticles as $datas) {
-			$articles['id']   = $datas['id'];
-			$articles['name'] = XmarticleUtility::getArticleName($datas['id']);
-			$articles['qty']  = $datas['qty'];
+			$articles['id']    	= $datas['id'];
+			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
+			$articles['areaid'] = $datas['area'];
+			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
+			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
+			$articles['qty']   	= $datas['qty'];
+			$articles['count']  = $count;
+			$count++;
 			$total += $datas['qty'];
 			$xoopsTpl->append_by_ref('articles', $articles);
 			unset($articles);
@@ -66,29 +75,44 @@ function listCart($sessionHelper, $session_name, $article_id = 0)
 	} else {
 		$xoopsTpl->assign('error_message', _MA_XMSTOCK_CADDY_ERROR_EMPTY);
 	}
-	
-	
-	
-	/*\Xmf\Debug::dump($_SESSION);
-	//$arr_selectionArticles = $sessionHelper->get($session_name);
-	foreach ($arr_selectionArticles as $datas) {
-		echo $datas['id'] . ' - ' . $datas['qty'] . '<br>';
-	}*/
 }
 
 $op = Request::getCmd('op', 'list');
 switch ($op) {
 	// Add
 	case 'add':
+		// Vérification si l'area existe.		
+		if ($area_id == 0){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOAREA);
+		}
+		$area  = $areaHandler->get($area_id);
+		if (!isset($area)){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOAREA);
+		}
+		if ($area->getVar('area_status') == 0){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOAREA);
+		}
 		// Vérification si l'article existe.
+		if ($article_id == 0){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+		}
 		$helper = Xmf\Module\Helper::getHelper('xmarticle');
 		$articleHandler   = $helper->getHandler('xmarticle_article');
 		$article  = $articleHandler->get($article_id);
 		if (!isset($article)){
 			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
 		}
+		if ($article->getVar('article_status') == 0){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+		}
 	
-		//TODO: Vérifier que l'article existe dans xmstock		
+		//Vérification que l'article existe dans le lieu de stockage
+		$criteria = new CriteriaCompo();
+		$stock_arr = $stockHandler->getall($criteria);
+		if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0){
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+		}		
+		
 		if ($sessionHelper->get($session_name) != false){
 			$arr_selectionArticles = $sessionHelper->get($session_name);			
 		} else {
@@ -97,27 +121,28 @@ switch ($op) {
 		$datasUpdate = array();
 		$exists = false;
 		foreach ($arr_selectionArticles as $articles) {
-			if ($articles['id'] == $article_id) {
+			if ($articles['id'] == $article_id && $articles['area'] == $area_id) {
 				$exists = true;
 				$articles['qty'] += 1;
 			}
 			$datasUpdate[] = $articles;				
 		}
 		if ($exists === false) {
-			$datas        = array();
-			$datas['id']  = $article_id;
-			$datas['qty'] = 1;
+			$datas         = array();
+			$datas['id']   = $article_id;
+			$datas['area'] = $area_id;
+			$datas['qty']  = 1;
 			$arr_selectionArticles[] = $datas;
 			$sessionHelper->set($session_name, $arr_selectionArticles);
 		} else {
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name, $article_id);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
 		break;
 		
 	// List: Liste des articles dans le caddy
 	case 'list':
-		listCart($sessionHelper, $session_name, $article_id);	
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);	
 		break;
 		
 	// Update: recalcul les quantités des articles dans le caddy
@@ -125,16 +150,21 @@ switch ($op) {
 		$arr_selectionArticles = $sessionHelper->get($session_name);
 		if (is_array($arr_selectionArticles) == true){
 			$datasUpdate = $article = array();
+			$count = 1;
 			foreach ($arr_selectionArticles as $datas) {
-				$name   = 'qty_' . $datas['id'];
-				$valeur = \Xmf\Request::getInt($name, 0, 'POST');
-				$article['id']  = $datas['id'];
-				$article['qty'] = $valeur;					
+				$name_qty = 'qty_' . $count;
+				$name_area = 'area_' . $count;
+				$qty = \Xmf\Request::getInt($name_qty, 0, 'POST');
+				$area = \Xmf\Request::getInt($name_area, 0, 'POST');
+				$article['id']   = $datas['id'];
+				$article['area'] = $area;
+				$article['qty']  = $qty;					
 				$datasUpdate[] = $article;
+				$count++;
 			}
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name, $article_id);	
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);	
 		break;
 
 	// empty: Vide le panier
@@ -145,12 +175,12 @@ switch ($op) {
 	
 	// del: Supprime un article
 	case 'del':
-		if ($article_id != 0){
+		if ($article_id != 0 && $area_id != 0){
 			$arr_selectionArticles = $sessionHelper->get($session_name);
 			if (is_array($arr_selectionArticles) == true){
 				$datasUpdate = array();
 				foreach ($arr_selectionArticles as $datas) {
-					if ($datas['id'] != $article_id){						
+					if (!($datas['id'] == $article_id && $datas['area'] == $area_id)){						
 						$datasUpdate[] = $datas;
 					}
 				}
@@ -160,11 +190,10 @@ switch ($op) {
 					$sessionHelper->del($session_name);
 				}
 			}
-		}	
-		listCart($sessionHelper, $session_name, $article_id);	
+		}
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);	
 		break;
 }
-
 
 //SEO
 // pagetitle

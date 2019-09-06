@@ -309,7 +309,7 @@ class XmstockUtility
 	/**
      * Fonction qui compte le nombre d'article contenu dans un lieu de stockage
      * @param int      $area_id 	Id du lieu de stockage
-     * @param array    $stock_arr Tableau des artices
+     * @param array    $stock_arr   Tableau des stocks
      * @return int     $count		Nombre d'article
      */
 	public static function articlePerArea($area_id, $stock_arr)
@@ -323,4 +323,51 @@ class XmstockUtility
         return $count;
     }
 	
+	/**
+     * Fonction qui donne le montant total de l'article dans le lieu de stockage défini
+     * @param int      $area_id 	Id du lieu de stockage
+	 * @param int      $articleid	Id de l'article
+     * @param array    $stock_arr   Tableau des stocks
+     * @return int     $amount		Montant total de l'article dans le lieu de stockage défini
+     */
+	public static function articleAmountPerArea($area_id, $article_id, $stock_arr)
+    {
+        $amount = 0;
+        foreach (array_keys($stock_arr) as $i) {
+            if ($stock_arr[$i]->getVar('stock_areaid') == $area_id && $stock_arr[$i]->getVar('stock_articleid') == $article_id) {
+                $amount = $stock_arr[$i]->getVar('stock_amount');
+            }
+        }
+        return $amount;
+    }
+	
+	/**
+     * Fonction qui permet d'afficher le nom d'un lieu de stockage
+	 * @param int      $areaeid	    Id du lieu de stockage
+     * @param boolean  $uloc		Afficher le lieu
+     * @param boolean  $ulink		Nom sous forme de lien     
+	 * @return string   			Nom selon les options ou message d'erreur
+     */
+	
+	public static function getAreaName($areaid, $uloc = true, $ulink = true)
+    {
+        include __DIR__ . '/../include/common.php';
+		
+		$area = $areaHandler->get($areaid);
+		if (isset($area)){
+			if ($uloc == true){
+				$loc = ' (' . $area->getVar('area_location') . ')';
+			} else {
+				$loc = '';
+			}
+			if ($ulink == true){
+				$link = '<a href="' . XOOPS_URL . '/modules/xmstock/viewarea.php?area_id=' . $areaid . '" title="' . $area->getVar('area_name') . '" target="_blank">' . $area->getVar('area_name') . '</a>';
+			} else {
+				$link = $area->getVar('area_name');
+			}		
+			return $link . $loc;
+		} else {
+			return 'Error: The requested area does not exist! (ID-' . $areaid . ')';
+		}
+    }
 }

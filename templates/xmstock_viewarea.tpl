@@ -23,7 +23,7 @@
 			<li class="list-group-item">
 				<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>"><{$stock.name}></a></span> (<{$stock.reference}>)
 				<span class="badge"><{$stock.amount}></span>
-				<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>">
+				<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>">
 					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></button>
 				</a>
 			</li>
