@@ -48,7 +48,7 @@
 			</div>
 		</form>		
 		<div class="xm-stock-general-button">
-			<a href="<{$xoops_url}>/modules/xmstock/caddy.php" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>	
+			<a href="<{$xoops_url}>/modules/xmstock/checkout.php" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>	
 		</div>
 
 		<table class="xmstock_step_body">
