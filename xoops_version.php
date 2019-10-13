@@ -94,7 +94,7 @@ $modversion['config'][] = [
 xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
-    'name'        => 'admin_editor',
+    'name'        => 'general_editor',
     'title'       => '_MI_XMSTOCK_PREF_EDITOR',
     'description' => '',
     'formtype'    => 'select',
