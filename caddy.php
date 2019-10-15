@@ -174,7 +174,7 @@ switch ($op) {
 	// empty: Vide le panier
 	case 'empty':
 		$sessionHelper->del($session_name);
-		listCart($sessionHelper, $session_name);	
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);	
 		break;
 	
 	// del: Supprime un article
