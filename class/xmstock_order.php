@@ -58,6 +58,7 @@ class xmstock_order extends XoopsObject
     public function saveOrder($orderHandler, $action = false)
     {
         global $xoopsUser;
+		$session_name = 'caddy';
 		if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
@@ -68,10 +69,33 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 		$this->setVar('order_ddesired', strtotime(Xmf\Request::getString('order_ddesired', '')));
 		$this->setVar('order_dorder', time());
-        $this->setVar('order_status', Xmf\Request::getInt('order_status', 11));
+        $this->setVar('order_status', Xmf\Request::getInt('order_status', 1));
         if ($error_message == '') {
-            if ($orderHandler->insert($this)) {
-                redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+            if ($orderHandler->insert($this)) {				
+				$sessionHelper = new \Xmf\Module\Helper\Session();
+				$arr_selectionArticles = $sessionHelper->get($session_name);
+				if (is_array($arr_selectionArticles) == true){
+					$order_id = $this->get_new_enreg();					
+					foreach ($arr_selectionArticles as $datas) {
+						$obj = $itemorderHandler->create();
+						$obj->setVar('itemorder_orderid', $order_id);
+						$obj->setVar('itemorder_articleid',  $datas['id']);
+						$obj->setVar('itemorder_areaid',  $datas['area']);
+						$obj->setVar('itemorder_amount',  $datas['qty']);
+						$obj->setVar('itemorder_dvalidated',  strtotime(Xmf\Request::getString('itemorder_dvalidated_' . $datas['id'], '')));
+						$obj->setVar('itemorder_davailable',  strtotime(Xmf\Request::getString('itemorder_davailable_' . $datas['id'], '')));
+						$obj->setVar('itemorder_dwithdrawal',  strtotime(Xmf\Request::getString('itemorder_dwithdrawal_' . $datas['id'], '')));
+						$obj->setVar('itemorder_status',  Xmf\Request::getInt('itemorder_status_' . $datas['id'], 1));
+						if (!$itemorderHandler->insert($obj)) {
+							$error_message = $obj->getHtmlErrors();
+						}
+					}
+					if ($error_message == '') {
+						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+					}					
+				} else {
+					redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);
+				}                
             } else {
                 $error_message =  $this->getHtmlErrors();
             }
