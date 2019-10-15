@@ -67,24 +67,43 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 $op = Request::getCmd('op', 'list');
 switch ($op) {
 		
-	// List: Liste les articles dans le caddy
+	// List: Liste les articles
 	case 'list':
 		include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 		$form = new XoopsThemeForm(_MA_XMSTOCK_CHECKOUT_INPUTINF, 'form', $_SERVER['REQUEST_URI'], 'post', true);
 		// description
         $editor_configs           =array();
-        $editor_configs['name']   = 'chechout_desc';
+        $editor_configs['name']   = 'order_description';
         $editor_configs['value']  = '';
         $editor_configs['rows']   = 3;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '50%';
         $editor_configs['height'] = '100px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
-        $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_CHECKOUT_DESC, 'chechout_desc', $editor_configs), true);
-        $form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'chechout_dorder', 2, time()), false);
+        $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_CHECKOUT_DESC, 'order_description', $editor_configs), true);
+        $form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time()), false);
+		$form->addElement(new XoopsFormHidden('op', 'save'));
 		$form->addElement(new XoopsFormButton('', 'submit', _MA_XMSTOCK_CADDY_STEP2_2, 'submit'));		
 		$xoopsTpl->assign('form', $form->render());
 		listCart($sessionHelper, $session_name, $stockHandler);	
+		break;		
+
+	case 'save':
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            redirect_header('caddy.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        $order_id = Request::getInt('order_id', 0);
+        if ($order_id == 0) {
+            $obj = $orderHandler->create();            
+        } else {
+            $obj = $orderHandler->get($order_id);
+        }
+        $error_message = $obj->saveOrder($orderHandler, 'checkout.php');
+        if ($error_message != ''){
+            $xoopsTpl->assign('error_message', $error_message);
+            $form = $obj->getForm();
+            $xoopsTpl->assign('form', $form->render());
+        }
 		break;
 		
 }
