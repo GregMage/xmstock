@@ -183,7 +183,7 @@ if ($stock_count > 0) {
 }
 //SEO
 // pagetitle
-$xoopsTpl->assign('xoops_pagetitle', \Xmf\Metagen::generateSeoTitle($area->getVar('area_name') . '-' . $xoopsModule->name()));
+$xoopsTpl->assign('xoops_pagetitle', $area->getVar('area_name') . '-' . $xoopsModule->name());
 //description
 $xoTheme->addMeta('meta', 'description', \Xmf\Metagen::generateDescription($area->getVar('area_description'), 30));
 //keywords
