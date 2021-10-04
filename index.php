@@ -34,6 +34,8 @@ $stock_arr = $stockHandler->getall($criteria);
 
 // Get start pager
 $start = Request::getInt('start', 0);
+
+$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 // Criteria
 $criteria = new CriteriaCompo();
 $criteria->setSort('area_weight ASC, area_name');

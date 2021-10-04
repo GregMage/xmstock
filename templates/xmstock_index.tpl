@@ -1,8 +1,8 @@
 <div class="xmstock">
-    <{if count($areas) gt 0}>
     <ol class="breadcrumb">
-        <li class="active"><{$smarty.const._MA_XMSTOCK_HOME}></li>
+        <li class="active"><{$index_module}></li>
     </ol>
+	<{if $area_count != 0}>
     <div class="xm-area row">
         <{foreach item=area from=$areas}>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 xm-area-list">
