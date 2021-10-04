@@ -16,10 +16,9 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
+use Xmf\Request;
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class xmstock_area
@@ -38,6 +37,7 @@ class xmstock_area extends XoopsObject
         // use html
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
         $this->initVar('area_logo', XOBJ_DTYPE_TXTBOX, null, false);
+		$this->initVar('area_color', XOBJ_DTYPE_TXTBOX, '#ffffff', false);
         $this->initVar('area_location', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('area_weight', XOBJ_DTYPE_INT, null, false, 11);
         $this->initVar('area_status', XOBJ_DTYPE_INT, null, false, 1);
@@ -62,7 +62,7 @@ class xmstock_area extends XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         include __DIR__ . '/../include/common.php';
-        
+
         $error_message = '';
         // test error
         if ((int)$_REQUEST['area_weight'] == 0 && $_REQUEST['area_weight'] != '0') {
@@ -72,7 +72,7 @@ class xmstock_area extends XoopsObject
         //logo
         if ($_FILES['area_logo']['error'] != UPLOAD_ERR_NO_FILE) {
             include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-            $uploader_area_img = new XoopsMediaUploader($path_logo_area, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'), $upload_size, null, null);
+            $uploader_area_img = new XoopsMediaUploader($path_logo_area, ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'], $upload_size, null, null);
             if ($uploader_area_img->fetchMedia('area_logo')) {
                 $uploader_area_img->setPrefix('area_');
                 if (!$uploader_area_img->upload()) {
@@ -84,14 +84,19 @@ class xmstock_area extends XoopsObject
                 $error_message .= $uploader_area_img->getErrors();
             }
         } else {
-            $this->setVar('area_logo', Xmf\Request::getString('area_logo', ''));
+			$area_logo = Request::getString('area_logo', '');
+			if ($area_logo == 'no-image.png'){
+				$area_logo = '';
+			}
+            $this->setVar('area_logo', $area_logo);
         }
-        $this->setVar('area_name', Xmf\Request::getString('area_name', ''));
-        $this->setVar('area_description',  Xmf\Request::getText('area_description', ''));
-        $this->setVar('area_location', Xmf\Request::getString('area_location', ''));
-        $this->setVar('area_status', Xmf\Request::getInt('area_status', 1));
+        $this->setVar('area_name', Request::getString('area_name', ''));
+        $this->setVar('area_description',  Request::getText('area_description', ''));
+        $this->setVar('area_color', Request::getString('area_color', ''));
+		$this->setVar('area_location',Request::getString('area_location', ''));
+        $this->setVar('area_status', Request::getInt('area_status', 1));
         if ($error_message == '') {
-            $this->setVar('area_weight', Xmf\Request::getInt('area_weight', 0));
+            $this->setVar('area_weight', Request::getInt('area_weight', 0));
             if ($areaHandler->insert($this)) {
                 // permissions
                 if ($this->get_new_enreg() == 0){
@@ -126,7 +131,6 @@ class xmstock_area extends XoopsObject
      */
     public function getForm($action = false)
     {
-        $upload_size = 512000;
         $helper = \Xmf\Module\Helper::getHelper('xmstock');
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
@@ -163,13 +167,13 @@ class xmstock_area extends XoopsObject
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_AREA_DESC, 'area_description', $editor_configs), false);
         // logo
-        $blank_img = $this->getVar('area_logo') ?: 'blank.gif';
-        $uploadirectory = str_replace(XOOPS_URL, '', $url_logo_area);
+		$blank_img       = $this->getVar('area_logo') ?: 'no-image.png';
+        $uploadirectory  = str_replace(XOOPS_URL, '', $url_logo_area);
         $imgtray_img     = new XoopsFormElementTray(_MA_XMSTOCK_AREA_LOGOFILE  . '<br /><br />' . sprintf(_MA_XMSTOCK_AREA_UPLOADSIZE, $upload_size/1024), '<br />');
         $imgpath_img     = sprintf(_MA_XMSTOCK_AREA_FORMPATH, $uploadirectory);
         $imageselect_img = new XoopsFormSelect($imgpath_img, 'area_logo', $blank_img);
         $image_array_img = XoopsLists::getImgListAsArray($path_logo_area);
-        $imageselect_img->addOption("$blank_img", $blank_img);
+		$imageselect_img->addOption("no-image.png", $blank_img);
         foreach ($image_array_img as $image_img) {
             $imageselect_img->addOption("$image_img", $image_img);
         }
@@ -181,9 +185,12 @@ class xmstock_area extends XoopsObject
         $fileseltray_img->addElement(new XoopsFormLabel(''), false);
         $imgtray_img->addElement($fileseltray_img);
         $form->addElement($imgtray_img);
-		
+
 		// location
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_AREA_LOCATION, 'area_location', 50, 255, $this->getVar('area_location')));
+
+		//color
+		$form->addElement(new XoopsFormColorPicker(_MA_XMSTOCK_AREA_COLOR, 'area_color', $this->getVar('area_color')), false);
 
         // weight
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_AREA_WEIGHT, 'area_weight', 5, 5, $weight));
@@ -193,7 +200,7 @@ class xmstock_area extends XoopsObject
         $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA,);
         $form_status->addOptionArray($options);
         $form->addElement($form_status);
-		
+
 		// permission
         $permHelper = new \Xmf\Module\Helper\Permission();
         $form->addElement($permHelper->getGroupSelectFormForItem('xmstock_manage', $this->getVar('area_id'), _MA_XMSTOCK_PERMISSION_MANAGE_DSC, 'xmstock_manage_perms', true));

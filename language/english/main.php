@@ -75,6 +75,7 @@ define('_MA_XMSTOCK_ERROR_TRANSFERT_NOARTICLE', 'Selected article is not availab
 define('_MA_XMSTOCK_ERROR_TRANSFERT_TBAMOUNT', 'The quantity requested (%s) is more important than that available (%s)');
 
 // area
+define('_MA_XMSTOCK_AREA_COLOR', 'Color');
 define('_MA_XMSTOCK_AREA_DESC', 'Description');
 define('_MA_XMSTOCK_AREA_FORMPATH', 'Files are in: %s');
 define('_MA_XMSTOCK_AREA_LOCATION', 'Location');

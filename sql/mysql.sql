@@ -3,6 +3,7 @@ CREATE TABLE `xmstock_area` (
   `area_name`           varchar(255)        NOT NULL DEFAULT '',
   `area_description`    text,
   `area_logo`           varchar(50)         NOT NULL DEFAULT '',
+  `area_color`    		varchar(7)          NOT NULL DEFAULT '#ffffff',
   `area_location`       varchar(255)        NOT NULL DEFAULT '',
   `area_weight`         int(5)             	NOT NULL DEFAULT '0',
   `area_status`         tinyint(1) unsigned NOT NULL DEFAULT '1',

@@ -31,3 +31,5 @@ $itemorderHandler = $helper->getHandler('xmstock_itemorder');
 // Path & url Config
 $url_logo_area = XOOPS_UPLOAD_URL . '/xmstock/images/area/';
 $path_logo_area = XOOPS_UPLOAD_PATH . '/xmstock/images/area/';
+
+$upload_size = $helper->getConfig('general_maxuploadsize', 104858);

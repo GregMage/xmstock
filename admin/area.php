@@ -36,7 +36,7 @@ switch ($op) {
         $xoTheme->addScript('modules/system/js/admin.js');
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_AREA_ADD, 'area.php?op=add', 'add');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Get start pager
         $start = Request::getInt('start', 0);
         // Criteria
@@ -53,12 +53,22 @@ switch ($op) {
                 $area_id                 = $area_arr[$i]->getVar('area_id');
                 $area['id']              = $area_id;
                 $area['name']            = $area_arr[$i]->getVar('area_name');
-                $area['description']     = \Xmf\Metagen::generateDescription($area_arr[$i]->getVar('area_description', 'show'), 30);
-				$area['location']            = $area_arr[$i]->getVar('area_location');
-                $area['weight']          = $area_arr[$i]->getVar('area_weight');
+                $area['description']     = XmstockUtility::generateDescriptionTagSafe($area_arr[$i]->getVar('area_description', 'show'), 50);
+				$area['location']        = $area_arr[$i]->getVar('area_location');
+				$color					 = $area_arr[$i]->getVar('area_color');
+				if ($color == '#ffffff'){
+					$area['color']	 	 = false;
+				} else {
+					$area['color']	 	 = $color;
+				}
+				$area['weight']          = $area_arr[$i]->getVar('area_weight');
                 $area['status']          = $area_arr[$i]->getVar('area_status');
-                $area_img                = $area_arr[$i]->getVar('area_logo') ?: 'blank.gif';
-                $area['logo']            = '<img src="' . $url_logo_area .  $area_img . '" alt="' . $area_img . '" />';
+				$area_img            	 = $area_arr[$i]->getVar('area_logo');
+				if ($area_img == ''){
+					$area['logo']    	 = $url_logo_area . 'no-image.png';
+				} else {
+					$area['logo']    	 = $url_logo_area . $area_img;
+				}
                 $xoopsTpl->append_by_ref('area', $area);
                 unset($area);
             }
@@ -71,23 +81,23 @@ switch ($op) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOAREA);
         }
         break;
-    
+
     // Add
     case 'add':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_AREA_LIST, 'area.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
         $obj  = $areaHandler->create();
         $form = $obj->getForm();
         $xoopsTpl->assign('form', $form->render());
         break;
-        
+
     // Edit
     case 'edit':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_AREA_LIST, 'area.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
         $area_id = Request::getInt('area_id', 0);
         if ($area_id == 0) {
@@ -95,7 +105,7 @@ switch ($op) {
         } else {
             $obj = $areaHandler->get($area_id);
             $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render()); 
+            $xoopsTpl->assign('form', $form->render());
         }
 
         break;
@@ -106,7 +116,7 @@ switch ($op) {
         }
         $area_id = Request::getInt('area_id', 0);
         if ($area_id == 0) {
-            $obj = $areaHandler->create();            
+            $obj = $areaHandler->create();
         } else {
             $obj = $areaHandler->get($area_id);
         }
@@ -116,11 +126,11 @@ switch ($op) {
             $form = $obj->getForm();
             $xoopsTpl->assign('form', $form->render());
         }
-        
+
         break;
-        
+
     // del
-    case 'del':    
+    case 'del':
         $area_id = Request::getInt('area_id', 0);
         if ($area_id == 0) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOAREA);
@@ -133,7 +143,7 @@ switch ($op) {
                 }
                 if ($areaHandler->delete($obj)) {
                     //Del logo
-                    if ($obj->getVar('area_logo') != 'blank.gif') {
+                    if ($obj->getVar('area_logo') != 'no-image.png') {
                         // Test if the image is used
                         $criteria = new CriteriaCompo();
                         $criteria->add(new Criteria('area_logo', $obj->getVar('area_logo')));
@@ -151,22 +161,22 @@ switch ($op) {
 					$permHelper->deletePermissionForItem('xmstock_manage', $area_id);
                     $permHelper->deletePermissionForItem('xmstock_supervisor', $area_id);
                     $permHelper->deletePermissionForItem('xmstock_view', $area_id);
-                    $permHelper->deletePermissionForItem('xmstock_request', $area_id);					
+                    $permHelper->deletePermissionForItem('xmstock_request', $area_id);
                     redirect_header('area.php', 2, _MA_XMSTOCK_REDIRECT_SAVE);
                 } else {
                     $xoopsTpl->assign('error_message', $obj->getHtmlErrors());
                 }
             } else {
-                $area_img = $obj->getVar('area_logo') ?: 'blank.gif';
-                xoops_confirm(array('surdel' => true, 'area_id' => $area_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
+                $area_img = $obj->getVar('area_logo') ?: 'no-image.png';
+                xoops_confirm(array('surdel' => true, 'area_id' => $area_id, 'op' => 'del'), $_SERVER['REQUEST_URI'],
                                     sprintf(_MA_XMSTOCK_AREA_SUREDEL, $obj->getVar('area_name')) . '<br>
-                                    <img src="' . $url_logo_area . $area_img . '" title="' . 
+                                    <img src="' . $url_logo_area . $area_img . '" title="' .
                                     $obj->getVar('area_name') . '" />');
             }
         }
-        
+
         break;
-        
+
     // Update status
     case 'area_update_status':
         $area_id = Request::getInt('area_id', 0);
