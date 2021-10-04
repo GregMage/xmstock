@@ -160,10 +160,10 @@ class xmstock_area extends XoopsObject
         $editor_configs           =array();
         $editor_configs['name']   = 'area_description';
         $editor_configs['value']  = $this->getVar('area_description', 'e');
-        $editor_configs['rows']   = 20;
+        $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 160;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_AREA_DESC, 'area_description', $editor_configs), false);
         // logo

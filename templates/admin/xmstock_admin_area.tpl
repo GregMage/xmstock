@@ -35,7 +35,7 @@
 					<img src="<{$area.logo}>" alt="<{$area.name}>" style="max-width:150px">
 				<{/if}>
 				</td>
-                <td class="txtleft"><{$area.name}></td>
+				<td class="txtleft"><a href="../viewarea.php?area_id=<{$area.id}>" title="<{$area.name}>"><{$area.name}></a></td>
                 <td class="txtleft"><{$area.description}></td>
                 <td class="txtleft"><{$area.location}></td>
 				<td class="txtcenter"><{if $area.color != false}><div style="background-color:<{$area.color}>;width:50px; height:20px;margin-left: auto; margin-right: auto;"></div><{/if}></td>
