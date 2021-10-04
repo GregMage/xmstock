@@ -105,6 +105,32 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'general_captcha',
+    'title'       => '_MI_XMSTOCK_PREF_CAPTCHA',
+    'description' => '_MI_XMSTOCK_PREF_CAPTCHA_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0
+];
+
+$optionMaxsize['0.1 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 104858;
+$optionMaxsize['0.5 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 1024*1024*0.5;
+$optionMaxsize['1 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 1024*1024*1;
+$optionMaxsize['1.5 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 1024*1024*1.5;
+$optionMaxsize['2 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 1024*1024*2;
+$optionMaxsize['5 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 1024*1024*5;
+$optionMaxsize['10 ' . _MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES] = 1024*1024*10;
+$modversion['config'][] = [
+    'name'        => 'general_maxuploadsize',
+    'title'       => '_MI_XMSTOCK_PREF_MAXUPLOADSIZE',
+    'description' => '_MI_XMSTOCK_PREF_MAXUPLOADSIZE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 104858,
+	'options' => $optionMaxsize,
+];
+
+$modversion['config'][] = [
     'name'        => 'break',
     'title'       => '_MI_XMSTOCK_PREF_HEAD_ADMIN',
     'description' => '',
@@ -130,5 +156,5 @@ $modversion['developer_lead']      = 'Mage';
 $modversion['module_website_url']  = 'github.com/GregMage';
 $modversion['module_website_name'] = 'github.com/GregMage';
 
-$modversion['min_xoops'] = '2.5.9';
-$modversion['min_php']   = '5.6.0';
+$modversion['min_xoops'] = '2.5.10';
+$modversion['min_php']   = '7.0';

@@ -16,7 +16,7 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
- 
+
 // Button
 define('_MA_XMSTOCK_AREA_ADD', 'Add area');
 define('_MA_XMSTOCK_AREA_LIST', 'Area list');
@@ -46,6 +46,17 @@ define('_MA_XMSTOCK_VIEW', 'View');
 define('_MA_XMSTOCK_TITLE', 'Title');
 define('_MA_XMSTOCK_INFORMATION', 'Informations');
 
+// Admin
+define('_MA_XMSTOCK_INDEX_IMAGEINFO', 'Server status');
+define('_MA_XMSTOCK_INDEX_SPHPINI', "<span style='font-weight: bold;'>Information taken from PHP ini file:</span>");
+define('_MA_XMSTOCK_INDEX_ON', "<span style='font-weight: bold;'>ON</span>");
+define('_MA_XMSTOCK_INDEX_OFF', "<span style='font-weight: bold;'>OFF</span>");
+define('_MA_XMSTOCK_INDEX_SERVERUPLOADSTATUS', 'Server uploads status: ');
+define('_MA_XMSTOCK_INDEX_MAXPOSTSIZE', 'Max post size permitted (post_max_size directive in php.ini): ');
+define('_MA_XMSTOCK_INDEX_MAXUPLOADSIZE', 'Max upload size permitted (upload_max_filesize directive in php.ini): ');
+define('_MA_XMSTOCK_INDEX_MEMORYLIMIT', 'Memory limit (memory_limit directive in php.ini): ');
+define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
+
 // Error message
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
@@ -56,6 +67,7 @@ define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
 define('_MA_XMSTOCK_ERROR_AMOUNTNOTZERO', 'The amount can not be 0');
 define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
+define('_MA_XMSTOCK_ERROR_SIZE', "The size in préférence (Max uploaded files size) exceeds the maximum values defined in 'post_max_size' or 'upload_max_filesize' in your configuration in php.ini");
 define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'There is no destination stock selected');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'There is no starting stock selected');
 define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'There is no output selected');
@@ -132,9 +144,6 @@ define('_MA_XMSTOCK_PERMISSION_OTHER_8', '');
 // renderStocks
 define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
 
-// Admin
-define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
-
 // user
 define('_MA_XMSTOCK_HOME', 'Home page');
 define('_MA_XMSTOCK_CADDY', 'Caddy');
@@ -162,4 +171,3 @@ define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to or
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 
 
- 

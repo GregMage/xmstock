@@ -47,12 +47,12 @@ class XmstockUtility
 		}
         return $arealist;
     }
-	
+
 	/**
      * Fonction qui génère une liste des outputs (id et nom)
      * @param boolean  $efl			Ajout d'un entrée nul en première position (-)
      * @return array   $outputlist
-     */	
+     */
 	public static function getOutputList($efl = false)
     {
         include __DIR__ . '/../include/common.php';
@@ -80,7 +80,7 @@ class XmstockUtility
      * @param int      $articleid	Id de l'article
      * @param int      $amount		montant
      * @param int      $areaid	    Id de l'area
-     * @return string   			Vide ou message d'erreur.	
+     * @return string   			Vide ou message d'erreur.
      */
 	public static function checkTransfert($type, $articleid, $amount, $areaid)
     {
@@ -90,7 +90,7 @@ class XmstockUtility
 			 default:
 				return '';
 				break;
-							
+
 			case 'O':
 			case 'T':
 				//test si l'article est bien dans le stock
@@ -99,7 +99,7 @@ class XmstockUtility
 				$criteria->add(new Criteria('stock_articleid', $articleid));
 				$stock_arr = $stockHandler->getall($criteria);
 				if (count($stock_arr) == 0){
-					// l'article n'est pas en stock					
+					// l'article n'est pas en stock
 					return _MA_XMSTOCK_ERROR_TRANSFERT_NOARTICLE;
 				} else {
 					foreach (array_keys($stock_arr) as $i) {
@@ -124,7 +124,7 @@ class XmstockUtility
      * @param int      $amount		montant
      * @param int      $areaid	    Id de l'area de départ
      * @param int      $areaid	    Id de l'area d'arrivée
-     * @return string   			Vide ou message d'erreur.	
+     * @return string   			Vide ou message d'erreur.
      */
 	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid)
     {
@@ -159,7 +159,7 @@ class XmstockUtility
 					}
 				}
 				break;
-							
+
 			case 'O':
 				$criteria = new CriteriaCompo();
 				$criteria->add(new Criteria('stock_areaid', $st_areaid));
@@ -169,7 +169,7 @@ class XmstockUtility
 					$obj = $stockHandler->get($i);
 				}
 				$old_amount = $obj->getVar('stock_amount');
-				
+
 				if ($old_amount == $amount){
 					if ($stockHandler->delete($obj)) {
 						return '';
@@ -184,7 +184,7 @@ class XmstockUtility
 						return $obj->getHtmlErrors();
 					}
 				}
-		
+
 				break;
 			case 'T':
 				$criteria = new CriteriaCompo();
@@ -195,7 +195,7 @@ class XmstockUtility
 					$obj = $stockHandler->get($i);
 				}
 				$old_amount = $obj->getVar('stock_amount');
-				
+
 				if ($old_amount == $amount){
 					if ($stockHandler->delete($obj)) {
 						return '';
@@ -257,7 +257,7 @@ class XmstockUtility
 
         return $areas;
     }
-	
+
 	/**
      * Fonction qui permet d'afficher les areas par rapport à un article
      * @param          $xoopsTpl
@@ -267,18 +267,18 @@ class XmstockUtility
 	public static function renderStocks($xoopsTpl, $xoTheme, $article_id = 0)
     {
         include __DIR__ . '/../include/common.php';
-        
+
         $xoTheme->addStylesheet( XOOPS_URL . '/modules/xmstock/assets/css/styles.css', null );
-        
+
         $xmstockHelper = Xmf\Module\Helper::getHelper('xmstock');
         // Load language files
         $xmstockHelper->loadLanguage('main');
-		
+
 		// Get Permission to view
 		$viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
 		// Get Permission to order
 		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
-		
+
 		// Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('area_weight');
@@ -329,7 +329,7 @@ class XmstockUtility
         }
         return $count;
     }
-	
+
 	/**
      * Fonction qui donne le montant total de l'article dans le lieu de stockage défini
      * @param int      $area_id 	Id du lieu de stockage
@@ -347,19 +347,19 @@ class XmstockUtility
         }
         return $amount;
     }
-	
+
 	/**
      * Fonction qui permet d'afficher le nom d'un lieu de stockage
 	 * @param int      $areaeid	    Id du lieu de stockage
      * @param boolean  $uloc		Afficher le lieu
-     * @param boolean  $ulink		Nom sous forme de lien     
+     * @param boolean  $ulink		Nom sous forme de lien
 	 * @return string   			Nom selon les options ou message d'erreur
      */
-	
+
 	public static function getAreaName($areaid, $uloc = true, $ulink = true)
     {
         include __DIR__ . '/../include/common.php';
-		
+
 		$area = $areaHandler->get($areaid);
 		if (isset($area)){
 			if ($uloc == true){
@@ -371,10 +371,66 @@ class XmstockUtility
 				$link = '<a href="' . XOOPS_URL . '/modules/xmstock/viewarea.php?area_id=' . $areaid . '" title="' . $area->getVar('area_name') . '" target="_blank">' . $area->getVar('area_name') . '</a>';
 			} else {
 				$link = $area->getVar('area_name');
-			}		
+			}
 			return $link . $loc;
 		} else {
 			return 'Error: The requested area does not exist! (ID-' . $areaid . ')';
 		}
     }
+
+	public static function getServerStats()
+    {
+        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+        xoops_loadLanguage('common', $moduleDirName);
+        $html = '';
+        $html .= "<fieldset><legend style='font-weight: bold; color: #900;'>" . _MA_XMSTOCK_INDEX_IMAGEINFO . "</legend>\n";
+        $html .= "<div style='padding: 8px;'>\n";
+        $html .= '<div>' . _MA_XMSTOCK_INDEX_SPHPINI . "</div>\n";
+        $html .= "<ul>\n";
+        $downloads = ini_get('file_uploads') ? '<span style="color: #008000;">' . _MA_XMSTOCK_INDEX_ON . '</span>' : '<span style="color: #ff0000;">' . _MA_XMNEWS_INDEX_OFF . '</span>';
+        $html      .= '<li>' . _MA_XMSTOCK_INDEX_SERVERUPLOADSTATUS . $downloads;
+        $html .= '<li>' . _MA_XMSTOCK_INDEX_MAXUPLOADSIZE . ' <b><span style="color: #0000ff;">' . ini_get('upload_max_filesize') . "</span></b>\n";
+        $html .= '<li>' . _MA_XMSTOCK_INDEX_MAXPOSTSIZE . ' <b><span style="color: #0000ff;">' . ini_get('post_max_size') . "</span></b>\n";
+        $html .= '<li>' . _MA_XMSTOCK_INDEX_MEMORYLIMIT . ' <b><span style="color: #0000ff;">' . ini_get('memory_limit') . "</span></b>\n";
+        $html .= "</ul>\n";
+        $html .= '</div>';
+        $html .= '</fieldset><br>';
+
+        return $html;
+    }
+
+	public static function returnBytes($val)
+	{
+		switch (mb_substr($val, -1)) {
+			case 'K':
+			case 'k':
+				return (int)$val * 1024;
+			case 'M':
+			case 'm':
+				return (int)$val * 1048576;
+			case 'G':
+			case 'g':
+				return (int)$val * 1073741824;
+			default:
+				return $val;
+		}
+	}
+
+	public static function generateDescriptionTagSafe($text, $wordCount = 100)
+    {
+		if (xoops_isActiveModule('xlanguage')){
+			$text = XoopsModules\Xlanguage\Utility::cleanMultiLang($text);
+		}
+		$text = \Xmf\Metagen::generateDescription($text, $wordCount);
+		return $text;
+	}
+
+	public static function TagSafe($text)
+    {
+		if (xoops_isActiveModule('xlanguage')){
+			$text = XoopsModules\Xlanguage\Utility::cleanMultiLang($text);
+		}
+		return $text;
+	}
 }
