@@ -20,7 +20,7 @@
 function xoops_module_install_xmstock()
 {
     $namemodule = 'xmstock';
-    
+
     //Creation ".$namemodule."/
     $dir = XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '';
     if (!is_dir($dir)) {
@@ -41,15 +41,15 @@ function xoops_module_install_xmstock()
         mkdir($dir, 0777);
     }
     chmod($dir, 0777);
-    
-    //Copy index.html
-    $indexFile = XOOPS_ROOT_PATH . '/modules/' . $namemodule . '/include/index.html';
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/images/index.html');
-    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/images/area/index.html');
 
-    //Copy blank.gif
-    $blankFile = XOOPS_ROOT_PATH . '/modules/' . $namemodule . '/assets/images/blank.gif';
-    copy($blankFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/images/area/blank.gif');
+    //Copy index.php
+    $indexFile = XOOPS_ROOT_PATH . '/modules/' . $namemodule . '/include/index.php';
+    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/index.php');
+    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/images/index.php');
+    copy($indexFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/images/area/index.php');
+
+    //Copy no-image.png
+    $blankFile = XOOPS_ROOT_PATH . '/modules/' . $namemodule . '/assets/images/no-image.png';
+    copy($blankFile, XOOPS_ROOT_PATH . '/uploads/' . $namemodule . '/images/area/no-image.png');
     return true;
 }
