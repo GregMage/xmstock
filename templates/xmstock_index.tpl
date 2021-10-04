@@ -30,7 +30,7 @@
                             <div class="modal-header"><h4 class="modal-title aligncenter"><{$area.name}></h4></div>
                             <div class="modal-body">
                                 <{$area.description}>
-								<div class="xm-area-location"><span class="glyphicon glyphicon-hdd" title="<{$smarty.const._MA_XMDOC_FORMDOC_DATE}>"></span>
+								<div class="xm-area-location"><span class="glyphicon glyphicon-hdd" title="<{$smarty.const._MA_XMSTOCK_AREA_LOCATION}>"></span>
 									<{$smarty.const._MA_XMSTOCK_AREA_LOCATION}>: <{$area.location}>
 								</div>
                             </div>
