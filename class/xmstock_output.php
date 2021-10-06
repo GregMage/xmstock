@@ -61,7 +61,7 @@ class xmstock_output extends XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         include __DIR__ . '/../include/common.php';
-        
+
         $error_message = '';
         // test error
         if ((int)$_REQUEST['output_weight'] == 0 && $_REQUEST['output_weight'] != '0') {
@@ -82,7 +82,7 @@ class xmstock_output extends XoopsObject
         }
         return $error_message;
     }
-	
+
 	/**
      * @param bool $action
      * @return XoopsThemeForm
@@ -117,13 +117,13 @@ class xmstock_output extends XoopsObject
         $editor_configs           =array();
         $editor_configs['name']   = 'output_description';
         $editor_configs['value']  = $this->getVar('output_description', 'e');
-        $editor_configs['rows']   = 20;
+        $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 160;
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_OUTPUT_DESC, 'output_description', $editor_configs), false);
-		
+
 		// user
         $form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_OUTPUT_USERID, 'output_userid', true, $this->getVar('output_userid')), true);
 
