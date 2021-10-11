@@ -58,8 +58,18 @@ if ($area_count > 0 && !empty($viewPermissionArea)) {
 		$area['description']     = \Xmf\Metagen::generateDescription($area_arr[$i]->getVar('area_description', 'show'), 30);
 		$area['location']        = $area_arr[$i]->getVar('area_location');
 		$area['totalarticle']    = sprintf(_MA_XMSTOCK_AREA_THEREAREARTICLE, XmstockUtility::articlePerArea($area_id, $stock_arr));
-		$area_img                = $area_arr[$i]->getVar('area_logo') ?: 'blank.gif';
-		$area['logo']            = $url_logo_area .  $area_img;
+		$area_img             	 = $area_arr[$i]->getVar('area_logo');
+		if ($area_img == ''){
+			$area['logo']        = '';
+		} else {
+			$area['logo']        = $url_logo_area . $area_img;
+		}
+		$color					 = $area_arr[$i]->getVar('area_color');
+		if ($color == '#ffffff'){
+			$area['color']	 	 = false;
+		} else {
+			$area['color']	  	 = $color;
+		}
 		$xoopsTpl->append_by_ref('areas', $area);
         if ($keywords == '') {
             $keywords = $area_arr[$i]->getVar('area_name');
