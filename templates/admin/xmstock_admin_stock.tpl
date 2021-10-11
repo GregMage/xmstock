@@ -27,7 +27,7 @@
         <tr>
             <th class="txtleft width20"><{$smarty.const._MA_XMSTOCK_STOCK_AREA}></th>
             <th class="txtleft"><{$smarty.const._MA_XMSTOCK_STOCK_ARTICLE}></th>
-            <th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_STOCK_AMOUNT}></th>            
+            <th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_STOCK_AMOUNT}></th>
         </tr>
         </thead>
         <tbody>

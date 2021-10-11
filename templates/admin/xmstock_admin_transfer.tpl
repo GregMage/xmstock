@@ -1,15 +1,15 @@
 <div>
-    <{$renderbutton}>
+    <{$renderbutton|default:''}>
 </div>
-<{if $error_message != ''}>
+<{if $error_message|default:'' != ''}>
     <div class="errorMsg" style="text-align: left;">
         <{$error_message}>
     </div>
 <{/if}>
 <div>
-    <{$form}>
+    <{$form|default:''}>
 </div>
-<{if $transfer_count != 0}>
+<{if $transfer_count|default:0 != 0}>
     <table id="xo-xmdoc-sorter" cellspacing="1" class="outer tablesorter">
         <thead>
         <tr>
@@ -60,12 +60,12 @@
         </tbody>
     </table>
     <div class="clear spacer"></div>
-    <{if $nav_menu}>
+    <{if $nav_menu|default:false}>
         <div class="floatright"><{$nav_menu}></div>
         <div class="clear spacer"></div>
     <{/if}>
 <{/if}>
-<{if $view}>
+<{if $view|default:false}>
     <table id="xo-xmcontact-sorter" cellspacing="1" class="outer tablesorter">
         <thead>
         <tr>

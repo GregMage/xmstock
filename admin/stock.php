@@ -33,9 +33,10 @@ switch ($op) {
         // Define Stylesheet
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
         // Module admin
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Get start pager
         $start = Request::getInt('start', 0);
+		$xoopsTpl->assign('start', $start);
 		//filter area
 		$article_area = Request::getInt('article_area', 0);
         $xoopsTpl->assign('article_area', $article_area);
@@ -57,8 +58,8 @@ switch ($op) {
 		if ($article_area != 0){
 			$sql .= " WHERE (`area_id` = '" . $article_area . "')  ";
 			$criteria->add(new Criteria('stock_areaid', $article_area));
-		}		
-		$sql .= " ORDER BY area_name ASC LIMIT " . $start . ", " . $nb_limit;		
+		}
+		$sql .= " ORDER BY area_name ASC LIMIT " . $start . ", " . $nb_limit;
 		$stock_arr = $xoopsDB->query($sql);
 		$stock_count = $stockHandler->getCount($criteria);
 		$xoopsTpl->assign('stock_count', $stock_count);
