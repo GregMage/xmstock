@@ -171,7 +171,7 @@ switch ($op) {
                 xoops_confirm(array('surdel' => true, 'area_id' => $area_id, 'op' => 'del'), $_SERVER['REQUEST_URI'],
                                     sprintf(_MA_XMSTOCK_AREA_SUREDEL, $obj->getVar('area_name')) . '<br>
                                     <img src="' . $url_logo_area . $area_img . '" title="' .
-                                    $obj->getVar('area_name') . '" />');
+                                    $obj->getVar('area_name') . '" style="max-width:100px"/>');
             }
         }
 
