@@ -1,35 +1,40 @@
-﻿ <div class="xmstock">   
-	<ol class="breadcrumb">
-        <li><a href="index.php"><{$smarty.const._MA_XMSTOCK_HOME}></a></li>
-        <li class="active"><{$name}></li>
-    </ol>
-	<div class="media">
-		<div class="media-left">
-			<a href="#">
-			  <img class="media-object" src="<{$logo}>" alt="<{$name}>">
-			</a>
+﻿ <div class="xmstock">
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
+		<li class="breadcrumb-item active" aria-current="page"><{$name}></li>
+	  </ol>
+	</nav>
+	<div class="row mb-2">
+		<{if $logo != ''}>
+		<div class="col-3 col-md-4 col-lg-3 text-center">
+			<img class="rounded img-fluid" src="<{$logo}>" alt="<{$name}>">
 		</div>
-		<div class="media-body">
-			<h4 class="media-heading"><{$name}> (<{$location}>)</h4>
+		<{/if}>
+		<div class="col-9 col-md-8 col-lg-9 " style="padding-bottom: 5px; padding-top: 5px;">
+			<h4 class="mt-0"><{$name}> (<{$location}>)</h4>
 			<{$description}>
 		</div>
 	</div>
-	<br>
-	<{$form}>
-	<br>
-	<{if $xmstock_viewarticles == true}>
+	<div class="mb-2 mt-3">
+		<{$form}>	
+	</div>
+	<{if $xmstock_viewarticles|default:false == true}>
 		<ul class="list-group">
 		<{foreach item=stock from=$stock}>
-			<li class="list-group-item">
-				<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>"><{$stock.name}></a></span> (<{$stock.reference}>)
-				<span class="badge"><{$stock.amount}></span>
-				<{if $order == true}>
-					<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
-				<{/if}>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<div>
+					<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>"><{$stock.name}></a></span> (<{$stock.reference}>)
+					<{if $order == true}>
+						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
+					<{/if}>
+				</div>
+				<span class="badge badge-info badge-pill"><{$stock.amount}></span>
 			</li>
 		<{/foreach}>
 		</ul>
-		<{if $nav_menu}>
+		<div class="clear spacer"></div>
+		<{if $nav_menu|default:false}>
 			<div class="floatright"><{$nav_menu}></div>
 			<div class="clear spacer"></div>
 		<{/if}>

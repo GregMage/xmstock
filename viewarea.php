@@ -27,6 +27,8 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 
 $area_id = Request::getInt('area_id', 0);
 
+$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+
 if ($area_id == 0) {
     redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOAREA);
 }
