@@ -4,10 +4,10 @@
 		<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
 		<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_CADDY}></li>
 	  </ol>
-	</nav>	
-	<{if $error_message != ''}>
+	</nav>
+	<{if $error_message|default:'' != ''}>
 		<div class="alert alert-danger" role="alert"><{$error_message}></div>
-	
+
 	<{else}>
 		<form name="formcaddy" id="formcaddy" action="caddy.php" method="post">
 			<table class="table table-striped">
@@ -23,8 +23,8 @@
 						<td>
 							<{$article.area}>
 							<input type="hidden" name="area_<{$article.count}>" id="area_<{$article.count}>" value="<{$article.areaid}>">
-							<span class="badge badge-info badge-pill"><{$article.amount}></span>					
-						</td>       
+							<span class="badge badge-info badge-pill"><{$article.amount}></span>
+						</td>
 						<td>
 							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" max="<{$article.amount}>">
 						</td>
@@ -32,13 +32,13 @@
 							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-secondary"><span class="fa fa-trash"></span></a>
 						</td>
 					</tr>
-					
+
 				<{/foreach}>
 				<tr>
 					<td class="txtright" colspan="2"><h3>Total</h3></td>
 					<td class="txtcenter"><h3><{$total}></h3></td>
 					<td>&nbsp;</td>
-				</tr>		
+				</tr>
 			</table>
 			<input type="hidden" name="op" id="op" value="update">
 			<div class="xm-stock-general-button">
@@ -48,9 +48,9 @@
 					<a href="<{$return_url}>" class="btn btn-secondary"><span class="fa fa-undo"></span> <{$smarty.const._MA_XMSTOCK_CADDY_CONTINUE}></a>
 				</div>
 			</div>
-		</form>		
+		</form>
 		<div class="xm-stock-general-button">
-			<a href="<{$xoops_url}>/modules/xmstock/checkout.php" class="btn btn-success"><span class="fa fa-check-circle"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>	
+			<a href="<{$xoops_url}>/modules/xmstock/checkout.php" class="btn btn-success"><span class="fa fa-check-circle"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>
 		</div>
 
 		<table class="xmstock_step_body">
