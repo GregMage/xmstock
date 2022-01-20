@@ -91,7 +91,7 @@ class xmstock_order extends XoopsObject
 						}
 					}
 					if ($error_message == '') {
-						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+						redirect_header($action, 2, _MA_XMSTOCK_CHECKOUT_SEND);
 					}					
 				} else {
 					redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);

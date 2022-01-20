@@ -27,6 +27,8 @@ $sessionHelper = new \Xmf\Module\Helper\Session();
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 
+$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+
 //$article_id = Request::getInt('article_id', 0);
 //$area_id = Request::getInt('area_id', 0);
 
@@ -66,7 +68,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 
 $op = Request::getCmd('op', 'list');
 switch ($op) {
-		
+
 	// List: Liste les articles
 	case 'list':
 		include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -83,10 +85,10 @@ switch ($op) {
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_CHECKOUT_DESC, 'order_description', $editor_configs), true);
         $form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time()), false);
 		$form->addElement(new XoopsFormHidden('op', 'save'));
-		$form->addElement(new XoopsFormButton('', 'submit', _MA_XMSTOCK_CADDY_STEP2_2, 'submit'));		
+		$form->addElement(new XoopsFormButton('', 'submit', "<span class='fa fa-check-circle'></span> " . _MA_XMSTOCK_CADDY_STEP2_2 . "<span>", 'submit'));
 		$xoopsTpl->assign('form', $form->render());
-		listCart($sessionHelper, $session_name, $stockHandler);	
-		break;		
+		listCart($sessionHelper, $session_name, $stockHandler);
+		break;
 
 	case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -94,18 +96,25 @@ switch ($op) {
         }
         $order_id = Request::getInt('order_id', 0);
         if ($order_id == 0) {
-            $obj = $orderHandler->create();            
+            $obj = $orderHandler->create();
         } else {
             $obj = $orderHandler->get($order_id);
         }
-        $error_message = $obj->saveOrder($orderHandler, 'checkout.php');
+        $error_message = $obj->saveOrder($orderHandler, 'checkout.php?op=confirm&order_id=' . $order_id);
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
             $form = $obj->getForm();
             $xoopsTpl->assign('form', $form->render());
         }
+		//redirect_header('checkout.php?op=confirm&order_id=' . $order_id, 3, _MA_XMSTOCK_CHECKOUT_SEND);
 		break;
 		
+	case 'confirm':
+		$xoopsTpl->assign('confirm', true);
+		$request_arr = [];
+		$xoopsTpl->assign('request_arr', $request_arr);
+		break;
+
 }
 
 //SEO
