@@ -30,11 +30,13 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $article_id = Request::getInt('article_id', 0);
 $area_id = Request::getInt('area_id', 0);
 
+$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+
 
 // ********************************************************************************************************************
 // Liste le contenu du caddy
 // ********************************************************************************************************************
-function listCart($sessionHelper, $session_name, $article_id = 0, $stockHandler)
+function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 {
 	global $xoopsTpl;
 	if ($article_id == 0){

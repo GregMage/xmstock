@@ -1,8 +1,10 @@
 <div class="xmstock">
-	<ol class="breadcrumb">
-        <li><a href="index.php"><{$smarty.const._MA_XMSTOCK_HOME}></a></li>
-        <li class="active"><{$smarty.const._MA_XMSTOCK_CADDY}></li>
-    </ol>	
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
+		<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_CADDY}></li>
+	  </ol>
+	</nav>	
 	<{if $error_message != ''}>
 		<div class="alert alert-danger" role="alert"><{$error_message}></div>
 	
@@ -21,13 +23,13 @@
 						<td>
 							<{$article.area}>
 							<input type="hidden" name="area_<{$article.count}>" id="area_<{$article.count}>" value="<{$article.areaid}>">
-							<span class="badge"><{$article.amount}></span>							
+							<span class="badge badge-info badge-pill"><{$article.amount}></span>					
 						</td>       
 						<td>
 							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" max="<{$article.amount}>">
 						</td>
 						<td class="txtcenter width10">
-							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-secondary"><span class="fa fa-trash"></span></a>
 						</td>
 					</tr>
 					
@@ -41,14 +43,14 @@
 			<input type="hidden" name="op" id="op" value="update">
 			<div class="xm-stock-general-button">
 				<div class="btn-group" role="group" aria-label="...">
-					<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-refresh"></span> <{$smarty.const._MA_XMSTOCK_CADDY_UPDATE}></button>
-					<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=empty" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> <{$smarty.const._MA_XMSTOCK_CADDY_EMPTY}></a>
-					<a href="<{$return_url}>" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"></span> <{$smarty.const._MA_XMSTOCK_CADDY_CONTINUE}></a>
+					<button class="btn btn-secondary" type="submit"><span class="fa fa-refresh"></span> <{$smarty.const._MA_XMSTOCK_CADDY_UPDATE}></button>
+					<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=empty" class="btn btn-secondary"><span class="fa fa-trash"></span> <{$smarty.const._MA_XMSTOCK_CADDY_EMPTY}></a>
+					<a href="<{$return_url}>" class="btn btn-secondary"><span class="fa fa-undo"></span> <{$smarty.const._MA_XMSTOCK_CADDY_CONTINUE}></a>
 				</div>
 			</div>
 		</form>		
 		<div class="xm-stock-general-button">
-			<a href="<{$xoops_url}>/modules/xmstock/checkout.php" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>	
+			<a href="<{$xoops_url}>/modules/xmstock/checkout.php" class="btn btn-success"><span class="fa fa-check-circle"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>	
 		</div>
 
 		<table class="xmstock_step_body">
