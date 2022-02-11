@@ -62,11 +62,8 @@ class xmstock_order extends XoopsObject
     {
         global $xoopsUser;
 		$session_name = 'caddy';
-		if ($action === false) {
-            $action = $_SERVER['REQUEST_URI'];
-        }
         include __DIR__ . '/../include/common.php';
-        
+
         $error_message = '';
         $this->setVar('order_description',  Request::getText('order_description', ''));
 		$this->setVar('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
@@ -75,11 +72,15 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
         $this->setVar('order_status', Request::getInt('order_status', 1));
         if ($error_message == '') {
-            if ($orderHandler->insert($this)) {				
+            if ($orderHandler->insert($this)) {
+				if ($this->get_new_enreg() == 0){
+					$order_id = $this->getVar('order_id');
+				} else {
+					$order_id = $this->get_new_enreg();
+				}
 				$sessionHelper = new \Xmf\Module\Helper\Session();
 				$arr_selectionArticles = $sessionHelper->get($session_name);
 				if (is_array($arr_selectionArticles) == true){
-					$order_id = $this->get_new_enreg();					
 					foreach ($arr_selectionArticles as $datas) {
 						$obj = $itemorderHandler->create();
 						$obj->setVar('itemorder_orderid', $order_id);
@@ -95,11 +96,14 @@ class xmstock_order extends XoopsObject
 						}
 					}
 					if ($error_message == '') {
+						if ($action === false) {
+							$action = $_SERVER['REQUEST_URI'] . '?op=confirm&order_id=' . $order_id;
+						}
 						redirect_header($action, 2, _MA_XMSTOCK_CHECKOUT_SEND);
-					}					
+					}
 				} else {
 					redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);
-				}                
+				}
             } else {
                 $error_message =  $this->getHtmlErrors();
             }
@@ -141,7 +145,7 @@ class xmstock_order extends XoopsObject
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_AREA_DESC, 'order_description', $editor_configs), false);
-		
+
 		// A faire (pour la gestion des commandes admin et user)
 		// status
         $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'order_status', $status);

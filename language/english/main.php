@@ -61,6 +61,7 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticl
 // Error message
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
+define('_MA_XMSTOCK_ERROR_NOORDER', 'There are no order in the database');
 define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
 define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
 define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
@@ -178,5 +179,8 @@ define('_MA_XMSTOCK_CADDY_ERROR_NOAREA', 'The requested area does not exist or i
 define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to order in this area');
 
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
+
+// order
+define('_MA_XMSTOCK_ORDER_NUMBER', 'Order number');
 
 

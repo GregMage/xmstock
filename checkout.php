@@ -112,20 +112,30 @@ switch ($op) {
         } else {
             $obj = $orderHandler->get($order_id);
         }
-        $error_message = $obj->saveOrder($orderHandler, 'checkout.php?op=confirm&order_id=' . $order_id);
+        $error_message = $obj->saveOrder($orderHandler);
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
             $form = $obj->getForm();
             $xoopsTpl->assign('form', $form->render());
         }
-		//redirect_header('checkout.php?op=confirm&order_id=' . $order_id, 3, _MA_XMSTOCK_CHECKOUT_SEND);
 		break;
 		
 	case 'confirm':
 		$xoopsTpl->assign('confirm', true);
+		$order_id = Request::getInt('order_id', 0);
+		$order  = $orderHandler->get($order_id);		
+		if (empty($order)) {
+			redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOORDER);
+		}	
 		$sessionHelper->del($session_name);
-		$request_arr = [];
-		$xoopsTpl->assign('request_arr', $request_arr);
+		
+		$order_arr = array(
+            _MA_XMSTOCK_ORDER_NUMBER        => $order->getVar('order_id'),
+            _MA_XMSTOCK_ORDER_NUMBER     	=> $order->getVar('order_id')
+        );
+	
+		
+		$xoopsTpl->assign('order_arr', $order_arr);
 		break;
 
 }

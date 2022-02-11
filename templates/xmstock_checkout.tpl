@@ -14,7 +14,7 @@
 				<th class="txtleft width40">titre</th>
 				<th class="txtleft">info</th>
 			</tr>
-			<{foreach from=$request_arr key=title item=information}>
+			<{foreach from=$order_arr key=title item=information}>
 				<tr>
 					<td class="txtleft"><{$title}></td>
 					<td class="txtleft"><{$information}></td>
