@@ -41,7 +41,12 @@
 				</tr>
 				<{foreach item=article from=$articles}>
 					<tr>
-						<td><{$article.name}></td>
+						<td>
+							<{$article.name}>
+							<{if $article.warning == true}>
+								<span class="badge badge-pill badge-warning"><{$smarty.const._MA_XMSTOCK_WARNING}></span>
+							<{/if}>
+						</td>
 						<td>
 							<{$article.area}>				
 						</td>       
@@ -55,8 +60,16 @@
 					<td class="txtcenter"><h3><{$total}></h3></td>
 				</tr>		
 			</table>
+			<{if $warning == true}>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<h4 class="alert-heading"><{$smarty.const._MA_XMSTOCK_WARNING}></h4>
+					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_WARNINGQTY}></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			<{/if}>			
 			<{$form}>
-
 			<table class="xmstock_step_body">
 				<tr>
 					<td class="xmstock_step_active">

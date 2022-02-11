@@ -45,6 +45,7 @@ define('_MA_XMSTOCK_ORDER', 'Order');
 define('_MA_XMSTOCK_VIEW', 'View');
 define('_MA_XMSTOCK_TITLE', 'Title');
 define('_MA_XMSTOCK_INFORMATION', 'Informations');
+define('_MA_XMSTOCK_WARNING', 'Warning');
 
 // Admin
 define('_MA_XMSTOCK_INDEX_IMAGEINFO', 'Server status');
@@ -150,12 +151,16 @@ define('_MA_XMSTOCK_HOME', 'Home page');
 define('_MA_XMSTOCK_CADDY', 'Caddy');
 define('_MA_XMSTOCK_CHECKOUT', 'Checkout');
 define('_MA_XMSTOCK_CHECKOUT_DESC', 'Description');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Delivery options');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Withdrawal ');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Desired date');
 define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Input information');
 define('_MA_XMSTOCK_CHECKOUT_SEND', 'Commande envoyée');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM', 'Confirmation');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM_SEND', 'Votre commande a bien été envoyée avec les informations suivantes :');
 define('_MA_XMSTOCK_CHECKOUT_SUMMARY', 'Summary of your cart');
+define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'The quantity requested for items with the logo <span class="badge badge-pill badge-warning">Warning</span> is greater than that available in stock. <br>The delivery time could be longer!');
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
 define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');

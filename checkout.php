@@ -47,20 +47,28 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		$stock_arr = $stockHandler->getall($criteria);
 		xoops_load('utility', 'xmarticle');
 		$count = 1;
+		$warning = false;
 		foreach ($arr_selectionArticles as $datas) {
 			$articles['id']    	= $datas['id'];
 			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
 			$articles['areaid'] = $datas['area'];
-			//$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
+			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
 			$articles['qty']   	= $datas['qty'];
 			$articles['count']  = $count;
+			if ($articles['qty'] > $articles['amount']) {
+				$warning = true;
+				$articles['warning']  = true;
+			} else {
+				$articles['warning']  = false;
+			}
 			$count++;
 			$total += $datas['qty'];
 			$xoopsTpl->append_by_ref('articles', $articles);
 			unset($articles);
 		}
 		$xoopsTpl->assign('total', $total);
+		$xoopsTpl->assign('warning', $warning);
 	} else {
 		redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);
 	}
@@ -84,6 +92,10 @@ switch ($op) {
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_CHECKOUT_DESC, 'order_description', $editor_configs), true);
         $form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time()), false);
+		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', 0);
+		$options        = [0 => _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL, 1 => _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY];
+		$delivery->addOptionArray($options);
+		$form->addElement($delivery);
 		$form->addElement(new XoopsFormHidden('op', 'save'));
 		$form->addElement(new XoopsFormButton('', 'submit', "<span class='fa fa-check-circle'></span> " . _MA_XMSTOCK_CADDY_STEP2_2 . "<span>", 'submit'));
 		$xoopsTpl->assign('form', $form->render());
@@ -111,6 +123,7 @@ switch ($op) {
 		
 	case 'confirm':
 		$xoopsTpl->assign('confirm', true);
+		$sessionHelper->del($session_name);
 		$request_arr = [];
 		$xoopsTpl->assign('request_arr', $request_arr);
 		break;

@@ -58,6 +58,7 @@ CREATE TABLE `xmstock_order` (
   `order_userid`         smallint(5)  unsigned  NOT NULL default '0',
   `order_ddesired`       int(10) unsigned    	NOT NULL DEFAULT '0',
   `order_dorder`         int(10) unsigned    	NOT NULL DEFAULT '0',
+  `order_delivery`       int(2)	 		        NOT NULL DEFAULT '0',
   `order_status`         tinyint(1) unsigned 	NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`order_id`),

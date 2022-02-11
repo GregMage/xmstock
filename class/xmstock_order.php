@@ -16,6 +16,8 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
+use Xmf\Request;
+use Xmf\Module\Helper;
 
 if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
@@ -39,6 +41,7 @@ class xmstock_order extends XoopsObject
 		$this->initVar('order_userid', XOBJ_DTYPE_INT, null, false, 8);
 		$this->initVar('order_ddesired', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dorder', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('order_delivery', XOBJ_DTYPE_INT, null, false, 2);
         $this->initVar('order_status', XOBJ_DTYPE_INT, null, false, 1);
     }
 
@@ -65,11 +68,12 @@ class xmstock_order extends XoopsObject
         include __DIR__ . '/../include/common.php';
         
         $error_message = '';
-        $this->setVar('order_description',  Xmf\Request::getText('order_description', ''));
+        $this->setVar('order_description',  Request::getText('order_description', ''));
 		$this->setVar('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
-		$this->setVar('order_ddesired', strtotime(Xmf\Request::getString('order_ddesired', '')));
+		$this->setVar('order_ddesired', strtotime(Request::getString('order_ddesired', '')));
 		$this->setVar('order_dorder', time());
-        $this->setVar('order_status', Xmf\Request::getInt('order_status', 1));
+		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
+        $this->setVar('order_status', Request::getInt('order_status', 1));
         if ($error_message == '') {
             if ($orderHandler->insert($this)) {				
 				$sessionHelper = new \Xmf\Module\Helper\Session();
@@ -82,10 +86,10 @@ class xmstock_order extends XoopsObject
 						$obj->setVar('itemorder_articleid',  $datas['id']);
 						$obj->setVar('itemorder_areaid',  $datas['area']);
 						$obj->setVar('itemorder_amount',  $datas['qty']);
-						$obj->setVar('itemorder_dvalidated',  strtotime(Xmf\Request::getString('itemorder_dvalidated_' . $datas['id'], '')));
-						$obj->setVar('itemorder_davailable',  strtotime(Xmf\Request::getString('itemorder_davailable_' . $datas['id'], '')));
-						$obj->setVar('itemorder_dwithdrawal',  strtotime(Xmf\Request::getString('itemorder_dwithdrawal_' . $datas['id'], '')));
-						$obj->setVar('itemorder_status',  Xmf\Request::getInt('itemorder_status_' . $datas['id'], 1));
+						$obj->setVar('itemorder_dvalidated',  strtotime(Request::getString('itemorder_dvalidated_' . $datas['id'], '')));
+						$obj->setVar('itemorder_davailable',  strtotime(Request::getString('itemorder_davailable_' . $datas['id'], '')));
+						$obj->setVar('itemorder_dwithdrawal',  strtotime(Request::getString('itemorder_dwithdrawal_' . $datas['id'], '')));
+						$obj->setVar('itemorder_status',  Request::getInt('itemorder_status_' . $datas['id'], 1));
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
 						}
@@ -109,7 +113,7 @@ class xmstock_order extends XoopsObject
      */
     public function getForm($action = false)
     {
-        $helper = \Xmf\Module\Helper::getHelper('xmstock');
+        $helper = Helper::getHelper('xmstock');
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
