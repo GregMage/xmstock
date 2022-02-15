@@ -12,9 +12,11 @@
 		</li>
     <{/foreach}>
 	</ul>
+	<{if $total_amount != 0}>
 	<div class="xm-stock-general-total">
 		<span class="xm-stock-general-bold"><{$smarty.const._MA_XMSTOCK_RENDERSTOCKS_TOTAL}> </span>
 		<span class="badge"><{$total_amount}></span>
 	</div>
+	<{/if}>
 <{/if}>
 <!-- .xmstock -->

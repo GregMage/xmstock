@@ -92,6 +92,26 @@ $modversion['config'][] = [
     'default'     => 15
 ];
 
+$areaHandler = xoops_getModuleHandler('xmstock_area', 'xmstock');
+// Criteria
+$criteria = new CriteriaCompo();
+$criteria->setSort('area_weight ASC, area_name');
+$criteria->setOrder('ASC');
+$criteria->add(new Criteria('area_status', 1));
+$area_arr = $areaHandler->getall($criteria);
+foreach (array_keys($area_arr) as $i) {
+	$area[$area_arr[$i]->getVar('area_id')] = $area_arr[$i]->getVar('area_name');
+}
+$modversion['config'][] = array(
+    'name'        => 'general_area',
+    'title'       => '_MI_XMSTOCK_PREF_DEFAULTAREA',
+    'description' => '_MI_XMSTOCK_PREF_DEFAULTAREA_DESC',
+    'formtype'    => 'select_multi',
+    'valuetype'   => 'array',
+    'default'     => 0,
+    'options'     => array_flip($area)
+);
+
 xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [

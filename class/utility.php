@@ -260,17 +260,19 @@ class XmstockUtility
 
 	/**
      * Fonction qui permet d'afficher les areas par rapport à un article
-     * @param          $xoopsTpl
-     * @param      	   $xoTheme
      * @param int      $articleid	Id de l'article
      */
-	public static function renderStocks($xoopsTpl, $xoTheme, $article_id = 0)
+	public static function renderStocks($article_id = 0)
     {
-        include __DIR__ . '/../include/common.php';
+        global $xoTheme;
+		global $xoopsTpl;
+		include __DIR__ . '/../include/common.php';
 
         $xoTheme->addStylesheet( XOOPS_URL . '/modules/xmstock/assets/css/styles.css', null );
 
         $xmstockHelper = Xmf\Module\Helper::getHelper('xmstock');
+
+		$general_area = $xmstockHelper->getConfig('general_area', '');
         // Load language files
         $xmstockHelper->loadLanguage('main');
 
@@ -310,7 +312,36 @@ class XmstockUtility
             }
 			$xoopsTpl->assign('total_amount', $total_amount);
             $xoopsTpl->assign('xmstock_viewstocks', true);
-        }
+        } else {
+			if ($general_area[0] != ''){
+				$criteria = new CriteriaCompo();
+				$criteria->setSort('area_weight ASC, area_name');
+				$criteria->setOrder('ASC');
+				if (!empty($viewPermissionArea)) {
+					$criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
+				}
+				$criteria->add(new Criteria('area_id', '(' . implode(',', $general_area) . ')', 'IN'));
+				$area_arr = $areaHandler->getall($criteria);
+				if (count($area_arr) > 0 && !empty($viewPermissionArea)) {
+					foreach (array_keys($area_arr) as $i) {
+						$stock['area_id']    = $area_arr[$i]->getVar('area_id');
+						$stock['name']       = $area_arr[$i]->getVar('area_name');
+						$stock['location']   = $area_arr[$i]->getVar('area_location');
+						$stock['amount']     = 0;
+						if (in_array($stock['area_id'], $orderPermissionArea) == true){
+							$stock['order']  = true;
+						} else {
+							$stock['order']  = false;
+						}
+						$xoopsTpl->append_by_ref('stock', $stock);
+						unset($stock);
+					}
+					$xoopsTpl->assign('xmstock_viewstocks', true);
+					$xoopsTpl->assign('total_amount', 0);
+				}
+			}
+
+		}
     }
 
 	/**
