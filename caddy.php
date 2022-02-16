@@ -39,7 +39,7 @@ $general_area = $helper->getConfig('general_area', '');
 // ********************************************************************************************************************
 // Liste le contenu du caddy
 // ********************************************************************************************************************
-function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
+function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area)
 {
 	global $xoopsTpl;
 	if ($article_id == 0){
@@ -73,6 +73,11 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			$articles['count']  = $count;
 			$count++;
 			$total += $datas['qty'];
+			if ($general_area[0] == ''){
+				$articles['max']  = 'max="' . $articles['amount'] . '"';
+			} else {
+				$articles['max']  = '';
+			}				
 			$xoopsTpl->append_by_ref('articles', $articles);
 			unset($articles);
 		}
@@ -148,12 +153,12 @@ switch ($op) {
 		} else {
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
 		break;
 
 	// List: Liste des articles dans le caddy
 	case 'list':
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
 		break;
 
 	// Update: recalcul les quantités des articles dans le caddy
@@ -175,13 +180,13 @@ switch ($op) {
 			}
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
 		break;
 
 	// empty: Vide le panier
 	case 'empty':
 		$sessionHelper->del($session_name);
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
 		break;
 
 	// del: Supprime un article
@@ -202,7 +207,7 @@ switch ($op) {
 				}
 			}
 		}
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
 		break;
 }
 
