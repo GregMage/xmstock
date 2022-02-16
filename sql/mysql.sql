@@ -14,11 +14,12 @@ CREATE TABLE `xmstock_area` (
 
 CREATE TABLE `xmstock_transfer` (
   `transfer_id`             int(11) unsigned    	NOT NULL AUTO_INCREMENT,
-  `transfer_description`    	text,
+  `transfer_description`    text,
   `transfer_articleid`      int(11) unsigned    	NOT NULL,
   `transfer_st_areaid`      int(11) unsigned   		NOT NULL,
   `transfer_ar_areaid`      int(11) unsigned    	NOT NULL,
   `transfer_outputid`     	int(11) unsigned    	NOT NULL,
+  `transfer_outputuserid`   int(11) unsigned    	NOT NULL,
   `transfer_amount`         int(11) unsigned    	NOT NULL,
   `transfer_date`           int(10) unsigned    	NOT NULL DEFAULT '0',
   `transfer_userid`         mediumint(8) unsigned   NOT NULL default '0',
