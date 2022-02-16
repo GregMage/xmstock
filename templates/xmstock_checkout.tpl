@@ -20,7 +20,7 @@
 					<td class="txtleft"><{$information}></td>
 				</tr>
 			<{/foreach}>
-		</table>			
+		</table>
 	<{else}>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -30,8 +30,8 @@
 			</ol>
 		</nav>
 		<{if $error_message|default:'' != ''}>
-			<div class="alert alert-danger" role="alert"><{$error_message}></div>	
-		<{else}>	
+			<div class="alert alert-danger" role="alert"><{$error_message}></div>
+		<{else}>
 			<h3><{$smarty.const._MA_XMSTOCK_CHECKOUT_SUMMARY}></h3>
 			<table class="table table-striped">
 				<tr>
@@ -48,17 +48,18 @@
 							<{/if}>
 						</td>
 						<td>
-							<{$article.area}>				
-						</td>       
+							<{$article.area}>
+							<span class="badge badge-info badge-pill"><{$article.amount}></span>
+						</td>
 						<td class="txtcenter width10">
 							<{$article.qty}>
 						</td>
-					</tr>				
+					</tr>
 				<{/foreach}>
 				<tr>
 					<td class="txtright" colspan="2"><h3>Total</h3></td>
 					<td class="txtcenter"><h3><{$total}></h3></td>
-				</tr>		
+				</tr>
 			</table>
 			<{if $warning == true}>
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -68,7 +69,7 @@
 					<span aria-hidden="true">&times;</span>
 				  </button>
 				</div>
-			<{/if}>			
+			<{/if}>
 			<{$form}>
 			<table class="xmstock_step_body">
 				<tr>
