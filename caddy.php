@@ -32,6 +32,8 @@ $area_id = Request::getInt('area_id', 0);
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
+$general_area = $helper->getConfig('general_area', '');
+
 
 // ********************************************************************************************************************
 // Liste le contenu du caddy
@@ -102,16 +104,18 @@ switch ($op) {
 		$articleHandler   = $helper->getHandler('xmarticle_article');
 		$article  = $articleHandler->get($article_id);
 		if (!isset($article)){
-			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE . ' A');
 		}
 		if ($article->getVar('article_status') == 0){
-			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE . ' B');
 		}
-		//Vérification que l'article existe dans le lieu de stockage
-		$criteria = new CriteriaCompo();
-		$stock_arr = $stockHandler->getall($criteria);
-		if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0){
-			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
+		if ($general_area[0] == ''){
+			//Vérification que l'article existe dans le lieu de stockage
+			$criteria = new CriteriaCompo();
+			$stock_arr = $stockHandler->getall($criteria);
+			if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0){
+				redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE  . ' C');
+			}
 		}
 		//Vérification si l'article peut être commandé (permission order)
 		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');

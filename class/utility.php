@@ -280,6 +280,8 @@ class XmstockUtility
 		$viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
 		// Get Permission to order
 		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
+		
+		$area = array();
 
 		// Criteria
         $criteria = new CriteriaCompo();
@@ -307,24 +309,44 @@ class XmstockUtility
 					$stock['order']  = false;
 				}
 				$total_amount += $stock['amount'];
-                $xoopsTpl->append_by_ref('stock', $stock);
-                unset($stock);
+                $xoopsTpl->append_by_ref('stock', $stock);                
+				$area[] = $stock['area_id'];
+				unset($stock);
             }
+			self::addStocks($viewPermissionArea, $orderPermissionArea, $area);
 			$xoopsTpl->assign('total_amount', $total_amount);
             $xoopsTpl->assign('xmstock_viewstocks', true);
         } else {
-			if ($general_area[0] != ''){
-				$criteria = new CriteriaCompo();
-				$criteria->setSort('area_weight ASC, area_name');
-				$criteria->setOrder('ASC');
-				if (!empty($viewPermissionArea)) {
-					$criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
-				}
-				$criteria->add(new Criteria('area_id', '(' . implode(',', $general_area) . ')', 'IN'));
-				$area_arr = $areaHandler->getall($criteria);
-				if (count($area_arr) > 0 && !empty($viewPermissionArea)) {
-					foreach (array_keys($area_arr) as $i) {
-						$stock['area_id']    = $area_arr[$i]->getVar('area_id');
+			self::addStocks($viewPermissionArea, $orderPermissionArea, $area);
+		}
+    }
+	
+	/**
+     * Fonction qui permet d'ajouter les areas sélectionnés dans les préférences
+     * @param array      $viewPermissionArea permission de voir
+     * @param array      $orderPermissionArea permission de commander
+     * @param array      $area tableau de area déja affiché
+     */
+	protected static function addStocks($viewPermissionArea, $orderPermissionArea, $area)
+    {
+		global $xoopsTpl;
+		include __DIR__ . '/../include/common.php';
+
+		$xmstockHelper = Xmf\Module\Helper::getHelper('xmstock');
+		$general_area = $xmstockHelper->getConfig('general_area', '');
+		if ($general_area[0] != ''){
+			$criteria = new CriteriaCompo();
+			$criteria->setSort('area_weight ASC, area_name');
+			$criteria->setOrder('ASC');
+			if (!empty($viewPermissionArea)) {
+				$criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
+			}
+			$criteria->add(new Criteria('area_id', '(' . implode(',', $general_area) . ')', 'IN'));
+			$area_arr = $areaHandler->getall($criteria);
+			if (count($area_arr) > 0 && !empty($viewPermissionArea)) {
+				foreach (array_keys($area_arr) as $i) {					
+					if (in_array($area_arr[$i]->getVar('area_id'), $area) == false){
+						$stock['area_id']    = $area_arr[$i]->getVar('area_id');					
 						$stock['name']       = $area_arr[$i]->getVar('area_name');
 						$stock['location']   = $area_arr[$i]->getVar('area_location');
 						$stock['amount']     = 0;
@@ -336,13 +358,12 @@ class XmstockUtility
 						$xoopsTpl->append_by_ref('stock', $stock);
 						unset($stock);
 					}
-					$xoopsTpl->assign('xmstock_viewstocks', true);
-					$xoopsTpl->assign('total_amount', 0);
 				}
+				$xoopsTpl->assign('xmstock_viewstocks', true);
+				$xoopsTpl->assign('total_amount', 0);
 			}
-
-		}
-    }
+		}	
+	}
 
 	/**
      * Fonction qui compte le nombre d'article contenu dans un lieu de stockage
