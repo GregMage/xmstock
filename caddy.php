@@ -16,14 +16,15 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
-use \Xmf\Request;
+use Xmf\Request;
+use Xmf\Module\Helper;
 
 include_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'xmstock_caddy.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
 $session_name = 'caddy';
-$sessionHelper = new \Xmf\Module\Helper\Session();
+$sessionHelper = new Helper\Session();
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 
@@ -44,8 +45,8 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 	if ($article_id == 0){
 		$return_url = XOOPS_URL . '/modules/xmarticle';
 	} else {
-		$helper = Xmf\Module\Helper::getHelper('xmarticle');
-		$articleHandler   = $helper->getHandler('xmarticle_article');
+		$helperArticle = Helper::getHelper('xmarticle');
+		$articleHandler   = $helperArticle->getHandler('xmarticle_article');
 		$article  = $articleHandler->get($article_id);
 		if (isset($article)){
 			$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $article->getVar('article_cid') . '&article_id=' . $article_id;
@@ -100,8 +101,8 @@ switch ($op) {
 		if ($article_id == 0){
 			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
 		}
-		$helper = Xmf\Module\Helper::getHelper('xmarticle');
-		$articleHandler   = $helper->getHandler('xmarticle_article');
+		$helperArticle = Helper::getHelper('xmarticle');
+		$articleHandler   = $helperArticle->getHandler('xmarticle_article');
 		$article  = $articleHandler->get($article_id);
 		if (!isset($article)){
 			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE . ' A');
@@ -164,8 +165,8 @@ switch ($op) {
 			foreach ($arr_selectionArticles as $datas) {
 				$name_qty = 'qty_' . $count;
 				$name_area = 'area_' . $count;
-				$qty = \Xmf\Request::getInt($name_qty, 0, 'POST');
-				$area = \Xmf\Request::getInt($name_area, 0, 'POST');
+				$qty = Request::getInt($name_qty, 0, 'POST');
+				$area = Request::getInt($name_area, 0, 'POST');
 				$article['id']   = $datas['id'];
 				$article['area'] = $area;
 				$article['qty']  = $qty;
