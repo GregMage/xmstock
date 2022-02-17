@@ -99,6 +99,7 @@ $criteria->setSort('area_weight ASC, area_name');
 $criteria->setOrder('ASC');
 $criteria->add(new Criteria('area_status', 1));
 $area_arr = $areaHandler->getall($criteria);
+$area = array();
 foreach (array_keys($area_arr) as $i) {
 	$area[$area_arr[$i]->getVar('area_id')] = $area_arr[$i]->getVar('area_name');
 }
