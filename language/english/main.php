@@ -181,6 +181,9 @@ define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to or
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 
 // order
-define('_MA_XMSTOCK_ORDER_NUMBER', 'Order number');
+define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
+define('_MA_XMSTOCK_ORDER_ORDERDATE', 'Order date');
+define('_MA_XMSTOCK_ORDER_ORDERDESIRED', 'Desired date');
+define('_MA_XMSTOCK_ORDER_NUMBE', 'Order number');
 
 

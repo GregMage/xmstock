@@ -129,9 +129,32 @@ switch ($op) {
 		}	
 		$sessionHelper->del($session_name);
 		
+		if ($order->getVar('order_delivery') == 0){
+			$delivery = _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL;
+		} else {
+			$delivery = _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY;
+		}
+		// Criteria
+        $criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('itemorder_orderid', $order->getVar('order_id')));
+		$itemorderHandler->table_link = $itemorderHandler->db->prefix("xmarticle_article");
+		$itemorderHandler->field_link = "article_id";
+		$itemorderHandler->field_object = "itemorder_articleid";
+		$itemorder_arr = $itemorderHandler->getByLink($criteria);
+		foreach (array_keys($itemorder_arr) as $i) {
+			echo '<br>' . $itemorder_arr[$i]->getVar('article_name');
+			echo '<br>' . $itemorder_arr[$i]->getVar('itemorder_amount');
+		}
+		
+		
+		
+		$xoopsTpl->assign('order_title', sprintf(_MA_XMSTOCK_ORDER_ORDER, $order->getVar('order_id')));
 		$order_arr = array(
-            _MA_XMSTOCK_ORDER_NUMBER        => $order->getVar('order_id'),
-            _MA_XMSTOCK_ORDER_NUMBER     	=> $order->getVar('order_id')
+            _MA_XMSTOCK_ORDER_ORDERDATE     => formatTimestamp($order->getVar('order_dorder'), 'm'),
+            _MA_XMSTOCK_ORDER_ORDERDESIRED  => formatTimestamp($order->getVar('order_ddesired'), 's'),
+            _MA_XMSTOCK_CHECKOUT_DELIVERY   => $delivery,
+            _MA_XMSTOCK_CADDY_ITMES     	=> $order->getVar('order_id'),
+            _MA_XMSTOCK_STATUS     			=> $order->getVar('order_status'),
         );
 	
 		

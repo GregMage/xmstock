@@ -9,10 +9,9 @@
 		<div class="alert alert-success" role="alert">
 			<{$smarty.const._MA_XMSTOCK_CHECKOUT_CONFIRM_SEND}>
 		</div>
-		<table class="table table-striped">
+		<table class="table table-striped table-bordered">
 			<tr>
-				<th class="txtleft width40">titre</th>
-				<th class="txtleft">info</th>
+				<th class="txtcenter" colspan="2"><{$order_title}></th>
 			</tr>
 			<{foreach from=$order_arr key=title item=information}>
 				<tr>

@@ -39,6 +39,9 @@ class xmstock_itemorder extends XoopsObject
         $this->initVar('itemorder_davailable', XOBJ_DTYPE_INT, null);
         $this->initVar('itemorder_dwithdrawal', XOBJ_DTYPE_INT, null);
         $this->initVar('itemorder_status', XOBJ_DTYPE_INT, null);
+		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
+		$this->initVar('article_cid', XOBJ_DTYPE_INT, null);
+		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
     }
 
     /**
