@@ -30,10 +30,10 @@ if (min($iniPostMaxSize, $iniUploadMaxFileSize) < $helper->getConfig('general_ma
 	echo '<div class="errorMsg" style="text-align: left;">' . _MA_XMSTOCK_ERROR_SIZE . '</div>';	
 }
 
-$moduleAdmin->addConfigModuleVersion('system', 212);
+$moduleAdmin->addConfigModuleVersion('system', '2.1.2');
 // xmarticle
 if (xoops_isActiveModule('xmarticle')) {
-    $moduleAdmin->addConfigModuleVersion('xmarticle', 10);
+    $moduleAdmin->addConfigModuleVersion('xmarticle', '1.0.0');
 } else {
     $moduleAdmin->addConfigError(_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR);
 }

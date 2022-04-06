@@ -31,6 +31,7 @@ define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 
 // Sub menu
 define('_MI_XMSTOCK_SUB_CADDY', 'Caddy');
+define('_MI_XMSTOCK_SUB_ORDER', 'Order');
 
 
 // Pref

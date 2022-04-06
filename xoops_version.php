@@ -18,7 +18,7 @@
  */
 $modversion['dirname']     = basename(__DIR__);
 $modversion['name']        = ucfirst(basename(__DIR__));
-$modversion['version']     = '0.1';
+$modversion['version']     = '0.1.0-Alpha1';
 $modversion['description'] = _MI_XMSTOCK_DESC;
 $modversion['author']      = 'Grégory Mage (Mage)';
 $modversion['url']         = 'https://github.com/GregMage';
@@ -35,6 +35,10 @@ $modversion['hasMain'] = 1;
 $modversion['sub'][]   = [
     'name' => _MI_XMSTOCK_SUB_CADDY,
     'url'  => 'caddy.php'
+];
+$modversion['sub'][]   = [
+    'name' => _MI_XMSTOCK_SUB_ORDER,
+    'url'  => 'order.php'
 ];
 
 // Admin things
@@ -170,7 +174,6 @@ $modversion['config'][] = [
 ];
 
 // About stuff
-$modversion['module_status'] = 'alpha 1';
 $modversion['release_date']  = '2017/11/04';
 
 $modversion['developer_lead']      = 'Mage';
