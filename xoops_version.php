@@ -37,8 +37,8 @@ $modversion['sub'][]   = [
     'url'  => 'caddy.php'
 ];
 $modversion['sub'][]   = [
-    'name' => _MI_XMSTOCK_SUB_ORDER,
-    'url'  => 'order.php'
+    'name' => _MI_XMSTOCK_SUB_ORDERS,
+    'url'  => 'orders.php'
 ];
 
 // Admin things
@@ -74,6 +74,7 @@ $modversion['templates'][] = ['file' => 'xmstock_viewstocks.tpl', 'description' 
 $modversion['templates'][] = ['file' => 'xmstock_viewarea.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_caddy.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_checkout.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_order.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];

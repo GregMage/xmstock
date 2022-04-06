@@ -180,6 +180,14 @@ define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to or
 
 define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 
+define('_MA_XMSTOCK_ORDERS', 'Orders');
+define('_MA_XMSTOCK_ORDER_A', 'Ouvertes');
+define('_MA_XMSTOCK_ORDER_B', 'Validées (en cours)');
+define('_MA_XMSTOCK_ORDER_C', 'Disponibles (livraison)');
+define('_MA_XMSTOCK_ORDER_D', 'Disponibles (à retirer)');
+define('_MA_XMSTOCK_ORDER_E', 'Cloturées');
+define('_MA_XMSTOCK_ORDER_F', 'Annulées');
+
 // order
 define('_MA_XMSTOCK_ORDER_NUMBER', 'Order number');
 
