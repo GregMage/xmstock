@@ -141,11 +141,13 @@ switch ($op) {
 		$itemorderHandler->field_link = "article_id";
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
+		$caddy_items = array();
 		foreach (array_keys($itemorder_arr) as $i) {
-			echo '<br>' . $itemorder_arr[$i]->getVar('article_name');
-			echo '<br>' . $itemorder_arr[$i]->getVar('itemorder_amount');
-		}
-		
+			$caddy_items[$i]['id'] = $itemorder_arr[$i]->getVar('itemorder_articleid');
+			$caddy_items[$i]['name'] = $itemorder_arr[$i]->getVar('article_name');
+			$caddy_items[$i]['amount'] = $itemorder_arr[$i]->getVar('itemorder_amount');
+			$caddy_items[$i]['cid'] = $itemorder_arr[$i]->getVar('article_cid');
+		}	
 		
 		
 		$xoopsTpl->assign('order_title', sprintf(_MA_XMSTOCK_ORDER_ORDER, $order->getVar('order_id')));
@@ -153,7 +155,7 @@ switch ($op) {
             _MA_XMSTOCK_ORDER_ORDERDATE     => formatTimestamp($order->getVar('order_dorder'), 'm'),
             _MA_XMSTOCK_ORDER_ORDERDESIRED  => formatTimestamp($order->getVar('order_ddesired'), 's'),
             _MA_XMSTOCK_CHECKOUT_DELIVERY   => $delivery,
-            _MA_XMSTOCK_CADDY_ITMES     	=> $order->getVar('order_id'),
+            _MA_XMSTOCK_CADDY_ITMES     	=> $caddy_items,
             _MA_XMSTOCK_STATUS     			=> $order->getVar('order_status'),
         );
 	
