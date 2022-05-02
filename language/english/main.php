@@ -153,7 +153,7 @@ define('_MA_XMSTOCK_CADDY', 'Caddy');
 define('_MA_XMSTOCK_CHECKOUT', 'Checkout');
 define('_MA_XMSTOCK_CHECKOUT_DESC', 'Description');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Delivery options');
-define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Withdrawal ');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Withdrawal');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Desired date');
 define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Input information');
@@ -193,5 +193,9 @@ define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
 define('_MA_XMSTOCK_ORDER_ORDERDATE', 'Order date');
 define('_MA_XMSTOCK_ORDER_ORDERDESIRED', 'Desired date');
 define('_MA_XMSTOCK_ORDER_NUMBE', 'Order number');
+define('_MA_XMSTOCK_ORDER_DESCRIPTION', 'Description');
+define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
+define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
+define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
 
 

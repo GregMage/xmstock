@@ -38,7 +38,7 @@ $modversion['sub'][]   = [
 ];
 $modversion['sub'][]   = [
     'name' => _MI_XMSTOCK_SUB_ORDERS,
-    'url'  => 'orders.php'
+    'url'  => 'order.php'
 ];
 
 // Admin things

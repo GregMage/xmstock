@@ -63,7 +63,7 @@ CREATE TABLE `xmstock_order` (
   `order_status`         tinyint(1)  unsigned 	NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`order_id`),
-  KEY `order_dorder` (`order_dorder`)
+  KEY `order_userid` (`order_userid`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_itemorder` (

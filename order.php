@@ -71,9 +71,9 @@ if ($order_count > 0) {
 		$order_id                 = $order_arr[$i]->getVar('order_id');
 		$order['id']              = $order_id;
 		$order['description']     = XmstockUtility::generateDescriptionTagSafe($order_arr[$i]->getVar('order_description', 'show'), 50);
-		$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 'm');
-		$order['dorder ']         = formatTimestamp($order_arr[$i]->getVar('order_dorder '), 'm');
-		$order['delivery ']       = $order_arr[$i]->getVar('order_delivery ');
+		$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
+		$order['dorder']          = formatTimestamp($order_arr[$i]->getVar('order_dorder'), 'm');
+		$order['delivery']        = $order_arr[$i]->getVar('order_delivery');
 		$xoopsTpl->append_by_ref('order', $order);
 		unset($order);
 	}
