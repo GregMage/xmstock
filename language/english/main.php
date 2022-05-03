@@ -75,6 +75,7 @@ define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'There is no starting stock selec
 define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'There is no output selected');
 define('_MA_XMSTOCK_ERROR_TRANSFERT_NOARTICLE', 'Selected article is not available in the selected stock');
 define('_MA_XMSTOCK_ERROR_TRANSFERT_TBAMOUNT', 'The quantity requested (%s) is more important than that available (%s)');
+define('_MA_XMSTOCK_ERROR_ORDER_DEL', 'You cannot delete this order!');
 
 // area
 define('_MA_XMSTOCK_AREA_COLOR', 'Color');
@@ -197,5 +198,6 @@ define('_MA_XMSTOCK_ORDER_DESCRIPTION', 'Description');
 define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
 define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
 define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
+define('_MA_XMSTOCK_ORDER_SUREDEL', 'Sure to delete this order? #%s');
 
 

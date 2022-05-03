@@ -159,6 +159,24 @@ class xmstock_order extends XoopsObject
 
         return $form;
     }
+	
+	/**
+     * @return mixed
+     */
+    public function delOrder($orderHandler, $order_id, $action = false)
+    {
+		if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+		$error_message = '';
+		include __DIR__ . '/../include/common.php';
+		if ($orderHandler->delete($this)) {
+			redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+		} else {
+			$error_message .= $obj->getHtmlErrors();
+		}
+		return $error_message;
+	}
 }
 
 /**
