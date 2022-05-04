@@ -68,8 +68,8 @@
 							<{if $order.delivery == 1}>
 							<span class="fa fa-truck"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_DELIVERY}>
 							<{/if}>
-							<{if $order.delivery == 2}>
-							<span class="fa fa-industry"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_DELIVERY}>
+							<{if $order.delivery == 0}>
+							<span class="fa fa-industry"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL}>
 							<{/if}>
 						</td>
 						<td class="text-center">

@@ -24,7 +24,6 @@ $GLOBALS['xoopsOption']['template_main'] = 'xmstock_order.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
 $status = Request::getInt('status', 1);
-$xoopsTpl->assign('status', $status);
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
 $op = Request::getCmd('op', 'list');
@@ -56,6 +55,26 @@ switch ($op) {
 		$xoopsTpl->assign('pill_D', $order_count_D);
 		$xoopsTpl->assign('pill_E', $order_count_E);
 		$xoopsTpl->assign('pill_F', $order_count_F);
+		if ($order_count_A == 0 && $status == 1){
+			$status = 2;
+		}
+		if ($order_count_B == 0 && $status == 2){
+			$status = 3;
+		}
+		if ($order_count_C == 0 && $status == 3){
+			$status = 4;
+		}
+		if ($order_count_D == 0 && $status == 4){
+			$status = 5;
+		}
+		if ($order_count_E == 0 && $status == 5){
+			$status = 6;
+		}
+		if ($order_count_F == 0 && $status == 6){
+			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
+		}
+		$xoopsTpl->assign('status', $status);
+		
 
 		// Get start pager
 		$start = Request::getInt('start', 0);
