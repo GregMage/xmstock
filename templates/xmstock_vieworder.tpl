@@ -8,5 +8,10 @@
 		<{/if}>
 	  </ol>
 	</nav>
+	<{if $error_message|default:'' != ''}>
+		<div class="alert alert-danger" role="alert"><{$error_message}></div>
+	<{else}>
 	
+	
+	<{/if}>	
 </div><!-- .xmstock -->

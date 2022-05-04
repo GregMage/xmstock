@@ -24,6 +24,19 @@ $GLOBALS['xoopsOption']['template_main'] = 'xmstock_vieworder.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+$order_id = Request::getInt('order_id', 0);
+if ($order_id == 0) {
+	$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
+} else {
+	$order = $orderHandler->get($order_id);
+	if (empty($order) === true){
+		$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
+	} else {
+
+		echo 'super';
+	}
+}
+
 
 //SEO
 // pagetitle
