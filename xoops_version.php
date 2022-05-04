@@ -75,6 +75,7 @@ $modversion['templates'][] = ['file' => 'xmstock_viewarea.tpl', 'description' =>
 $modversion['templates'][] = ['file' => 'xmstock_caddy.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_checkout.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_order.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_vieworder.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];
