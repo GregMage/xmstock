@@ -171,6 +171,12 @@ class xmstock_order extends XoopsObject
 		$error_message = '';
 		include __DIR__ . '/../include/common.php';
 		if ($orderHandler->delete($this)) {
+			$criteria = new CriteriaCompo();
+			$criteria->add(new Criteria('itemorder_orderid', $order_id));
+			$itemorder_count = $itemorderHandler->getCount($criteria);
+			if ($itemorder_count > 0) {
+				$itemorderHandler->deleteAll($criteria);
+			}		
 			redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 		} else {
 			$error_message .= $obj->getHtmlErrors();
