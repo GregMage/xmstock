@@ -16,14 +16,14 @@
 			<{foreach from=$order_arr key=title item=information}>
 				<tr>
 					<td class="txtleft"><{$title}></td>
-					<{if $title == $smarty.const._MA_XMSTOCK_CADDY_ITMES}>						
+					<{if $title == $smarty.const._MA_XMSTOCK_CADDY_ITMES}>
 						<td class="txtleft">
 						<div class="list-group">
-						<{foreach from=$information key=item_id item=item_info}>						
+						<{foreach from=$information key=item_id item=item_info}>
 							<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$item_info.cid}>&article_id=<{$item_info.id}>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" target="_blank">
 							<{$item_info.name}><span class="badge badge-primary badge-pill"><{$item_info.amount}></span>
 							</a>
-							
+
 							</div>
 						<{/foreach}>
 						</td>
@@ -33,6 +33,11 @@
 				</tr>
 			<{/foreach}>
 		</table>
+		<div class="col-12 pl-4 pr-4 pb-2">
+			<div class="text-center pt-2">
+				<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span> <{$smarty.const._MA_XMSTOCK_CHECKOUT_VIEW}></a>
+			</div>
+		</div>
 	<{else}>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">

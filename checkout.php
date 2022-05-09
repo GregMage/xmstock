@@ -119,16 +119,16 @@ switch ($op) {
             $xoopsTpl->assign('form', $form->render());
         }
 		break;
-		
+
 	case 'confirm':
 		$xoopsTpl->assign('confirm', true);
 		$order_id = Request::getInt('order_id', 0);
-		$order  = $orderHandler->get($order_id);		
+		$order  = $orderHandler->get($order_id);
 		if (empty($order)) {
 			redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOORDER);
-		}	
+		}
 		$sessionHelper->del($session_name);
-		
+
 		if ($order->getVar('order_delivery') == 0){
 			$delivery = _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL;
 		} else {
@@ -147,19 +147,38 @@ switch ($op) {
 			$caddy_items[$i]['name'] = $itemorder_arr[$i]->getVar('article_name');
 			$caddy_items[$i]['amount'] = $itemorder_arr[$i]->getVar('itemorder_amount');
 			$caddy_items[$i]['cid'] = $itemorder_arr[$i]->getVar('article_cid');
-		}	
-		
-		
+		}
 		$xoopsTpl->assign('order_title', sprintf(_MA_XMSTOCK_ORDER_ORDER, $order->getVar('order_id')));
+		$xoopsTpl->assign('order_id', $order_id);
+		switch ($order->getVar('order_status')) {
+			case 1:
+				$status = _MA_XMSTOCK_ORDER_A;
+				break;
+			case 2:
+				$status = _MA_XMSTOCK_ORDER_B;
+				break;
+			case 3:
+				$status = _MA_XMSTOCK_ORDER_C;
+				break;
+			case 4:
+				$status = _MA_XMSTOCK_ORDER_D;
+				break;
+			case 5:
+				$status = _MA_XMSTOCK_ORDER_E;
+				break;
+			case 6:
+				$status = _MA_XMSTOCK_ORDER_F;
+				break;
+		}
 		$order_arr = array(
             _MA_XMSTOCK_ORDER_ORDERDATE     => formatTimestamp($order->getVar('order_dorder'), 'm'),
             _MA_XMSTOCK_ORDER_ORDERDESIRED  => formatTimestamp($order->getVar('order_ddesired'), 's'),
             _MA_XMSTOCK_CHECKOUT_DELIVERY   => $delivery,
             _MA_XMSTOCK_CADDY_ITMES     	=> $caddy_items,
-            _MA_XMSTOCK_STATUS     			=> $order->getVar('order_status'),
+            _MA_XMSTOCK_STATUS     			=> $status,
         );
-	
-		
+
+
 		$xoopsTpl->assign('order_arr', $order_arr);
 		break;
 
