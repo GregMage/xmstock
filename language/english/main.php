@@ -210,5 +210,8 @@ define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
 
 
 define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
+define('_MA_XMSTOCK_VIEWORDER_ARTICLE', 'Article');
+define('_MA_XMSTOCK_VIEWORDER_AMOUNT', 'Amount');
+define('_MA_XMSTOCK_VIEWORDER_STATUS', 'Status');
 
 

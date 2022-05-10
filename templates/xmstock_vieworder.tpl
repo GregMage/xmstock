@@ -57,31 +57,29 @@
 						</p>
 						<hr>
 						<h4>Articles commandés </h4>
-						<div class="col-12 pl-2 pr-2 pb-2">
-							<div class="card">
-								<div class="card-header">
-									<{$smarty.const._MA_XMSTOCK_CADDY_ITMES}>
-								</div>
-								<hr>
-								<div class="card-body">
-									<div class="row">
-										<{foreach item=item from=$item}>
-											<div class="col-12 col-md-6 p-2">
-												<div class="row">
-													<div class="col-6">
-														<b><{$item.name}></b><br>
-														<{$item.cid}>
-													</div>
-													<div class="col-6">
-														<{$item.amount}>
-													</div>
-												</div>
-											</div>
-										<{/foreach}>
-									</div>
-								</div>
-							</div>
-						</div>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_ARTICLE}></th>
+									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}></th>
+									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_STATUS}></th>
+								</tr>
+							</thead>
+							<tbody>
+								<{foreach item=article from=$item}>
+								<tr>
+									<td>
+										<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$article.cid}>&article_id=<{$article.id}>" title="<{$article.name}>" target="_blank">
+											<{$article.name}>
+										</a>
+										(<{$article.reference}>)										
+									</td>
+									<td class="text-center"><{$article.amount}></td>
+									<td class="text-center"><{$article.status}></td>
+								</tr>
+								<{/foreach}>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

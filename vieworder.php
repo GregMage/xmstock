@@ -63,12 +63,12 @@ if ($order_id == 0) {
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
 		foreach (array_keys($itemorder_arr) as $i) {
-			$item_id          = $itemorder_arr[$i]->getVar('order_id');
-			$item['id']       = $item_id;
-			$item['name']     = $itemorder_arr[$i]->getVar('article_name');
-			$item['amount']   = $itemorder_arr[$i]->getVar('itemorder_amount');
-			$item['cid']   	  = $itemorder_arr[$i]->getVar('article_cid');
-
+			$item['id']        = $itemorder_arr[$i]->getVar('itemorder_articleid');
+			$item['name']      = $itemorder_arr[$i]->getVar('article_name');
+			$item['reference'] = $itemorder_arr[$i]->getVar('article_reference');
+			$item['cid']   	   = $itemorder_arr[$i]->getVar('article_cid');
+			$item['amount']    = $itemorder_arr[$i]->getVar('itemorder_amount');
+			$item['status']    = $itemorder_arr[$i]->getVar('itemorder_status');
 			$xoopsTpl->append_by_ref('item', $item);
 			unset($item);
 		}
