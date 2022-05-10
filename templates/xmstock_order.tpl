@@ -15,35 +15,30 @@
 		<{if $op == 'list'}>
 			<h2><{$smarty.const._MA_XMSTOCK_ORDERS}></h2>
 			<div class="list-group">
-			  <{if $pill_A != 0}>
-				<a href="order.php?status=1" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 1}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_A}><span class="badge badge-primary badge-pill"><{$pill_A}></span></a>
+			  <{if $pill_1 != 0}>
+				<a href="order.php?status=1" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 1}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_1}><span class="badge badge-primary badge-pill"><{$pill_A}></span></a>
 			  <{else}>
-				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_A}></a>
+				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_1}></a>
 			  <{/if}>
-			  <{if $pill_B != 0}>
-				<a href="order.php?status=2" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 2}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_B}><span class="badge badge-primary badge-pill"><{$pill_B}></span></a>
+			  <{if $pill_2 != 0}>
+				<a href="order.php?status=2" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 2}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_2}><span class="badge badge-primary badge-pill"><{$pill_B}></span></a>
 			  <{else}>
-				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_B}></a>
+				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_2}></a>
 			  <{/if}>
-			  <{if $pill_C != 0}>
-			  <a href="order.php?status=3" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 3}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_C}><span class="badge badge-primary badge-pill"><{$pill_C}></span></a>
+			  <{if $pill_3 != 0}>
+			  <a href="order.php?status=3" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 3}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_3}><span class="badge badge-primary badge-pill"><{$pill_C}></span></a>
 			  <{else}>
-				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_C}></a>
+				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_3}></a>
 			  <{/if}>
-			  <{if $pill_D != 0}>
-			  <a href="order.php?status=4" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 4}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_D}><span class="badge badge-primary badge-pill"><{$pill_D}></span></a>
+			  <{if $pill_4 != 0}>
+			  <a href="order.php?status=4" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 4}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_4}><span class="badge badge-primary badge-pill"><{$pill_D}></span></a>
 			  <{else}>
-				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_D}></a>
+				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_4}></a>
 			  <{/if}>
-			  <{if $pill_E != 0}>
-				<a href="order.php?status=5" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 5}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_E}><span class="badge badge-primary badge-pill"><{$pill_E}></span></a>
+			  <{if $pill_0 != 0}>
+				<a href="order.php?status=5" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 0}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_0}><span class="badge badge-primary badge-pill"><{$pill_E}></span></a>
 			  <{else}>
-				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_E}></a>
-			  <{/if}>
-			  <{if $pill_F != 0}>
-				<a href="order.php?status=6" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 6}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_F}><span class="badge badge-primary badge-pill"><{$pill_F}></span></a>
-			  <{else}>
-				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_F}></a>
+				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_0}></a>
 			  <{/if}>
 			</div>
 			<table class="table table-hover">

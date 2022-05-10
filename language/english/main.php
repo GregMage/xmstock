@@ -183,12 +183,17 @@ define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articl
 
 define('_MA_XMSTOCK_ORDERS', 'Orders');
 define('_MA_XMSTOCK_VIEWORDER', 'Visualization of the order');
-define('_MA_XMSTOCK_ORDER_A', 'Ouvertes');
-define('_MA_XMSTOCK_ORDER_B', 'Validées (en cours)');
-define('_MA_XMSTOCK_ORDER_C', 'Disponibles (livraison)');
-define('_MA_XMSTOCK_ORDER_D', 'Disponibles (à retirer)');
-define('_MA_XMSTOCK_ORDER_E', 'Cloturées');
-define('_MA_XMSTOCK_ORDER_F', 'Annulées');
+
+define('_MA_XMSTOCK_ORDER_STATUS_0', 'Annulé');
+define('_MA_XMSTOCK_ORDER_STATUS_1', 'En attente');
+define('_MA_XMSTOCK_ORDER_STATUS_2', 'En cours');
+define('_MA_XMSTOCK_ORDER_STATUS_3', 'Livraison/retrait');
+define('_MA_XMSTOCK_ORDER_STATUS_4', 'Livré');
+define('_MA_XMSTOCK_ORDER_STATUS_TITLE_0', 'Commandes annulées');
+define('_MA_XMSTOCK_ORDER_STATUS_TITLE_1', 'Commandes en attentes');
+define('_MA_XMSTOCK_ORDER_STATUS_TITLE_2', 'Commandes en cours');
+define('_MA_XMSTOCK_ORDER_STATUS_TITLE_3', 'Commandes prêtes (livraison/retrait)');
+define('_MA_XMSTOCK_ORDER_STATUS_TITLE_4', 'Commandes livrées');
 
 // order
 define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
@@ -200,5 +205,10 @@ define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
 define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
 define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_ORDER_SUREDEL', 'Sure to delete this order? #%s');
+
+define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
+
+
+define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
 
 

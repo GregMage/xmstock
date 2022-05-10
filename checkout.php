@@ -152,22 +152,19 @@ switch ($op) {
 		$xoopsTpl->assign('order_id', $order_id);
 		switch ($order->getVar('order_status')) {
 			case 1:
-				$status = _MA_XMSTOCK_ORDER_A;
+				$status = _MA_XMSTOCK_ORDER_STATUS_1;
 				break;
 			case 2:
-				$status = _MA_XMSTOCK_ORDER_B;
+				$status = _MA_XMSTOCK_ORDER_STATUS_2;
 				break;
 			case 3:
-				$status = _MA_XMSTOCK_ORDER_C;
+				$status = _MA_XMSTOCK_ORDER_STATUS_3;
 				break;
 			case 4:
-				$status = _MA_XMSTOCK_ORDER_D;
+				$status = _MA_XMSTOCK_ORDER_STATUS_4;
 				break;
-			case 5:
-				$status = _MA_XMSTOCK_ORDER_E;
-				break;
-			case 6:
-				$status = _MA_XMSTOCK_ORDER_F;
+			case 0:
+				$status = _MA_XMSTOCK_ORDER_STATUS_0;
 				break;
 		}
 		$order_arr = array(

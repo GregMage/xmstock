@@ -33,44 +33,43 @@ switch ($op) {
 	case 'list':
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 1));
-		$order_count_A = $orderHandler->getCount($criteria);
+		$order_count_1 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 2));
-		$order_count_B = $orderHandler->getCount($criteria);
+		$order_count_2 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 3));
-		$order_count_C = $orderHandler->getCount($criteria);
+		$order_count_3 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 4));
-		$order_count_D = $orderHandler->getCount($criteria);
+		$order_count_4 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 5));
-		$order_count_E = $orderHandler->getCount($criteria);
+		$order_count_5 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('order_status', 6));
-		$order_count_F = $orderHandler->getCount($criteria);
-		$xoopsTpl->assign('pill_A', $order_count_A);
-		$xoopsTpl->assign('pill_B', $order_count_B);
-		$xoopsTpl->assign('pill_C', $order_count_C);
-		$xoopsTpl->assign('pill_D', $order_count_D);
-		$xoopsTpl->assign('pill_E', $order_count_E);
-		$xoopsTpl->assign('pill_F', $order_count_F);
-		if ($order_count_A == 0 && $status == 1){
+		$criteria->add(new Criteria('order_status', 0));
+		$order_count_0 = $orderHandler->getCount($criteria);
+		$xoopsTpl->assign('pill_1', $order_count_1);
+		$xoopsTpl->assign('pill_2', $order_count_2);
+		$xoopsTpl->assign('pill_3', $order_count_3);
+		$xoopsTpl->assign('pill_4', $order_count_4);
+		$xoopsTpl->assign('pill_0', $order_count_0);
+		if ($order_count_1 == 0 && $status == 1){
 			$status = 2;
 		}
-		if ($order_count_B == 0 && $status == 2){
+		if ($order_count_2 == 0 && $status == 2){
 			$status = 3;
 		}
-		if ($order_count_C == 0 && $status == 3){
+		if ($order_count_3 == 0 && $status == 3){
 			$status = 4;
 		}
-		if ($order_count_D == 0 && $status == 4){
+		if ($order_count_4 == 0 && $status == 4){
 			$status = 5;
 		}
-		if ($order_count_E == 0 && $status == 5){
-			$status = 6;
+		if ($order_count_0 == 0 && $status == 0){
+			$status = 0;
 		}
-		if ($order_count_F == 0 && $status == 6){
+		if ($order_count_0 == 0 && $status == 0){
 			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 		}
 		$xoopsTpl->assign('status', $status);
