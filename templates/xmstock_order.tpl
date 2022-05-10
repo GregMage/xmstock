@@ -54,7 +54,7 @@
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_ORDERDATE}></th>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_ORDERDESIRED}></th>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}></th>
-						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+						<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 					</tr>
 				</thead>
 				<tbody>
