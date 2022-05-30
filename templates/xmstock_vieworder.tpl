@@ -26,11 +26,11 @@
 					</div>
 					<div class="row border-bottom border-secondary mx-1 pl-1">
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
-							  <span class="fa fa-calendar fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_ORDERDATE}>
+							  <span class="fa fa-calendar fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}>
 							  <figcaption class="figure-caption text-center"><{$dorder}></figcaption>
 						</figure>
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
-							  <span class="fa fa-repeat fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_ORDERDESIRED}>
+							  <span class="fa fa-repeat fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}>
 							  <figcaption class="figure-caption text-center"><{$ddesired}></figcaption>
 						</figure>
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">

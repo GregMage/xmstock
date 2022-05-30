@@ -46,8 +46,8 @@
 					<tr>
 						<th class="text-center" scope="col">#</th>
 						<th scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DESCRIPTION}></th>
-						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_ORDERDATE}></th>
-						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_ORDERDESIRED}></th>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}></th>
 						<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 					</tr>

@@ -197,14 +197,22 @@ define('_MA_XMSTOCK_ORDER_STATUS_TITLE_4', 'Commandes livrées');
 
 // order
 define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
-define('_MA_XMSTOCK_ORDER_ORDERDATE', 'Order date');
-define('_MA_XMSTOCK_ORDER_ORDERDESIRED', 'Desired date');
 define('_MA_XMSTOCK_ORDER_NUMBE', 'Order number');
 define('_MA_XMSTOCK_ORDER_DESCRIPTION', 'Description');
 define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
 define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
 define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_ORDER_SUREDEL', 'Sure to delete this order? #%s');
+
+
+
+define('_MA_XMSTOCK_ORDER_DATEORDER', 'Order date');
+define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Desired date');
+define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Order validation date');
+define('_MA_XMSTOCK_ORDER_DATEVALIDATED', 'Validated delivery/withdrawal date');
+define('_MA_XMSTOCK_ORDER_DATEREADY', 'Order ready date');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Delivery date');
+define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Order cancellation date');
 
 define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
 

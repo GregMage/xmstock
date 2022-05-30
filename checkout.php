@@ -168,8 +168,8 @@ switch ($op) {
 				break;
 		}
 		$order_arr = array(
-            _MA_XMSTOCK_ORDER_ORDERDATE     => formatTimestamp($order->getVar('order_dorder'), 'm'),
-            _MA_XMSTOCK_ORDER_ORDERDESIRED  => formatTimestamp($order->getVar('order_ddesired'), 's'),
+            _MA_XMSTOCK_ORDER_DATEORDER     => formatTimestamp($order->getVar('order_dorder'), 'm'),
+            _MA_XMSTOCK_ORDER_DATEDESIRED  => formatTimestamp($order->getVar('order_ddesired'), 's'),
             _MA_XMSTOCK_CHECKOUT_DELIVERY   => $delivery,
             _MA_XMSTOCK_CADDY_ITMES     	=> $caddy_items,
             _MA_XMSTOCK_STATUS     			=> $status,
