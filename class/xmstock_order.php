@@ -84,13 +84,10 @@ class xmstock_order extends XoopsObject
 					foreach ($arr_selectionArticles as $datas) {
 						$obj = $itemorderHandler->create();
 						$obj->setVar('itemorder_orderid', $order_id);
-						$obj->setVar('itemorder_articleid',  $datas['id']);
-						$obj->setVar('itemorder_areaid',  $datas['area']);
-						$obj->setVar('itemorder_amount',  $datas['qty']);
-						$obj->setVar('itemorder_dvalidated',  strtotime(Request::getString('itemorder_dvalidated_' . $datas['id'], '')));
-						$obj->setVar('itemorder_davailable',  strtotime(Request::getString('itemorder_davailable_' . $datas['id'], '')));
-						$obj->setVar('itemorder_dwithdrawal',  strtotime(Request::getString('itemorder_dwithdrawal_' . $datas['id'], '')));
-						$obj->setVar('itemorder_status',  Request::getInt('itemorder_status_' . $datas['id'], 1));
+						$obj->setVar('itemorder_articleid', $datas['id']);
+						$obj->setVar('itemorder_areaid', $datas['area']);
+						$obj->setVar('itemorder_amount', $datas['qty']);
+						$obj->setVar('itemorder_status', 1);
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
 						}
