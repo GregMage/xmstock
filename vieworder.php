@@ -37,6 +37,11 @@ if ($order_id == 0) {
 		$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($order->getVar('order_description', 'show'), 50));
 		$xoopsTpl->assign('ddesired', formatTimestamp($order->getVar('order_ddesired'), 's'));
 		$xoopsTpl->assign('dorder', formatTimestamp($order->getVar('order_dorder'), 'm'));
+		$xoopsTpl->assign('dvalidation', formatTimestamp($order->getVar('order_dvalidation'), 'm'));
+		$xoopsTpl->assign('ddelivery_v', formatTimestamp($order->getVar('order_ddelivery_v'), 'm'));
+		$xoopsTpl->assign('dready', formatTimestamp($order->getVar('order_dready'), 'm'));
+		$xoopsTpl->assign('ddelivery_r', formatTimestamp($order->getVar('order_ddelivery_r'), 'm'));
+		$xoopsTpl->assign('dcancellation', formatTimestamp($order->getVar('order_dcancellation'), 'm'));
 		$xoopsTpl->assign('delivery', $order->getVar('order_delivery'));		
 		switch ($order->getVar('order_status')) {
 			case 1:
