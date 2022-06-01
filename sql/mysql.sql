@@ -59,6 +59,11 @@ CREATE TABLE `xmstock_order` (
   `order_userid`         smallint(5) unsigned   NOT NULL DEFAULT '0',
   `order_ddesired`       int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_dorder`         int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `order_dvalidation`    int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `order_ddelivery_v`    int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `order_dready`    	 int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `order_ddelivery_r`    int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `order_dcancellation`  int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_delivery`       tinyint(1)  unsigned   NOT NULL DEFAULT '1',
   `order_status`         tinyint(1)  unsigned 	NOT NULL DEFAULT '1',
   
@@ -67,14 +72,23 @@ CREATE TABLE `xmstock_order` (
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_itemorder` (
-  `itemorder_id`          int(11) 	   unsigned    	NOT NULL AUTO_INCREMENT,
-  `itemorder_orderid`     int(11) 	   unsigned    	NOT NULL DEFAULT '0', 
-  `itemorder_articleid`   mediumint(8) unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_areaid`      smallint(5)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_amount`      smallint(5)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_dvalidated`  int(10) 	   unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_davailable`  int(10) 	   unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_dwithdrawal` int(10) 	   unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_id`          	int(11) 	 unsigned    	NOT NULL AUTO_INCREMENT,
+  `itemorder_orderid`     	int(11) 	 unsigned    	NOT NULL DEFAULT '0', 
+  `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_amount`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_dvalidation`   int(10) 	 unsigned   	NOT NULL DEFAULT '0',
+  `itemorder_ddelivery_v`   int(10) 	 unsigned   	NOT NULL DEFAULT '0',
+  `itemorder_dready`    	int(10) 	 unsigned   	NOT NULL DEFAULT '0',
+  `itemorder_ddelivery_r`   int(10) 	 unsigned   	NOT NULL DEFAULT '0',
+  `itemorder_dcancellation` int(10) 	 unsigned   	NOT NULL DEFAULT '0',
+  `itemorder_dvalidated`  	int(10) 	 unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_davailable`  	int(10) 	 unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_dwithdrawal` 	int(10) 	 unsigned    	NOT NULL DEFAULT '0',
+  
+  
+  
+  
   `itemorder_status`      tinyint(1)   unsigned 	NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`itemorder_id`),

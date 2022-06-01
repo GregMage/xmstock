@@ -209,9 +209,9 @@ define('_MA_XMSTOCK_ORDER_SUREDEL', 'Sure to delete this order? #%s');
 define('_MA_XMSTOCK_ORDER_DATEORDER', 'Order date');
 define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Desired date');
 define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Order validation date');
-define('_MA_XMSTOCK_ORDER_DATEVALIDATED', 'Validated delivery/withdrawal date');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY_V', 'Validated delivery/withdrawal date');
 define('_MA_XMSTOCK_ORDER_DATEREADY', 'Order ready date');
-define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Delivery date');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Delivery date');
 define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Order cancellation date');
 
 define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
