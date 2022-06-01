@@ -33,8 +33,7 @@
 							  <span class="fa fa-repeat fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}>
 							  <figcaption class="figure-caption text-center"><{$ddesired}></figcaption>
 						</figure>
-						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
-							
+						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">							
 							<{if $delivery == 1}>
 								<span class="fa fa-truck fa-fw"></span><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
 								<figcaption class="figure-caption text-center"> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_DELIVERY}></figcaption>
@@ -55,7 +54,44 @@
 								</div>
 							</div>
 						</p>
-						<hr>
+						<h4>Historique de la commande </h4>
+						<div class="row">
+							<div class="col-md-4 col-sm-8">
+								<{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
+							</div>
+							<div class="col-md-2 col-sm-4">
+								<{$dvalidation}>
+							</div>
+							<div class="col-md-4 col-sm-8">
+								<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_V}>
+							</div>
+							<div class="col-md-2 col-sm-4">
+								<{$ddelivery_v}>
+							</div>
+							
+							<div class="col-md-4 col-sm-8">
+								<{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}>
+							</div>
+							<div class="col-md-2 col-sm-4">
+								<{$dready}>
+							</div>
+							<div class="col-md-4 col-sm-8">
+								<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_R}>
+							</div>
+							<div class="col-md-2 col-sm-4">
+								<{$ddelivery_r}>
+							</div>
+							
+							<div class="col-md-4 col-sm-8">
+								<{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}>
+							</div>
+							<div class="col-md-2 col-sm-4">
+								<{$dcancellation}>
+							</div>
+						
+						</div>
+						
+
 						<h4>Articles commandés </h4>
 						<table class="table table-hover">
 							<thead>

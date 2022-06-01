@@ -41,6 +41,11 @@ class xmstock_order extends XoopsObject
 		$this->initVar('order_userid', XOBJ_DTYPE_INT, null, false, 8);
 		$this->initVar('order_ddesired', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dorder', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('order_dvalidation', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('order_ddelivery_v', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('order_dready', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('order_ddelivery_r', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('order_dcancellation', XOBJ_DTYPE_INT, null, false, 10);;
 		$this->initVar('order_delivery', XOBJ_DTYPE_INT, null, false, 2);
         $this->initVar('order_status', XOBJ_DTYPE_INT, null, false, 1);
     }
@@ -71,6 +76,14 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_dorder', time());
 		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
         $this->setVar('order_status', Request::getInt('order_status', 1));
+		// temporaire pour les tests
+		$this->setVar('order_dvalidation', strtotime(Request::getString('order_ddesired', ''))+(1*86400));
+		$this->setVar('order_ddelivery_v', strtotime(Request::getString('order_ddesired', ''))+(2*86400));
+		$this->setVar('order_dready', strtotime(Request::getString('order_ddesired', ''))+(3*86400));
+		$this->setVar('order_ddelivery_r', strtotime(Request::getString('order_ddesired', ''))+(4*86400));
+		$this->setVar('order_dcancellation', strtotime(Request::getString('order_ddesired', ''))+(5*86400));
+		
+		//
         if ($error_message == '') {
             if ($orderHandler->insert($this)) {
 				if ($this->get_new_enreg() == 0){
