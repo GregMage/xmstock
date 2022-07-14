@@ -54,7 +54,7 @@
 								</div>
 							</div>
 						</p>
-						<h4>Historique de la commande </h4>
+						<h4><{$smarty.const._MA_XMSTOCK_ORDER_HISTORY}></h4>
 						<div class="row">
 							<div class="col-md-4 col-sm-8">
 								<{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
@@ -87,12 +87,9 @@
 							</div>
 							<div class="col-md-2 col-sm-4">
 								<{$dcancellation}>
-							</div>
-						
+							</div>						
 						</div>
-						
-
-						<h4>Articles commandés </h4>
+						<h4><{$smarty.const._MA_XMSTOCK_ORDER_ARTICLES}></h4>
 						<table class="table table-hover">
 							<thead>
 								<tr>

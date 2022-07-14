@@ -100,7 +100,7 @@ class XmstockUtility
 				$stock_arr = $stockHandler->getall($criteria);
 				if (count($stock_arr) == 0){
 					// l'article n'est pas en stock
-					return _MA_XMSTOCK_ERROR_TRANSFERT_NOARTICLE;
+					return _MA_XMSTOCK_ERROR_TRANSFER_NOARTICLE;
 				} else {
 					foreach (array_keys($stock_arr) as $i) {
 						$obj = $stockHandler->get($i);
@@ -108,7 +108,7 @@ class XmstockUtility
 					$old_amount = $obj->getVar('stock_amount');
 					if ($old_amount < $amount){
 						// la quantité demandée est plus grande que celle disponible
-						return sprintf(_MA_XMSTOCK_ERROR_TRANSFERT_TBAMOUNT, $amount, $old_amount);
+						return sprintf(_MA_XMSTOCK_ERROR_TRANSFER_TBAMOUNT, $amount, $old_amount);
 					} else {
 						return '';
 					}
