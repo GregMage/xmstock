@@ -11,7 +11,7 @@
 	</nav>
 	<{if $error_message|default:'' != ''}>
 		<div class="alert alert-danger" role="alert"><{$error_message}></div>
-	<{else}>	
+	<{else}>
 		<{if $op == 'list'}>
 			<h2><{$smarty.const._MA_XMSTOCK_ORDERS}></h2>
 			<div class="list-group">
