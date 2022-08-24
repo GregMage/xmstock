@@ -45,9 +45,11 @@ $criteria->setLimit($nb_limit);
 $criteria->add(new Criteria('area_status', 1));
 if (!empty($viewPermissionAreat)) {
     $criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
+	$area_arr = $areaHandler->getall($criteria);
+	$area_count = $areaHandler->getCount($criteria);
+} else {
+	$area_count = 0;
 }
-$area_arr = $areaHandler->getall($criteria);
-$area_count = $areaHandler->getCount($criteria);
 $xoopsTpl->assign('area_count', $area_count);
 $keywords = '';
 if ($area_count > 0 && !empty($viewPermissionArea)) {
