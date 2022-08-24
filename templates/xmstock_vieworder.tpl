@@ -19,7 +19,7 @@
 							<h3 class="mb-0 text-white"><{$smarty.const._MA_XMSTOCK_VIEWORDER_ORDER}><{$orderid}></h3>
 							<div class="row align-items-center text-right">
 								<div class="col">
-									<span class="badge badge-secondary fa-lg text-primary ml-2"><small> <{$status}></small></span>
+									<span class="badge badge-secondary fa-lg text-primary ml-2"><small><{$status_icon}> <{$status_text}></small></span>
 								</div>
 							</div>
 						</div>
@@ -33,13 +33,13 @@
 							  <span class="fa fa-repeat fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}>
 							  <figcaption class="figure-caption text-center"><{$ddesired}></figcaption>
 						</figure>
-						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">							
+						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
 							<{if $delivery == 1}>
 								<span class="fa fa-truck fa-fw"></span><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
 								<figcaption class="figure-caption text-center"> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_DELIVERY}></figcaption>
 							<{/if}>
 							<{if $delivery == 0}>
-							<span class="fa fa-industry fa-fw"></span><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
+								<span class="fa fa-industry fa-fw"></span><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
 								<figcaption class="figure-caption text-center"><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL}></figcaption>
 							<{/if}>
 						</figure>
@@ -54,41 +54,47 @@
 								</div>
 							</div>
 						</p>
-						<h4><{$smarty.const._MA_XMSTOCK_ORDER_HISTORY}></h4>
-						<div class="row">
-							<div class="col-md-4 col-sm-8">
-								<{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
+						<{if $status != 1}>
+							<h4><{$smarty.const._MA_XMSTOCK_ORDER_HISTORY}></h4>
+							<div class="row">
+								<div class="col-md-4 col-sm-8">
+									<{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
+								</div>
+								<div class="col-md-2 col-sm-4">
+									<{$dvalidation}>
+								</div>
+								<div class="col-md-4 col-sm-8">
+									<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_V}>
+								</div>
+								<div class="col-md-2 col-sm-4">
+									<{$ddelivery_v}>
+								</div>
+								<{if $status > 2 || $status == 0}>
+									<div class="col-md-4 col-sm-8">
+										<{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}>
+									</div>
+									<div class="col-md-2 col-sm-4">
+										<{$dready}>
+									</div>
+									<{if $status > 3 || $status == 0}>
+										<div class="col-md-4 col-sm-8">
+											<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_R}>
+										</div>
+										<div class="col-md-2 col-sm-4">
+											<{$ddelivery_r}>
+										</div>
+									<{/if}>
+									<{if $status == 0}>
+										<div class="col-md-4 col-sm-8">
+											<{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}>
+										</div>
+										<div class="col-md-2 col-sm-4">
+											<{$dcancellation}>
+										</div>
+									<{/if}>
+								<{/if}>
 							</div>
-							<div class="col-md-2 col-sm-4">
-								<{$dvalidation}>
-							</div>
-							<div class="col-md-4 col-sm-8">
-								<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_V}>
-							</div>
-							<div class="col-md-2 col-sm-4">
-								<{$ddelivery_v}>
-							</div>
-							
-							<div class="col-md-4 col-sm-8">
-								<{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}>
-							</div>
-							<div class="col-md-2 col-sm-4">
-								<{$dready}>
-							</div>
-							<div class="col-md-4 col-sm-8">
-								<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_R}>
-							</div>
-							<div class="col-md-2 col-sm-4">
-								<{$ddelivery_r}>
-							</div>
-							
-							<div class="col-md-4 col-sm-8">
-								<{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}>
-							</div>
-							<div class="col-md-2 col-sm-4">
-								<{$dcancellation}>
-							</div>						
-						</div>
+						<{/if}>
 						<h4><{$smarty.const._MA_XMSTOCK_ORDER_ARTICLES}></h4>
 						<table class="table table-hover">
 							<thead>
@@ -105,7 +111,7 @@
 										<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$article.cid}>&article_id=<{$article.id}>" title="<{$article.name}>" target="_blank">
 											<{$article.name}>
 										</a>
-										(<{$article.reference}>)										
+										(<{$article.reference}>)
 									</td>
 									<td class="text-center"><{$article.amount}></td>
 									<td class="text-center"><{$article.status}></td>
