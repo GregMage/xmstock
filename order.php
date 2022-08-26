@@ -73,7 +73,7 @@ switch ($op) {
 			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 		}
 		$xoopsTpl->assign('status', $status);
-		
+
 
 		// Get start pager
 		$start = Request::getInt('start', 0);
@@ -81,13 +81,13 @@ switch ($op) {
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		$order_count = $orderHandler->getCount($criteria);
-		$criteria->add(new Criteria('order_status', $status));		
+		$criteria->add(new Criteria('order_status', $status));
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setStart($start);
 		$criteria->setLimit($nb_limit);
 		$order_arr = $orderHandler->getall($criteria);
-		
+
 		$xoopsTpl->assign('order_count', $order_count);
 		if ($order_count > 0) {
 			foreach (array_keys($order_arr) as $i) {
@@ -118,6 +118,11 @@ switch ($op) {
         } else {
             $surdel = Request::getBool('surdel', false);
             $obj  = $orderHandler->get($order_id);
+			// Uniquement le propriétaire de la commande peut la supprimer
+			$userid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
+			if ($obj->getVar('order_userid') != $userid){
+				redirect_header('index.php', 2, _NOPERM);
+			}
 			if (empty($obj) === true){
 				$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 			} else {
