@@ -33,6 +33,11 @@ if ($order_id == 0) {
 		$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 	} else {
 		$order  = $orderHandler->get($order_id);
+		// Uniquement le propriétaire de la commande peut la voire
+		$userid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
+		if ( $order->getVar('order_userid') != $userid){
+			redirect_header('index.php', 2, _NOPERM);
+		}
 		$xoopsTpl->assign('orderid', $order_id);
 		$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($order->getVar('order_description', 'show'), 50));
 		$xoopsTpl->assign('ddesired', formatTimestamp($order->getVar('order_ddesired'), 's'));
@@ -110,8 +115,6 @@ if ($order_id == 0) {
 		}
 	}
 }
-
-
 //SEO
 // pagetitle
 $xoopsTpl->assign('xoops_pagetitle', _MA_XMSTOCK_VIEWORDER . ' - ' . $xoopsModule->name());
