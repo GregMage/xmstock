@@ -43,7 +43,7 @@ $criteria->setOrder('ASC');
 $criteria->setStart($start);
 $criteria->setLimit($nb_limit);
 $criteria->add(new Criteria('area_status', 1));
-if (!empty($viewPermissionAreat)) {
+if (!empty($viewPermissionArea)) {
     $criteria->add(new Criteria('area_id', '(' . implode(',', $viewPermissionArea) . ')', 'IN'));
 	$area_arr = $areaHandler->getall($criteria);
 	$area_count = $areaHandler->getCount($criteria);
