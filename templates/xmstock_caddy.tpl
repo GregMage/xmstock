@@ -5,9 +5,11 @@
 		<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_CADDY}></li>
 	  </ol>
 	</nav>
+	<{if $warning_message|default:'' != ''}>
+		<div class="alert alert-warning txtcenter" role="alert"><{$warning_message}></div>
+	<{/if}>
 	<{if $error_message|default:'' != ''}>
 		<div class="alert alert-danger" role="alert"><{$error_message}></div>
-
 	<{else}>
 		<form name="formcaddy" id="formcaddy" action="caddy.php" method="post">
 			<table class="table table-striped">

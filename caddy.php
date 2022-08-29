@@ -77,7 +77,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 				$articles['max']  = 'max="' . $articles['amount'] . '"';
 			} else {
 				$articles['max']  = '';
-			}				
+			}
 			$xoopsTpl->append_by_ref('articles', $articles);
 			unset($articles);
 		}
@@ -136,20 +136,28 @@ switch ($op) {
 		}
 		$datasUpdate = array();
 		$exists = false;
+		$temp_areaid = 0;
 		foreach ($arr_selectionArticles as $articles) {
 			if ($articles['id'] == $article_id && $articles['area'] == $area_id) {
 				$exists = true;
 				$articles['qty'] += 1;
 			}
+			$temp_areaid = $articles['area'];
 			$datasUpdate[] = $articles;
 		}
 		if ($exists === false) {
-			$datas         = array();
-			$datas['id']   = $article_id;
-			$datas['area'] = $area_id;
-			$datas['qty']  = 1;
-			$arr_selectionArticles[] = $datas;
-			$sessionHelper->set($session_name, $arr_selectionArticles);
+			// vérification que la commande concerne qu'un stock
+			if ($temp_areaid == 0 || $area_id == $temp_areaid) {
+				$datas         = array();
+				$datas['id']   = $article_id;
+				$datas['area'] = $area_id;
+				$datas['qty']  = 1;
+				$arr_selectionArticles[] = $datas;
+				$sessionHelper->set($session_name, $arr_selectionArticles);
+			} else {
+				xoops_load('utility', 'xmarticle');
+				$xoopsTpl->assign('warning_message', _MA_XMSTOCK_CADDY_WARNING_AREA . '<br>' . XmarticleUtility::getArticleName($article_id));
+			}
 		} else {
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
