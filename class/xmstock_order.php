@@ -39,6 +39,7 @@ class xmstock_order extends XoopsObject
         // use html
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
 		$this->initVar('order_userid', XOBJ_DTYPE_INT, null, false, 8);
+		$this->initVar('order_areaid', XOBJ_DTYPE_INT, null, false, 8);
 		$this->initVar('order_ddesired', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dorder', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dvalidation', XOBJ_DTYPE_INT, null, false, 10);
@@ -85,14 +86,20 @@ class xmstock_order extends XoopsObject
 		
 		//
         if ($error_message == '') {
+			$sessionHelper = new \Xmf\Module\Helper\Session();
+			$arr_selectionArticles = $sessionHelper->get($session_name);
+			$areaid = 0;
+			if (is_array($arr_selectionArticles) == true){
+				$areaid = $arr_selectionArticles[0]['area'];
+			}
+			$this->setVar('order_areaid', $areaid);
             if ($orderHandler->insert($this)) {
 				if ($this->get_new_enreg() == 0){
 					$order_id = $this->getVar('order_id');
 				} else {
 					$order_id = $this->get_new_enreg();
 				}
-				$sessionHelper = new \Xmf\Module\Helper\Session();
-				$arr_selectionArticles = $sessionHelper->get($session_name);
+
 				if (is_array($arr_selectionArticles) == true){
 					foreach ($arr_selectionArticles as $datas) {
 						$obj = $itemorderHandler->create();
