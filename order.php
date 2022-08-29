@@ -80,14 +80,13 @@ switch ($op) {
 		// Criteria
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
-		$order_count = $orderHandler->getCount($criteria);
 		$criteria->add(new Criteria('order_status', $status));
+		$order_count = $orderHandler->getCount($criteria);
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setStart($start);
 		$criteria->setLimit($nb_limit);
 		$order_arr = $orderHandler->getall($criteria);
-
 		$xoopsTpl->assign('order_count', $order_count);
 		if ($order_count > 0) {
 			foreach (array_keys($order_arr) as $i) {
