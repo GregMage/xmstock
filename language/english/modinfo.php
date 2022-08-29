@@ -31,7 +31,8 @@ define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 
 // Sub menu
 define('_MI_XMSTOCK_SUB_CADDY', 'Caddy');
-define('_MI_XMSTOCK_SUB_ORDERS', 'Orders');
+define('_MI_XMSTOCK_SUB_ORDERS', 'My orders');
+define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Order management');
 
 
 // Pref

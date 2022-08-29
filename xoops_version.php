@@ -40,6 +40,10 @@ $modversion['sub'][]   = [
     'name' => _MI_XMSTOCK_SUB_ORDERS,
     'url'  => 'order.php'
 ];
+$modversion['sub'][]   = [
+    'name' => _MI_XMSTOCK_SUB_ORDERSMANAGEMENT,
+    'url'  => 'management.php'
+];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -76,6 +80,7 @@ $modversion['templates'][] = ['file' => 'xmstock_caddy.tpl', 'description' => ''
 $modversion['templates'][] = ['file' => 'xmstock_checkout.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_order.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_vieworder.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_management.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];

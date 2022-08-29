@@ -224,4 +224,12 @@ define('_MA_XMSTOCK_VIEWORDER_ARTICLE', 'Article');
 define('_MA_XMSTOCK_VIEWORDER_AMOUNT', 'Amount');
 define('_MA_XMSTOCK_VIEWORDER_STATUS', 'Status');
 
+// management
+define('_MA_XMSTOCK_MANAGEMENT', 'Orders management');
+define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Commandes à traiter'); //Orders to process
+define('_MA_XMSTOCK_MANAGEMENT_PREPARATION', 'Commandes en préparation'); //Orders in preparation
+
+
+
+
 
