@@ -229,6 +229,7 @@ define('_MA_XMSTOCK_VIEWORDER_STATUS', 'Status');
 define('_MA_XMSTOCK_MANAGEMENT', 'Orders management');
 define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Commandes à traiter'); //Orders to process
 define('_MA_XMSTOCK_MANAGEMENT_PREPARATION', 'Commandes en préparation'); //Orders in preparation
+define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes'); //All orders
 
 
 
