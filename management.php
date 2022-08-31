@@ -73,6 +73,60 @@ switch ($op) {
 		} else {
 			$xoopsTpl->assign('error_message_2', _MA_XMSTOCK_ERROR_NOORDER);
 		}
+		// Statut 3
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_status', 3));
+		$criteria->setSort('order_dorder');
+		$criteria->setOrder('DESC');
+		$criteria->setLimit(10);
+		$order_3_arr = $orderHandler->getall($criteria);
+		if (!empty($order_3_arr)) {
+			foreach (array_keys($order_3_arr) as $i) {
+				$order_3['id']              = $order_3_arr[$i]->getVar('order_id');
+				$order_3['ddesired']        = formatTimestamp($order_3_arr[$i]->getVar('order_ddesired'), 's');
+				$order_3['dorder']          = formatTimestamp($order_3_arr[$i]->getVar('order_dorder'), 's');
+				$xoopsTpl->append_by_ref('order_3', $order_3);
+				unset($order_3);
+			}
+		} else {
+			$xoopsTpl->assign('error_message_3', _MA_XMSTOCK_ERROR_NOORDER);
+		}
+		// Statut 4
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_status', 4));
+		$criteria->setSort('order_dorder');
+		$criteria->setOrder('DESC');
+		$criteria->setLimit(10);
+		$order_4_arr = $orderHandler->getall($criteria);
+		if (!empty($order_4_arr)) {
+			foreach (array_keys($order_4_arr) as $i) {
+				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
+				$order_4['ddesired']        = formatTimestamp($order_4_arr[$i]->getVar('order_ddesired'), 's');
+				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
+				$xoopsTpl->append_by_ref('order_4', $order_4);
+				unset($order_4);
+			}
+		} else {
+			$xoopsTpl->assign('error_message_4', _MA_XMSTOCK_ERROR_NOORDER);
+		}
+		// Statut 0
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_status', 0));
+		$criteria->setSort('order_dorder');
+		$criteria->setOrder('DESC');
+		$criteria->setLimit(10);
+		$order_0_arr = $orderHandler->getall($criteria);
+		if (!empty($order_0_arr)) {
+			foreach (array_keys($order_0_arr) as $i) {
+				$order_0['id']              = $order_0_arr[$i]->getVar('order_id');
+				$order_0['ddesired']        = formatTimestamp($order_0_arr[$i]->getVar('order_ddesired'), 's');
+				$order_0['dorder']          = formatTimestamp($order_0_arr[$i]->getVar('order_dorder'), 's');
+				$xoopsTpl->append_by_ref('order_0', $order_0);
+				unset($order_0);
+			}
+		} else {
+			$xoopsTpl->assign('error_message_0', _MA_XMSTOCK_ERROR_NOORDER);
+		}
 
 
 		break;

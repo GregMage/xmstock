@@ -87,6 +87,121 @@
 										<{/foreach}>
 									</tbody>
 								</table>
+								<a href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=2" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
+							<{/if}>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
+					<div class="card xmstock-border">
+						<a class="text-decoration-none" title="<{$smarty.const._MA_XMSTOCK_MANAGEMENT_READY}>" href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=3">
+							<div class="card-header text-center">
+								<{$smarty.const._MA_XMSTOCK_MANAGEMENT_READY}>
+							</div>
+						</a>
+						<div class="card-body text-center">
+							<{if $error_message_3|default:'' != ''}>
+								<div class="alert alert-danger" role="alert"><{$error_message_3}></div>
+							<{else}>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th class="text-center" scope="col">#</th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+										</tr>
+									</thead>
+									<tbody>
+										<{foreach item=order_3 from=$order_3}>
+										<tr>
+											<th class="text-center" scope="row"><{$order_3.id}></th>
+											<td class="text-center"><{$order_3.dorder}></td>
+											<td class="text-center"><{$order_3.ddesired}></td>
+											<td class="text-center">
+												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_3.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+											</td>
+										</tr>
+										<{/foreach}>
+									</tbody>
+								</table>
+								<a href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=3" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
+							<{/if}>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
+					<div class="card xmstock-border">
+						<a class="text-decoration-none" title="<{$smarty.const._MA_XMSTOCK_MANAGEMENT_DELIVRED}>" href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=4">
+							<div class="card-header text-center">
+								<{$smarty.const._MA_XMSTOCK_MANAGEMENT_DELIVRED}>
+							</div>
+						</a>
+						<div class="card-body text-center">
+							<{if $error_message_4|default:'' != ''}>
+								<div class="alert alert-danger" role="alert"><{$error_message_4}></div>
+							<{else}>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th class="text-center" scope="col">#</th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+										</tr>
+									</thead>
+									<tbody>
+										<{foreach item=order_4 from=$order_4}>
+										<tr>
+											<th class="text-center" scope="row"><{$order_4.id}></th>
+											<td class="text-center"><{$order_4.dorder}></td>
+											<td class="text-center"><{$order_4.ddesired}></td>
+											<td class="text-center">
+												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_4.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+											</td>
+										</tr>
+										<{/foreach}>
+									</tbody>
+								</table>
+								<a href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=4" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
+							<{/if}>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
+					<div class="card xmstock-border">
+						<a class="text-decoration-none" title="<{$smarty.const._MA_XMSTOCK_MANAGEMENT_CANCELED}>" href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=0">
+							<div class="card-header text-center">
+								<{$smarty.const._MA_XMSTOCK_MANAGEMENT_CANCELED}>
+							</div>
+						</a>
+						<div class="card-body text-center">
+							<{if $error_message_0|default:'' != ''}>
+								<div class="alert alert-danger" role="alert"><{$error_message_0}></div>
+							<{else}>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th class="text-center" scope="col">#</th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+										</tr>
+									</thead>
+									<tbody>
+										<{foreach item=order_0 from=$order_0}>
+										<tr>
+											<th class="text-center" scope="row"><{$order_0.id}></th>
+											<td class="text-center"><{$order_0.dorder}></td>
+											<td class="text-center"><{$order_0.ddesired}></td>
+											<td class="text-center">
+												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_0.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+											</td>
+										</tr>
+										<{/foreach}>
+									</tbody>
+								</table>
+								<a href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=0" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
 							<{/if}>
 						</div>
 					</div>
