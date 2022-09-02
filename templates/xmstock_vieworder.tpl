@@ -101,7 +101,7 @@
 								<tr>
 									<th scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_ARTICLE}></th>
 									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}></th>
-									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_STATUS}></th>
+									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
 								</tr>
 							</thead>
 							<tbody>
