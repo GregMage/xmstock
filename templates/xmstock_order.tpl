@@ -36,7 +36,7 @@
 				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_4}></a>
 			  <{/if}>
 			  <{if $pill_0 != 0}>
-				<a href="order.php?status=5" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 0}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_0}><span class="badge badge-primary badge-pill"><{$pill_5}></span></a>
+				<a href="order.php?status=0" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<{if $status == 0}> active<{/if}>"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_0}><span class="badge badge-primary badge-pill"><{$pill_0}></span></a>
 			  <{else}>
 				<a href="" class="list-group-item list-group-item-action disabled"><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_TITLE_0}></a>
 			  <{/if}>

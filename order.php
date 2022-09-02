@@ -44,9 +44,6 @@ switch ($op) {
 		$criteria->add(new Criteria('order_status', 4));
 		$order_count_4 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('order_status', 5));
-		$order_count_5 = $orderHandler->getCount($criteria);
-		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 0));
 		$order_count_0 = $orderHandler->getCount($criteria);
 		$xoopsTpl->assign('pill_1', $order_count_1);
@@ -63,9 +60,7 @@ switch ($op) {
 		if ($order_count_3 == 0 && $status == 3){
 			$status = 4;
 		}
-		if ($order_count_4 == 0 && $status == 4){
-			$status = 5;
-		}
+
 		if ($order_count_0 == 0 && $status == 0){
 			$status = 0;
 		}
@@ -73,7 +68,6 @@ switch ($op) {
 			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 		}
 		$xoopsTpl->assign('status', $status);
-
 
 		// Get start pager
 		$start = Request::getInt('start', 0);
