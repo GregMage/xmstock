@@ -5,7 +5,12 @@
 		<{if $op == 'view'}>
 			<li class="breadcrumb-item"><a href="management.php?op=list"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></a></li>
 			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_VIEW}></li>
-		<{else}>
+		<{/if}>
+		<{if $op == 'viewall'}>
+			<li class="breadcrumb-item"><a href="management.php?op=list"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_VIEWALL}></li>
+		<{/if}>
+		<{if $op == 'list'}>
 			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></li>
 		<{/if}>
 	  </ol>
@@ -207,6 +212,81 @@
 					</div>
 				</div>
 			</div>
+		<{/if}>
+		<{if $op|default:'list' == 'viewall'}>		
+			<div class="pull-right">
+				<form id="form_order_tri" name="form_order_tri" method="get" action="management.php" class="form-inline">
+					<div class="form-group mb-2">
+					    <label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_STATUS}> </label>
+						<select class="form-control form-control-sm" id="statut_filter" onchange="location='management.php?op=viewall&sort=<{$sort}>&status='+this.options[this.selectedIndex].value">
+							<option value="all" <{if $status == 'all'}>selected="selected"<{/if}>><{$smarty.const._ALL}></option>
+							<option value="1" <{if $status == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_1}></option>
+							<option value="2" <{if $status == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_2}></option>
+							<option value="3" <{if $status == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_3}></option>
+							<option value="4" <{if $status == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_4}></option>
+							<option value="0" <{if $status == '0'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_0}></option>
+						</select>
+					</div>
+					<div class="form-group mb-2">
+					    <label class="my-1 mr-2">&nbsp;<{$smarty.const._MA_XMSTOCK_SORTBY}> </label>
+						<select class="form-control form-control-sm" id="sort_filter" onchange="location='management.php?op=viewall&status=<{$status}>&sort='+this.options[this.selectedIndex].value">
+							<option value="all" <{if $sort == 'all'}>selected="selected"<{/if}>><{$smarty.const._ALL}></option>
+							<option value="1" <{if $sort == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTORDER}></option>
+							<option value="2" <{if $sort == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEORDER}></option>
+							<option value="3" <{if $sort == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEDESIRED}></option>
+							<{if $status > 1 || $status == 'all' || $status == 0}>							
+							<option value="4" <{if $sort == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEVALIDATION}></option>
+							<{if $status > 2 || $status == 'all' || $status == 0}>
+							<option value="5" <{if $sort == '5'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_V}></option>
+							<{if $status > 3 || $status == 'all' || $status == 0}>
+							<option value="6" <{if $sort == '6'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEREADY}></option>
+							<{if $status > 4 || $status == 'all' || $status == 0}>
+							<option value="7" <{if $sort == '7'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_R}></option>
+							<{if $status == 0 || $status == 'all'}>
+							<option value="8" <{if $sort == '8'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATECANCELLATION}></option>
+							<{/if}>
+							<{/if}>
+							<{/if}>
+							<{/if}>
+							<{/if}>
+						</select>
+					</div>
+				</form>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="text-center" scope="col">#</th>
+						<th scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DESCRIPTION}></th>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
+						<th class="text-center width20" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+					</tr>
+				</thead>
+				<tbody>
+					<{foreach item=order from=$order}>
+					<tr>
+						<th class="text-center" scope="row"><{$order.id}></th>
+						<td><{$order.description}></td>
+						<td class="text-center"><{$order.dorder}></td>
+						<td class="text-center"><{$order.ddesired}></td>
+						<td class="text-center"><{$order.status_text}></td>
+						<td class="text-center">
+							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+							
+						</td>
+					</tr>
+					<{/foreach}>
+				</tbody>
+			</table>
+			<div class="clear spacer"></div>
+			<{if $nav_menu|default:false}>
+				<div class="floatright"><{$nav_menu}></div>
+				<div class="clear spacer"></div>
+			<{/if}>			
 		<{/if}>
 	<{/if}>
 </div><!-- .xmstock -->

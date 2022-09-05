@@ -127,10 +127,72 @@ switch ($op) {
 		} else {
 			$xoopsTpl->assign('error_message_0', _MA_XMSTOCK_ERROR_NOORDER);
 		}
-
-
 		break;
-
+	
+	case 'viewall':
+		$status = Request::getString('status', 'all');
+		$sort = Request::getString('sort', 'all');
+		$xoopsTpl->assign('status', $status);
+		$xoopsTpl->assign('sort', $sort);
+		// Get start pager
+		$start = Request::getInt('start', 0);
+		// Criteria
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
+		if ($status == 0 || $status == 1 || $status == 2 || $status == 3 || $status == 4){
+			$criteria->add(new Criteria('order_status', $status));
+		}
+		$order_count = $orderHandler->getCount($criteria);
+		$criteria->setSort('order_dorder');
+		$criteria->setOrder('DESC');
+		$criteria->setStart($start);
+		$criteria->setLimit($nb_limit);
+		$order_arr = $orderHandler->getall($criteria);
+		$xoopsTpl->assign('order_count', $order_count);
+		if ($order_count > 0) {
+			foreach (array_keys($order_arr) as $i) {
+				$order_id                 = $order_arr[$i]->getVar('order_id');
+				$order['id']              = $order_id;
+				$order['description']     = XmstockUtility::generateDescriptionTagSafe($order_arr[$i]->getVar('order_description', 'show'), 50);
+				$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
+				$order['dorder']          = formatTimestamp($order_arr[$i]->getVar('order_dorder'), 'm');
+				$order['delivery']        = $order_arr[$i]->getVar('order_delivery');
+				$order['status']       	  = $order_arr[$i]->getVar('order_status');
+				switch ($order['status']) {
+					case 0:
+						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_0;
+						break;
+						
+					case 1:
+						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_1;
+						break;
+						
+					case 2:
+						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_2;
+						break;
+						
+					case 3:
+						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_3;
+						break;
+						
+					case 4:
+						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_4;
+						break;
+					
+				}
+				$xoopsTpl->append_by_ref('order', $order);
+				unset($order);
+			}
+			// Display Page Navigation
+			if ($order_count > $nb_limit) {
+				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start', 'op=viewall&status=' . $status . '&sort=' . $sort);
+				$xoopsTpl->assign('nav_menu', $nav->renderNav(4));
+			}
+		} else {
+			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
+		}
+		
+		break;
 
 }
 

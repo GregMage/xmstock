@@ -36,7 +36,9 @@ define('_MA_XMSTOCK_DEL', 'Delete');
 define('_MA_XMSTOCK_EDIT', 'Edit');
 define('_MA_XMSTOCK_INFORMATION', 'Informations');
 define('_MA_XMSTOCK_ORDER', 'Order');
+define('_MA_XMSTOCK_PROCESS', 'Faire avancer'); // progress
 define('_MA_XMSTOCK_REDIRECT_SAVE', 'Successfully saved');
+define('_MA_XMSTOCK_SORTBY', 'Trier par'); //Sort by
 define('_MA_XMSTOCK_STATUS', 'Status');
 define('_MA_XMSTOCK_STATUS_A', 'Active');
 define('_MA_XMSTOCK_STATUS_NA', 'Disabled');
@@ -223,7 +225,6 @@ define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
 define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
 define('_MA_XMSTOCK_VIEWORDER_ARTICLE', 'Article');
 define('_MA_XMSTOCK_VIEWORDER_AMOUNT', 'Amount');
-define('_MA_XMSTOCK_VIEWORDER_STATUS', 'Status');
 
 // management
 define('_MA_XMSTOCK_MANAGEMENT', 'Orders management');
@@ -233,6 +234,19 @@ define('_MA_XMSTOCK_MANAGEMENT_READY', 'Commandes prêtes'); //Orders ready
 define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Commandes livrées'); //Orders delivered
 define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Commandes annulées'); //Canceled orders
 define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes'); //All orders
+define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande'); //Viewing an order
+define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders'); //Viewing an order
+define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande'); //Order number
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATEORDER', 'Date de commande'); //Order date
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATEDESIRED', 'Date désirée'); //Desired date
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATEVALIDATION', 'Date de validation'); //Order validation date
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_V', 'Date de livraison/retrait'); //Validated delivery/withdrawal date
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATEREADY', 'Date de la commande prête'); //Order ready date
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_R', 'Date de livraison'); //Order ready date
+define('_MA_XMSTOCK_MANAGEMENT_SORTDATECANCELLATION', 'Date d\'annulation de la commande'); //Order cancellation date
+
+
+
 
 
 
