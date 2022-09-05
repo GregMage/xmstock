@@ -96,7 +96,7 @@ switch ($op) {
 			}
 			// Display Page Navigation
 			if ($order_count > $nb_limit) {
-				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start');
+				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start', 'op=list&status=' . $status);
 				$xoopsTpl->assign('nav_menu', $nav->renderNav(4));
 			}
 		} else {
