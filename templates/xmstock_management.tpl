@@ -75,7 +75,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></th>
 											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
@@ -84,7 +84,7 @@
 										<tr>
 											<th class="text-center" scope="row"><{$order_2.id}></th>
 											<td class="text-center"><{$order_2.dorder}></td>
-											<td class="text-center"><{$order_2.ddesired}></td>
+											<td class="text-center"><{$order_2.delivery}></td>
 											<td class="text-center">
 												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_2.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
@@ -113,7 +113,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></th>
 											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
@@ -122,7 +122,7 @@
 										<tr>
 											<th class="text-center" scope="row"><{$order_3.id}></th>
 											<td class="text-center"><{$order_3.dorder}></td>
-											<td class="text-center"><{$order_3.ddesired}></td>
+											<td class="text-center"><{$order_3.dready}></td>
 											<td class="text-center">
 												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_3.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
@@ -151,7 +151,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></th>
 											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
@@ -160,7 +160,7 @@
 										<tr>
 											<th class="text-center" scope="row"><{$order_4.id}></th>
 											<td class="text-center"><{$order_4.dorder}></td>
-											<td class="text-center"><{$order_4.ddesired}></td>
+											<td class="text-center"><{$order_4.delivery_r}></td>
 											<td class="text-center">
 												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_4.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
@@ -189,7 +189,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></th>
 											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
@@ -198,7 +198,7 @@
 										<tr>
 											<th class="text-center" scope="row"><{$order_0.id}></th>
 											<td class="text-center"><{$order_0.dorder}></td>
-											<td class="text-center"><{$order_0.ddesired}></td>
+											<td class="text-center"><{$order_0.dcancellation}></td>
 											<td class="text-center">
 												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_0.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
@@ -213,7 +213,7 @@
 				</div>
 			</div>
 		<{/if}>
-		<{if $op|default:'list' == 'viewall'}>		
+		<{if $op|default:'list' == 'viewall'}>
 			<div class="pull-right">
 				<form id="form_order_tri" name="form_order_tri" method="get" action="management.php" class="form-inline">
 					<div class="form-group mb-2">
@@ -232,22 +232,19 @@
 						<select class="form-control form-control-sm" id="sort_filter" onchange="location='management.php?op=viewall&status=<{$status}>&sort='+this.options[this.selectedIndex].value">
 							<option value="all" <{if $sort == 'all'}>selected="selected"<{/if}>><{$smarty.const._ALL}></option>
 							<option value="1" <{if $sort == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTORDER}></option>
-							<option value="2" <{if $sort == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEORDER}></option>
-							<option value="3" <{if $sort == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEDESIRED}></option>
-							<{if $status > 1 || $status == 'all' || $status == 0}>							
-							<option value="4" <{if $sort == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEVALIDATION}></option>
-							<{if $status > 2 || $status == 'all' || $status == 0}>
-							<option value="5" <{if $sort == '5'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_V}></option>
-							<{if $status > 3 || $status == 'all' || $status == 0}>
-							<option value="6" <{if $sort == '6'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEREADY}></option>
-							<{if $status > 4 || $status == 'all' || $status == 0}>
-							<option value="7" <{if $sort == '7'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_R}></option>
-							<{if $status == 0 || $status == 'all'}>
-							<option value="8" <{if $sort == '8'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTDATECANCELLATION}></option>
+							<option value="2" <{if $sort == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></option>
+							<option value="3" <{if $sort == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></option>
+							<{if ($status > 1 || $status == 0) && $status != 'all'}>
+							<option value="4" <{if $sort == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></option>
 							<{/if}>
+							<{if ($status > 2 || $status == 0) && $status != 'all'}>
+							<option value="5" <{if $sort == '5'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></option>
 							<{/if}>
+							<{if ($status > 3 || $status == 0) && $status != 'all'}>
+							<option value="6" <{if $sort == '6'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></option>
 							<{/if}>
-							<{/if}>
+							<{if $status == 0}>
+							<option value="8" <{if $sort == '8'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></option>
 							<{/if}>
 						</select>
 					</div>
@@ -260,7 +257,21 @@
 						<th scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DESCRIPTION}></th>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
+						<{if ($status > 1 || $status == 0) && $status != 'all'}>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></th>
+						<{/if}>
+						<{if ($status > 2 || $status == 0) && $status != 'all'}>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></th>
+						<{/if}>
+						<{if ($status > 3 || $status == 0) && $status != 'all'}>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></th>
+						<{/if}>
+						<{if $status == 0}>
+						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></th>
+						<{/if}>
+						<{if $status == 'all'}>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
+						<{/if}>
 						<th class="text-center width20" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 					</tr>
 				</thead>
@@ -271,12 +282,26 @@
 						<td><{$order.description}></td>
 						<td class="text-center"><{$order.dorder}></td>
 						<td class="text-center"><{$order.ddesired}></td>
+						<{if ($status > 1 || $status == 0) && $status != 'all'}>
+						<td class="text-center"><{$order.d_dw}></td>
+						<{/if}>
+						<{if ($status > 2 || $status == 0) && $status != 'all'}>
+						<td class="text-center"><{$order.dready}></td>
+						<{/if}>
+						<{if ($status > 3 || $status == 0) && $status != 'all'}>
+						<td class="text-center"><{$order.r_dw}></td>
+						<{/if}>
+						<{if $status == 0}>
+						<td class="text-center"><{$order.dcancellation}></td>
+						<{/if}>
+						<{if $status == 'all'}>
 						<td class="text-center"><{$order.status_text}></td>
+						<{/if}>
 						<td class="text-center">
 							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
 							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
-							
+
 						</td>
 					</tr>
 					<{/foreach}>
@@ -286,7 +311,7 @@
 			<{if $nav_menu|default:false}>
 				<div class="floatright"><{$nav_menu}></div>
 				<div class="clear spacer"></div>
-			<{/if}>			
+			<{/if}>
 		<{/if}>
 	<{/if}>
 </div><!-- .xmstock -->

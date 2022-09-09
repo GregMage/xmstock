@@ -213,9 +213,11 @@ define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Date désirée');//Desired date
 define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Date de validation');//Order validation date
 define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Date de livraison prévue');//Delivery Date
 define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL', 'Date de retrait prévu');//Planned withdrawal date
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Date de livraison/retrait prévue'); //Validated delivery/withdrawal date
 define('_MA_XMSTOCK_ORDER_DATEREADY', 'Date commande prête');//Order ready date
 define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Date de la livraison');//
 define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R', 'Date du retrait');//Date of withdrawal
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Date de livraison/retrait'); //Order ready date
 define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Date d\'annulation');//Cancellation date
 define('_MA_XMSTOCK_ORDER_HISTORY', 'Historique de la commande');//
 define('_MA_XMSTOCK_ORDER_ARTICLES', 'Articles commandés');
@@ -239,13 +241,6 @@ define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes'); //All orders
 define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande'); //Viewing an order
 define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders'); //Viewing an order
 define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande'); //Order number
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATEORDER', 'Date de commande'); //Order date
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATEDESIRED', 'Date désirée'); //Desired date
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATEVALIDATION', 'Date de validation'); //Order validation date
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_V', 'Date de livraison/retrait'); //Validated delivery/withdrawal date
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATEREADY', 'Date de la commande prête'); //Order ready date
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATEDELIVERY_R', 'Date de livraison'); //Order ready date
-define('_MA_XMSTOCK_MANAGEMENT_SORTDATECANCELLATION', 'Date d\'annulation de la commande'); //Order cancellation date
 
 
 

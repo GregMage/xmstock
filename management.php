@@ -65,7 +65,11 @@ switch ($op) {
 		if (!empty($order_2_arr)) {
 			foreach (array_keys($order_2_arr) as $i) {
 				$order_2['id']              = $order_2_arr[$i]->getVar('order_id');
-				$order_2['ddesired']        = formatTimestamp($order_2_arr[$i]->getVar('order_ddesired'), 's');
+				if ($order_2_arr[$i]->getVar('order_delivery') == 1){
+					$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_ddelivery'), 's');
+				} else {
+					$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_dwithdrawal'), 's');
+				}
 				$order_2['dorder']          = formatTimestamp($order_2_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_2', $order_2);
 				unset($order_2);
@@ -83,7 +87,7 @@ switch ($op) {
 		if (!empty($order_3_arr)) {
 			foreach (array_keys($order_3_arr) as $i) {
 				$order_3['id']              = $order_3_arr[$i]->getVar('order_id');
-				$order_3['ddesired']        = formatTimestamp($order_3_arr[$i]->getVar('order_ddesired'), 's');
+				$order_3['dready']        	= formatTimestamp($order_3_arr[$i]->getVar('order_dready'), 's');
 				$order_3['dorder']          = formatTimestamp($order_3_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_3', $order_3);
 				unset($order_3);
@@ -101,6 +105,11 @@ switch ($op) {
 		if (!empty($order_4_arr)) {
 			foreach (array_keys($order_4_arr) as $i) {
 				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
+				if ($order_4_arr[$i]->getVar('order_delivery') == 1){
+					$order_4['delivery_r']  = formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
+				} else {
+					$order_4['delivery_r']  = formatTimestamp($order_4_arr[$i]->getVar('order_dwithdrawal_r'), 's');
+				}
 				$order_4['ddesired']        = formatTimestamp($order_4_arr[$i]->getVar('order_ddesired'), 's');
 				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_4', $order_4);
@@ -119,7 +128,7 @@ switch ($op) {
 		if (!empty($order_0_arr)) {
 			foreach (array_keys($order_0_arr) as $i) {
 				$order_0['id']              = $order_0_arr[$i]->getVar('order_id');
-				$order_0['ddesired']        = formatTimestamp($order_0_arr[$i]->getVar('order_ddesired'), 's');
+				$order_0['dcancellation']        = formatTimestamp($order_0_arr[$i]->getVar('order_dcancellation'), 's');
 				$order_0['dorder']          = formatTimestamp($order_0_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_0', $order_0);
 				unset($order_0);
@@ -128,7 +137,7 @@ switch ($op) {
 			$xoopsTpl->assign('error_message_0', _MA_XMSTOCK_ERROR_NOORDER);
 		}
 		break;
-	
+
 	case 'viewall':
 		$status = Request::getString('status', 'all');
 		$sort = Request::getString('sort', 'all');
@@ -155,30 +164,42 @@ switch ($op) {
 				$order['id']              = $order_id;
 				$order['description']     = XmstockUtility::generateDescriptionTagSafe($order_arr[$i]->getVar('order_description', 'show'), 50);
 				$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
+				if ($order_arr[$i]->getVar('order_delivery') == 1){
+					$order['d_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery'), 's');
+				} else {
+					$order['d_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_dwithdrawal'), 's');
+				}
+				$order['dready']          = formatTimestamp($order_arr[$i]->getVar('order_dready'), 's');
+				if ($order_arr[$i]->getVar('order_delivery') == 1){
+					$order['r_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery_r'), 's');
+				} else {
+					$order['r_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_dwithdrawal_r'), 's');
+				}
 				$order['dorder']          = formatTimestamp($order_arr[$i]->getVar('order_dorder'), 'm');
+				$order['dcancellation']   = formatTimestamp($order_arr[$i]->getVar('order_dcancellation'), 's');
 				$order['delivery']        = $order_arr[$i]->getVar('order_delivery');
 				$order['status']       	  = $order_arr[$i]->getVar('order_status');
 				switch ($order['status']) {
 					case 0:
 						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_0;
 						break;
-						
+
 					case 1:
 						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_1;
 						break;
-						
+
 					case 2:
 						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_2;
 						break;
-						
+
 					case 3:
 						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_3;
 						break;
-						
+
 					case 4:
 						$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_4;
 						break;
-					
+
 				}
 				$xoopsTpl->append_by_ref('order', $order);
 				unset($order);
@@ -191,7 +212,7 @@ switch ($op) {
 		} else {
 			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 		}
-		
+
 		break;
 
 }
