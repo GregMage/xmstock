@@ -230,7 +230,6 @@
 					<div class="form-group mb-2">
 					    <label class="my-1 mr-2">&nbsp;<{$smarty.const._MA_XMSTOCK_SORTBY}> </label>
 						<select class="form-control form-control-sm" id="sort_filter" onchange="location='management.php?op=viewall&status=<{$status}>&sort='+this.options[this.selectedIndex].value">
-							<option value="all" <{if $sort == 'all'}>selected="selected"<{/if}>><{$smarty.const._ALL}></option>
 							<option value="1" <{if $sort == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTORDER}></option>
 							<option value="2" <{if $sort == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></option>
 							<option value="3" <{if $sort == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></option>
@@ -244,7 +243,7 @@
 							<option value="6" <{if $sort == '6'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></option>
 							<{/if}>
 							<{if $status == 0}>
-							<option value="8" <{if $sort == '8'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></option>
+							<option value="7" <{if $sort == '7'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></option>
 							<{/if}>
 						</select>
 					</div>

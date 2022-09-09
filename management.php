@@ -140,7 +140,22 @@ switch ($op) {
 
 	case 'viewall':
 		$status = Request::getString('status', 'all');
-		$sort = Request::getString('sort', 'all');
+		$sort = Request::getInt('sort', 2);
+		if ($status == 1 && $sort > 3){
+			$sort = 2;
+		}
+		if ($status == 2 && $sort > 4){
+			$sort = 2;
+		}
+		if ($status == 3 && $sort > 5){
+			$sort = 2;
+		}
+		if ($status == 4 && $sort > 6){
+			$sort = 2;
+		}
+		if ($status == 'all' && $sort > 3){
+			$sort = 2;
+		}
 		$xoopsTpl->assign('status', $status);
 		$xoopsTpl->assign('sort', $sort);
 		// Get start pager
@@ -152,7 +167,35 @@ switch ($op) {
 			$criteria->add(new Criteria('order_status', $status));
 		}
 		$order_count = $orderHandler->getCount($criteria);
-		$criteria->setSort('order_dorder');
+		switch ($sort) {
+			case 1:
+				$criteria->setSort('order_id');
+				break;
+
+			case 2:
+				$criteria->setSort('order_dorder');
+				break;
+
+			case 3:
+				$criteria->setSort('order_ddesired');
+				break;
+
+			case 4:
+				$criteria->setSort('order_ddelivery');
+				break;
+
+			case 5:
+				$criteria->setSort('order_dready');
+				break;
+			case 6:
+				$criteria->setSort('order_ddelivery_r');
+				break;
+			case 7:
+				$criteria->setSort('order_dcancellation');
+				break;
+
+		}
+		
 		$criteria->setOrder('DESC');
 		$criteria->setStart($start);
 		$criteria->setLimit($nb_limit);
