@@ -35,14 +35,26 @@
 						</figure>
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
 							<{if $delivery == 1}>
-								<span class="fa fa-truck fa-fw"></span><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
+								<span class="fa fa-truck fa-fw"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
 								<figcaption class="figure-caption text-center"> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_DELIVERY}></figcaption>
 							<{/if}>
 							<{if $delivery == 0}>
-								<span class="fa fa-industry fa-fw"></span><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
+								<span class="fa fa-industry fa-fw"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY}>
 								<figcaption class="figure-caption text-center"><{$smarty.const._MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL}></figcaption>
 							<{/if}>
 						</figure>
+						<{if $status > 1 || $status ==0}>
+						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
+							<{if $delivery == 1}>
+								<span class="fa fa-long-arrow-right"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY}>
+								<figcaption class="figure-caption text-center"><{$ddelivery}></figcaption>
+							<{/if}>
+							<{if $delivery == 0}>
+								<span class="fa fa-exchange"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL}>
+								<figcaption class="figure-caption text-center"><{$dwithdrawal}></figcaption>
+							<{/if}>
+						</figure>
+						<{/if}>
 					</div>
 					<div class="card-body">
 						<p class="card-text mb-auto">
@@ -63,12 +75,6 @@
 								<div class="col-md-2 col-sm-4">
 									<{$dvalidation}>
 								</div>
-								<div class="col-md-4 col-sm-8">
-									<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_V}>
-								</div>
-								<div class="col-md-2 col-sm-4">
-									<{$ddelivery_v}>
-								</div>
 								<{if $status > 2 || $status == 0}>
 									<div class="col-md-4 col-sm-8">
 										<{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}>
@@ -78,10 +84,18 @@
 									</div>
 									<{if $status > 3 || $status == 0}>
 										<div class="col-md-4 col-sm-8">
+											<{if $delivery == 1}>
 											<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_R}>
+											<{else}>
+											<{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R}>
+											<{/if}>
 										</div>
 										<div class="col-md-2 col-sm-4">
+											<{if $delivery == 1}>
 											<{$ddelivery_r}>
+											<{else}>
+											<{$dwithdrawal_r}>
+											<{/if}>
 										</div>
 									<{/if}>
 									<{if $status == 0}>
