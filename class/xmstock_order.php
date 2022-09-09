@@ -82,10 +82,8 @@ class xmstock_order extends XoopsObject
 		// temporaire pour les tests
 		$this->setVar('order_dvalidation', strtotime(Request::getString('order_ddesired', ''))+(1*86400));
 		$this->setVar('order_ddelivery', strtotime(Request::getString('order_ddesired', ''))+(2*86400));
-		$this->setVar('order_dwithdrawal', strtotime(Request::getString('order_ddesired', ''))+(2*86400));
 		$this->setVar('order_dready', strtotime(Request::getString('order_ddesired', ''))+(3*86400));
 		$this->setVar('order_ddelivery_r', strtotime(Request::getString('order_ddesired', ''))+(4*86400));
-		$this->setVar('order_dwithdrawal_r', strtotime(Request::getString('order_ddesired', ''))+(4*86400));
 		$this->setVar('order_dcancellation', strtotime(Request::getString('order_ddesired', ''))+(5*86400));
 		
 		//

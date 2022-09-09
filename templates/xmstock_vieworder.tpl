@@ -51,7 +51,7 @@
 							<{/if}>
 							<{if $delivery == 0}>
 								<span class="fa fa-exchange"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL}>
-								<figcaption class="figure-caption text-center"><{$dwithdrawal}></figcaption>
+								<figcaption class="figure-caption text-center"><{$ddelivery}></figcaption>
 							<{/if}>
 						</figure>
 						<{/if}>
@@ -91,11 +91,7 @@
 											<{/if}>
 										</div>
 										<div class="col-md-2 col-sm-4">
-											<{if $delivery == 1}>
 											<{$ddelivery_r}>
-											<{else}>
-											<{$dwithdrawal_r}>
-											<{/if}>
 										</div>
 									<{/if}>
 									<{if $status == 0}>

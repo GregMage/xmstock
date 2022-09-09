@@ -283,13 +283,13 @@
 						<td class="text-center"><{$order.dorder}></td>
 						<td class="text-center"><{$order.ddesired}></td>
 						<{if ($status > 1 || $status == 0) && $status != 'all'}>
-						<td class="text-center"><{$order.d_dw}></td>
+						<td class="text-center"><{$order.ddelivery}></td>
 						<{/if}>
 						<{if ($status > 2 || $status == 0) && $status != 'all'}>
 						<td class="text-center"><{$order.dready}></td>
 						<{/if}>
 						<{if ($status > 3 || $status == 0) && $status != 'all'}>
-						<td class="text-center"><{$order.r_dw}></td>
+						<td class="text-center"><{$order.ddelivery_r}></td>
 						<{/if}>
 						<{if $status == 0}>
 						<td class="text-center"><{$order.dcancellation}></td>

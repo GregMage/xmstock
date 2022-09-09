@@ -52,11 +52,6 @@ if ($order_id == 0) {
 		} else {
 			$xoopsTpl->assign('ddelivery', formatTimestamp($order->getVar('order_ddelivery'), 's'));
 		}
-		if ($order->getVar('order_dwithdrawal') == 0){
-			$xoopsTpl->assign('dwithdrawal', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
-		} else {
-			$xoopsTpl->assign('dwithdrawal', formatTimestamp($order->getVar('order_dwithdrawal'), 's'));
-		}
 		if ($order->getVar('order_dready') == 0){
 			$xoopsTpl->assign('dready', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
 		} else {
@@ -66,11 +61,6 @@ if ($order_id == 0) {
 			$xoopsTpl->assign('ddelivery_r', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
 		} else {
 			$xoopsTpl->assign('ddelivery_r', formatTimestamp($order->getVar('order_ddelivery_r'), 'm'));
-		}
-		if ($order->getVar('order_dwithdrawal_r') == 0){
-			$xoopsTpl->assign('dwithdrawal_r', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
-		} else {
-			$xoopsTpl->assign('dwithdrawal_r', formatTimestamp($order->getVar('order_dwithdrawal_r'), 'm'));
 		}
 		if ($order->getVar('order_dcancellation') == 0){
 			$xoopsTpl->assign('dcancellation', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');

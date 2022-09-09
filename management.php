@@ -164,17 +164,9 @@ switch ($op) {
 				$order['id']              = $order_id;
 				$order['description']     = XmstockUtility::generateDescriptionTagSafe($order_arr[$i]->getVar('order_description', 'show'), 50);
 				$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
-				if ($order_arr[$i]->getVar('order_delivery') == 1){
-					$order['d_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery'), 's');
-				} else {
-					$order['d_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_dwithdrawal'), 's');
-				}
+				$order['ddelivery']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery'), 's');
 				$order['dready']          = formatTimestamp($order_arr[$i]->getVar('order_dready'), 's');
-				if ($order_arr[$i]->getVar('order_delivery') == 1){
-					$order['r_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery_r'), 's');
-				} else {
-					$order['r_dw']		  = formatTimestamp($order_arr[$i]->getVar('order_dwithdrawal_r'), 's');
-				}
+				$order['ddelivery_r']	  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery_r'), 's');
 				$order['dorder']          = formatTimestamp($order_arr[$i]->getVar('order_dorder'), 'm');
 				$order['dcancellation']   = formatTimestamp($order_arr[$i]->getVar('order_dcancellation'), 's');
 				$order['delivery']        = $order_arr[$i]->getVar('order_delivery');
