@@ -101,7 +101,6 @@ class xmstock_order extends XoopsObject
 				} else {
 					$order_id = $this->get_new_enreg();
 				}
-
 				if (is_array($arr_selectionArticles) == true){
 					foreach ($arr_selectionArticles as $datas) {
 						$obj = $itemorderHandler->create();
@@ -134,7 +133,7 @@ class xmstock_order extends XoopsObject
      * @param bool $action
      * @return XoopsThemeForm
      */
-    public function getForm($action = false)
+    /*public function getForm($action = false)
     {
         $helper = Helper::getHelper('xmstock');
         if ($action === false) {
@@ -166,6 +165,116 @@ class xmstock_order extends XoopsObject
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_AREA_DESC, 'order_description', $editor_configs), false);
 
 		// A faire (pour la gestion des commandes admin et user)
+		// status
+        $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'order_status', $status);
+        $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA);
+        $form_status->addOptionArray($options);
+        $form->addElement($form_status);
+
+        $form->addElement(new XoopsFormHidden('op', 'save'));
+        // submit
+        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+
+        return $form;
+    }*/
+
+    /**
+     * @return mixed
+     */
+    public function saveOrderEdit($orderHandler, $action = false)
+    {
+        global $xoopsUser;
+        include __DIR__ . '/../include/common.php';
+
+        $error_message = '';
+        $this->setVar('order_description',  Request::getText('order_description', ''));
+		$this->setVar('order_userid', Request::getInt('order_userid', ''));
+		$this->setVar('order_ddesired', strtotime(Request::getString('order_ddesired', '')));
+		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
+        $this->setVar('order_status', Request::getInt('order_status', 1));
+		
+		//
+        if ($error_message == '') {
+			$sessionHelper = new \Xmf\Module\Helper\Session();
+			$arr_selectionArticles = $sessionHelper->get($session_name);
+			$areaid = 0;
+			if (is_array($arr_selectionArticles) == true){
+				$areaid = $arr_selectionArticles[0]['area'];
+			}
+			$this->setVar('order_areaid', $areaid);
+            if ($orderHandler->insert($this)) {
+				if ($this->get_new_enreg() == 0){
+					$order_id = $this->getVar('order_id');
+				} else {
+					$order_id = $this->get_new_enreg();
+				}
+				if (is_array($arr_selectionArticles) == true){
+					foreach ($arr_selectionArticles as $datas) {
+						$obj = $itemorderHandler->create();
+						$obj->setVar('itemorder_orderid', $order_id);
+						$obj->setVar('itemorder_articleid', $datas['id']);
+						$obj->setVar('itemorder_areaid', $datas['area']);
+						$obj->setVar('itemorder_amount', $datas['qty']);
+						$obj->setVar('itemorder_status', 1);
+						if (!$itemorderHandler->insert($obj)) {
+							$error_message = $obj->getHtmlErrors();
+						}
+					}
+					if ($error_message == '') {
+						if ($action === false) {
+							$action = $_SERVER['REQUEST_URI'] . '?op=confirm&order_id=' . $order_id;
+						}
+						redirect_header($action, 2, _MA_XMSTOCK_CHECKOUT_SEND);
+					}
+				} else {
+					redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);
+				}
+            } else {
+                $error_message =  $this->getHtmlErrors();
+            }
+        }
+        return $error_message;
+    }
+
+	/**
+     * @param bool $action
+     * @return XoopsThemeForm
+     */
+    public function getFormEdit($action = false)
+    {
+        $helper = Helper::getHelper('xmstock');
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        include __DIR__ . '/../include/common.php';
+
+        //form title
+        $title = sprintf(_MA_XMSTOCK_EDIT);
+        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+		$form->addElement(new XoopsFormHidden('order_id', $this->getVar('order_id')));
+		$status = $this->getVar('order_status');
+
+        // description
+        $editor_configs           =array();
+        $editor_configs['name']   = 'order_description';
+        $editor_configs['value']  = $this->getVar('order_description', 'e');
+        $editor_configs['rows']   = 3;
+        $editor_configs['cols']   = 40;
+        $editor_configs['width']  = '50%';
+        $editor_configs['height'] = '100px';
+        $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
+        $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_AREA_DESC, 'order_description', $editor_configs), false);
+		
+		$form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time()), false);
+		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', 0);
+		$options        = [0 => _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL, 1 => _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY];
+		$delivery->addOptionArray($options);
+		$form->addElement($delivery);
+		$form->addElement(new XoopsFormHidden('op', 'save'));
+		
+		// user
+        $form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_MANAGEMENT_CUSTOMER, 'order_userid', true, $this->getVar('order_userid')), true);
+
 		// status
         $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'order_status', $status);
         $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA);

@@ -241,6 +241,8 @@ define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders'); //Viewing a
 define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande'); //Order number
 define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
 
+//action.php
+define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande'); //Edition of an order
 
 
 
