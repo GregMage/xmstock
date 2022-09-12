@@ -1,4 +1,13 @@
 <div class="xmstock">
+	<{if $opt|default:'' == 'man'}>
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
+			<li class="breadcrumb-item"><a href="management.php?op=list"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_VIEW}></li>
+	  </ol>
+	</nav>
+	<{else}>
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
@@ -8,6 +17,7 @@
 		<{/if}>
 	  </ol>
 	</nav>
+	<{/if}>
 	<{if $error_message|default:'' != ''}>
 		<div class="alert alert-danger" role="alert"><{$error_message}></div>
 	<{else}>

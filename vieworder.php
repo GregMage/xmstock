@@ -32,11 +32,18 @@ if ($order_id == 0) {
 	if (empty($order) === true){
 		$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 	} else {
+		$opt = Request::getString('opt', '');
+		$xoopsTpl->assign('opt', $opt);
 		$order  = $orderHandler->get($order_id);
-		// Uniquement le propriétaire de la commande peut la voire
+		// Uniquement le propriétaire de la commande peut la voire ou le responsable du stock ou l'admin
+		$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 		$userid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
-		if ( $order->getVar('order_userid') != $userid){
-			redirect_header('index.php', 2, _NOPERM);
+		if ($helper->isUserAdmin() != true){
+			if (in_array($order->getVar('order_areaid'), $managePermissionArea) == false) {
+				if ( $order->getVar('order_userid') != $userid){
+					redirect_header('index.php', 2, _NOPERM);
+				}
+			}
 		}
 		$xoopsTpl->assign('orderid', $order_id);
 		$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($order->getVar('order_description', 'show'), 50));
