@@ -239,6 +239,8 @@ define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes'); //All orders
 define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande'); //Viewing an order
 define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders'); //Viewing an order
 define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande'); //Order number
+define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
+
 
 
 

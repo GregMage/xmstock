@@ -49,6 +49,7 @@ if ($order_id == 0) {
 		$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($order->getVar('order_description', 'show'), 50));
 		$xoopsTpl->assign('ddesired', formatTimestamp($order->getVar('order_ddesired'), 's'));
 		$xoopsTpl->assign('dorder', formatTimestamp($order->getVar('order_dorder'), 'm'));
+		$xoopsTpl->assign('user', XoopsUser::getUnameFromId($order->getVar('order_userid')));
 		if ($order->getVar('order_dvalidation') == 0){
 			$xoopsTpl->assign('dvalidation', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
 		} else {

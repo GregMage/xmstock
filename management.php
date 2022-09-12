@@ -157,6 +157,8 @@ switch ($op) {
 		$status = Request::getString('status', 'all');
 		$sort = Request::getInt('sort', 2);
 		$filter = Request::getInt('filter', 0);
+		$userid = Request::getInt('userid', 0);
+
 		if ($status == 1 && $sort > 3){
 			$sort = 2;
 		}
@@ -179,12 +181,36 @@ switch ($op) {
 		$start = Request::getInt('start', 0);
 		// Criteria
 		$criteria = new CriteriaCompo();
+		$criteria_user = new CriteriaCompo();
 		if ($status == 0 || $status == 1 || $status == 2 || $status == 3 || $status == 4){
 			$criteria->add(new Criteria('order_status', $status));
+			$criteria_user->add(new Criteria('order_status', $status));
 		}
 		if ($helper->isUserAdmin() != true){
 			$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		}
+
+		// list des user
+		$user_arr = array();
+		$userid_arr = $orderHandler->getall($criteria_user);
+		$user_options = '<option value="0"' . ($userid == 0 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
+		foreach (array_keys($userid_arr) as $i) {
+			$user_arr[$userid_arr[$i]->getVar('order_userid')]= XoopsUser::getUnameFromId($userid_arr[$i]->getVar('order_userid'));
+		}
+		asort($user_arr, SORT_STRING);
+		foreach (array_keys($user_arr) as $i) {
+			$user_options .= '<option value="' . $i . '"' . ($userid == $i ? ' selected="selected"' : '') . '>' . $user_arr[$i] . '</option>';
+		}
+		if ($userid != 0){
+			if (array_key_exists($userid, $user_arr)){
+				$criteria->add(new Criteria('order_userid', $userid));
+			} else {
+				$userid = 0;
+			}
+		}
+		$xoopsTpl->assign('user_options', $user_options);
+		$xoopsTpl->assign('userid', $userid);
+
 		$order_count = $orderHandler->getCount($criteria);
 		switch ($sort) {
 			case 1:
@@ -212,7 +238,6 @@ switch ($op) {
 			case 7:
 				$criteria->setSort('order_dcancellation');
 				break;
-
 		}
 		if ($filter == 0){
 			$criteria->setOrder('DESC');
@@ -227,7 +252,7 @@ switch ($op) {
 			foreach (array_keys($order_arr) as $i) {
 				$order_id                 = $order_arr[$i]->getVar('order_id');
 				$order['id']              = $order_id;
-				$order['description']     = XmstockUtility::generateDescriptionTagSafe($order_arr[$i]->getVar('order_description', 'show'), 50);
+				$order['user']     		  = XoopsUser::getUnameFromId($order_arr[$i]->getVar('order_userid'));
 				$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
 				$order['ddelivery']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery'), 's');
 				$order['dready']          = formatTimestamp($order_arr[$i]->getVar('order_dready'), 's');
@@ -263,16 +288,14 @@ switch ($op) {
 			}
 			// Display Page Navigation
 			if ($order_count > $nb_limit) {
-				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start', 'op=viewall&status=' . $status . '&sort=' . $sort . '&filter=' . $filter);
+				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start', 'op=viewall&status=' . $status . '&sort=' . $sort . '&filter=' . $filter. '&userid=' . $userid);
 				$xoopsTpl->assign('nav_menu', $nav->renderNav(4));
 			}
 		} else {
 			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 		}
 		break;
-
 }
-
 
 //SEO
 // pagetitle
