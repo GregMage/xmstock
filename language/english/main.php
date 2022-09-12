@@ -211,11 +211,11 @@ define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Date désirée');//Desired date
 define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Date de validation');//Order validation date
 define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Date de livraison prévue');//Delivery Date
 define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL', 'Date de retrait prévu');//Planned withdrawal date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Date de livraison/retrait prévue'); //Validated delivery/withdrawal date
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Date de livraison / retrait prévue'); //Validated delivery/withdrawal date
 define('_MA_XMSTOCK_ORDER_DATEREADY', 'Date commande prête');//Order ready date
 define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Date de la livraison');//
 define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R', 'Date du retrait');//Date of withdrawal
-define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Date de livraison/retrait'); //Order ready date
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Date de livraison / retrait'); //Order ready date
 define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Date d\'annulation');//Cancellation date
 define('_MA_XMSTOCK_ORDER_HISTORY', 'Historique de la commande');//
 define('_MA_XMSTOCK_ORDER_ARTICLES', 'Articles commandés');

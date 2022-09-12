@@ -28,23 +28,24 @@
 							<{if $error_message_1|default:'' != ''}>
 								<div class="alert alert-danger" role="alert"><{$error_message_1}></div>
 							<{else}>
-								<table class="table table-hover">
+								<table class="table table-hover table-sm">
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
-											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
 									<tbody>
 										<{foreach item=order_1 from=$order_1}>
 										<tr>
-											<th class="text-center" scope="row"><{$order_1.id}></th>
+											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_1.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_1.id}></a></th>
 											<td class="text-center"><{$order_1.dorder}></td>
 											<td class="text-center"><{$order_1.ddesired}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_1.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_1.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_1.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -66,23 +67,24 @@
 							<{if $error_message_2|default:'' != ''}>
 								<div class="alert alert-danger" role="alert"><{$error_message_2}></div>
 							<{else}>
-								<table class="table table-hover">
+								<table class="table table-hover table-sm">
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></th>
-											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
 									<tbody>
 										<{foreach item=order_2 from=$order_2}>
 										<tr>
-											<th class="text-center" scope="row"><{$order_2.id}></th>
+											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_2.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_2.id}></a></th>
 											<td class="text-center"><{$order_2.dorder}></td>
 											<td class="text-center"><{$order_2.delivery}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_2.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_2.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_2.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -104,23 +106,24 @@
 							<{if $error_message_3|default:'' != ''}>
 								<div class="alert alert-danger" role="alert"><{$error_message_3}></div>
 							<{else}>
-								<table class="table table-hover">
+								<table class="table table-hover table-sm">
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></th>
-											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
 									<tbody>
 										<{foreach item=order_3 from=$order_3}>
 										<tr>
-											<th class="text-center" scope="row"><{$order_3.id}></th>
+											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_3.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_3.id}></a></th>
 											<td class="text-center"><{$order_3.dorder}></td>
 											<td class="text-center"><{$order_3.dready}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_3.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_3.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_3.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -142,23 +145,24 @@
 							<{if $error_message_4|default:'' != ''}>
 								<div class="alert alert-danger" role="alert"><{$error_message_4}></div>
 							<{else}>
-								<table class="table table-hover">
+								<table class="table table-hover table-sm">
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></th>
-											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
 									<tbody>
 										<{foreach item=order_4 from=$order_4}>
 										<tr>
-											<th class="text-center" scope="row"><{$order_4.id}></th>
+											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_4.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_4.id}></a></th>
 											<td class="text-center"><{$order_4.dorder}></td>
 											<td class="text-center"><{$order_4.delivery_r}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_4.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_4.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_4.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -180,23 +184,24 @@
 							<{if $error_message_0|default:'' != ''}>
 								<div class="alert alert-danger" role="alert"><{$error_message_0}></div>
 							<{else}>
-								<table class="table table-hover">
+								<table class="table table-hover table-sm">
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></th>
-											<th class="text-center width15" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
 									<tbody>
 										<{foreach item=order_0 from=$order_0}>
 										<tr>
-											<th class="text-center" scope="row"><{$order_0.id}></th>
+											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_0.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_0.id}></a></th>
 											<td class="text-center"><{$order_0.dorder}></td>
 											<td class="text-center"><{$order_0.dcancellation}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_0.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_0.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_0.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -288,7 +293,7 @@
 				<tbody>
 					<{foreach item=order from=$order}>
 					<tr>
-						<th class="text-center" scope="row"><{$order.id}></th>
+						<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order.id}></a></th>
 						<td><{$order.description}></td>
 						<td class="text-center"><{$order.dorder}></td>
 						<td class="text-center"><{$order.ddesired}></td>
@@ -308,10 +313,8 @@
 						<td class="text-center"><{$order.status_text}></td>
 						<{/if}>
 						<td class="text-center">
-							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
-							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
-							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
-
+							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 						</td>
 					</tr>
 					<{/foreach}>

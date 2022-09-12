@@ -269,7 +269,6 @@ switch ($op) {
 		} else {
 			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 		}
-
 		break;
 
 }
