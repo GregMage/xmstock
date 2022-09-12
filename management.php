@@ -40,6 +40,7 @@ switch ($op) {
 		// Statut 1
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 1));
+		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
@@ -58,6 +59,7 @@ switch ($op) {
 		// Statut 2
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 2));
+		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
@@ -80,6 +82,7 @@ switch ($op) {
 		// Statut 3
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 3));
+		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
@@ -98,6 +101,7 @@ switch ($op) {
 		// Statut 4
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 4));
+		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
@@ -121,6 +125,7 @@ switch ($op) {
 		// Statut 0
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('order_status', 0));
+		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$criteria->setSort('order_dorder');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
@@ -164,11 +169,12 @@ switch ($op) {
 		$start = Request::getInt('start', 0);
 		// Criteria
 		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		if ($status == 0 || $status == 1 || $status == 2 || $status == 3 || $status == 4){
 			$criteria->add(new Criteria('order_status', $status));
 		}
+		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$order_count = $orderHandler->getCount($criteria);
+		echo '$order_count: ' . $order_count;
 		switch ($sort) {
 			case 1:
 				$criteria->setSort('order_id');
