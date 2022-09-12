@@ -2,10 +2,6 @@
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
-		<{if $op == 'view'}>
-			<li class="breadcrumb-item"><a href="management.php?op=list"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></a></li>
-			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_VIEW}></li>
-		<{/if}>
 		<{if $op == 'viewall'}>
 			<li class="breadcrumb-item"><a href="management.php?op=list"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></a></li>
 			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_VIEWALL}></li>
@@ -48,7 +44,7 @@
 											<td class="text-center"><{$order_1.dorder}></td>
 											<td class="text-center"><{$order_1.ddesired}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_1.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_1.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -86,7 +82,7 @@
 											<td class="text-center"><{$order_2.dorder}></td>
 											<td class="text-center"><{$order_2.delivery}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_2.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_2.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -124,7 +120,7 @@
 											<td class="text-center"><{$order_3.dorder}></td>
 											<td class="text-center"><{$order_3.dready}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_3.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_3.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -162,7 +158,7 @@
 											<td class="text-center"><{$order_4.dorder}></td>
 											<td class="text-center"><{$order_4.delivery_r}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_4.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_4.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -200,7 +196,7 @@
 											<td class="text-center"><{$order_0.dorder}></td>
 											<td class="text-center"><{$order_0.dcancellation}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/management.php?op=view&order_id=<{$order_0.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+												<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_0.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -309,7 +305,7 @@
 						<td class="text-center">
 							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
 							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
-							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>&opt=man" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-eye"></span></a>
 
 						</td>
 					</tr>
