@@ -16,7 +16,7 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
-use Xmf\Module\Admin; 
+use Xmf\Module\Admin;
 use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
@@ -34,10 +34,10 @@ $permission = Request::getInt('permission', 1);
 $criteria = new CriteriaCompo();
 $area_arr = $areaHandler->getall($criteria);
 if (count($area_arr) > 0) {
-    $tab_perm = array(1 => _MA_XMSTOCK_PERMISSION_MANAGE, 2 => _MA_XMSTOCK_PERMISSION_SUPERVISE, 3 => _MA_XMSTOCK_PERMISSION_VIEW, 4 => _MA_XMSTOCK_PERMISSION_ORDER, 5 => _MA_XMSTOCK_PERMISSION_OTHER);
+    $tab_perm = array(1 => _MA_XMSTOCK_PERMISSION_MANAGE, 2 => _MA_XMSTOCK_PERMISSION_VIEW, 3 => _MA_XMSTOCK_PERMISSION_ORDER, 4 => _MA_XMSTOCK_PERMISSION_OTHER);
 } else {
-    $tab_perm = [5 => _MA_XMSTOCK_PERMISSION_OTHER];
-    $permission = 5;
+    $tab_perm = [4 => _MA_XMSTOCK_PERMISSION_OTHER];
+    $permission = 4;
 }
 if (isset($tab_perm)){
     $permission_options = '';
@@ -55,15 +55,8 @@ if (isset($tab_perm)){
                 $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
             }
             break;
-		case 2:    // supervisor permission
-            $formTitle = _MA_XMSTOCK_PERMISSION_SUPERVISE;
-            $permissionName = 'xmstock_supervisor';
-            $permissionDescription = _MA_XMSTOCK_PERMISSION_SUPERVISE_DSC;
-            foreach (array_keys($area_arr) as $i) {
-                $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
-            }
-            break;
-		case 3:    // view permission
+
+		case 2:    // view permission
             $formTitle = _MA_XMSTOCK_PERMISSION_VIEW;
             $permissionName = 'xmstock_view';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_VIEW_DSC;
@@ -72,7 +65,7 @@ if (isset($tab_perm)){
             }
             break;
 
-        case 4:    // request permission
+        case 3:    // request permission
             $formTitle = _MA_XMSTOCK_PERMISSION_ORDER;
             $permissionName = 'xmstock_order';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_ORDER_DSC;
@@ -80,7 +73,8 @@ if (isset($tab_perm)){
                 $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
             }
             break;
-		case 5:    // Other permission
+
+		case 4:    // Other permission
 			$formTitle = _MA_XMSTOCK_PERMISSION_OTHER;
 			$permissionName = 'xmstock_other';
 			$permissionDescription = _MA_XMSTOCK_PERMISSION_OTHER_DSC;

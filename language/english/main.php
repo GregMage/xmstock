@@ -141,8 +141,6 @@ define('_MA_XMSTOCK_PERMISSION_OTHER', 'Other permissions');
 define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Select groups that can:');
 define('_MA_XMSTOCK_PERMISSION_OTHER_4', '');
 define('_MA_XMSTOCK_PERMISSION_OTHER_8', '');
-define('_MA_XMSTOCK_PERMISSION_SUPERVISE', 'Supervisor Permissions');
-define('_MA_XMSTOCK_PERMISSION_SUPERVISE_DSC', 'Select groups that can supervise this area');
 define('_MA_XMSTOCK_PERMISSION_VIEW', 'View Permissions');
 define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this area');
 
