@@ -141,6 +141,7 @@ switch ($op) {
 	case 'viewall':
 		$status = Request::getString('status', 'all');
 		$sort = Request::getInt('sort', 2);
+		$filter = Request::getInt('filter', 0);
 		if ($status == 1 && $sort > 3){
 			$sort = 2;
 		}
@@ -158,6 +159,7 @@ switch ($op) {
 		}
 		$xoopsTpl->assign('status', $status);
 		$xoopsTpl->assign('sort', $sort);
+		$xoopsTpl->assign('filter', $filter);
 		// Get start pager
 		$start = Request::getInt('start', 0);
 		// Criteria
@@ -195,8 +197,11 @@ switch ($op) {
 				break;
 
 		}
-		
-		$criteria->setOrder('DESC');
+		if ($filter == 0){
+			$criteria->setOrder('DESC');
+		} else {
+			$criteria->setOrder('ASC');
+		}
 		$criteria->setStart($start);
 		$criteria->setLimit($nb_limit);
 		$order_arr = $orderHandler->getall($criteria);
@@ -241,7 +246,7 @@ switch ($op) {
 			}
 			// Display Page Navigation
 			if ($order_count > $nb_limit) {
-				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start', 'op=viewall&status=' . $status . '&sort=' . $sort);
+				$nav = new XoopsPageNav($order_count, $nb_limit, $start, 'start', 'op=viewall&status=' . $status . '&sort=' . $sort . '&filter=' . $filter);
 				$xoopsTpl->assign('nav_menu', $nav->renderNav(4));
 			}
 		} else {

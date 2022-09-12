@@ -247,6 +247,16 @@
 							<{/if}>
 						</select>
 					</div>
+					<div class="form-group mb-2">
+						<div class="form-check form-check-inline">
+							&nbsp;<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" <{if $filter == '0'}>checked<{/if}> onchange="location='management.php?op=viewall&status=<{$status}>&sort=<{$sort}>&filter=0'">
+							<label class="form-check-label" for="inlineRadio1"><span class="fa fa-arrow-down"></span></label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" <{if $filter == '1'}>checked<{/if}> onchange="location='management.php?op=viewall&status=<{$status}>&sort=<{$sort}>&filter=1'">
+							<label class="form-check-label" for="inlineRadio2"><span class="fa fa-arrow-up"></span></label></label>
+						</div>
+					</div>
 				</form>
 			</div>
 			<table class="table table-hover">
