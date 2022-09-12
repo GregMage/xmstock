@@ -174,7 +174,6 @@ switch ($op) {
 		}
 		$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$order_count = $orderHandler->getCount($criteria);
-		echo '$order_count: ' . $order_count;
 		switch ($sort) {
 			case 1:
 				$criteria->setSort('order_id');

@@ -11,10 +11,10 @@
 		<{/if}>
 	  </ol>
 	</nav>
-	<{if $error_message|default:'' != ''}>
-		<div class="alert alert-danger" role="alert"><{$error_message}></div>
-	<{else}>
-		<{if $op|default:'list' == 'list'}>
+	<{if $op|default:'list' == 'list'}>
+		<{if $error_message|default:'' != ''}>
+			<div class="alert alert-danger" role="alert"><{$error_message}></div>
+		<{else}>
 			<h2><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></h2>
 			<div class="row justify-content-center">
 				<div class="col-12 col-sm-12 col-md-6 col-lg-6 p-2">
@@ -209,52 +209,57 @@
 				</div>
 			</div>
 		<{/if}>
-		<{if $op|default:'list' == 'viewall'}>
-			<div class="pull-right">
-				<form id="form_order_tri" name="form_order_tri" method="get" action="management.php" class="form-inline">
-					<div class="form-group mb-2">
-					    <label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_STATUS}> </label>
-						<select class="form-control form-control-sm" id="statut_filter" onchange="location='management.php?op=viewall&sort=<{$sort}>&status='+this.options[this.selectedIndex].value">
-							<option value="all" <{if $status == 'all'}>selected="selected"<{/if}>><{$smarty.const._ALL}></option>
-							<option value="1" <{if $status == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_1}></option>
-							<option value="2" <{if $status == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_2}></option>
-							<option value="3" <{if $status == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_3}></option>
-							<option value="4" <{if $status == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_4}></option>
-							<option value="0" <{if $status == '0'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_0}></option>
-						</select>
+	<{/if}>
+	<{if $op|default:'list' == 'viewall'}>
+		<div class="pull-right">
+			<form id="form_order_tri" name="form_order_tri" method="get" action="management.php" class="form-inline">
+				<div class="form-group mb-2">
+					<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_STATUS}> </label>
+					<select class="form-control form-control-sm" id="statut_filter" onchange="location='management.php?op=viewall&sort=<{$sort}>&status='+this.options[this.selectedIndex].value">
+						<option value="all" <{if $status == 'all'}>selected="selected"<{/if}>><{$smarty.const._ALL}></option>
+						<option value="1" <{if $status == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_1}></option>
+						<option value="2" <{if $status == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_2}></option>
+						<option value="3" <{if $status == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_3}></option>
+						<option value="4" <{if $status == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_4}></option>
+						<option value="0" <{if $status == '0'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_STATUS_0}></option>
+					</select>
+				</div>
+				<div class="form-group mb-2">
+					<label class="my-1 mr-2">&nbsp;<{$smarty.const._MA_XMSTOCK_SORTBY}> </label>
+					<select class="form-control form-control-sm" id="sort_filter" onchange="location='management.php?op=viewall&status=<{$status}>&sort='+this.options[this.selectedIndex].value">
+						<option value="1" <{if $sort == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTORDER}></option>
+						<option value="2" <{if $sort == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></option>
+						<option value="3" <{if $sort == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></option>
+						<{if ($status > 1 || $status == 0) && $status != 'all'}>
+						<option value="4" <{if $sort == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></option>
+						<{/if}>
+						<{if ($status > 2 || $status == 0) && $status != 'all'}>
+						<option value="5" <{if $sort == '5'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></option>
+						<{/if}>
+						<{if ($status > 3 || $status == 0) && $status != 'all'}>
+						<option value="6" <{if $sort == '6'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></option>
+						<{/if}>
+						<{if $status == 0}>
+						<option value="7" <{if $sort == '7'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></option>
+						<{/if}>
+					</select>
+				</div>
+				<div class="form-group mb-2">
+					<div class="form-check form-check-inline">
+						&nbsp;<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" <{if $filter == '0'}>checked<{/if}> onchange="location='management.php?op=viewall&status=<{$status}>&sort=<{$sort}>&filter=0'">
+						<label class="form-check-label" for="inlineRadio1"><span class="fa fa-arrow-down"></span></label>
 					</div>
-					<div class="form-group mb-2">
-					    <label class="my-1 mr-2">&nbsp;<{$smarty.const._MA_XMSTOCK_SORTBY}> </label>
-						<select class="form-control form-control-sm" id="sort_filter" onchange="location='management.php?op=viewall&status=<{$status}>&sort='+this.options[this.selectedIndex].value">
-							<option value="1" <{if $sort == '1'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_MANAGEMENT_SORTORDER}></option>
-							<option value="2" <{if $sort == '2'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></option>
-							<option value="3" <{if $sort == '3'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></option>
-							<{if ($status > 1 || $status == 0) && $status != 'all'}>
-							<option value="4" <{if $sort == '4'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></option>
-							<{/if}>
-							<{if ($status > 2 || $status == 0) && $status != 'all'}>
-							<option value="5" <{if $sort == '5'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></option>
-							<{/if}>
-							<{if ($status > 3 || $status == 0) && $status != 'all'}>
-							<option value="6" <{if $sort == '6'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></option>
-							<{/if}>
-							<{if $status == 0}>
-							<option value="7" <{if $sort == '7'}>selected="selected"<{/if}>><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></option>
-							<{/if}>
-						</select>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" <{if $filter == '1'}>checked<{/if}> onchange="location='management.php?op=viewall&status=<{$status}>&sort=<{$sort}>&filter=1'">
+						<label class="form-check-label" for="inlineRadio2"><span class="fa fa-arrow-up"></span></label></label>
 					</div>
-					<div class="form-group mb-2">
-						<div class="form-check form-check-inline">
-							&nbsp;<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" <{if $filter == '0'}>checked<{/if}> onchange="location='management.php?op=viewall&status=<{$status}>&sort=<{$sort}>&filter=0'">
-							<label class="form-check-label" for="inlineRadio1"><span class="fa fa-arrow-down"></span></label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" <{if $filter == '1'}>checked<{/if}> onchange="location='management.php?op=viewall&status=<{$status}>&sort=<{$sort}>&filter=1'">
-							<label class="form-check-label" for="inlineRadio2"><span class="fa fa-arrow-up"></span></label></label>
-						</div>
-					</div>
-				</form>
-			</div>
+				</div>
+			</form>
+		</div>
+		<{if $error_message|default:'' != ''}>
+			<div class="clear spacer"></div>
+			<div class="alert alert-danger" role="alert"><{$error_message}></div>
+		<{else}>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -312,6 +317,7 @@
 					<{/foreach}>
 				</tbody>
 			</table>
+			
 			<div class="clear spacer"></div>
 			<{if $nav_menu|default:false}>
 				<div class="floatright"><{$nav_menu}></div>
@@ -319,4 +325,5 @@
 			<{/if}>
 		<{/if}>
 	<{/if}>
+	
 </div><!-- .xmstock -->
