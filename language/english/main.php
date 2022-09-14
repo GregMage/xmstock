@@ -184,11 +184,11 @@ define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articl
 define('_MA_XMSTOCK_ORDERS', 'Orders');
 define('_MA_XMSTOCK_VIEWORDER', 'Visualization of the order');
 
-define('_MA_XMSTOCK_ORDER_STATUS_0', 'Annulé');
+define('_MA_XMSTOCK_ORDER_STATUS_0', 'Annulée');
 define('_MA_XMSTOCK_ORDER_STATUS_1', 'En attente');
 define('_MA_XMSTOCK_ORDER_STATUS_2', 'En cours');
 define('_MA_XMSTOCK_ORDER_STATUS_3', 'Livraison/retrait');
-define('_MA_XMSTOCK_ORDER_STATUS_4', 'Livré');
+define('_MA_XMSTOCK_ORDER_STATUS_4', 'Livrée');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_0', 'Commandes annulées');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_1', 'Commandes en attentes');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_2', 'Commandes en cours');
