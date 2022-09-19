@@ -243,6 +243,8 @@ define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
 
 //action.php
 define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande'); //Edition of an order
+define('_MA_XMSTOCK_ACTION_ARTICLES', 'Articles');
+define('_MA_XMSTOCK_ACTION_INFODELARTICLE', 'Mettre "0" pour supprimer un article');
 
 
 
