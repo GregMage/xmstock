@@ -203,8 +203,12 @@ class xmstock_order extends XoopsObject
 						$itemorder = Request::getInt('itemorder' . $i, 0);
 						$obj = $itemorderHandler->get($itemorder);
 						if ($amount == 0){
-							if (!$itemorderHandler->delete($obj)) {
-								$error_message = $obj->getHtmlErrors();
+							if ($count > 1){
+								if (!$itemorderHandler->delete($obj)) {
+									$error_message = $obj->getHtmlErrors();
+								}
+							} else {
+								$error_message = _MA_XMSTOCK_ERROR_ONEARTICLE;
 							}
 						} else {
 							$obj->setVar('itemorder_amount', $amount);
@@ -216,6 +220,8 @@ class xmstock_order extends XoopsObject
 					if ($error_message == '') {
 						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					}
+				} else {
+					$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
 				}
             } else {
                 $error_message =  $this->getHtmlErrors();
