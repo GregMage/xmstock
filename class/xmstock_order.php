@@ -272,6 +272,9 @@ class xmstock_order extends XoopsObject
 
 		// articles
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('stock_areaid', $this->getVar('order_areaid')));
+		$stock_arr = $stockHandler->getall($criteria);
+		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('itemorder_orderid', $this->getVar('order_id')));
 		$itemorderHandler->table_link = $itemorderHandler->db->prefix("xmarticle_article");
 		$itemorderHandler->field_link = "article_id";
@@ -284,9 +287,8 @@ class xmstock_order extends XoopsObject
 			$count++;
 			$articles .= "<tr><th scope='row'>" . $itemorder_arr[$i]->getVar('article_name') . "</th>";
 			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='"  . $itemorder_arr[$i]->getVar('itemorder_amount') .  "'></td>";
-			$articles .= "<td>miam</td></tr>";
+			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
-			//$form->addElement(new XoopsFormText($itemorder_arr[$i]->getVar('article_name'), 'itemorder' . $i, 20, 255, $itemorder_arr[$i]->getVar('itemorder_amount')), false);
 		}
 		$articles .= "</tbody></table>";
 		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_INFODELARTICLE . "</small>";
@@ -337,24 +339,27 @@ class xmstock_order extends XoopsObject
 
 		// articles
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('stock_areaid', $this->getVar('order_areaid')));
+		$stock_arr = $stockHandler->getall($criteria);
+		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('itemorder_orderid', $this->getVar('order_id')));
 		$itemorderHandler->table_link = $itemorderHandler->db->prefix("xmarticle_article");
 		$itemorderHandler->field_link = "article_id";
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
 		$count = 0;
-		$articles = "<table  class='table table-bordered'><thead class='table-primary'><tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th><th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th></tr></thead>";
+		$articles = "<table  class='table table-bordered'><thead class='table-primary'><tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th><th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_SPLIT . "</th></tr></thead>";
 		$articles .= "<tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
 			$articles .= "<tr><th scope='row'>" . $itemorder_arr[$i]->getVar('article_name') . "</th>";
 			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='"  . $itemorder_arr[$i]->getVar('itemorder_amount') .  "'></td>";
-			$articles .= "<td>miam</td></tr>";
+			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td>";
+			$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
-			//$form->addElement(new XoopsFormText($itemorder_arr[$i]->getVar('article_name'), 'itemorder' . $i, 20, 255, $itemorder_arr[$i]->getVar('itemorder_amount')), false);
 		}
 		$articles .= "</tbody></table>";
-		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_INFODELARTICLE . "</small>";
+		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_STOCK_SPLIT_DESC . "</small>";
 		$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_ORDER_ARTICLES, $articles), true);
 		$form->addElement(new XoopsFormHidden('count', $count));
 

@@ -50,6 +50,7 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save') {
 					$xoopsTpl->assign('user', XoopsUser::getUnameFromId($obj->getVar('order_userid')));
 					$xoopsTpl->assign('delivery', $obj->getVar('order_delivery'));
 					$xoopsTpl->assign('status', $obj->getVar('order_status'));
+					$xoopsTpl->assign('ddelivery', formatTimestamp($obj->getVar('order_ddelivery'), 's'));
 					switch ($obj->getVar('order_status')) {
 						case 1:
 							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_1);
