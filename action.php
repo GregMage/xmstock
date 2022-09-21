@@ -27,13 +27,55 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 
 $op = Request::getCmd('op', '');
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+$xoopsTpl->assign('op', $op);
 
 if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save') {
     switch ($op) {
 
         // next
         case 'next':
-			// a faire
+			$order_id = Request::getInt('order_id', 0);
+			if ($order_id == 0) {
+                $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
+			} else {
+				$obj  = $orderHandler->get($order_id);
+				if (empty($obj)) {
+					$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
+				} else {
+					$permHelper->checkPermissionRedirect('xmstock_manage', $obj->getVar('order_areaid'), 'index.php', 2, _NOPERM);
+					$xoopsTpl->assign('orderid', $order_id);
+					$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($obj->getVar('order_description', 'show'), 50));
+					$xoopsTpl->assign('ddesired', formatTimestamp($obj->getVar('order_ddesired'), 's'));
+					$xoopsTpl->assign('dorder', formatTimestamp($obj->getVar('order_dorder'), 'm'));
+					$xoopsTpl->assign('user', XoopsUser::getUnameFromId($obj->getVar('order_userid')));
+					$xoopsTpl->assign('delivery', $obj->getVar('order_delivery'));
+					$xoopsTpl->assign('status', $obj->getVar('order_status'));
+					switch ($obj->getVar('order_status')) {
+						case 1:
+							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_1);
+							$xoopsTpl->assign('status_icon', '<span class="fa fa-hourglass-start fa-fw" aria-hidden="true"></span>');
+							break;
+						case 2:
+							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_2);
+							$xoopsTpl->assign('status_icon', '<span class="fa fa-hourglass-half fa-fw" aria-hidden="true"></span>');
+							break;
+						case 3:
+							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_3);
+							$xoopsTpl->assign('status_icon', '<span class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></span>');
+							break;
+						case 4:
+							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_4);
+							$xoopsTpl->assign('status_icon', '<span class="fa fa-check fa-fw" aria-hidden="true"></span>');
+							break;
+						case 0:
+							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_0);
+							$xoopsTpl->assign('status_icon', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
+							break;
+					}					
+					$form = $obj->getFormNext();
+					$xoopsTpl->assign('form', $form->render());
+				}
+            }
             break;
 
         // Edit
@@ -46,7 +88,6 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save') {
 				if (empty($obj)) {
 					$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 				} else {
-					// Get Permission to edit in category
 					$permHelper->checkPermissionRedirect('xmstock_manage', $obj->getVar('order_areaid'), 'index.php', 2, _NOPERM);
 					$form = $obj->getFormEdit();
 					$xoopsTpl->assign('form', $form->render());

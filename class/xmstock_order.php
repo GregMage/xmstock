@@ -310,6 +310,63 @@ class xmstock_order extends XoopsObject
     }
 
 	/**
+     * @param bool $action
+     * @return XoopsThemeForm
+     */
+    public function getFormNext($action = false)
+    {
+        $helper = Helper::getHelper('xmstock');
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        include __DIR__ . '/../include/common.php';
+
+        //form title
+        $title = sprintf(_MA_XMSTOCK_ACTION_NEXT);
+        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+		$form->addElement(new XoopsFormHidden('order_id', $this->getVar('order_id')));
+
+		//Date de livraison
+		$form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_ORDER_DATEDELIVERY, 'order_ddelivery', 2, time()), false);
+
+		//Livraison
+		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', $this->getVar('order_delivery'));
+		$options        = [0 => _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL, 1 => _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY];
+		$delivery->addOptionArray($options);
+		$form->addElement($delivery);
+
+		// articles
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('itemorder_orderid', $this->getVar('order_id')));
+		$itemorderHandler->table_link = $itemorderHandler->db->prefix("xmarticle_article");
+		$itemorderHandler->field_link = "article_id";
+		$itemorderHandler->field_object = "itemorder_articleid";
+		$itemorder_arr = $itemorderHandler->getByLink($criteria);
+		$count = 0;
+		$articles = "<table  class='table table-bordered'><thead class='table-primary'><tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th><th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th></tr></thead>";
+		$articles .= "<tbody>";
+		foreach (array_keys($itemorder_arr) as $i) {
+			$count++;
+			$articles .= "<tr><th scope='row'>" . $itemorder_arr[$i]->getVar('article_name') . "</th>";
+			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='"  . $itemorder_arr[$i]->getVar('itemorder_amount') .  "'></td>";
+			$articles .= "<td>miam</td></tr>";
+			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
+			//$form->addElement(new XoopsFormText($itemorder_arr[$i]->getVar('article_name'), 'itemorder' . $i, 20, 255, $itemorder_arr[$i]->getVar('itemorder_amount')), false);
+		}
+		$articles .= "</tbody></table>";
+		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_INFODELARTICLE . "</small>";
+		$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_ORDER_ARTICLES, $articles), true);
+		$form->addElement(new XoopsFormHidden('count', $count));
+
+		$form->addElement(new XoopsFormHidden('op', 'saveNext'));
+		$form->addElement(new XoopsFormHidden('status', $this->getVar('order_status')));
+        // submit
+        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+
+        return $form;
+    }
+
+	/**
      * @return mixed
      */
     public function delOrder($orderHandler, $order_id, $action = false)
