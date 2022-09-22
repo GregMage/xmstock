@@ -29,7 +29,7 @@ $op = Request::getCmd('op', '');
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 $xoopsTpl->assign('op', $op);
 
-if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save') {
+if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save' || $op == 'savenext') {
     switch ($op) {
 
         // next
@@ -110,10 +110,32 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save') {
             } else {
                 $obj = $orderHandler->get($order_id);
             }
-            $error_message = $obj->saveOrderEdit($orderHandler, 'management.php');
+            $error_message = $obj->saveOrderEdit($orderHandler, 'vieworder.php?op=view&order_id=' . $order_id . '&opt=man');
             if ($error_message != '') {
                 $xoopsTpl->assign('error_message', $error_message);
 				$form = $obj->getFormEdit();
+                $xoopsTpl->assign('form', $form->render());
+            }
+            break;
+
+        // SaveNext
+        case 'savenext':
+			$order_areaid = Request::getInt('order_areaid', 0);
+			// Get Permission to submit in category
+			$permHelper->checkPermissionRedirect('xmstock_manage', $order_areaid, 'index.php', 2, _NOPERM);
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                redirect_header('index.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            $order_id = Request::getInt('order_id', 0);
+            if ($order_id == 0) {
+                redirect_header('index.php', 2, _NOPERM);
+            } else {
+                $obj = $orderHandler->get($order_id);
+            }
+            $error_message = $obj->saveOrderNext($orderHandler, 'management.php');
+            if ($error_message != '') {
+                $xoopsTpl->assign('error_message', $error_message);
+				$form = $obj->getFormNext();
                 $xoopsTpl->assign('form', $form->render());
             }
             break;

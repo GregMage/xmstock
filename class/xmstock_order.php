@@ -79,12 +79,6 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_dorder', time());
 		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
         $this->setVar('order_status', Request::getInt('order_status', 1));
-		// temporaire pour les tests
-		$this->setVar('order_dvalidation', strtotime(Request::getString('order_ddesired', ''))+(1*86400));
-		$this->setVar('order_ddelivery', strtotime(Request::getString('order_ddesired', ''))+(2*86400));
-		$this->setVar('order_dready', strtotime(Request::getString('order_ddesired', ''))+(3*86400));
-		$this->setVar('order_ddelivery_r', strtotime(Request::getString('order_ddesired', ''))+(4*86400));
-		$this->setVar('order_dcancellation', strtotime(Request::getString('order_ddesired', ''))+(5*86400));
 
 		//
         if ($error_message == '') {
@@ -192,41 +186,38 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_ddesired', strtotime(Request::getString('order_ddesired', '')));
 		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
         $this->setVar('order_status', Request::getInt('order_status', 1));
-
-        if ($error_message == '') {
-            if ($orderHandler->insert($this)) {
-				$order_id = $this->getVar('order_id');
-				$count = Request::getInt('count', 0);
-				if ($count > 0){
-					for ($i = 1; $i <= $count; $i++) {
-						$amount = Request::getInt('amount' . $i, 0);
-						$itemorder = Request::getInt('itemorder' . $i, 0);
-						$obj = $itemorderHandler->get($itemorder);
-						if ($amount == 0){
-							if ($count > 1){
-								if (!$itemorderHandler->delete($obj)) {
-									$error_message = $obj->getHtmlErrors();
-								}
-							} else {
-								$error_message = _MA_XMSTOCK_ERROR_ONEARTICLE;
-							}
-						} else {
-							$obj->setVar('itemorder_amount', $amount);
-							if (!$itemorderHandler->insert($obj)) {
+		if ($orderHandler->insert($this)) {
+			$order_id = $this->getVar('order_id');
+			$count = Request::getInt('count', 0);
+			if ($count > 0){
+				for ($i = 1; $i <= $count; $i++) {
+					$amount = Request::getInt('amount' . $i, 0);
+					$itemorder = Request::getInt('itemorder' . $i, 0);
+					$obj = $itemorderHandler->get($itemorder);
+					if ($amount == 0){
+						if ($count > 1){
+							if (!$itemorderHandler->delete($obj)) {
 								$error_message = $obj->getHtmlErrors();
 							}
+						} else {
+							$error_message = _MA_XMSTOCK_ERROR_ONEARTICLE;
+						}
+					} else {
+						$obj->setVar('itemorder_amount', $amount);
+						if (!$itemorderHandler->insert($obj)) {
+							$error_message = $obj->getHtmlErrors();
 						}
 					}
-					if ($error_message == '') {
-						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
-					}
-				} else {
-					$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
 				}
-            } else {
-                $error_message =  $this->getHtmlErrors();
-            }
-        }
+				if ($error_message == '') {
+					redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+				}
+			} else {
+				$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
+			}
+		} else {
+			$error_message =  $this->getHtmlErrors();
+		}
         return $error_message;
     }
 
@@ -286,7 +277,7 @@ class xmstock_order extends XoopsObject
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
 			$articles .= "<tr><th scope='row'>" . $itemorder_arr[$i]->getVar('article_name') . "</th>";
-			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='"  . $itemorder_arr[$i]->getVar('itemorder_amount') .  "'></td>";
+			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'></td>";
 			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
@@ -305,10 +296,46 @@ class xmstock_order extends XoopsObject
         $form->addElement($form_status);
 
 		$form->addElement(new XoopsFormHidden('op', 'save'));
+		$form->addElement(new XoopsFormHidden('order_areaid', $this->getVar('order_areaid')));
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
         return $form;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function saveOrderNext($orderHandler, $action = false)
+    {
+        global $xoopsUser;
+        include __DIR__ . '/../include/common.php';
+
+        $error_message = '';		
+		$this->setVar('order_ddelivery',  strtotime(Request::getString('order_ddelivery', '')));
+		/*$this->setVar('order_dready',  strtotime(Request::getString('order_dready', '')));
+		$this->setVar('order_ddelivery_r',  strtotime(Request::getString('order_ddelivery_r', '')));
+		$this->setVar('order_dcancellation',  strtotime(Request::getString('order_dcancellation', '')));*/
+		
+		$this->setVar('order_delivery', Request::getInt('order_delivery', ''));
+		$this->setVar('order_dvalidation', time());
+		if ($this->getVar('order_status') >= 1 &&  $this->getVar('order_status') <= 4){
+			$this->setVar('order_status', $this->getVar('order_status') + 1);
+		}
+		if ($orderHandler->insert($this)) {
+			$order_id = $this->getVar('order_id');
+			$count = Request::getInt('count', 0);
+			if ($count > 0){
+				if ($error_message == '') {
+					redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+				}
+			} else {
+				$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
+			}
+		} else {
+			$error_message =  $this->getHtmlErrors();
+		}
+        return $error_message;
     }
 
 	/**
@@ -353,7 +380,7 @@ class xmstock_order extends XoopsObject
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
 			$articles .= "<tr><th scope='row'>" . $itemorder_arr[$i]->getVar('article_name') . "</th>";
-			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='"  . $itemorder_arr[$i]->getVar('itemorder_amount') .  "'></td>";
+			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
 			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td>";
 			$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
@@ -364,6 +391,7 @@ class xmstock_order extends XoopsObject
 		$form->addElement(new XoopsFormHidden('count', $count));
 
 		$form->addElement(new XoopsFormHidden('op', 'saveNext'));
+		$form->addElement(new XoopsFormHidden('order_areaid', $this->getVar('order_areaid')));
 		$form->addElement(new XoopsFormHidden('status', $this->getVar('order_status')));
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
