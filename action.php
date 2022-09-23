@@ -43,38 +43,44 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save' || $op == 's
 					$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 				} else {
 					$permHelper->checkPermissionRedirect('xmstock_manage', $obj->getVar('order_areaid'), 'index.php', 2, _NOPERM);
-					$xoopsTpl->assign('orderid', $order_id);
-					$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($obj->getVar('order_description', 'show'), 50));
-					$xoopsTpl->assign('ddesired', formatTimestamp($obj->getVar('order_ddesired'), 's'));
-					$xoopsTpl->assign('dorder', formatTimestamp($obj->getVar('order_dorder'), 'm'));
-					$xoopsTpl->assign('user', XoopsUser::getUnameFromId($obj->getVar('order_userid')));
-					$xoopsTpl->assign('delivery', $obj->getVar('order_delivery'));
-					$xoopsTpl->assign('status', $obj->getVar('order_status'));
-					$xoopsTpl->assign('ddelivery', formatTimestamp($obj->getVar('order_ddelivery'), 's'));
-					switch ($obj->getVar('order_status')) {
-						case 1:
-							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_1);
-							$xoopsTpl->assign('status_icon', '<span class="fa fa-hourglass-start fa-fw" aria-hidden="true"></span>');
-							break;
-						case 2:
-							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_2);
-							$xoopsTpl->assign('status_icon', '<span class="fa fa-hourglass-half fa-fw" aria-hidden="true"></span>');
-							break;
-						case 3:
-							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_3);
-							$xoopsTpl->assign('status_icon', '<span class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></span>');
-							break;
-						case 4:
-							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_4);
-							$xoopsTpl->assign('status_icon', '<span class="fa fa-check fa-fw" aria-hidden="true"></span>');
-							break;
-						case 0:
-							$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_0);
-							$xoopsTpl->assign('status_icon', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
-							break;
-					}					
-					$form = $obj->getFormNext();
-					$xoopsTpl->assign('form', $form->render());
+					$status = $obj->getVar('order_status');
+					if ($status >= 1 &&  $status <= 3){
+						$xoopsTpl->assign('status', $status);
+						$xoopsTpl->assign('orderid', $order_id);
+						$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($obj->getVar('order_description', 'show'), 50));
+						$xoopsTpl->assign('ddesired', formatTimestamp($obj->getVar('order_ddesired'), 's'));
+						$xoopsTpl->assign('dorder', formatTimestamp($obj->getVar('order_dorder'), 'm'));
+						$xoopsTpl->assign('user', XoopsUser::getUnameFromId($obj->getVar('order_userid')));
+						$xoopsTpl->assign('delivery', $obj->getVar('order_delivery'));
+						$xoopsTpl->assign('status', $obj->getVar('order_status'));
+						$xoopsTpl->assign('ddelivery', formatTimestamp($obj->getVar('order_ddelivery'), 's'));
+						switch ($status) {
+							case 1:
+								$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_1);
+								$xoopsTpl->assign('status_icon', '<span class="fa fa-hourglass-start fa-fw" aria-hidden="true"></span>');
+								break;
+							case 2:
+								$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_2);
+								$xoopsTpl->assign('status_icon', '<span class="fa fa-hourglass-half fa-fw" aria-hidden="true"></span>');
+								break;
+							case 3:
+								$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_3);
+								$xoopsTpl->assign('status_icon', '<span class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></span>');
+								break;
+							case 4:
+								$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_4);
+								$xoopsTpl->assign('status_icon', '<span class="fa fa-check fa-fw" aria-hidden="true"></span>');
+								break;
+							case 0:
+								$xoopsTpl->assign('status_text', _MA_XMSTOCK_ORDER_STATUS_0);
+								$xoopsTpl->assign('status_icon', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
+								break;
+						}					
+						$form = $obj->getFormNext();
+						$xoopsTpl->assign('form', $form->render());
+					} else {
+						redirect_header('index.php', 2, _NOPERM);
+					}
 				}
             }
             break;
