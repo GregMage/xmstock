@@ -161,7 +161,6 @@
 											<td class="text-center"><{$order_4.dorder}></td>
 											<td class="text-center"><{$order_4.delivery_r}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_4.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
 												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_4.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
@@ -200,7 +199,6 @@
 											<td class="text-center"><{$order_0.dorder}></td>
 											<td class="text-center"><{$order_0.dcancellation}></td>
 											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_0.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
 												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_0.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
