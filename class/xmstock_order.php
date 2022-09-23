@@ -185,7 +185,11 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_userid', Request::getInt('order_userid', 0));
 		$this->setVar('order_ddesired', strtotime(Request::getString('order_ddesired', '')));
 		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
-        $this->setVar('order_status', Request::getInt('order_status', 1));
+        $status = Request::getInt('order_status', 1);
+        $this->setVar('order_status', $status);
+		if ($status == 0){
+			$this->setVar('order_dcancellation', time());
+		}
 		if ($orderHandler->insert($this)) {
 			$order_id = $this->getVar('order_id');
 			$count = Request::getInt('count', 0);
