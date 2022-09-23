@@ -5,7 +5,15 @@
 			<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
 			<li class="breadcrumb-item"><a href="management.php?op=list"><{$smarty.const._MA_XMSTOCK_MANAGEMENT}></a></li>
 			<{if $op|default:'' == 'next'}>
-			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_NEXT}></li>
+				<{if $status|default:1 == 1}>
+				<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_NEXT1}></li>
+				<{/if}>
+				<{if $status|default:1 == 2}>
+				<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_NEXT2}></li>
+				<{/if}>
+				<{if $status|default:1 == 3}>
+				<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_NEXT3}></li>
+				<{/if}>
 			<{else}>
 			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_EDIT}></li>
 			<{/if}>

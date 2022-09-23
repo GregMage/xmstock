@@ -112,6 +112,7 @@ define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
 define('_MA_XMSTOCK_STOCK_AMOUNT', 'Amount in stock');
 define('_MA_XMSTOCK_STOCK_AREA', 'Area');
 define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
+define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
@@ -247,7 +248,9 @@ define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
 define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande'); //Edition of an order
 define('_MA_XMSTOCK_ACTION_ARTICLES', 'Articles');
 define('_MA_XMSTOCK_ACTION_INFODELARTICLE', 'Mettre "0" pour supprimer un article');
-define('_MA_XMSTOCK_ACTION_NEXT', 'Traitement d\'une commande');
+define('_MA_XMSTOCK_ACTION_NEXT1', 'Formulaire de validation de la commande');
+define('_MA_XMSTOCK_ACTION_NEXT2', 'Formulaire de préparation de la commande');
+define('_MA_XMSTOCK_ACTION_NEXT3', 'Formulaire de livraison de la commande');
 define('_MA_XMSTOCK_STOCK_SPLIT', 'Diviser');
 define('_MA_XMSTOCK_STOCK_SPLIT_DESC', 'Les articles sélectionnés dans "Diviser" seront regroupés dans une nouvelle commande');
 
