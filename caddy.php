@@ -73,11 +73,11 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 			$articles['count']  = $count;
 			$count++;
 			$total += $datas['qty'];
-			if ($general_area[0] == ''){
+			/*if ($general_area[0] == ''){
 				$articles['max']  = 'max="' . $articles['amount'] . '"';
-			} else {
+			} else {*/
 				$articles['max']  = '';
-			}
+			//}
 			$xoopsTpl->append_by_ref('articles', $articles);
 			unset($articles);
 		}
