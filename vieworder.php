@@ -46,7 +46,7 @@ if ($order_id == 0) {
 			}
 		}
 		$xoopsTpl->assign('orderid', $order_id);
-		$xoopsTpl->assign('description', XmstockUtility::generateDescriptionTagSafe($order->getVar('order_description', 'show'), 50));
+		$xoopsTpl->assign('description', $order->getVar('order_description'));
 		$xoopsTpl->assign('ddesired', formatTimestamp($order->getVar('order_ddesired'), 's'));
 		$xoopsTpl->assign('dorder', formatTimestamp($order->getVar('order_dorder'), 'm'));
 		$xoopsTpl->assign('user', XoopsUser::getUnameFromId($order->getVar('order_userid')));
