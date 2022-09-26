@@ -355,6 +355,8 @@ class xmstock_order extends XoopsObject
 					$new_orderid = 0;
 					$nb_split = 0;
 					for ($i = 1; $i <= $count; $i++) {
+						$itemorder = Request::getInt('itemorder' . $i, 0);
+						$item = $itemorderHandler->get($itemorder);
 						if (isset($_POST['split' . $i])){
 							$nb_split++;
 							// création d'une nouvelle commande si pas existante (copie des données de la commande de base)
@@ -372,17 +374,35 @@ class xmstock_order extends XoopsObject
 								$orderHandler->insert($new_order);
 								$new_orderid = $new_order->get_new_enreg();
 							}
-							// changement de l'article dans la nouvelle commande uniquement si pas tous les article sont splité
+							// changement de l'article dans la nouvelle commande uniquement si pas tous les articles sont splités
 							if ($nb_split < $count){
-								$itemorder = Request::getInt('itemorder' . $i, 0);
-								$item = $itemorderHandler->get($itemorder);
 								$item->setVar('itemorder_orderid', $new_orderid);
 								if (!$itemorderHandler->insert($item)) {
 									$error_message = $item->getHtmlErrors();
 								}
 							}
+						} else {
+							// Sortie de stock uniquement en statut de 2 à 3
+							if ($status == 2) {
+								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+								$new_transfer = $transferHandler->create();
+								$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
+								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
+								$new_transfer->setVar('transfer_type', 'O');
+								$new_transfer->setVar('transfer_st_areaid', $item->getVar('itemorder_areaid'));
+								$new_transfer->setVar('transfer_outputuserid', $this->getVar('order_userid'));		
+								$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_DESC, formatTimestamp($this->getVar('order_dorder'), 'm'), $this->getVar('order_id')));		
+								$new_transfer->setVar('transfer_ref', sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_REF, $this->getVar('order_id')));
+								$new_transfer->setVar('transfer_status', 1);
+								$new_transfer->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
+								$new_transfer->setVar('transfer_date', time());
+								if (!$transferHandler->insert($new_transfer)) {
+									$error_message .=  $new_transfer->getHtmlErrors();
+								}
+							}							
 						}
 					}
+
 					if ($error_message == '') {
 						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					}
