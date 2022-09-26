@@ -77,21 +77,7 @@ CREATE TABLE `xmstock_itemorder` (
   `itemorder_orderid`     	int(11) 	 unsigned    	NOT NULL DEFAULT '0', 
   `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_amount`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_dvalidation`   int(10) 	 unsigned   	NOT NULL DEFAULT '0',
-  `itemorder_ddelivery_v`   int(10) 	 unsigned   	NOT NULL DEFAULT '0',
-  `itemorder_dready`    	int(10) 	 unsigned   	NOT NULL DEFAULT '0',
-  `itemorder_ddelivery_r`   int(10) 	 unsigned   	NOT NULL DEFAULT '0',
-  `itemorder_dcancellation` int(10) 	 unsigned   	NOT NULL DEFAULT '0',
-  `itemorder_dvalidated`  	int(10) 	 unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_davailable`  	int(10) 	 unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_dwithdrawal` 	int(10) 	 unsigned    	NOT NULL DEFAULT '0',
-  
-  
-  
-  
-  `itemorder_status`      tinyint(1)   unsigned 	NOT NULL DEFAULT '1',
-  
+  `itemorder_amount`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',  
   PRIMARY KEY (`itemorder_id`),
   KEY `itemorder_orderid` (`itemorder_articleid`)
 ) ENGINE=MyISAM;
