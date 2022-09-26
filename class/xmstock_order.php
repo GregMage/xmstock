@@ -102,7 +102,6 @@ class xmstock_order extends XoopsObject
 						$obj->setVar('itemorder_articleid', $datas['id']);
 						$obj->setVar('itemorder_areaid', $datas['area']);
 						$obj->setVar('itemorder_amount', $datas['qty']);
-						$obj->setVar('itemorder_status', 1);
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
 						}
@@ -279,8 +278,8 @@ class xmstock_order extends XoopsObject
 		$articles = "<table  class='table table-bordered'><thead class='table-primary'><tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th><th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th></tr></thead>";
 		$articles .= "<tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
-			$count++;
-			$articles .= "<tr><th scope='row'>" . $itemorder_arr[$i]->getVar('article_name') . "</th>";
+			$count++;		
+			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'></td>";
 			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
@@ -334,23 +333,65 @@ class xmstock_order extends XoopsObject
 			$this->setVar('order_status', $status + 1);
 		} else {
 			redirect_header('index.php', 2, _NOPERM);
-		}
-
-		// ajouter un sytème de contrôle, pas possible de passer à status 2 à 3 si montant plus grand que stock!!!!
-
-
-		if ($orderHandler->insert($this)) {
-			$order_id = $this->getVar('order_id');
-			$count = Request::getInt('count', 0);
+		}	
+		$count = Request::getInt('count', 0);
+		// Contrôle pour ne pas faire suivre si le stock d'un article n'est pas suffissant
+		if ($status == 2) {
 			if ($count > 0){
-				if ($error_message == '') {
-					redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+				for ($i = 1; $i <= $count; $i++) {
+					if (!isset($_POST['split' . $i])){
+						$itemorder = Request::getInt('itemorder' . $i, 0);
+						$item = $itemorderHandler->get($itemorder);
+						$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+					}
+				}
+			}
+		}
+		if ($error_message == '') {
+			if ($orderHandler->insert($this)) {
+				$order_id = $this->getVar('order_id');				
+				if ($count > 0){
+					//split de commandes
+					$new_orderid = 0;
+					$nb_split = 0;
+					for ($i = 1; $i <= $count; $i++) {
+						if (isset($_POST['split' . $i])){
+							$nb_split++;
+							// création d'une nouvelle commande si pas existante (copie des données de la commande de base)
+							if ($new_orderid == 0) {
+								$new_order = $orderHandler->create();							
+								$description = sprintf(_MA_XMSTOCK_ACTION_SPLIT_TEXT, "<a href='" . XOOPS_URL . "/modules/xmstock/vieworder.php?op=view&order_id=" . $this->getVar('order_id') . "' target='_blank'>" . $this->getVar('order_id') . "</a>") . '<br>' . $this->getVar('order_description');
+								$new_order->setVar('order_description', $description);
+								$new_order->setVar('order_userid', $this->getVar('order_userid'));
+								$new_order->setVar('order_areaid', $this->getVar('order_areaid'));
+								$new_order->setVar('order_ddesired', $this->getVar('order_ddesired'));
+								$new_order->setVar('order_dorder', $this->getVar('order_dorder'));
+								$new_order->setVar('order_ddesired', $this->getVar('order_ddesired'));
+								$new_order->setVar('order_delivery', $this->getVar('order_delivery'));
+								$new_order->setVar('order_status', 1);
+								$orderHandler->insert($new_order);
+								$new_orderid = $new_order->get_new_enreg();
+							}
+							// changement de l'article dans la nouvelle commande uniquement si pas tous les article sont splité
+							if ($nb_split < $count){
+								$itemorder = Request::getInt('itemorder' . $i, 0);
+								$item = $itemorderHandler->get($itemorder);
+								$item->setVar('itemorder_orderid', $new_orderid);
+								if (!$itemorderHandler->insert($item)) {
+									$error_message = $item->getHtmlErrors();
+								}
+							}
+						}
+					}
+					if ($error_message == '') {
+						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+					}
+				} else {
+					$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
 				}
 			} else {
-				$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
+				$error_message =  $this->getHtmlErrors();
 			}
-		} else {
-			$error_message =  $this->getHtmlErrors();
 		}
         return $error_message;
     }
@@ -403,6 +444,7 @@ class xmstock_order extends XoopsObject
 		$itemorderHandler->field_link = "article_id";
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
+		$item_array_count = count($itemorder_arr);
 		$count = 0;
 		$articles = "<table class='table table-bordered'><thead class='table-primary'><tr>";
 		$articles .= "<th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th>";
@@ -411,7 +453,9 @@ class xmstock_order extends XoopsObject
 		if ($status == 2){
 			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_LOCATION . "</th>";
 		}
-		$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_SPLIT . "</th>";
+		if ($item_array_count > 1){
+			$articles .= "<th scope='col'>" . _MA_XMSTOCK_ACTION_SPLIT . "</th>";
+		}
 		$articles .= "</tr></thead><tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
@@ -421,11 +465,15 @@ class xmstock_order extends XoopsObject
 			if ($status == 2){
 				$articles .= "<td class='text-center'>A faire</td>";
 			}
-			$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td></tr>";
+			if ($item_array_count > 1){
+				$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td></tr>";
+			}
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
 		$articles .= "</tbody></table>";
-		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_STOCK_SPLIT_DESC . "</small>";
+		if ($item_array_count > 1){
+			$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_SPLIT_DESC . "</small>";
+		}
 		$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_ORDER_ARTICLES, $articles), true);
 		$form->addElement(new XoopsFormHidden('count', $count));
 
