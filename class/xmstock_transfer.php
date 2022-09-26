@@ -40,6 +40,7 @@ class xmstock_transfer extends XoopsObject
 		$this->initVar('transfer_st_areaid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_ar_areaid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_outputid', XOBJ_DTYPE_INT, null, false, 11);
+		$this->initVar('transfer_outputuserid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_amount', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('transfer_date', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('transfer_userid', XOBJ_DTYPE_INT, null, false, 8);
@@ -48,7 +49,7 @@ class xmstock_transfer extends XoopsObject
 		$this->initVar('transfer_status', XOBJ_DTYPE_INT, null, false, 1);
 		$this->initVar('article_id', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_cid', XOBJ_DTYPE_TXTBOX, null);
-		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);		
+		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
     }
 
@@ -72,7 +73,7 @@ class xmstock_transfer extends XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         include __DIR__ . '/../include/common.php';
-        
+
         $error_message = '';
         // test error
 		$transfer_amount = Xmf\Request::getInt('transfer_amount', 0);
@@ -120,12 +121,12 @@ class xmstock_transfer extends XoopsObject
 		$this->setVar('transfer_type', $transfer_type);
 		$this->setVar('transfer_ar_areaid', $transfer_ar_areaid);
 		$this->setVar('transfer_st_areaid', $transfer_st_areaid);
-		$this->setVar('transfer_outputid', $transfer_outputid);		
-		$this->setVar('transfer_description',  Xmf\Request::getText('transfer_description', ''));		
+		$this->setVar('transfer_outputid', $transfer_outputid);
+		$this->setVar('transfer_description',  Xmf\Request::getText('transfer_description', ''));
         $this->setVar('transfer_ref', Xmf\Request::getString('transfer_ref', ''));
         $this->setVar('transfer_status', Xmf\Request::getInt('transfer_status', 1));
 		$this->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
-		$this->setVar('transfer_date', time());		
+		$this->setVar('transfer_date', time());
         if ($error_message == '') {
 			if ($transfer_articleid == 0){
 				$error_message .= _MA_XMSTOCK_ERROR_ARTICLEID . '<br>';
@@ -168,11 +169,11 @@ class xmstock_transfer extends XoopsObject
             $status = $this->getVar('transfer_status');
 			$type = $this->getVar('transfer_type');
         }
-		
+
 		//articleid
 		xoops_load('utility', 'xmarticle');
 		XmarticleUtility::renderArticleForm($form, _MA_XMSTOCK_TRANSFER_ARTICLE, $this->getVar('transfer_articleid'));
-		
+
 		// description
         $editor_configs           = array();
         $editor_configs['name']   = 'transfer_description';
@@ -183,7 +184,7 @@ class xmstock_transfer extends XoopsObject
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_TRANSFER_DESC, 'transfer_description', $editor_configs), false);
-		
+
 		if ($type != 'E'){
 			// st_areaid
 			$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true), true);
@@ -196,7 +197,7 @@ class xmstock_transfer extends XoopsObject
 		} else {
 			$form->addElement(new XoopsFormHidden('transfer_ar_areaid', 0));
 		}
-		
+
 		if ($type == 'O'){
 			// outputid
 			$form->addElement(new XmstockFormSelectOutput(_MA_XMSTOCK_TRANSFER_OUTPUT, 'transfer_outputid', $this->getVar('transfer_outputid'), true), true);
@@ -205,16 +206,16 @@ class xmstock_transfer extends XoopsObject
 		}
         // amount
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUNT, 'transfer_amount', 10, 10, $this->getVar('transfer_amount')), true);
-		
+
 		// ref
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
-		
+
 		// status
         $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', $status);
         $options = array(1 => _MA_XMSTOCK_STATUS_EXECUTED, 0 =>_MA_XMSTOCK_STATUS_WAITING,);
         $form_status->addOptionArray($options);
-        $form->addElement($form_status);		
-		
+        $form->addElement($form_status);
+
 		$form->addElement(new XoopsFormHidden('transfer_type', $type));
         $form->addElement(new XoopsFormHidden('op', 'save'));
         // submit
