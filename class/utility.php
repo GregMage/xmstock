@@ -122,11 +122,11 @@ class XmstockUtility
      * @param string   $type		Type de transfert (E: entrée, O: sortie, T: Transfert)
      * @param int      $articleid	Id de l'article
      * @param int      $amount		montant
-     * @param int      $areaid	    Id de l'area de départ
-     * @param int      $areaid	    Id de l'area d'arrivée
+     * @param int      $st_areaid	Id de l'area de départ
+     * @param int      $ar_areaid	Id de l'area d'arrivée
      * @return string   			Vide ou message d'erreur.
      */
-	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid)
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0)
     {
 		include __DIR__ . '/../include/common.php';
 		switch ($type) {
