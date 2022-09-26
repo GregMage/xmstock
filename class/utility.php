@@ -280,7 +280,7 @@ class XmstockUtility
 		$viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
 		// Get Permission to order
 		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
-		
+
 		$area = array();
 
 		// Criteria
@@ -309,7 +309,7 @@ class XmstockUtility
 					$stock['order']  = false;
 				}
 				$total_amount += $stock['amount'];
-                $xoopsTpl->append_by_ref('stock', $stock);                
+                $xoopsTpl->append_by_ref('stock', $stock);
 				$area[] = $stock['area_id'];
 				unset($stock);
             }
@@ -320,7 +320,7 @@ class XmstockUtility
 			self::addStocks($viewPermissionArea, $orderPermissionArea, $area);
 		}
     }
-	
+
 	/**
      * Fonction qui permet d'ajouter les areas sélectionnés dans les préférences
      * @param array      $viewPermissionArea permission de voir
@@ -344,9 +344,9 @@ class XmstockUtility
 			$criteria->add(new Criteria('area_id', '(' . implode(',', $general_area) . ')', 'IN'));
 			$area_arr = $areaHandler->getall($criteria);
 			if (count($area_arr) > 0 && !empty($viewPermissionArea)) {
-				foreach (array_keys($area_arr) as $i) {					
+				foreach (array_keys($area_arr) as $i) {
 					if (in_array($area_arr[$i]->getVar('area_id'), $area) == false){
-						$stock['area_id']    = $area_arr[$i]->getVar('area_id');					
+						$stock['area_id']    = $area_arr[$i]->getVar('area_id');
 						$stock['name']       = $area_arr[$i]->getVar('area_name');
 						$stock['location']   = $area_arr[$i]->getVar('area_location');
 						$stock['amount']     = 0;
@@ -362,7 +362,7 @@ class XmstockUtility
 				$xoopsTpl->assign('xmstock_viewstocks', true);
 				$xoopsTpl->assign('total_amount', 0);
 			}
-		}	
+		}
 	}
 
 	/**
