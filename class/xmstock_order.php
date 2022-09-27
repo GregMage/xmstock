@@ -483,8 +483,17 @@ class xmstock_order extends XoopsObject
 			$count++;
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			if ($status == 1 || $status == 2){
-				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
-				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td>";
+				$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+				if ($amoutArea > $itemorder_arr[$i]->getVar('itemorder_amount')) {
+					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
+				} else {
+					if ($status == 1){
+						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
+					} else {
+						$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
+					}
+				}
+				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . "</span></td>";
 			}
 			if ($status == 2){
 				$articles .= "<td class='text-center'>A faire</td>";

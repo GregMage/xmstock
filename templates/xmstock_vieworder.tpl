@@ -125,7 +125,6 @@
 								<tr>
 									<th scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_ARTICLE}></th>
 									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}></th>
-									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -137,8 +136,7 @@
 										</a>
 										(<{$article.reference}>)
 									</td>
-									<td class="text-center"><{$article.amount}></td>
-									<td class="text-center"><{$article.status}></td>
+									<td class="text-center"><span class='badge badge-primary badge-pill'><{$article.amount}></span></td>
 								</tr>
 								<{/foreach}>
 							</tbody>
