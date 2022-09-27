@@ -468,8 +468,10 @@ class xmstock_order extends XoopsObject
 		$count = 0;
 		$articles = "<table class='table table-bordered'><thead class='table-primary'><tr>";
 		$articles .= "<th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th>";
-		$articles .= "<th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th>";
-		$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th>";
+		if ($status == 1 || $status == 2){
+			$articles .= "<th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th>";
+			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th>";
+		}
 		if ($status == 2){
 			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_LOCATION . "</th>";
 		}
@@ -480,8 +482,10 @@ class xmstock_order extends XoopsObject
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
-			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
-			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td>";
+			if ($status == 1 || $status == 2){
+				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
+				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td>";
+			}
 			if ($status == 2){
 				$articles .= "<td class='text-center'>A faire</td>";
 			}

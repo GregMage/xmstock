@@ -92,6 +92,11 @@
 			<{$smarty.const._MA_XMSTOCK_ACTION_WARNING_STATUS2}>
 		</div>
 		<{/if}>
+		<{if $status|default:1 == 3}>
+		<div class="alert alert-info" role="alert">
+			<{$smarty.const._MA_XMSTOCK_ACTION_WARNING_STATUS3}>
+		</div>
+		<{/if}>
         <{$form}>
 
     <{/if}>

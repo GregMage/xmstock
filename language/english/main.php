@@ -255,6 +255,7 @@ define('_MA_XMSTOCK_ACTION_SPLIT', 'Diviser');
 define('_MA_XMSTOCK_ACTION_SPLIT_DESC', 'Les articles sélectionnés dans "Diviser" seront regroupés dans une nouvelle commande');
 define('_MA_XMSTOCK_ACTION_SPLIT_TEXT', 'Cette commande est une commande divisée (commande d\'origine: %s)');
 define('_MA_XMSTOCK_ACTION_WARNING_STATUS2', 'Une fois ce formulaire validé, les articles seront décomptés du stock!');
+define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la commande sera considérée comme livrée (article livrés ou retirés).');
 define('_MA_XMSTOCK_ACTION_TRANSFERT_REF', 'Commande %s');
 define('_MA_XMSTOCK_ACTION_TRANSFERT_DESC', 'Commande du %s avec le numéro %s');
 
