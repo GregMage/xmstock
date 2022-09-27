@@ -22,7 +22,7 @@
 		<{if $error_message|default:false}>
 			<div class="alert alert-danger" role="alert"><{$error_message}></div>
 		<{/if}>
-		<{if $op|default:'' == 'next'}>
+		<{if $op|default:'' == 'next' || $op|default:'' == 'savenext'}>
 		<div class="row mb-2">
 			<div class="col-md-12">
 				<div class="card border border-primary">

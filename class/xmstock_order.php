@@ -278,7 +278,7 @@ class xmstock_order extends XoopsObject
 		$articles = "<table  class='table table-bordered'><thead class='table-primary'><tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th><th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th></tr></thead>";
 		$articles .= "<tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
-			$count++;		
+			$count++;
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'></td>";
 			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td></tr>";
@@ -329,11 +329,6 @@ class xmstock_order extends XoopsObject
 				$this->setVar('order_ddelivery_r', time());
 				break;
 		}
-		if ($status >= 1 &&  $status <= 3){
-			$this->setVar('order_status', $status + 1);
-		} else {
-			redirect_header('index.php', 2, _NOPERM);
-		}	
 		$count = Request::getInt('count', 0);
 		// Contrôle pour ne pas faire suivre si le stock d'un article n'est pas suffissant
 		if ($status == 2) {
@@ -348,8 +343,13 @@ class xmstock_order extends XoopsObject
 			}
 		}
 		if ($error_message == '') {
+			if ($status >= 1 &&  $status <= 3){
+				$this->setVar('order_status', $status + 1);
+			} else {
+				redirect_header('index.php', 2, _NOPERM);
+			}
 			if ($orderHandler->insert($this)) {
-				$order_id = $this->getVar('order_id');				
+				$order_id = $this->getVar('order_id');
 				if ($count > 0){
 					//split de commandes
 					$new_orderid = 0;
@@ -361,7 +361,7 @@ class xmstock_order extends XoopsObject
 							$nb_split++;
 							// création d'une nouvelle commande si pas existante (copie des données de la commande de base)
 							if ($new_orderid == 0) {
-								$new_order = $orderHandler->create();							
+								$new_order = $orderHandler->create();
 								$description = sprintf(_MA_XMSTOCK_ACTION_SPLIT_TEXT, "<a href='" . XOOPS_URL . "/modules/xmstock/vieworder.php?op=view&order_id=" . $this->getVar('order_id') . "' target='_blank'>" . $this->getVar('order_id') . "</a>") . '<br>' . $this->getVar('order_description');
 								$new_order->setVar('order_description', $description);
 								$new_order->setVar('order_userid', $this->getVar('order_userid'));
@@ -390,8 +390,8 @@ class xmstock_order extends XoopsObject
 								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
 								$new_transfer->setVar('transfer_type', 'O');
 								$new_transfer->setVar('transfer_st_areaid', $item->getVar('itemorder_areaid'));
-								$new_transfer->setVar('transfer_outputuserid', $this->getVar('order_userid'));		
-								$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_DESC, formatTimestamp($this->getVar('order_dorder'), 'm'), $this->getVar('order_id')));		
+								$new_transfer->setVar('transfer_outputuserid', $this->getVar('order_userid'));
+								$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_DESC, formatTimestamp($this->getVar('order_dorder'), 'm'), $this->getVar('order_id')));
 								$new_transfer->setVar('transfer_ref', sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_REF, $this->getVar('order_id')));
 								$new_transfer->setVar('transfer_status', 1);
 								$new_transfer->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
@@ -399,7 +399,7 @@ class xmstock_order extends XoopsObject
 								if (!$transferHandler->insert($new_transfer)) {
 									$error_message .=  $new_transfer->getHtmlErrors();
 								}
-							}							
+							}
 						}
 					}
 
