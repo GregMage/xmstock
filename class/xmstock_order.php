@@ -410,6 +410,7 @@ class xmstock_order extends XoopsObject
 					$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
 				}
 			} else {
+				$this->setVar('order_status', $status);
 				$error_message =  $this->getHtmlErrors();
 			}
 		}
