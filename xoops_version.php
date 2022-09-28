@@ -64,6 +64,7 @@ $modversion['tables'][3] = 'xmstock_stock';
 $modversion['tables'][4] = 'xmstock_output';
 $modversion['tables'][6] = 'xmstock_order';
 $modversion['tables'][7] = 'xmstock_itemorder';
+$modversion['tables'][8] = 'xmstock_price';
 
 
 // Admin Templates
@@ -124,6 +125,19 @@ $modversion['config'][] = array(
     'default'     => 0,
     'options'     => array_flip($area)
 );
+
+$optionPrice[_MI_XMSTOCK_PREF_PRICE_0] = 0;
+$optionPrice[_MI_XMSTOCK_PREF_PRICE_1] = 1;
+$optionPrice[_MI_XMSTOCK_PREF_PRICE_2] = 2;
+$modversion['config'][] = [
+    'name'        => 'general_price',
+    'title'       => '_MI_XMSTOCK_PREF_PRICE',
+    'description' => '_MI_XMSTOCK_PREF_PRICE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 0,
+	'options' => $optionPrice,
+];
 
 xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
