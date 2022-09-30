@@ -72,6 +72,7 @@ define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
 define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
 define('_MA_XMSTOCK_ERROR_ONEARTICLE', 'Vous devez avoir au minimum un article (pas de valeur 0 sur l\'article restant)');
 define('_MA_XMSTOCK_ERROR_ORDER_DEL', 'You cannot delete this order!');
+define('_MA_XMSTOCK_ERROR_PRICE', 'Le prix doit être un nombre et supérieur à 0');
 define('_MA_XMSTOCK_ERROR_SIZE', "The size in préférence (Max uploaded files size) exceeds the maximum values defined in 'post_max_size' or 'upload_max_filesize' in your configuration in php.ini");
 define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'There is no destination stock selected');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'There is no starting stock selected');

@@ -124,14 +124,16 @@ class XmstockUtility
      * @param int      $amount		montant
      * @param int      $st_areaid	Id de l'area de départ
      * @param int      $ar_areaid	Id de l'area d'arrivée
+     * @param float    $prix		prix
      * @return string   			Vide ou message d'erreur.
      */
-	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0)
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0)
     {
 		include __DIR__ . '/../include/common.php';
 		switch ($type) {
 			case 'E':
 			default:
+				echo '<br>prix tr: ' . $price;
 				$criteria = new CriteriaCompo();
 				$criteria->add(new Criteria('stock_areaid', $ar_areaid));
 				$criteria->add(new Criteria('stock_articleid', $articleid));
@@ -141,6 +143,9 @@ class XmstockUtility
 					$obj->setVar('stock_areaid', $ar_areaid);
 					$obj->setVar('stock_articleid', $articleid);
 					$obj->setVar('stock_amount', $amount);
+					if ($helper->getConfig('general_price', 0) != 0) {
+						$obj->setVar('stock_price', number_format($price, 4));
+					}
 					if ($stockHandler->insert($obj)) {
 						return '';
 					} else {
@@ -151,7 +156,27 @@ class XmstockUtility
 						$obj = $stockHandler->get($i);
 					}
 					$old_amount = $obj->getVar('stock_amount');
+					$old_price = $obj->getVar('stock_price');
 					$obj->setVar('stock_amount', $old_amount + $amount);
+					//price
+					if ($helper->getConfig('general_price', 0) != 0) {						
+						if ($helper->getConfig('general_price', 0) == 1) {
+							$obj->setVar('stock_price', $price);
+						} else {							
+							if ($old_price > 0 && $price > 0) {
+								$obj->setVar('stock_price', number_format((($old_amount * $old_price) + ($amount * $price))/($old_amount + $amount), 4));
+							} else {
+								if ($old_price > 0 && $price == 0) {
+									$obj->setVar('stock_price', $old_price);
+								} else {
+									$obj->setVar('stock_price', $price);
+								}
+							}							
+						}
+						if ($price > 0) {
+							echo 'jj: ' . self::setPrice($articleid, $ar_areaid, $amount, $price);
+						}
+					}
 					if ($stockHandler->insert($obj)) {
 						return '';
 					} else {
@@ -237,6 +262,30 @@ class XmstockUtility
 					}
 				}
 				break;
+		}
+    }
+
+	/**
+     * Fonction qui enregistre les prix dans la table price
+     * @param int      $articleid	Id de l'article
+	 * @param int      $areaid		Id de l'area
+     * @param int      $amount		montant
+     * @param float    $prix		prix
+     * @return string   			Vide ou message d'erreur.
+     */
+	public static function setPrice($articleid, $areaid, $amount, $price)
+    {
+        include __DIR__ . '/../include/common.php';
+		$obj = $priceHandler->create();
+		$obj->setVar('price_articleid', $articleid);
+		$obj->setVar('price_areaid', $areaid);
+		$obj->setVar('price_amount', $amount);
+		$obj->setVar('price_price', number_format($price, 4));
+		$obj->setVar('price_date', time());
+		if ($priceHandler->insert($obj)) {
+			return '';
+		} else {
+			return $obj->getHtmlErrors();
 		}
     }
 

@@ -16,6 +16,7 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
+use Xmf\Request;
 
 if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
@@ -76,11 +77,11 @@ class xmstock_transfer extends XoopsObject
 
         $error_message = '';
         // test error
-		$transfer_amount = Xmf\Request::getInt('transfer_amount', 0);
-		$transfer_type = Xmf\Request::getString('transfer_type', 'E');
-		$transfer_st_areaid = Xmf\Request::getInt('transfer_st_areaid', 0);
-		$transfer_ar_areaid = Xmf\Request::getInt('transfer_ar_areaid', 0);
-		$transfer_outputid = Xmf\Request::getInt('transfer_outputid', 0);
+		$transfer_amount = Request::getInt('transfer_amount', 0);
+		$transfer_type = Request::getString('transfer_type', 'E');
+		$transfer_st_areaid = Request::getInt('transfer_st_areaid', 0);
+		$transfer_ar_areaid = Request::getInt('transfer_ar_areaid', 0);
+		$transfer_outputid = Request::getInt('transfer_outputid', 0);
         if ((int)$_REQUEST['transfer_amount'] == 0 && $_REQUEST['transfer_amount'] != '0') {
             $error_message .= _MA_XMSTOCK_ERROR_AMOUNT . '<br>';
             $transfer_amount = 0;
@@ -113,6 +114,12 @@ class xmstock_transfer extends XoopsObject
 				$transfer_ar_areaid = 0;
 			}
 		}
+		$price = Request::getFloat('transfer_price', 0.0);
+		if ($price < 0.0) {
+            $error_message .= _MA_XMSTOCK_ERROR_PRICE . '<br>';
+            $this->setVar('transfer_price', number_format($price, 4));
+        }		
+		
 		xoops_load('utility', 'xmarticle');
 		$transfer_articleid = XmarticleUtility::renderArticleIdSave();
 		$error_message .= XmstockUtility::checkTransfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid);
@@ -122,9 +129,9 @@ class xmstock_transfer extends XoopsObject
 		$this->setVar('transfer_ar_areaid', $transfer_ar_areaid);
 		$this->setVar('transfer_st_areaid', $transfer_st_areaid);
 		$this->setVar('transfer_outputid', $transfer_outputid);
-		$this->setVar('transfer_description',  Xmf\Request::getText('transfer_description', ''));
-        $this->setVar('transfer_ref', Xmf\Request::getString('transfer_ref', ''));
-        $this->setVar('transfer_status', Xmf\Request::getInt('transfer_status', 1));
+		$this->setVar('transfer_description',  Request::getText('transfer_description', ''));
+        $this->setVar('transfer_ref', Request::getString('transfer_ref', ''));
+        $this->setVar('transfer_status', Request::getInt('transfer_status', 1));
 		$this->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 		$this->setVar('transfer_date', time());
         if ($error_message == '') {
@@ -132,10 +139,11 @@ class xmstock_transfer extends XoopsObject
 				$error_message .= _MA_XMSTOCK_ERROR_ARTICLEID . '<br>';
 			} else {
 				$this->setVar('transfer_articleid', $transfer_articleid);
-				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid);
+				echo '<br>prix: ' . $price;
+				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price);
 				if ($error_message == '') {
 					if ($transferHandler->insert($this)) {
-						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+						//redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					} else {
 						$error_message .=  $this->getHtmlErrors();
 					}
