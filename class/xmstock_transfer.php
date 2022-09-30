@@ -207,6 +207,13 @@ class xmstock_transfer extends XoopsObject
         // amount
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUNT, 'transfer_amount', 10, 10, $this->getVar('transfer_amount')), true);
 
+		// price
+		if ($helper->getConfig('general_price', 0) != 0 && $type == 'E') {
+			$price = new XoopsFormText(_MA_XMSTOCK_TRANSFER_PRICE, 'transfer_price', 10, 10, $this->getVar('transfer_price'));
+			$price->setDescription(_MA_XMSTOCK_TRANSFER_PRICE_DSC);
+			$form->addElement($price, true);
+		}
+
 		// ref
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
 
