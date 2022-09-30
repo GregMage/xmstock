@@ -48,6 +48,7 @@ class xmstock_transfer extends XoopsObject
 		$this->initVar('transfer_type', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('transfer_ref', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('transfer_status', XOBJ_DTYPE_INT, null, false, 1);
+		$this->initVar('transfer_price', XOBJ_DTYPE_OTHER, null, false, 10);
 		$this->initVar('article_id', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_cid', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
@@ -117,9 +118,11 @@ class xmstock_transfer extends XoopsObject
 		$price = Request::getFloat('transfer_price', 0.0);
 		if ($price < 0.0) {
             $error_message .= _MA_XMSTOCK_ERROR_PRICE . '<br>';
-            $this->setVar('transfer_price', number_format($price, 4));
-        }		
-		
+            $this->setVar('transfer_price', 0.0);
+        } else {
+			$this->setVar('transfer_price', number_format($price, 2));
+		}
+
 		xoops_load('utility', 'xmarticle');
 		$transfer_articleid = XmarticleUtility::renderArticleIdSave();
 		$error_message .= XmstockUtility::checkTransfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid);
@@ -139,9 +142,10 @@ class xmstock_transfer extends XoopsObject
 				$error_message .= _MA_XMSTOCK_ERROR_ARTICLEID . '<br>';
 			} else {
 				$this->setVar('transfer_articleid', $transfer_articleid);
-				echo '<br>prix: ' . $price;
+				$price = $price / $transfer_amount;
 				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price);
 				if ($error_message == '') {
+					$this->destroyVars('transfer_price');
 					if ($transferHandler->insert($this)) {
 						//redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					} else {

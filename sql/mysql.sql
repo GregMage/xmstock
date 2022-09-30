@@ -37,7 +37,7 @@ CREATE TABLE `xmstock_stock` (
   `stock_articleid`     mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `stock_amount`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
   `stock_type`         	tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
-  `stock_price`         double(6,4)             	NOT NULL default '0.0000',
+  `stock_price`         double(8,2)             	NOT NULL default '0.00',
   
   PRIMARY KEY (`stock_id`),
   KEY `stock_areaid` (`stock_articleid`)
@@ -89,7 +89,7 @@ CREATE TABLE `xmstock_price` (
   `price_areaid`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
   `price_articleid`     mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `price_amount`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
-  `price_price`         double(6,4)             	NOT NULL default '0.0000',
+  `price_price`         double(8,2)             	NOT NULL default '0.00',
   `price_date`          int(10) 	 unsigned   	NOT NULL DEFAULT '0',
   
   PRIMARY KEY (`price_id`),
