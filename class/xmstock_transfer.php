@@ -147,7 +147,7 @@ class xmstock_transfer extends XoopsObject
 				if ($error_message == '') {
 					$this->destroyVars('transfer_price');
 					if ($transferHandler->insert($this)) {
-						//redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					} else {
 						$error_message .=  $this->getHtmlErrors();
 					}

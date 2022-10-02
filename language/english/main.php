@@ -152,6 +152,7 @@ define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this a
 
 // renderStocks
 define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
+define('_MA_XMSTOCK_RENDERSTOCKS_PRICE', 'Prix: %s CHF');
 
 // user
 define('_MA_XMSTOCK_HOME', 'Home page');
