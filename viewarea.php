@@ -174,11 +174,7 @@ if ($stock_count > 0) {
 		$stock['name']        = $stock_arr[$i]->getVar('article_name');
 		$stock['reference']   = $stock_arr[$i]->getVar('article_reference');
 		$stock['amount']      = $stock_arr[$i]->getVar('stock_amount');
-		if ($stock_arr[$i]->getVar('stock_price') != 0 && $helper->getConfig('general_price', 0) != 0) {
-			$stock['price']   = sprintf(_MA_XMSTOCK_RENDERSTOCKS_PRICE ,$stock_arr[$i]->getVar('stock_price'));
-		} else {
-			$stock['price']   = '';
-		}
+		$stock['price']   	  = XmstockUtility::getPrice($stock_arr[$i]->getVar('stock_price'));
 		$xoopsTpl->append_by_ref('stock', $stock);
 		unset($stock);
 	}

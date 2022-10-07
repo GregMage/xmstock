@@ -124,7 +124,7 @@ class XmstockUtility
      * @param int      $amount		montant
      * @param int      $st_areaid	Id de l'area de départ
      * @param int      $ar_areaid	Id de l'area d'arrivée
-     * @param float    $prix		prix
+     * @param float    $price		prix
      * @return string   			Vide ou message d'erreur.
      */
 	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0)
@@ -317,6 +317,27 @@ class XmstockUtility
     }
 
 	/**
+     * Fonction qui affiche le prix d'un article
+     * @param float    $price		prix
+     * @return string				prix mis en forme
+     */
+	public static function getPrice($price)
+    {
+        global $xoopsUser;
+        $helper = Xmf\Module\Helper::getHelper('xmstock');
+        $moduleHandler = $helper->getModule();
+        $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+        $gpermHandler = xoops_getHandler('groupperm');
+		// Permission de voir le prix
+        $perm_price = $gpermHandler->checkRight('xmstock_other', 4, $groups, $moduleHandler->getVar('mid')) ? true : false;
+		if ($perm_price == true && $price != 0 && $helper->getConfig('general_price', 0) != 0) {
+			return sprintf(_MA_XMSTOCK_RENDERSTOCKS_PRICE ,$price);
+		} else {
+			return '';
+		}
+    }
+
+	/**
      * Fonction qui permet d'afficher les areas par rapport à un article
      * @param int      $articleid	Id de l'article
      */
@@ -361,11 +382,7 @@ class XmstockUtility
                 $stock['name']       = $stock_arr[$i]->getVar('area_name');
                 $stock['location']   = $stock_arr[$i]->getVar('area_location');
                 $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
-				if ($stock_arr[$i]->getVar('stock_price') != 0 && $helper->getConfig('general_price', 0) != 0) {
-					$stock['price']  = sprintf(_MA_XMSTOCK_RENDERSTOCKS_PRICE ,$stock_arr[$i]->getVar('stock_price'));
-				} else {
-					$stock['price']  = '';
-				}
+				$stock['price']   	 = self::getPrice($stock_arr[$i]->getVar('stock_price'));
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
 					$stock['order']  = true;
 				} else {
