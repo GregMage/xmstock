@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="mb-2 mt-3">
-		<{$form}>	
+		<{$form}>
 	</div>
 	<{if $xmstock_viewarticles|default:false == true}>
 		<ul class="list-group">
@@ -25,6 +25,9 @@
 			<li class="list-group-item d-flex justify-content-between align-items-center">
 				<div>
 					<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>"><{$stock.name}></a></span> (<{$stock.reference}>)
+					<{if $stock.price != ''}>
+						<a href="<{$xoops_url}>/modules/xmstock/viewprice.php?article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="badge badge-info" target="_blank"><{$stock.price}></a>
+					<{/if}>
 					<{if $order == true}>
 						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
 					<{/if}>

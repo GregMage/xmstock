@@ -138,24 +138,24 @@ if ($s_amty != '' && $s_amval != 0) {
 switch ($s_sort) {
 	case 'NASC';
 		$criteria->setSort('article_name');
-		$criteria->setOrder('ASC');	
+		$criteria->setOrder('ASC');
 		break;
 
 	case 'NDESC';
 		$criteria->setSort('article_name');
-		$criteria->setOrder('DESC');	
+		$criteria->setOrder('DESC');
 		break;
 
 	case 'AASC';
 		$criteria->setSort('stock_amount');
-		$criteria->setOrder('ASC');	
+		$criteria->setOrder('ASC');
 		break;
 
 	case 'ADESC';
 	default:
 		$criteria->setSort('stock_amount');
-		$criteria->setOrder('DESC');	
-		break;	
+		$criteria->setOrder('DESC');
+		break;
 }
 $arguments .= '&amp;s_sort=' . $s_sort;
 $criteria->setStart($start);
@@ -174,6 +174,11 @@ if ($stock_count > 0) {
 		$stock['name']        = $stock_arr[$i]->getVar('article_name');
 		$stock['reference']   = $stock_arr[$i]->getVar('article_reference');
 		$stock['amount']      = $stock_arr[$i]->getVar('stock_amount');
+		if ($stock_arr[$i]->getVar('stock_price') != 0 && $helper->getConfig('general_price', 0) != 0) {
+			$stock['price']   = sprintf(_MA_XMSTOCK_RENDERSTOCKS_PRICE ,$stock_arr[$i]->getVar('stock_price'));
+		} else {
+			$stock['price']   = '';
+		}
 		$xoopsTpl->append_by_ref('stock', $stock);
 		unset($stock);
 	}

@@ -117,9 +117,9 @@ class xmstock_transfer extends XoopsObject
 		}
 		$price = Request::getFloat('transfer_price', 0.0);
 		if ($price < 0.0) {
-            $error_message .= _MA_XMSTOCK_ERROR_PRICE . '<br>';
-            $this->setVar('transfer_price', 0.0);
-        } else {
+			$error_message .= _MA_XMSTOCK_ERROR_PRICE . '<br>';
+			$this->setVar('transfer_price', 0.0);
+		} else {
 			$this->setVar('transfer_price', number_format($price, 2));
 		}
 
@@ -180,7 +180,10 @@ class xmstock_transfer extends XoopsObject
             $form->addElement(new XoopsFormHidden('transfer_id', $this->getVar('transfer_id')));
             $status = $this->getVar('transfer_status');
 			$type = $this->getVar('transfer_type');
-        }
+			$price = $this->getVar('transfer_price');
+        } else {
+			$price = 0;
+		}
 
 		//articleid
 		xoops_load('utility', 'xmarticle');
@@ -221,9 +224,11 @@ class xmstock_transfer extends XoopsObject
 
 		// price
 		if ($helper->getConfig('general_price', 0) != 0 && $type == 'E') {
-			$price = new XoopsFormText(_MA_XMSTOCK_TRANSFER_PRICE, 'transfer_price', 10, 10, $this->getVar('transfer_price'));
+			$price = new XoopsFormText(_MA_XMSTOCK_TRANSFER_PRICE, 'transfer_price', 10, 10, $price);
 			$price->setDescription(_MA_XMSTOCK_TRANSFER_PRICE_DSC);
-			$form->addElement($price, true);
+			$form->addElement($price, false);
+		} else {
+			$form->addElement(new XoopsFormHidden('transfer_price', 0));
 		}
 
 		// ref

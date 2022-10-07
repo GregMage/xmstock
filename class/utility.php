@@ -361,7 +361,11 @@ class XmstockUtility
                 $stock['name']       = $stock_arr[$i]->getVar('area_name');
                 $stock['location']   = $stock_arr[$i]->getVar('area_location');
                 $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
-                $stock['price']      = sprintf(_MA_XMSTOCK_RENDERSTOCKS_PRICE ,$stock_arr[$i]->getVar('stock_price'));
+				if ($stock_arr[$i]->getVar('stock_price') != 0 && $helper->getConfig('general_price', 0) != 0) {
+					$stock['price']  = sprintf(_MA_XMSTOCK_RENDERSTOCKS_PRICE ,$stock_arr[$i]->getVar('stock_price'));
+				} else {
+					$stock['price']  = '';
+				}
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
 					$stock['order']  = true;
 				} else {
