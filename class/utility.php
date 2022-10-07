@@ -356,9 +356,9 @@ class XmstockUtility
         $xmstockHelper->loadLanguage('main');
 
 		// Get Permission to view
-		$viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
+		$viewPermissionArea = self::getPermissionArea('xmstock_view');
 		// Get Permission to order
-		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
+		$orderPermissionArea = self::getPermissionArea('xmstock_order');
 
 		$area = array();
 
