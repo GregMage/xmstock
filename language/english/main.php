@@ -263,6 +263,10 @@ define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la
 define('_MA_XMSTOCK_ACTION_TRANSFERT_REF', 'Commande %s');
 define('_MA_XMSTOCK_ACTION_TRANSFERT_DESC', 'Commande du %s avec le numéro %s');
 
+// viewprice.php
+define('_MA_XMSTOCK_VIEWPRICE_DASHBOARD', 'Tableau de bord');
+
+
 
 
 
