@@ -61,7 +61,7 @@ $price_arr = $areaHandler->getall($criteria);
 $price_count = $areaHandler->getCount($criteria);
 if ($price_arr > 0) {
 	foreach (array_keys($price_arr) as $i) {
-		$price['date']   = formatTimestamp($price_arr->getVar('price_date'), 'm';
+		$price['date']   = formatTimestamp($price_arr->getVar('price_date'), 'm');
 		$price['amount'] = $price_arr->getVar('price_amount');
 		$price['price']  = $price_arr->getVar('price_price');
 		$xoopsTpl->append_by_ref('price', $price);
