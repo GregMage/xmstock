@@ -68,6 +68,7 @@ define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
 define('_MA_XMSTOCK_ERROR_NOARTICLE', 'Il n\'y a pas d\'article, il est nécessaire d\'avoir au minimum un article!');
 define('_MA_XMSTOCK_ERROR_NOORDER', 'There are no order in the database');
 define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
+define('_MA_XMSTOCK_ERROR_NOPRICE', 'Pas de prix dans la base de donnée');
 define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
 define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
 define('_MA_XMSTOCK_ERROR_ONEARTICLE', 'Vous devez avoir au minimum un article (pas de valeur 0 sur l\'article restant)');
@@ -265,6 +266,10 @@ define('_MA_XMSTOCK_ACTION_TRANSFERT_DESC', 'Commande du %s avec le numéro %s')
 
 // viewprice.php
 define('_MA_XMSTOCK_VIEWPRICE_DASHBOARD', 'Tableau de bord');
+define('_MA_XMSTOCK_VIEWPRICE_DATE', 'Date');
+define('_MA_XMSTOCK_VIEWPRICE_AMOUNT', 'Quantité transférée');
+define('_MA_XMSTOCK_VIEWPRICE_PRICECHF', 'Prix en CHF');
+define('_MA_XMSTOCK_VIEWPRICE_PRICE', 'Prix');
 
 
 

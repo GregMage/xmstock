@@ -26,6 +26,7 @@ include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 $xoTheme->addScript('modules/xmstock/assets/js/chart.min.js');
+$xoTheme->addScript('modules/xmstock/assets/js/price.js');
 
 
 $area_id = Request::getInt('area_id', 0);
@@ -57,14 +58,14 @@ $criteria->setStart($start);
 $criteria->setLimit($nb_limit);
 $criteria->add(new Criteria('price_areaid', $area_id));
 $criteria->add(new Criteria('price_articleid', $article_id));
-$price_arr = $areaHandler->getall($criteria);
-$price_count = $areaHandler->getCount($criteria);
-if ($price_arr > 0) {
+$price_arr = $priceHandler->getall($criteria);
+$price_count = $priceHandler->getCount($criteria);
+if ($price_count > 0) {
 	foreach (array_keys($price_arr) as $i) {
-		$price['date']   = formatTimestamp($price_arr->getVar('price_date'), 'm');
-		$price['amount'] = $price_arr->getVar('price_amount');
-		$price['price']  = $price_arr->getVar('price_price');
-		$xoopsTpl->append_by_ref('price', $price);
+		$price['date']   = formatTimestamp($price_arr[$i]->getVar('price_date'), 's');
+		$price['amount'] = $price_arr[$i]->getVar('price_amount');
+		$price['price']  = $price_arr[$i]->getVar('price_price');
+		$xoopsTpl->append_by_ref('prices', $price);
         unset($price);
     }
     // Display Page Navigation

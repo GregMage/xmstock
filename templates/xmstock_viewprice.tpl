@@ -1,5 +1,4 @@
 <div class="xmstock">
-
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h1 class="h2"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_DASHBOARD}> "<{$article_name}>"</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
@@ -12,67 +11,43 @@
 			This week
 			</button>
 		</div>
-	</div>	
+	</div>
 	<canvas class="my-4 w-100" id="myChart" width="400" height="200"></canvas>
-	<h2>Prix</h2>
+	<h2><{$smarty.const._MA_XMSTOCK_VIEWPRICE_PRICE}></h2>
+
 	<div class="table-responsive">
+		<script>
+			addChart();
+		</script>
 		<table class="table table-striped table-sm">
 			<thead>
 				<tr>
-					<th>Date</th>
-					<th>Quantité transférée</th>
-					<th>Prix en CHF</th>
+					<th><{$smarty.const._MA_XMSTOCK_VIEWPRICE_DATE}></th>
+					<th class="text-center"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_AMOUNT}></th>
+					<th class="text-center"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_PRICECHF}></th>
 				</tr>
 			</thead>
 			<tbody>
+				<{foreach item=price from=$prices}>
+					<script>
+						myChart.data.labels.push('<{$price.date}>');
+						myChart.data.datasets.forEach((dataset) => {
+							dataset.data.push(<{$price.price}>);
+						});
+						myChart.update();
+					</script>
 				<tr>
-					<td>xcycdsf</td>
-					<td>xcycdsf</td>
-					<td>xcycdsf</td>
+					<td><{$price.date}></td>
+					<td class="text-center"><{$price.amount}></td>
+					<td class="text-center"><{$price.price}></td>
 				</tr>
+				<{/foreach}>
 			</tbody>
 		</table>
 	</div>
-
-<script>
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
-        datasets: [{
-            label: 'Prix en CHF',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-</script>
-
-
-	
-	
+	<div class="clear spacer"></div>
+	<{if $nav_menu|default:false}>
+		<div class="floatright"><{$nav_menu}></div>
+		<div class="clear spacer"></div>
+	<{/if}>
 </div><!-- .xmstock -->
