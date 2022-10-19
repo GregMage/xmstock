@@ -33,10 +33,6 @@ $xoTheme->addScript('modules/xmstock/assets/js/price.js');
 $area_id = Request::getInt('area_id', 0);
 $article_id = Request::getInt('article_id', 0);
 
-$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
-$xoopsTpl->assign('area_id', $area_id);
-$xoopsTpl->assign('article_id', $article_id);
-
 if ($area_id == 0) {
     redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOAREA);
 }
@@ -49,27 +45,32 @@ $permHelper->checkPermissionRedirect('xmstock_other', 4, 'index.php', 2, _NOPERM
 //Article
 xoops_load('utility', 'xmarticle');
 $xoopsTpl->assign('article_name', XmarticleUtility::getArticleName($article_id));
-$xoopsTpl->assign('file_name', 'Price-' . XmarticleUtility::getArticleName($article_id, false, false));
+$article_name = XmarticleUtility::getArticleName($article_id, false, false);
+$xoopsTpl->assign('file_name', 'Price-' . $article_name);
+
+$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+$xoopsTpl->assign('area_id', $area_id);
+$xoopsTpl->assign('article_id', $article_id);
+$xoopsTpl->assign('breadcrumb', _MA_XMSTOCK_VIEWPRICE_DASHBOARD . ' - ' . $article_name);
 
 
 // Get start pager
 $start = Request::getInt('start', 0);
 
 $sort = Request::getString('sort', 'DESC');
-$filter = Request::getInt('filter', 20);
+$filter = Request::getInt('filter', 2);
 $xoopsTpl->assign('sort', $sort);
-$xoopsTpl->assign('sort', $sort);
-echo 'filter: ' . $filter;
+$xoopsTpl->assign('filter', $filter);
 
 // Criteria
 $criteria = new CriteriaCompo();
 $criteria->setSort('price_date');
-$criteria->setStart($start);
-$criteria->setLimit($filter);
 $criteria->add(new Criteria('price_areaid', $area_id));
 $criteria->add(new Criteria('price_articleid', $article_id));
 $criteria->setOrder('ASC');
-$price_graph = $priceHandler->getall($criteria);
+$price_grapharr = $priceHandler->getall($criteria);
+$criteria->setStart($start);
+$criteria->setLimit($filter);
 $criteria->setOrder($sort);
 $price_arr = $priceHandler->getall($criteria);
 $price_count = $priceHandler->getCount($criteria);
@@ -81,26 +82,24 @@ if ($price_count > 0) {
 		$xoopsTpl->append_by_ref('prices', $price);
         unset($price);
     }
-	foreach (array_keys($price_graph) as $i) {
-		$price_graph['price']  = $price_arr[$i]->getVar('price_price');
-		$price_graph['date']   = formatTimestamp($price_arr[$i]->getVar('price_date'), 's');
+	foreach (array_keys($price_grapharr) as $i) {
+		$price_graph['price']  = $price_grapharr[$i]->getVar('price_price');
+		$price_graph['date']   = formatTimestamp($price_grapharr[$i]->getVar('price_date'), 's');
 		$xoopsTpl->append_by_ref('price_graph', $price_graph);
         unset($price_graph);
 	}
     // Display Page Navigation
-    if ($price_count > $nb_limit) {
-        $nav = new XoopsPageNav($price_count, $nb_limit, $start, 'start');
+    if ($price_count > $filter) {
+        $nav = new XoopsPageNav($price_count, $filter, $start, 'start','article_id=' . $article_id . '&area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter);
         $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
     }
 } else {
 	redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOPRICE);
 }
 
-
-
 //SEO
 // pagetitle
-//$xoopsTpl->assign('xoops_pagetitle', $area->getVar('area_name') . '-' . $xoopsModule->name());
+$xoopsTpl->assign('xoops_pagetitle', strip_tags($article_name) . ' - ' . strip_tags(_MA_XMSTOCK_VIEWPRICE_DASHBOARD) . ' - ' . $xoopsModule->name());
 //description
-//$xoTheme->addMeta('meta', 'description', \Xmf\Metagen::generateDescription('A faire!!!!!!!!!!!!', 30));
+$xoTheme->addMeta('meta', 'description', \Xmf\Metagen::generateDescription(_MA_XMSTOCK_VIEWPRICE_DASHBOARD . ' ' . $article_name, 30));
 include XOOPS_ROOT_PATH . '/footer.php';
