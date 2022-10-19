@@ -26,6 +26,7 @@ include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 $xoTheme->addScript('modules/xmstock/assets/js/chart.min.js');
+$xoTheme->addScript('modules/xmstock/assets/js/FileSaver.js');
 $xoTheme->addScript('modules/xmstock/assets/js/price.js');
 
 
@@ -46,6 +47,8 @@ $permHelper->checkPermissionRedirect('xmstock_other', 4, 'index.php', 2, _NOPERM
 //Article
 xoops_load('utility', 'xmarticle');
 $xoopsTpl->assign('article_name', XmarticleUtility::getArticleName($article_id));
+$xoopsTpl->assign('file_name', 'Price-' . XmarticleUtility::getArticleName($article_id, false, false));
+
 
 // Get start pager
 $start = Request::getInt('start', 0);
@@ -53,11 +56,13 @@ $start = Request::getInt('start', 0);
 // Criteria
 $criteria = new CriteriaCompo();
 $criteria->setSort('price_date');
-$criteria->setOrder('DESC');
 $criteria->setStart($start);
 $criteria->setLimit($nb_limit);
 $criteria->add(new Criteria('price_areaid', $area_id));
 $criteria->add(new Criteria('price_articleid', $article_id));
+$criteria->setOrder('ASC');
+$price_graph = $priceHandler->getall($criteria);
+$criteria->setOrder('DESC');
 $price_arr = $priceHandler->getall($criteria);
 $price_count = $priceHandler->getCount($criteria);
 if ($price_count > 0) {
@@ -68,6 +73,12 @@ if ($price_count > 0) {
 		$xoopsTpl->append_by_ref('prices', $price);
         unset($price);
     }
+	foreach (array_keys($price_graph) as $i) {
+		$price_graph['price']  = $price_arr[$i]->getVar('price_price');
+		$price_graph['date']   = formatTimestamp($price_arr[$i]->getVar('price_date'), 's');
+		$xoopsTpl->append_by_ref('price_graph', $price_graph);
+        unset($price_graph);
+	}
     // Display Page Navigation
     if ($price_count > $nb_limit) {
         $nav = new XoopsPageNav($price_count, $nb_limit, $start, 'start');

@@ -270,6 +270,7 @@ define('_MA_XMSTOCK_VIEWPRICE_DATE', 'Date');
 define('_MA_XMSTOCK_VIEWPRICE_AMOUNT', 'Quantité transférée');
 define('_MA_XMSTOCK_VIEWPRICE_PRICECHF', 'Prix en CHF');
 define('_MA_XMSTOCK_VIEWPRICE_PRICE', 'Prix');
+define('_MA_XMSTOCK_VIEWPRICE_EXPORT', 'Exporter');
 
 
 
