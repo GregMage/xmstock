@@ -34,6 +34,8 @@ $area_id = Request::getInt('area_id', 0);
 $article_id = Request::getInt('article_id', 0);
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+$xoopsTpl->assign('area_id', $area_id);
+$xoopsTpl->assign('article_id', $article_id);
 
 if ($area_id == 0) {
     redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOAREA);
@@ -53,16 +55,22 @@ $xoopsTpl->assign('file_name', 'Price-' . XmarticleUtility::getArticleName($arti
 // Get start pager
 $start = Request::getInt('start', 0);
 
+$sort = Request::getString('sort', 'DESC');
+$filter = Request::getInt('filter', 20);
+$xoopsTpl->assign('sort', $sort);
+$xoopsTpl->assign('sort', $sort);
+echo 'filter: ' . $filter;
+
 // Criteria
 $criteria = new CriteriaCompo();
 $criteria->setSort('price_date');
 $criteria->setStart($start);
-$criteria->setLimit($nb_limit);
+$criteria->setLimit($filter);
 $criteria->add(new Criteria('price_areaid', $area_id));
 $criteria->add(new Criteria('price_articleid', $article_id));
 $criteria->setOrder('ASC');
 $price_graph = $priceHandler->getall($criteria);
-$criteria->setOrder('DESC');
+$criteria->setOrder($sort);
 $price_arr = $priceHandler->getall($criteria);
 $price_count = $priceHandler->getCount($criteria);
 if ($price_count > 0) {
