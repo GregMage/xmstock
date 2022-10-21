@@ -2,7 +2,40 @@
     <ol class="breadcrumb">
 		<li class="active"><{$index_module}></li>
     </ol>
+	<div class="text-center">
+
+	<div class="row">
+		<div class="col-lg-<{if $manage == true}>4<{else}>6<{/if}>">
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_CADDY}>" href="<{$xoops_url}>/modules/xmstock/caddy.php">
+				<div class="btn m-2 border">
+					<img class="bd-placeholder-img mt-3 rounded" height="120" src="<{$xoops_url}>/modules/xmstock/assets/images/Caddy.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_CADDY}>">
+					<h4><{$smarty.const._MI_XMSTOCK_SUB_CADDY}></h4>
+				</div>
+			</a>
+		</div>
+		<div class="col-lg-<{if $manage == true}>4<{else}>6<{/if}>">
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERS}>" href="<{$xoops_url}>/modules/xmstock/order.php">
+				<div class="btn m-2 border">
+					<img class="bd-placeholder-img mt-3 rounded" height="120" src="<{$xoops_url}>/modules/xmstock/assets/images/Orders.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERS}>">
+					<h4><{$smarty.const._MI_XMSTOCK_SUB_ORDERS}></h4>
+				</div>
+			</a>
+		</div>
+		<{if $manage == true}>
+		<div class="col-lg-4">
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>" href="<{$xoops_url}>/modules/xmstock/management.php">
+				<div class="btn m-2 border">
+					<img class="bd-placeholder-img mt-3 rounded" height="120" src="<{$xoops_url}>/modules/xmstock/assets/images/Management.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>">
+					<h4><{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}></h4>
+				</div>
+			</a>
+		</div>
+		<{/if}>
+    </div>
 	<{if $area_count != 0}>
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_STOCK_AREA}></h1>
+		</div>
 		<div class="row justify-content-center">
 			<{foreach item=area from=$areas}>
 				<div class="col-6 col-sm-4 col-md-3 col-lg-3 p-2">
@@ -27,11 +60,11 @@
 											<button class="btn btn-secondary btn-sm" disabled data-toggle="modal">+</button>
 										<{/if}>
 									</div>
-								</div>								
-							</div>				
-						</div>				
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>		
+				</div>
 				<div class="modal fade" id="xmDesc-<{$area.id}>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -64,6 +97,6 @@
 		<div class="alert alert-danger alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<{$smarty.const._MA_XMSTOCK_ERROR_NOAREA}>
-		</div>	
+		</div>
 	<{/if}>
 </div><!-- .xmstock -->

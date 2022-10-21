@@ -28,6 +28,15 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 // Get Permission to view
 $viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
 
+// Get Permission to manage
+$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+
+if (!empty($managePermissionArea)) {
+	$xoopsTpl->assign('manage', true);
+} else {
+	$xoopsTpl->assign('manage', false);
+}
+
 // Get stock
 $criteria = new CriteriaCompo();
 $stock_arr = $stockHandler->getall($criteria);
