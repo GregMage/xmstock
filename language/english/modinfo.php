@@ -33,6 +33,7 @@ define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 define('_MI_XMSTOCK_SUB_CADDY', 'Caddy');
 define('_MI_XMSTOCK_SUB_ORDERS', 'My orders');
 define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Order management');
+define('_MI_XMSTOCK_SUB_TRANSFER', 'Transfert');
 
 
 // Pref

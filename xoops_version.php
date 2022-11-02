@@ -44,6 +44,10 @@ $modversion['sub'][]   = [
     'name' => _MI_XMSTOCK_SUB_ORDERSMANAGEMENT,
     'url'  => 'management.php'
 ];
+$modversion['sub'][]   = [
+    'name' => _MI_XMSTOCK_SUB_TRANSFER,
+    'url'  => 'transfer.php'
+];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -84,6 +88,7 @@ $modversion['templates'][] = ['file' => 'xmstock_vieworder.tpl', 'description' =
 $modversion['templates'][] = ['file' => 'xmstock_management.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_action.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_viewprice.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_transfer.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];
