@@ -58,7 +58,7 @@ $xoopsTpl->assign('breadcrumb', _MA_XMSTOCK_VIEWPRICE_DASHBOARD . ' - ' . $artic
 $start = Request::getInt('start', 0);
 
 $sort = Request::getString('sort', 'DESC');
-$filter = Request::getInt('filter', 2);
+$filter = Request::getInt('filter', 10);
 $xoopsTpl->assign('sort', $sort);
 $xoopsTpl->assign('filter', $filter);
 
