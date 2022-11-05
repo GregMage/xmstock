@@ -61,9 +61,13 @@
 						<option value=100 <{if $filter == 100}>selected="selected"<{/if}>>100&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 					</select>
 				</div>
-				<button type="button" class="btn btn-sm btn-secondary" onclick="saveChart()"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}></button>
+				<button type="button" class="btn btn-sm btn-secondary" onclick="saveData()"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}></button>
 			</div>
 		</div>
+		<script>
+			let export_data = '<{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_REF}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_USER}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}>' + '\n';
+			let name = 'Transfert';
+		</script>
 		<div class="row justify-content-center">			
 			<table class="table table-striped table-sm">
 				<thead>
@@ -86,6 +90,9 @@
 						<td class="text-center"><{$transfer.user}></td>
 						<td class="text-center"><{$transfer.type}></td>
 					</tr>
+					<script>
+						export_data += '<{$transfer.date}>' + ';' + '<{$transfer.article_name}>' + ';' + '<{$transfer.ref}>' + ';' + <{$transfer.amount}> + ';' + '<{$transfer.user}>' + ';' + '<{$transfer.type}>' + '\n';
+					</script>
 					<{/foreach}>
 				</tbody>
 			</table>

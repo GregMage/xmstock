@@ -24,6 +24,8 @@ $GLOBALS['xoopsOption']['template_main'] = 'xmstock_transfer.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
+$xoTheme->addScript('modules/xmstock/assets/js/FileSaver.js');
+$xoTheme->addScript('modules/xmstock/assets/js/export.js');
 
 // Get Permission to manage
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
@@ -91,6 +93,7 @@ switch ($op) {
                 $transfer['id']            = $transfer_id;
                 $transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
                 $transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
+                $transfer['article_name']  = $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
                 $transfer['user']          = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), false, true);
