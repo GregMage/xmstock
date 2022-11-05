@@ -30,7 +30,7 @@
 					<option value=100 <{if $filter == 100}>selected="selected"<{/if}>>100&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 				</select>
 			</div>
-			<button type="button" class="btn btn-sm btn-secondary" onclick="saveChart()"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}></button>
+			<button type="button" class="btn btn-sm btn-secondary" onclick="saveData()"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}></button>
 		</div>
 	</div>
 	<div class="table-responsive">
