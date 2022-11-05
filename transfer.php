@@ -66,16 +66,19 @@ switch ($op) {
 			
 		}
 		
-		echo $area_options;
-		
         // Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('transfer_date');
 		$criteria->setStart($start);
 		$criteria->setLimit($filter);
 		$criteria->setOrder($sort);
-		$criteria->add(new Criteria('transfer_st_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
-		$criteria->add(new Criteria('transfer_ar_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
+		if ($area_id == 0){
+			$criteria->add(new Criteria('transfer_st_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
+			$criteria->add(new Criteria('transfer_ar_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
+		} else {
+			$criteria->add(new Criteria('transfer_st_areaid', $area_id ), 'OR');
+			$criteria->add(new Criteria('transfer_ar_areaid', $area_id), 'OR');
+		}
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
