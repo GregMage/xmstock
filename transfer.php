@@ -32,18 +32,50 @@ if (empty($managePermissionArea)) {
 	redirect_header('index.php', 2, _NOPERM);
 }
 
+$xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
+
 // Get Action type
 $op = Request::getCmd('op', 'list');
 switch ($op) {
     case 'list':       
         // Get start pager
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start', 0);		
+		//filter
+		$area_id = Request::getInt('area_id', 0);
+        $xoopsTpl->assign('area_id', $area_id);
+		$sort = Request::getString('sort', 'DESC');
+		$filter = Request::getInt('filter', 10);
+		$xoopsTpl->assign('sort', $sort);
+		$xoopsTpl->assign('filter', $filter);
+		
+		//area
+		$area = array();
+		$criteria = new CriteriaCompo();
+		$criteria->setSort('area_weight ASC, area_name');
+        $criteria->setOrder('ASC');
+        $area_arr = $areaHandler->getall($criteria);
+		if (count($area_arr) > 0) {
+			$area_options = '<option value="0"' . ($area_id == 0 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
+			foreach (array_keys($area_arr) as $i) {
+				if (in_array($i, $managePermissionArea)){
+					$area_options .= '<option value="' . $i . '"' . ($area_id == $i ? ' selected="selected"' : '') . '>' . $area_arr[$i]->getVar('area_name') . '</option>';
+				}
+				$area[$i] = $area_arr[$i]->getVar('area_name');
+			}
+			$xoopsTpl->assign('area_options', $area_options);
+			
+		}
+		
+		echo $area_options;
+		
         // Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('transfer_date');
-        $criteria->setOrder('DESC');
-        $criteria->setStart($start);
-        $criteria->setLimit($nb_limit);
+		$criteria->setStart($start);
+		$criteria->setLimit($filter);
+		$criteria->setOrder($sort);
+		$criteria->add(new Criteria('transfer_st_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
+		$criteria->add(new Criteria('transfer_ar_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
@@ -78,7 +110,7 @@ switch ($op) {
                 unset($transfer);
             }
             // Display Page Navigation
-            if ($transfer_count > $nb_limit) {
+            if ($transfer_count > $filter) {
                 $nav = new XoopsPageNav($transfer_count, $nb_limit, $start, 'start');
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
