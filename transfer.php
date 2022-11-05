@@ -114,7 +114,7 @@ switch ($op) {
             }
             // Display Page Navigation
             if ($transfer_count > $filter) {
-                $nav = new XoopsPageNav($transfer_count, $nb_limit, $start, 'start');
+                $nav = new XoopsPageNav($transfer_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter);
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         }

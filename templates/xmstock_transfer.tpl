@@ -54,7 +54,7 @@
 						<label class="form-check-label" for="inlineRadio2"><span class="fa fa-arrow-up"></span></label></label>
 					</div>
 					<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_FILTER}> </label>
-					<select class="form-control form-control-sm" id="statut_filter" onchange="location='transfer.php?article_id=<{$article_id}>&area_id=<{$area_id}>&sort=<{$sort}>&filter='+this.options[this.selectedIndex].value">
+					<select class="form-control form-control-sm" id="statut_filter" onchange="location='transfer.php?area_id=<{$area_id}>&sort=<{$sort}>&filter='+this.options[this.selectedIndex].value">
 						<option value=10 <{if $filter == 10}>selected="selected"<{/if}>>10&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 						<option value=20 <{if $filter == 20}>selected="selected"<{/if}>>20&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 						<option value=50 <{if $filter == 50}>selected="selected"<{/if}>>50&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
