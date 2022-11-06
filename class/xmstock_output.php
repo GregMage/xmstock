@@ -37,7 +37,6 @@ class xmstock_output extends XoopsObject
 		$this->initVar('output_description', XOBJ_DTYPE_TXTAREA, null, false);
         // use html
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
-		$this->initVar('output_userid', XOBJ_DTYPE_INT, null, false, 8);
 		$this->initVar('output_weight', XOBJ_DTYPE_INT, null, false, 11);
         $this->initVar('output_status', XOBJ_DTYPE_INT, null, false, 1);
     }
@@ -70,7 +69,6 @@ class xmstock_output extends XoopsObject
         }
         $this->setVar('output_name', Xmf\Request::getString('output_name', ''));
         $this->setVar('output_description',  Xmf\Request::getText('output_description', ''));
-        $this->setVar('output_userid', Xmf\Request::getInt('output_userid', 0));
         $this->setVar('output_status', Xmf\Request::getInt('output_status', 1));
         if ($error_message == '') {
             $this->setVar('output_weight', Xmf\Request::getInt('output_weight', 0));
@@ -123,9 +121,6 @@ class xmstock_output extends XoopsObject
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_OUTPUT_DESC, 'output_description', $editor_configs), false);
-
-		// user
-        $form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_OUTPUT_USERID, 'output_userid', true, $this->getVar('output_userid')), true);
 
         // weight
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_OUTPUT_WEIGHT, 'output_weight', 5, 5, $weight));

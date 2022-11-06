@@ -35,7 +35,7 @@ switch ($op) {
         $xoTheme->addScript('modules/system/js/admin.js');
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_OUTPUT_ADD, 'output.php?op=add', 'add');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Get start pager
         $start = Request::getInt('start', 0);
         // Criteria
@@ -53,7 +53,6 @@ switch ($op) {
                 $output['id']            = $output_id;
                 $output['name']          = $output_arr[$i]->getVar('output_name');
                 $output['description']   = \Xmf\Metagen::generateDescription($output_arr[$i]->getVar('output_description', 'show'), 30);
-				$output['receiver']      = XoopsUser::getUnameFromId($output_arr[$i]->getVar('output_userid'));
                 $output['weight']        = $output_arr[$i]->getVar('output_weight');
                 $output['status']        = $output_arr[$i]->getVar('output_status');
                 $xoopsTpl->append_by_ref('output', $output);
@@ -68,23 +67,23 @@ switch ($op) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOOUTPUT);
         }
         break;
-    
+
     // Add
     case 'add':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_OUTPUT_LIST, 'output.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
         $obj  = $outputHandler->create();
         $form = $obj->getForm();
         $xoopsTpl->assign('form', $form->render());
         break;
-        
+
     // Edit
     case 'edit':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_OUTPUT_LIST, 'output.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
         $output_id = Request::getInt('output_id', 0);
         if ($output_id == 0) {
@@ -92,7 +91,7 @@ switch ($op) {
         } else {
             $obj = $outputHandler->get($output_id);
             $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render()); 
+            $xoopsTpl->assign('form', $form->render());
         }
 
         break;
@@ -103,7 +102,7 @@ switch ($op) {
         }
         $output_id = Request::getInt('output_id', 0);
         if ($output_id == 0) {
-            $obj = $outputHandler->create();            
+            $obj = $outputHandler->create();
         } else {
             $obj = $outputHandler->get($output_id);
         }
@@ -113,11 +112,11 @@ switch ($op) {
             $form = $obj->getForm();
             $xoopsTpl->assign('form', $form->render());
         }
-        
+
         break;
-        
+
     // del
-    case 'del':    
+    case 'del':
         $output_id = Request::getInt('output_id', 0);
         if ($output_id == 0) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOOUTPUT);
@@ -128,19 +127,19 @@ switch ($op) {
                 if (!$GLOBALS['xoopsSecurity']->check()) {
                     redirect_header('output.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
                 }
-                if ($outputHandler->delete($obj)) {					
+                if ($outputHandler->delete($obj)) {
                     redirect_header('output.php', 2, _MA_XMSTOCK_REDIRECT_SAVE);
                 } else {
                     $xoopsTpl->assign('error_message', $obj->getHtmlErrors());
                 }
             } else {
-                xoops_confirm(array('surdel' => true, 'output_id' => $output_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
+                xoops_confirm(array('surdel' => true, 'output_id' => $output_id, 'op' => 'del'), $_SERVER['REQUEST_URI'],
                                     sprintf(_MA_XMSTOCK_OUTPUT_SUREDEL, $obj->getVar('output_name')));
             }
         }
-        
+
         break;
-        
+
     // Update status
     case 'output_update_status':
         $output_id = Request::getInt('output_id', 0);

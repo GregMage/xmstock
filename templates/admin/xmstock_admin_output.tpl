@@ -19,7 +19,6 @@
         <tr>
             <th class="txtleft width15"><{$smarty.const._MA_XMSTOCK_OUTPUT_NAME}></th>
             <th class="txtleft"><{$smarty.const._MA_XMSTOCK_OUTPUT_DESC}></th>
-            <th class="txtleft width15"><{$smarty.const._MA_XMSTOCK_OUTPUT_USERID}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSTOCK_OUTPUT_WEIGHT}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
@@ -30,7 +29,6 @@
             <tr class="<{cycle values='even,odd'}> alignmiddle">
                 <td class="txtleft"><{$output.name}></td>
                 <td class="txtleft"><{$output.description}></td>
-                <td class="txtleft"><{$output.receiver}></td>
                 <td class="txtcenter"><{$output.weight}></td>
                 <td class="xo-actions txtcenter">
                     <img id="loading_sml<{$output.id}>" src="../assets/images/spinner.gif" style="display:none;" title="<{$smarty.const._AM_SYSTEM_LOADING}>"
