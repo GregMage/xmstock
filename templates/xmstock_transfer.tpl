@@ -133,6 +133,12 @@
 											<{$transfer.type}>
 										</div>
 										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.date}>
+										</div>
+										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></b>
 										</div>
 											<div class="col-6">
