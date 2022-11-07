@@ -39,9 +39,9 @@ $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 // Get Action type
 $op = Request::getCmd('op', 'list');
 switch ($op) {
-    case 'list':       
+    case 'list':
         // Get start pager
-        $start = Request::getInt('start', 0);		
+        $start = Request::getInt('start', 0);
 		//filter
 		$area_id = Request::getInt('area_id', 0);
         $xoopsTpl->assign('area_id', $area_id);
@@ -49,7 +49,7 @@ switch ($op) {
 		$filter = Request::getInt('filter', 10);
 		$xoopsTpl->assign('sort', $sort);
 		$xoopsTpl->assign('filter', $filter);
-		
+
 		//area
 		$area = array();
 		$area[0] = '';
@@ -66,7 +66,7 @@ switch ($op) {
 				$area[$i] = $area_arr[$i]->getVar('area_name');
 			}
 			$xoopsTpl->assign('area_options', $area_options);
-			
+
 		}
 		//output
 		$criteria = new CriteriaCompo();
@@ -78,7 +78,7 @@ switch ($op) {
 				$output[$i] = $output_arr[$i]->getVar('output_name');
 			}
 		}
-		
+
         // Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('transfer_date');
@@ -99,13 +99,13 @@ switch ($op) {
         $transfer_arr = $transferHandler->getByLink($criteria);
         $transfer_count = $transferHandler->getCountByLink($criteria);
         $xoopsTpl->assign('transfer_count', $transfer_count);
+		$xoopsTpl->assign('export_head', '#;' . _MA_XMSTOCK_TRANSFER_DESC . ';' . _MA_XMSTOCK_TRANSFER_ARTICLE . ';' . _MA_XMSTOCK_TRANSFER_REF . ';' . _MA_XMSTOCK_TRANSFER_TYPE . ';' . _MA_XMSTOCK_TRANSFER_DATE . ';' . _MA_XMSTOCK_TRANSFER_TIME . ';' . _MA_XMSTOCK_TRANSFER_AMOUNT . ';' . _MA_XMSTOCK_TRANSFER_DESTINATION . ';' . _MA_XMSTOCK_TRANSFER_USER . '\n');
         if ($transfer_count > 0) {
             foreach (array_keys($transfer_arr) as $i) {
                 $transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
                 $transfer['id']            = $transfer_id;
                 $transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
                 $transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
-                $transfer['article_name']  = $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
                 $transfer['description']   = $transfer_arr[$i]->getVar('transfer_description');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
@@ -118,7 +118,7 @@ switch ($op) {
 						$transfer['starea'] = '';
 						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						break;
-						
+
 					case 'O':
 						$transfer['type']   = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
 						$transfer['starea'] = $area[$transfer_arr[$i]->getVar('transfer_st_areaid')];
@@ -131,16 +131,16 @@ switch ($op) {
 						} else {
 							$transfer['destination'] = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_outputuserid'), false, true);
 						}
-						
+
 						break;
-						
+
 					case 'T':
 						$transfer['type']   = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
 						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						$transfer['starea'] = $area[$transfer_arr[$i]->getVar('transfer_st_areaid')];
 						break;
 				}
-                $transfer['status']        = $transfer_arr[$i]->getVar('transfer_status');
+				$transfer['export'] = $transfer_id . ';' . $transfer['description'] . ';' . $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')' . ';' . $transfer['ref'] . ';' . $transfer['type'] . ';' . formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 's') . ';' . substr(formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm'), -5) . ';' . $transfer['amount'] . ';' . $transfer['destination'] . ';' . $transfer['user'] . '\n';
                 $xoopsTpl->append_by_ref('transfers', $transfer);
                 unset($transfer);
             }
@@ -151,18 +151,18 @@ switch ($op) {
             }
         }
         break;
-    
+
     // Add
-    case 'add':       
+    case 'add':
         // Form
 		$type = Request::getString('type', 'E');
         $obj  = $transferHandler->create();
         $form = $obj->getForm($type);
         $xoopsTpl->assign('form', $form->render());
         break;
-        
+
     // Edit
-    case 'edit':       
+    case 'edit':
         // Form
         $transfer_id = Request::getInt('transfer_id', 0);
         if ($transfer_id == 0) {
@@ -172,7 +172,7 @@ switch ($op) {
 			if ($obj->getVar('transfer_status') == 0){
 				$form = $obj->getForm();
 				$xoopsTpl->assign('form', $form->render());
-			}				
+			}
         }
 
         break;
@@ -183,7 +183,7 @@ switch ($op) {
         }
         $transfer_id = Request::getInt('transfer_id', 0);
         if ($transfer_id == 0) {
-            $obj = $transferHandler->create();            
+            $obj = $transferHandler->create();
         } else {
             $obj = $transferHandler->get($transfer_id);
         }
@@ -192,7 +192,7 @@ switch ($op) {
             $xoopsTpl->assign('error_message', $error_message);
             $form = $obj->getForm($obj->getVar('transfer_type'), $obj->getVar('transfer_status'));
             $xoopsTpl->assign('form', $form->render());
-        }        
+        }
         break;
 }
 

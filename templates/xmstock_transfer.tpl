@@ -65,10 +65,10 @@
 			</div>
 		</div>
 		<script>
-			let export_data = '<{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_REF}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}>' + '\n';
+			let export_data = '<{$export_head}>';
 			let name = 'Transfert';
 		</script>
-		<div class="row justify-content-center">			
+		<div class="row justify-content-center">
 			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
@@ -78,7 +78,7 @@
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_STAREA}></th>
-						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></th>						
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></th>
 					</tr>
 				</thead>
@@ -99,7 +99,7 @@
 						<td class="text-center"><{$transfer.type}></td>
 					</tr>
 					<script>
-						export_data += '<{$transfer.date}>' + ';' + '<{$transfer.article_name}>' + ';' + '<{$transfer.ref}>' + ';' + <{$transfer.amount}> + ';' + '<{$transfer.destination}>' + ';' + '<{$transfer.type}>' + '\n';
+						export_data += '<{$transfer.export}>';
 					</script>
 					<div class="modal fade" id="xmDesc-<{$transfer.id}>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">

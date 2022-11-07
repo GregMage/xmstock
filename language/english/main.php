@@ -137,6 +137,7 @@ define('_MA_XMSTOCK_TRANSFER_REF', 'Transfer reference');
 define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
 define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
+define('_MA_XMSTOCK_TRANSFER_TIME', 'Heure');
 define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
 define('_MA_XMSTOCK_TRANSFER_USER', 'Auteur du transfert');
 
