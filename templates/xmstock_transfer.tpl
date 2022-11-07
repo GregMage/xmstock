@@ -72,6 +72,7 @@
 			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
+						<th class="text-center" scope="col">#</th>
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></th>
@@ -84,7 +85,12 @@
 				<tbody>
 					<{foreach item=transfer from=$transfers}>
 					<tr>
-						<td><{$transfer.id}> <{$transfer.date}></td>
+						<th class="text-center" scope="row">
+							<a class="text-decoration-none" title="<{$transfer.id}>" data-toggle="modal" data-target="#xmDesc-<{$transfer.id}>">
+								<{$transfer.id}>
+							</a>
+						</th>
+						<td><{$transfer.date}></td>
 						<td><{$transfer.article}></td>
 						<td><{$transfer.ref}></td>
 						<td class="text-center"><{$transfer.amount}></td>
@@ -95,6 +101,71 @@
 					<script>
 						export_data += '<{$transfer.date}>' + ';' + '<{$transfer.article_name}>' + ';' + '<{$transfer.ref}>' + ';' + <{$transfer.amount}> + ';' + '<{$transfer.destination}>' + ';' + '<{$transfer.type}>' + '\n';
 					</script>
+					<div class="modal fade" id="xmDesc-<{$transfer.id}>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title aligncenter"># <{$transfer.id}></h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<span><{$transfer.description}></span>
+									<hr>
+									<div class="row mt-2">
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.article}>
+										</div>
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.ref}>
+										</div>
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.type}>
+										</div>
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></b>
+										</div>
+											<div class="col-6">
+											<span class="badge badge-pill badge-info"><{$transfer.amount}></span>
+										</div>
+										<{if $transfer.code_type != 'E'}>
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_STAREA}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.starea}>
+										</div>
+										<{/if}>
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.destination}>
+										</div>
+										<div class="col-6">
+											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_USER}></b>
+										</div>
+											<div class="col-6">
+											<{$transfer.user}>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+								    <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<{/foreach}>
 				</tbody>
 			</table>

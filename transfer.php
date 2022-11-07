@@ -107,7 +107,10 @@ switch ($op) {
                 $transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['article_name']  = $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
+                $transfer['description']   = $transfer_arr[$i]->getVar('transfer_description');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
+                $transfer['code_type']     = $transfer_arr[$i]->getVar('transfer_type');
+                $transfer['user']     	   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'));
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
 					default:
 					case 'E':
