@@ -65,7 +65,7 @@
 			</div>
 		</div>
 		<script>
-			let export_data = '<{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_REF}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_USER}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}>' + '\n';
+			let export_data = '<{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_REF}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}>' + ';' + '<{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}>' + '\n';
 			let name = 'Transfert';
 		</script>
 		<div class="row justify-content-center">			
@@ -76,22 +76,24 @@
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></th>
-						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_USER}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_STAREA}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></th>						
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></th>
 					</tr>
 				</thead>
 				<tbody>
 					<{foreach item=transfer from=$transfers}>
 					<tr>
-						<td><{$transfer.date}></td>
+						<td><{$transfer.id}> <{$transfer.date}></td>
 						<td><{$transfer.article}></td>
 						<td><{$transfer.ref}></td>
 						<td class="text-center"><{$transfer.amount}></td>
-						<td class="text-center"><{$transfer.user}></td>
+						<td class="text-center"><{$transfer.starea}></td>
+						<td class="text-center"><{$transfer.destination}></td>
 						<td class="text-center"><{$transfer.type}></td>
 					</tr>
 					<script>
-						export_data += '<{$transfer.date}>' + ';' + '<{$transfer.article_name}>' + ';' + '<{$transfer.ref}>' + ';' + <{$transfer.amount}> + ';' + '<{$transfer.user}>' + ';' + '<{$transfer.type}>' + '\n';
+						export_data += '<{$transfer.date}>' + ';' + '<{$transfer.article_name}>' + ';' + '<{$transfer.ref}>' + ';' + <{$transfer.amount}> + ';' + '<{$transfer.destination}>' + ';' + '<{$transfer.type}>' + '\n';
 					</script>
 					<{/foreach}>
 				</tbody>

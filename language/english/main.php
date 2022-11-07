@@ -120,7 +120,6 @@ define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
 define('_MA_XMSTOCK_OUTPUT_NAME', 'Name');
 define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Sure to delete this output? %s');
-define('_MA_XMSTOCK_OUTPUT_USERID', 'Receiver');
 define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Weight');
 
 //transfer
@@ -129,12 +128,14 @@ define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Destination stock');
 define('_MA_XMSTOCK_TRANSFER_ARTICLE', 'Article to transfer');
 define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');
 define('_MA_XMSTOCK_TRANSFER_DESC', 'Description of the transfer');
+define('_MA_XMSTOCK_TRANSFER_DESTINATION', 'Destination');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Output');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
 define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'affichera pas de prix');
 define('_MA_XMSTOCK_TRANSFER_REF', 'Transfer reference');
 define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
+define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
 define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
 define('_MA_XMSTOCK_TRANSFER_USER', 'User');

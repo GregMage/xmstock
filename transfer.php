@@ -52,6 +52,7 @@ switch ($op) {
 		
 		//area
 		$area = array();
+		$area[0] = '';
 		$criteria = new CriteriaCompo();
 		$criteria->setSort('area_weight ASC, area_name');
         $criteria->setOrder('ASC');
@@ -67,6 +68,16 @@ switch ($op) {
 			$xoopsTpl->assign('area_options', $area_options);
 			
 		}
+		//output
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('output_status', 1));
+		$output_arr = $outputHandler->getall($criteria);
+		$output[0] = '';
+		if (count($output_arr) > 0) {
+			foreach (array_keys($output_arr) as $i) {
+				$output[$i] = $output_arr[$i]->getVar('output_name');
+			}
+		}
 		
         // Criteria
         $criteria = new CriteriaCompo();
@@ -81,6 +92,7 @@ switch ($op) {
 			$criteria->add(new Criteria('transfer_st_areaid', $area_id ), 'OR');
 			$criteria->add(new Criteria('transfer_ar_areaid', $area_id), 'OR');
 		}
+		$criteria->add(new Criteria('transfer_status', 1));
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
@@ -96,19 +108,33 @@ switch ($op) {
                 $transfer['article_name']  = $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
-                $transfer['user']          = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), false, true);
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
 					default:
 					case 'E':
-						$transfer['type'] = _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
+						$transfer['type'] 	= _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
+						$transfer['starea'] = '';
+						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						break;
 						
 					case 'O':
-						$transfer['type'] = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
+						$transfer['type']   = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
+						$transfer['starea'] = $area[$transfer_arr[$i]->getVar('transfer_st_areaid')];
+						if ($transfer_arr[$i]->getVar('transfer_outputuserid') == 0){
+							if ($transfer_arr[$i]->getVar('transfer_outputid') != 0){
+								$transfer['destination'] = $output[$transfer_arr[$i]->getVar('transfer_outputid')];
+							} else {
+								$transfer['destination'] = '';
+							}
+						} else {
+							$transfer['destination'] = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_outputuserid'), false, true);
+						}
+						
 						break;
 						
 					case 'T':
-						$transfer['type'] = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
+						$transfer['type']   = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
+						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
+						$transfer['starea'] = $area[$transfer_arr[$i]->getVar('transfer_st_areaid')];
 						break;
 				}
                 $transfer['status']        = $transfer_arr[$i]->getVar('transfer_status');
