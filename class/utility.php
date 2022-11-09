@@ -22,31 +22,6 @@
  */
 class XmstockUtility
 {
-	/**
-     * Fonction qui génère une liste des areas (id et nom)
-     * @param boolean  $efl			Ajout d'un entrée nul en première position (-)
-     * @return array   $arealist
-     */
-    public static function getAreaList($efl = false)
-    {
-        include __DIR__ . '/../include/common.php';
-		$arealist = array();
-
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('area_status', 1));
-		$criteria->setSort('area_weight ASC, area_name');
-        $criteria->setOrder('ASC');
-		$area_arr = $areaHandler->getall($criteria);
-		if ($efl == true){
-			$arealist[0] = "-";
-		}
-		if (count($area_arr) > 0) {
-			foreach (array_keys($area_arr) as $i) {
-				$arealist[$i] = $area_arr[$i]->getVar('area_name');
-			}
-		}
-        return $arealist;
-    }
 
 	/**
      * Fonction qui génère une liste des outputs (id et nom)

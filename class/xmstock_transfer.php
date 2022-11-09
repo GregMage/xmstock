@@ -202,13 +202,18 @@ class xmstock_transfer extends XoopsObject
 
 		if ($type != 'E'){
 			// st_areaid
-			$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true), true);
+			$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true, true), true);
 		} else {
 			$form->addElement(new XoopsFormHidden('transfer_st_areaid', 0));
 		}
 		if ($type != 'O'){
 			// ar_areaid
-			$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_ARAREA, 'transfer_ar_areaid', $this->getVar('transfer_ar_areaid'), true), true);
+			if ($type == 'E'){
+				$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_ARAREA, 'transfer_ar_areaid', $this->getVar('transfer_ar_areaid'), true, true), true);
+			} else {
+				$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_ARAREA, 'transfer_ar_areaid', $this->getVar('transfer_ar_areaid'), true, false), true);
+			}
+			
 		} else {
 			$form->addElement(new XoopsFormHidden('transfer_ar_areaid', 0));
 		}
@@ -233,12 +238,14 @@ class xmstock_transfer extends XoopsObject
 
 		// ref
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
-
+		
 		// status
-        $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', $status);
-        $options = array(1 => _MA_XMSTOCK_STATUS_EXECUTED, 0 =>_MA_XMSTOCK_STATUS_WAITING,);
-        $form_status->addOptionArray($options);
-        $form->addElement($form_status);
+		if ($helper->isUserAdmin() == true){
+			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', $status);
+			$options = array(1 => _MA_XMSTOCK_STATUS_EXECUTED, 0 =>_MA_XMSTOCK_STATUS_WAITING,);
+			$form_status->addOptionArray($options);
+			$form->addElement($form_status);
+		}
 
 		$form->addElement(new XoopsFormHidden('transfer_type', $type));
         $form->addElement(new XoopsFormHidden('op', 'save'));

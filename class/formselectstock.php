@@ -34,12 +34,38 @@ class XmstockFormSelectArea extends XoopsFormSelect
      * @param mixed   $value   Pre-selected value (or array of them).
      *                         Legal are all 2-letter country codes (in capitals).
 	 * @param boolean $efl     If true added an empty first line 
+	 * @param boolean $filter  If true area filtred 
      * @param int     $size    Number or rows. "1" makes a drop-down-list
      */
-    public function __construct($caption, $name, $value = null, $efl = false, $size = 1)
+    public function __construct($caption, $name, $value = null, $efl = false, $filter = false, $size = 1)
     {
         parent::__construct($caption, $name, $value, $size);
-        $this->addOptionArray(XmstockUtility::getAreaList($efl));
+		
+		include __DIR__ . '/../include/common.php';
+		
+		// Get Permission to manage
+		$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+		
+		$arealist = array();
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('area_status', 1));
+		if ($helper->isUserAdmin() != true){
+			if ($filter == true) {
+				$criteria->add(new Criteria('area_id', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+			}
+		}
+		$criteria->setSort('area_weight ASC, area_name');
+        $criteria->setOrder('ASC');
+		$area_arr = $areaHandler->getall($criteria);
+		if ($efl == true && count($area_arr) > 1){
+			$arealist[0] = "-";
+		}
+		if (count($area_arr) > 0) {
+			foreach (array_keys($area_arr) as $i) {
+				$arealist[$i] = $area_arr[$i]->getVar('area_name');
+			}
+		}
+        $this->addOptionArray($arealist);
     }
 }
 
