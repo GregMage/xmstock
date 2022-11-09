@@ -86,8 +86,8 @@ switch ($op) {
 		$criteria->setLimit($filter);
 		$criteria->setOrder($sort);
 		if ($area_id == 0){
-			$criteria->add(new Criteria('transfer_st_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
-			$criteria->add(new Criteria('transfer_ar_areaid', '(0,' . implode(',', $managePermissionArea) . ')', 'IN'));
+			$criteria->add(new Criteria('transfer_st_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
+			$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
 		} else {
 			$criteria->add(new Criteria('transfer_st_areaid', $area_id ), 'OR');
 			$criteria->add(new Criteria('transfer_ar_areaid', $area_id), 'OR');
