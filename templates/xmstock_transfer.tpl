@@ -2,7 +2,12 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.php"><{$index_module}></a></li>
+			<{if $op == 'list'}>
 			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MI_XMSTOCK_SUB_TRANSFER}></li>
+			<{else}>
+			<li class="breadcrumb-item"><a href="transfer.php?op=list"><{$smarty.const._MI_XMSTOCK_SUB_TRANSFER}></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_TRANSFER_FORM}></li>
+			<{/if}>
 		</ol>
 	</nav>
 

@@ -129,6 +129,7 @@ define('_MA_XMSTOCK_TRANSFER_ARTICLE', 'Article to transfer');
 define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');
 define('_MA_XMSTOCK_TRANSFER_DESC', 'Description of the transfer');
 define('_MA_XMSTOCK_TRANSFER_DESTINATION', 'Destination');
+define('_MA_XMSTOCK_TRANSFER_FORM', 'Formulaire de transfert');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Output');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');

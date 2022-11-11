@@ -38,6 +38,7 @@ $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
 // Get Action type
 $op = Request::getCmd('op', 'list');
+$xoopsTpl->assign('op', $op);
 switch ($op) {
     case 'list':
         // Get start pager
