@@ -46,7 +46,7 @@
 	<div>
 		<{$form|default:''}>
 	</div>
-	<{if $transfer_count != 0}>
+	<{if $transfer_count|default:0 != 0}>
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}></h2>
 			<div class="btn-toolbar mb-2 mb-md-0">
