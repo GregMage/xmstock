@@ -279,9 +279,10 @@ class xmstock_order extends XoopsObject
 		$articles .= "<tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
+			$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'></td>";
-			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span></td></tr>";
+			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span> " . $area_name . "</td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
 		$articles .= "</tbody></table>";
@@ -484,6 +485,7 @@ class xmstock_order extends XoopsObject
 			$count++;
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			if ($status == 1 || $status == 2){
+				$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
 				$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 				if ($amoutArea > $itemorder_arr[$i]->getVar('itemorder_amount')) {
 					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
@@ -494,10 +496,11 @@ class xmstock_order extends XoopsObject
 						$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
 					}
 				}
-				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . "</span></td>";
+				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . "</span> " . $area_name . "</td>";
 			}
 			if ($status == 2){
-				$articles .= "<td class='text-center'>A faire</td>";
+				$location =  XmstockUtility::getLocation($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+				$articles .= "<td class='text-center'>" . $location . "</td>";
 			}
 			if ($item_array_count > 1){
 				$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td></tr>";
