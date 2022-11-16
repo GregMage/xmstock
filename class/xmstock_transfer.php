@@ -49,6 +49,7 @@ class xmstock_transfer extends XoopsObject
         $this->initVar('transfer_ref', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('transfer_status', XOBJ_DTYPE_INT, null, false, 1);
 		$this->initVar('transfer_price', XOBJ_DTYPE_OTHER, null, false, 10);
+		$this->initVar('transfer_location', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_id', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_cid', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
@@ -122,6 +123,14 @@ class xmstock_transfer extends XoopsObject
 		} else {
 			$this->setVar('transfer_price', number_format($price, 2));
 		}
+		$location = Request::getString('transfer_location', '');
+		if ($location == '') {
+			$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
+			$this->setVar('transfer_location', '');
+		} else {
+			$this->setVar('transfer_location', $location);
+		}
+
 
 		xoops_load('utility', 'xmarticle');
 		$transfer_articleid = XmarticleUtility::renderArticleIdSave();
@@ -143,9 +152,10 @@ class xmstock_transfer extends XoopsObject
 			} else {
 				$this->setVar('transfer_articleid', $transfer_articleid);
 				$price = $price / $transfer_amount;
-				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price);
+				$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price, $location);
 				if ($error_message == '') {
 					$this->destroyVars('transfer_price');
+					$this->destroyVars('transfer_location');
 					if ($transferHandler->insert($this)) {
 						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					} else {
@@ -213,7 +223,7 @@ class xmstock_transfer extends XoopsObject
 			} else {
 				$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_ARAREA, 'transfer_ar_areaid', $this->getVar('transfer_ar_areaid'), true, false), true);
 			}
-			
+
 		} else {
 			$form->addElement(new XoopsFormHidden('transfer_ar_areaid', 0));
 		}
@@ -238,7 +248,12 @@ class xmstock_transfer extends XoopsObject
 
 		// ref
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
-		
+
+		// location
+		$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'transfer_location', 50, 255, $this->getVar('transfer_location'));
+		$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
+		$form->addElement($location, true);
+
 		// status
 		if ($helper->isUserAdmin() == true){
 			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', $status);

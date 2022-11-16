@@ -100,9 +100,10 @@ class XmstockUtility
      * @param int      $st_areaid	Id de l'area de départ
      * @param int      $ar_areaid	Id de l'area d'arrivée
      * @param float    $price		prix
+     * @param string   $location	emplacement
      * @return string   			Vide ou message d'erreur.
      */
-	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0)
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0, $location = '')
     {
 		include __DIR__ . '/../include/common.php';
 		$error_message = '';
@@ -118,6 +119,7 @@ class XmstockUtility
 					$obj->setVar('stock_areaid', $ar_areaid);
 					$obj->setVar('stock_articleid', $articleid);
 					$obj->setVar('stock_amount', $amount);
+					$obj->setVar('stock_location', $location);
 					if ($helper->getConfig('general_price', 0) != 0) {
 						$obj->setVar('stock_price', number_format($price, 2));
 						$error_message = self::setPrice($articleid, $ar_areaid, $amount, $price);
@@ -138,6 +140,7 @@ class XmstockUtility
 					$old_amount = $obj->getVar('stock_amount');
 					$old_price = $obj->getVar('stock_price');
 					$obj->setVar('stock_amount', $old_amount + $amount);
+					$obj->setVar('stock_location', $location);
 					//price
 					if ($helper->getConfig('general_price', 0) != 0) {
 						if ($helper->getConfig('general_price', 0) == 1) {

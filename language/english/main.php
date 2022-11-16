@@ -63,6 +63,7 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticl
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
 define('_MA_XMSTOCK_ERROR_AMOUNTNOTZERO', 'The amount can not be 0');
 define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
+define('_MA_XMSTOCK_ERROR_LOCATION', 'L\emplacement n\'est pas défini');
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
 define('_MA_XMSTOCK_ERROR_NOARTICLE', 'Il n\'y a pas d\'article, il est nécessaire d\'avoir au minimum un article!');
@@ -131,6 +132,8 @@ define('_MA_XMSTOCK_TRANSFER_DESC', 'Description of the transfer');
 define('_MA_XMSTOCK_TRANSFER_DESTINATION', 'Destination');
 define('_MA_XMSTOCK_TRANSFER_FORM', 'Formulaire de transfert');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
+define('_MA_XMSTOCK_TRANSFER_LOCATION', 'Emplacement');
+define('_MA_XMSTOCK_TRANSFER_LOCATION_DSC', 'Emplacement de l\'article dans le stock');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Output');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
 define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'affichera pas de prix');

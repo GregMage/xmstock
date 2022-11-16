@@ -37,6 +37,7 @@ class xmstock_stock extends XoopsObject
 		$this->initVar('stock_articleid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('stock_amount', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('stock_price', XOBJ_DTYPE_OTHER, null, false, 10);
+		$this->initVar('stock_location', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('area_id', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('area_name', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('area_logo', XOBJ_DTYPE_TXTBOX, null, false);
@@ -46,7 +47,7 @@ class xmstock_stock extends XoopsObject
 		$this->initVar('article_cid', XOBJ_DTYPE_INT, null);
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
-		$this->initVar('article_status', XOBJ_DTYPE_INT, 1);		
+		$this->initVar('article_status', XOBJ_DTYPE_INT, 1);
     }
 
     /**
@@ -58,12 +59,12 @@ class xmstock_stock extends XoopsObject
         $new_enreg = $xoopsDB->getInsertId();
         return $new_enreg;
     }
-	
+
 	/**
      * @param bool $action
      * @return XoopsThemeForm
      */
-    public function getForm($action = false)
+    /*public function getForm($action = false)
     {
         $helper = \Xmf\Module\Helper::getHelper('xmstock');
         if ($action === false) {
@@ -84,7 +85,7 @@ class xmstock_stock extends XoopsObject
 
 		// area
         $form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_OUTPUT_USERID, 'stock_areaid', $this->getVar('stock_areaid')), true);
-		
+
         // amound
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_STOCK_AMOUND, 'stock_amound', 10, 10, $this->getVar('stock_amound')), true);
 
@@ -93,7 +94,7 @@ class xmstock_stock extends XoopsObject
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
         return $form;
-    }
+    }*/
 
 }
 
