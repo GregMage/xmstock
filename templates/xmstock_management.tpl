@@ -123,7 +123,6 @@
 											<td class="text-center"><{$order_3.dready}></td>
 											<td class="text-center">
 												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order_3.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
-												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_3.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 											</td>
 										</tr>
 										<{/foreach}>
@@ -151,7 +150,6 @@
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -160,9 +158,6 @@
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_4.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_4.id}></a></th>
 											<td class="text-center"><{$order_4.dorder}></td>
 											<td class="text-center"><{$order_4.delivery_r}></td>
-											<td class="text-center">
-												<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order_4.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
-											</td>
 										</tr>
 										<{/foreach}>
 									</tbody>
@@ -317,8 +312,10 @@
 						<td class="text-center"><{$order.status_text}></td>
 						<{/if}>
 						<td class="text-center">
-							<{if $order.status < 4}>
+							<{if $order.status > 0 && $order.status < 4}>
 							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
+							<{/if}>
+							<{if $order.status < 3}>
 							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 							<{/if}>
 						</td>

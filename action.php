@@ -105,6 +105,9 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save' || $op == 's
 					$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOORDER);
 				} else {
 					$permHelper->checkPermissionRedirect('xmstock_manage', $obj->getVar('order_areaid'), 'index.php', 2, _NOPERM);
+					if ($obj->getVar('order_status') == 3 || $obj->getVar('order_status') == 4){
+						redirect_header('management.php', 3, _NOPERM);
+					}
 					$form = $obj->getFormEdit();
 					$xoopsTpl->assign('form', $form->render());
 				}
