@@ -32,18 +32,23 @@ switch ($op) {
 	// List: Liste les commandes
 	case 'list':
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		$criteria->add(new Criteria('order_status', 1));
 		$order_count_1 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		$criteria->add(new Criteria('order_status', 2));
 		$order_count_2 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		$criteria->add(new Criteria('order_status', 3));
 		$order_count_3 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		$criteria->add(new Criteria('order_status', 4));
 		$order_count_4 = $orderHandler->getCount($criteria);
 		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 		$criteria->add(new Criteria('order_status', 0));
 		$order_count_0 = $orderHandler->getCount($criteria);
 		$xoopsTpl->assign('pill_1', $order_count_1);
