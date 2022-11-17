@@ -317,8 +317,10 @@
 						<td class="text-center"><{$order.status_text}></td>
 						<{/if}>
 						<td class="text-center">
+							<{if $order.status < 4}>
 							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
 							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
+							<{/if}>
 						</td>
 					</tr>
 					<{/foreach}>
