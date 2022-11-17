@@ -82,6 +82,7 @@
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
 					<h4 class="alert-heading"><{$smarty.const._MA_XMSTOCK_WARNING}></h4>
 					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_WARNINGQTY}></p>
+					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_WARNINGQTY2}></p>
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				  </button>

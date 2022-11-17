@@ -176,6 +176,7 @@ define('_MA_XMSTOCK_CHECKOUT_CONFIRM', 'Confirmation');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM_SEND', 'Votre commande a bien été envoyée avec les informations suivantes :');
 define('_MA_XMSTOCK_CHECKOUT_SUMMARY', 'Summary of your cart');
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'The quantity requested for items with the logo <span class="badge badge-pill badge-warning">Warning</span> is greater than that available in stock. <br>The delivery time could be longer!');
+define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffissante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
 define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');
