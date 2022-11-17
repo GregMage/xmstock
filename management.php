@@ -117,12 +117,7 @@ switch ($op) {
 		if (!empty($order_4_arr)) {
 			foreach (array_keys($order_4_arr) as $i) {
 				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
-				if ($order_4_arr[$i]->getVar('order_delivery') == 1){
-					$order_4['delivery_r']  = formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
-				} else {
-					$order_4['delivery_r']  = formatTimestamp($order_4_arr[$i]->getVar('order_dwithdrawal_r'), 's');
-				}
-				$order_4['ddesired']        = formatTimestamp($order_4_arr[$i]->getVar('order_ddesired'), 's');
+				$order_4['delivery_r']  = formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
 				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_4', $order_4);
 				unset($order_4);
