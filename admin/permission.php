@@ -80,7 +80,7 @@ if (isset($tab_perm)){
 			$permissionDescription = _MA_XMSTOCK_PERMISSION_OTHER_DSC;
 			$global_perms_array    = [
 				'4' => _MA_XMSTOCK_PERMISSION_OTHER_4 ,
-				'16' => _MA_XMSTOCK_PERMISSION_OTHER_8
+				'8' => _MA_XMSTOCK_PERMISSION_OTHER_8
 			];
 			break;
     }

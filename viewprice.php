@@ -40,7 +40,7 @@ if ($article_id == 0) {
     redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOARTICLE);
 }
 // permission to view
-$permHelper->checkPermissionRedirect('xmstock_other', 4, 'index.php', 2, _NOPERM);
+$permHelper->checkPermissionRedirect('xmstock_other', 8, 'index.php', 2, _NOPERM);
 
 //Article
 xoops_load('utility', 'xmarticle');
