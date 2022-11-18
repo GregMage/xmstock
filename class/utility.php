@@ -359,6 +359,7 @@ class XmstockUtility
 				$stock['area_id']    = $stock_arr[$i]->getVar('area_id');
                 $stock['name']       = $stock_arr[$i]->getVar('area_name');
                 $stock['location']   = $stock_arr[$i]->getVar('area_location');
+                $stock['location_s'] = $stock_arr[$i]->getVar('stock_location');
                 $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
 				$stock['price']   	 = self::getPrice($stock_arr[$i]->getVar('stock_price'));
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){

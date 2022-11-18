@@ -20,11 +20,16 @@
 		<{$form}>
 	</div>
 	<{if $xmstock_viewarticles|default:false == true}>
+		<script>
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+		</script>
 		<ul class="list-group">
 		<{foreach item=stock from=$stock}>
 			<li class="list-group-item d-flex justify-content-between align-items-center">
 				<div>
-					<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>"><{$stock.name}></a></span> (<{$stock.reference}>)
+					<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_AREA_LOCATION}>: <{$stock.location_s}>"><{$stock.name}></a></span> (<{$stock.reference}>)
 					<{if $stock.price != ''}>
 						<a href="<{$xoops_url}>/modules/xmstock/viewprice.php?article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="badge badge-info" target="_blank"><{$stock.price}></a>
 					<{/if}>
