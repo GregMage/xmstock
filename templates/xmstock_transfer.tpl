@@ -46,6 +46,7 @@
 	<{if $form|default:'' != ''}>
 	<div>
 		<{$form|default:''}>
+		<{if $type|default:'E' != 'O'}>
 		<script>
 		let oldareaid = 0;
 		setInterval(function getInfoStock()
@@ -76,6 +77,7 @@
 			xhttp.send();
 		}, 1000);
 		</script>
+		<{/if}>
 	</div>
 	<{/if}>
 	<{if $transfer_count|default:0 != 0}>

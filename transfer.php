@@ -159,6 +159,7 @@ switch ($op) {
 		$type = Request::getString('type', 'E');
         $obj  = $transferHandler->create();
         $form = $obj->getForm($type);
+		$xoopsTpl->assign('type', $type);
 		$payload = array(
             'aud' => 'stockajax.php',
             'cat' => '',

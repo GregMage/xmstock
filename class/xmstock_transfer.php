@@ -250,9 +250,11 @@ class xmstock_transfer extends XoopsObject
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
 
 		// location
-		$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'transfer_location', 50, 255, $this->getVar('transfer_location'));
-		$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
-		$form->addElement($location, true);
+		if ($type != 'O'){
+			$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'transfer_location', 50, 255, $this->getVar('transfer_location'));
+			$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
+			$form->addElement($location, true);
+		}
 
 		// status
 		if ($helper->isUserAdmin() == true){
