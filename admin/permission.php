@@ -65,7 +65,7 @@ if (isset($tab_perm)){
             }
             break;
 
-        case 3:    // request permission
+        case 3:    // order permission
             $formTitle = _MA_XMSTOCK_PERMISSION_ORDER;
             $permissionName = 'xmstock_order';
             $permissionDescription = _MA_XMSTOCK_PERMISSION_ORDER_DSC;
