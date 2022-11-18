@@ -63,7 +63,7 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticl
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
 define('_MA_XMSTOCK_ERROR_AMOUNTNOTZERO', 'The amount can not be 0');
 define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
-define('_MA_XMSTOCK_ERROR_LOCATION', 'L\emplacement n\'est pas défini');
+define('_MA_XMSTOCK_ERROR_LOCATION', 'L\'emplacement n\'est pas défini');
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
 define('_MA_XMSTOCK_ERROR_NOARTICLE', 'Il n\'y a pas d\'article, il est nécessaire d\'avoir au minimum un article!');

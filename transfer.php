@@ -159,6 +159,13 @@ switch ($op) {
 		$type = Request::getString('type', 'E');
         $obj  = $transferHandler->create();
         $form = $obj->getForm($type);
+		$payload = array(
+            'aud' => 'stockajax.php',
+            'cat' => '',
+            'uid' => (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->uid() : 0
+        );
+		$jwt = \Xmf\Jwt\TokenFactory::build('stock', $payload, 60*10); // token good for 10 minutes
+        $xoopsTpl->assign('jwt', $jwt);
         $xoopsTpl->assign('form', $form->render());
         break;
 
@@ -191,6 +198,13 @@ switch ($op) {
         $error_message = $obj->saveTransfer($transferHandler, 'transfer.php');
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
+			$payload = array(
+				'aud' => 'stockajax.php',
+				'cat' => '',
+				'uid' => (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->uid() : 0
+			);
+			$jwt = \Xmf\Jwt\TokenFactory::build('stock', $payload, 60*10); // token good for 10 minutes
+			$xoopsTpl->assign('jwt', $jwt);
             $form = $obj->getForm($obj->getVar('transfer_type'), $obj->getVar('transfer_status'));
             $xoopsTpl->assign('form', $form->render());
         }

@@ -43,9 +43,41 @@
 		<{$error_message}>
 	</div>
 	<{/if}>
+	<{if $form|default:'' != ''}>
 	<div>
 		<{$form|default:''}>
+		<script>
+		let oldareaid = 0;
+		setInterval(function getInfoStock()
+		{
+			let xhttp = new XMLHttpRequest();
+			let areaid = document.getElementById('transfer_ar_areaid').options[document.getElementById('transfer_ar_areaid').selectedIndex].value;
+			xhttp.onreadystatechange = function()
+			{
+				if(this.readyState == 4 && this.status == 200)
+				{
+					let datas = xhttp.response;
+					if(datas['location'] != '')
+					{
+						document.getElementById('transfer_location').value = datas['location'];
+						oldareaid = areaid;
+					} else {
+						if(oldareaid != areaid)
+						{
+							document.getElementById('transfer_location').value = '';
+							oldareaid = areaid;
+						}
+					}
+				}
+			};
+
+			xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);
+			xhttp.responseType = 'json';
+			xhttp.send();
+		}, 1000);
+		</script>
 	</div>
+	<{/if}>
 	<{if $transfer_count|default:0 != 0}>
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}></h2>
