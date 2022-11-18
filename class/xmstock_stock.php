@@ -16,10 +16,9 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
+use Xmf\Request;
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class xmstock_stock
@@ -64,7 +63,7 @@ class xmstock_stock extends XoopsObject
      * @param bool $action
      * @return XoopsThemeForm
      */
-    /*public function getForm($action = false)
+    public function getForm($action = false)
     {
         $helper = \Xmf\Module\Helper::getHelper('xmstock');
         if ($action === false) {
@@ -72,7 +71,6 @@ class xmstock_stock extends XoopsObject
         }
         include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         include __DIR__ . '/../include/common.php';
-		include __DIR__ . '/formselectarea.php';
 
         //form title
         $title = $this->isNew() ? sprintf(_MA_XMSTOCK_ADD) : sprintf(_MA_XMSTOCK_EDIT);
@@ -82,20 +80,45 @@ class xmstock_stock extends XoopsObject
         if (!$this->isNew()) {
             $form->addElement(new XoopsFormHidden('stock_id', $this->getVar('stock_id')));
         }
+		$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'stock_location', 50, 255, $this->getVar('stock_location'));
+		$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
+		$form->addElement($location, true);
 
-		// area
-        $form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_OUTPUT_USERID, 'stock_areaid', $this->getVar('stock_areaid')), true);
-
-        // amound
-        $form->addElement(new XoopsFormText(_MA_XMSTOCK_STOCK_AMOUND, 'stock_amound', 10, 10, $this->getVar('stock_amound')), true);
-
-        $form->addElement(new XoopsFormHidden('op', 'save'));
+		$form->addElement(new XoopsFormHidden('stock_areaid', $this->getVar('stock_areaid')));
+        $form->addElement(new XoopsFormHidden('op', 'savestock'));
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-
         return $form;
-    }*/
+    }
 
+    /**
+     * @return mixed
+     */
+    public function saveStock($stockHandler, $action = false)
+    {
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        include __DIR__ . '/../include/common.php';
+
+        $error_message = '';
+        // test error
+		$location = Request::getString('stock_location', '');
+		if ($location == '') {
+			$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
+			$this->setVar('stock_location', '');
+		} else {
+			$this->setVar('stock_location', $location);
+		}
+        if ($error_message == '') {
+            if ($stockHandler->insert($this)) {
+                redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+            } else {
+                $error_message =  $this->getHtmlErrors();
+            }
+        }
+        return $error_message;
+    }
 }
 
 /**

@@ -77,7 +77,7 @@ function listOrder($obj, $order_id)
 	}
 }
 
-if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save' || $op == 'savenext') {
+if ($op == 'next' || $op == 'edit' || $op == 'editstock' || $op == 'del' || $op == 'save' || $op == 'savenext' || $op == 'savestock') {
     switch ($op) {
         // next
         case 'next':
@@ -109,6 +109,37 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save' || $op == 's
 						redirect_header('management.php', 3, _NOPERM);
 					}
 					$form = $obj->getFormEdit();
+					$xoopsTpl->assign('form', $form->render());
+				}
+            }
+            break;
+
+        // Edit
+        case 'editstock':
+			$article_id = Request::getInt('article_id', 0);
+			$area_id = Request::getInt('area_id', 0);
+			$xoopsTpl->assign('area_id', $area_id);
+			if ($article_id == 0 || $area_id == 0) {
+                $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
+            } else {
+				$criteria = new CriteriaCompo();
+				$criteria->add(new Criteria('stock_areaid', $area_id));
+				$criteria->add(new Criteria('stock_articleid', $article_id));
+				$stock_arr = $stockHandler->getall($criteria);
+				if (count($stock_arr) > 0) {
+					foreach (array_keys($stock_arr) as $i) {
+						$obj = $stockHandler->get($i);
+					}
+				} else {
+					$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
+				}
+				if (empty($obj)) {
+					$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
+				} else {
+					$permHelper->checkPermissionRedirect('xmstock_manage', $area_id, 'index.php', 2, _NOPERM);
+					$area = $areaHandler->get($area_id);
+					$xoopsTpl->assign('area_name', $area->getVar('area_name'));
+					$form = $obj->getForm();
 					$xoopsTpl->assign('form', $form->render());
 				}
             }
@@ -156,6 +187,31 @@ if ($op == 'next' || $op == 'edit' || $op == 'del' || $op == 'save' || $op == 's
 				$form = $obj->getFormNext();
                 $xoopsTpl->assign('form', $form->render());
 				listOrder($obj, $order_id);
+            }
+            break;
+
+        // SaveStock
+        case 'savestock':
+			$stock_areaid = Request::getInt('stock_areaid', 0);
+			// Get Permission to submit in category
+			$permHelper->checkPermissionRedirect('xmstock_manage', $stock_areaid, 'index.php', 2, _NOPERM);
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                redirect_header('index.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            $stock_id = Request::getInt('stock_id', 0);
+            if ($stock_id == 0) {
+                redirect_header('index.php', 2, _NOPERM);
+            } else {
+                $obj = $stockHandler->get($stock_id);
+            }
+            $error_message = $obj->saveStock($stockHandler, XOOPS_URL . '/modules/xmstock/viewarea.php?area_id=' . $stock_areaid);
+            if ($error_message != '') {
+                $xoopsTpl->assign('error_message', $error_message);
+				$xoopsTpl->assign('area_id', $stock_areaid);
+				$area = $areaHandler->get($stock_areaid);
+				$xoopsTpl->assign('area_name', $area->getVar('area_name'));
+				$form = $obj->getForm();
+                $xoopsTpl->assign('form', $form->render());
             }
             break;
 
