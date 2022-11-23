@@ -58,6 +58,14 @@
 				if(this.readyState == 4 && this.status == 200)
 				{
 					let datas = xhttp.response;
+					if(datas['manage'] != true)
+					{
+						document.getElementById('location_label').style.display = "none";
+						document.getElementById('location_input').style.display = "none";
+					} else {
+						document.getElementById('location_label').style.display = "block";
+						document.getElementById('location_input').style.display = "block";
+					}
 					if(datas['location'] != '')
 					{
 						document.getElementById('transfer_location').value = datas['location'];

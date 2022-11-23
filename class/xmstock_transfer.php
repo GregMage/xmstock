@@ -77,6 +77,8 @@ class xmstock_transfer extends XoopsObject
         }
         include __DIR__ . '/../include/common.php';
 
+		$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+
         $error_message = '';
         // test error
 		$transfer_amount = Request::getInt('transfer_amount', 0);
@@ -128,13 +130,17 @@ class xmstock_transfer extends XoopsObject
 			$this->setVar('transfer_price', number_format($price, 2));
 		}
 		$location = Request::getString('transfer_location', '');
-		if ($location == '') {
-			$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
-			$this->setVar('transfer_location', '');
-		} else {
-			$this->setVar('transfer_location', $location);
-		}
 
+		if ($transfer_type != 'O'){
+			if (in_array($transfer_ar_areaid, $managePermissionArea) == true){
+				if ($location == '') {
+					$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
+					$this->setVar('transfer_location', '');
+				} else {
+					$this->setVar('transfer_location', $location);
+				}
+			}
+		}
 
 		xoops_load('utility', 'xmarticle');
 		$transfer_articleid = XmarticleUtility::renderArticleIdSave();
@@ -255,9 +261,13 @@ class xmstock_transfer extends XoopsObject
 
 		// location
 		if ($type != 'O'){
-			$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'transfer_location', 50, 255, $this->getVar('transfer_location'));
-			$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
-			$form->addElement($location, true);
+			$location     = new XoopsFormElementTray('<section id="location_label">' . _MA_XMSTOCK_TRANSFER_LOCATION . '</section>', '');
+			$location->addElement(new XoopsFormLabel('<section id="location_input">'), false);
+			$location_input = new XoopsFormText('', 'transfer_location', 25, 255, $this->getVar('transfer_location'));
+			$location->addElement($location_input);
+			$location->addElement(new XoopsFormLabel('<p class="form-text text-muted">' . _MA_XMSTOCK_TRANSFER_LOCATION_DSC . '</p>'), false);
+			$location->addElement(new XoopsFormLabel('</section>'), false);
+			$form->addElement($location);
 		}
 
 		// status

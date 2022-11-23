@@ -26,9 +26,20 @@ if ($claims === false) {
 }
 
 include __DIR__ . '/include/common.php';
+// Get Permission to manage
+xoops_load('utility', 'xmstock');
+$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+
 $info['location'] = '';
 $articleid = Request::getInt('articleid', 0);
 $areaid = Request::getInt('areaid', 0);
+
+if (in_array($areaid, $managePermissionArea) == true){
+	$info['manage']  = true;
+} else {
+	$info['manage']  = false;
+}
+
 if ($articleid != 0 && $areaid != 0){
 	$criteria = new CriteriaCompo();
 	$criteria->add(new Criteria('stock_areaid', $areaid));
@@ -38,7 +49,7 @@ if ($articleid != 0 && $areaid != 0){
 		foreach (array_keys($stock_arr) as $i) {
 			$info['location'] =  $stock_arr[$i]->getVar('stock_location');
 		}
-	}	
+	}
 }
 echo json_encode($info, $jsonFlags);
 exit;

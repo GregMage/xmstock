@@ -133,7 +133,7 @@ define('_MA_XMSTOCK_TRANSFER_DESC', 'Description of the transfer');
 define('_MA_XMSTOCK_TRANSFER_DESTINATION', 'Destination');
 define('_MA_XMSTOCK_TRANSFER_FORM', 'Formulaire de transfert');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
-define('_MA_XMSTOCK_TRANSFER_LOCATION', 'Emplacement');
+define('_MA_XMSTOCK_TRANSFER_LOCATION', 'Emplacement*');
 define('_MA_XMSTOCK_TRANSFER_LOCATION_DSC', 'Emplacement de l\'article dans le stock');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Output');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
