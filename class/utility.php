@@ -337,6 +337,8 @@ class XmstockUtility
 		$viewPermissionArea = self::getPermissionArea('xmstock_view');
 		// Get Permission to order
 		$orderPermissionArea = self::getPermissionArea('xmstock_order');
+		// Get Permission to manage
+		$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 
 		$area = array();
 
@@ -366,6 +368,11 @@ class XmstockUtility
 					$stock['order']  = true;
 				} else {
 					$stock['order']  = false;
+				}
+				if (in_array($stock['area_id'], $managePermissionArea) == true){
+					$stock['manage']  = true;
+				} else {
+					$stock['manage']  = false;
 				}
 				$total_amount += $stock['amount'];
                 $xoopsTpl->append_by_ref('stock', $stock);
