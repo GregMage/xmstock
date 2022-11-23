@@ -115,6 +115,10 @@ class xmstock_transfer extends XoopsObject
 				$error_message .= _MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID . '<br>';
 				$transfer_ar_areaid = 0;
 			}
+			if ($transfer_ar_areaid == $transfer_st_areaid){
+				$error_message .= _MA_XMSTOCK_ERROR_TRANSFER_ST_TO_AR . '<br>';
+				$transfer_ar_areaid = 0;
+			}
 		}
 		$price = Request::getFloat('transfer_price', 0.0);
 		if ($price < 0.0) {
