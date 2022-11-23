@@ -145,6 +145,7 @@ define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
 define('_MA_XMSTOCK_TRANSFER_TIME', 'Heure');
 define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
 define('_MA_XMSTOCK_TRANSFER_USER', 'Auteur du transfert');
+define('_MA_XMSTOCK_TRANSFER_LIST_WARNING', 'Transfer en attente de validation');
 
 // permission
 define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');

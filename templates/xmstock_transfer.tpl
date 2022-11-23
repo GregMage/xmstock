@@ -88,6 +88,43 @@
 		<{/if}>
 	</div>
 	<{/if}>
+	<{if $transfer_w_count|default:0 != 0}>
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h1 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST_WARNING}></h2>
+		</div>
+		<div class="row justify-content-center">
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th class="text-center" scope="col">#</th>
+						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></th>
+						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
+						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_STAREA}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+					</tr>
+				</thead>
+				<tbody>
+					<{foreach item=transfer_w from=$transfers_w}>
+					<tr>
+						<th class="text-center" scope="row"><{$transfer_w.id}></th>
+						<td><{$transfer_w.date}></td>
+						<td><{$transfer_w.article}></td>
+						<td><{$transfer_w.ref}></td>
+						<td class="text-center"><{$transfer_w.amount}></td>
+						<td class="text-center"><{$transfer_w.starea}></td>
+						<td class="text-center"><{$transfer_w.destination}></td>
+						<td class="text-center">A faire</td>
+					</tr>
+					<{/foreach}>
+				</tbody>
+			</table>
+		</div>
+	<{/if}>
+
+
 	<{if $transfer_count|default:0 != 0}>
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}></h2>

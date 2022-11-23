@@ -139,7 +139,12 @@ class xmstock_transfer extends XoopsObject
 				} else {
 					$this->setVar('transfer_location', $location);
 				}
+				$this->setVar('transfer_status', 1);
+			} else {
+				$this->setVar('transfer_status', 0);
 			}
+		} else {
+			$this->setVar('transfer_status', 1);
 		}
 
 		xoops_load('utility', 'xmarticle');
@@ -153,7 +158,6 @@ class xmstock_transfer extends XoopsObject
 		$this->setVar('transfer_outputid', $transfer_outputid);
 		$this->setVar('transfer_description',  Request::getText('transfer_description', ''));
         $this->setVar('transfer_ref', Request::getString('transfer_ref', ''));
-        $this->setVar('transfer_status', Request::getInt('transfer_status', 1));
 		$this->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 		$this->setVar('transfer_date', time());
         if ($error_message == '') {
@@ -270,13 +274,13 @@ class xmstock_transfer extends XoopsObject
 			$form->addElement($location);
 		}
 
-		// status
-		if ($helper->isUserAdmin() == true){
+		// status ----------important, à mettre dans le formulaire de validation!
+		/*if ($helper->isUserAdmin() == true){
 			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', $status);
 			$options = array(1 => _MA_XMSTOCK_STATUS_EXECUTED, 0 =>_MA_XMSTOCK_STATUS_WAITING,);
 			$form_status->addOptionArray($options);
 			$form->addElement($form_status);
-		}
+		}*/
 
 		$form->addElement(new XoopsFormHidden('transfer_type', $type));
         $form->addElement(new XoopsFormHidden('op', 'save'));
