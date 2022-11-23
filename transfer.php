@@ -86,14 +86,15 @@ switch ($op) {
 		$criteria->setStart($start);
 		$criteria->setLimit($filter);
 		$criteria->setOrder($sort);
+		
 		if ($area_id == 0){
-			$criteria->add(new Criteria('transfer_st_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
+			$criteria->add(new Criteria('(transfer_st_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
 			$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
 		} else {
-			$criteria->add(new Criteria('transfer_st_areaid', $area_id ), 'OR');
+			$criteria->add(new Criteria('(transfer_st_areaid', $area_id ), 'OR');
 			$criteria->add(new Criteria('transfer_ar_areaid', $area_id), 'OR');
 		}
-		$criteria->add(new Criteria('transfer_status', 1));
+		$criteria->add(new Criteria('transfer_status', 1), ')AND');
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
