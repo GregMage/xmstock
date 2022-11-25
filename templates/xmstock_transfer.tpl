@@ -90,7 +90,7 @@
 	<{/if}>
 	<{if $transfer_w_count|default:0 != 0}>
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h1 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST_WARNING}></h2>
+		<h2 class="h2 alert alert-warning"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST_WARNING}></h2>
 		</div>
 		<div class="row justify-content-center">
 			<table class="table table-striped table-sm">
@@ -127,7 +127,7 @@
 
 	<{if $transfer_count|default:0 != 0}>
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}></h2>
+			<h2 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}></h2>
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
 					<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_STOCK_AREA}> </label>
