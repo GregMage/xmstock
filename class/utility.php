@@ -198,6 +198,7 @@ class XmstockUtility
 				}
 
 				break;
+
 			case 'T':
 				$criteria = new CriteriaCompo();
 				$criteria->add(new Criteria('stock_areaid', $st_areaid));
@@ -208,40 +209,44 @@ class XmstockUtility
 				}
 				$old_amount = $obj->getVar('stock_amount');
 
-				if ($old_amount == $amount){
-					if (!$stockHandler->delete($obj)) {
-						return $obj->getHtmlErrors();
-					}
-				} else {
-					$obj->setVar('stock_amount', $old_amount - $amount);
-					if (!$stockHandler->insert($obj)) {
-						return $obj->getHtmlErrors();
-					}
-				}
-				$criteria = new CriteriaCompo();
-				$criteria->add(new Criteria('stock_areaid', $ar_areaid));
-				$criteria->add(new Criteria('stock_articleid', $articleid));
-				$stock_arr = $stockHandler->getall($criteria);
-				if (count($stock_arr) == 0){
-					$obj = $stockHandler->create();
-					$obj->setVar('stock_areaid', $ar_areaid);
-					$obj->setVar('stock_articleid', $articleid);
-					$obj->setVar('stock_amount', $amount);
-					if ($stockHandler->insert($obj)) {
-						return '';
+				// Get Permission to manage
+				$managePermissionArea =  self::getPermissionArea('xmstock_manage');
+				if (in_array($ar_areaid, $managePermissionArea)){
+					if ($old_amount == $amount){
+						if (!$stockHandler->delete($obj)) {
+							return $obj->getHtmlErrors();
+						}
 					} else {
-						return $obj->getHtmlErrors();
+						$obj->setVar('stock_amount', $old_amount - $amount);
+						if (!$stockHandler->insert($obj)) {
+							return $obj->getHtmlErrors();
+						}
 					}
-				} else {
-					foreach (array_keys($stock_arr) as $i) {
-						$obj = $stockHandler->get($i);
-					}
-					$old_amount = $obj->getVar('stock_amount');
-					$obj->setVar('stock_amount', $old_amount + $amount);
-					if ($stockHandler->insert($obj)) {
-						return '';
+					$criteria = new CriteriaCompo();
+					$criteria->add(new Criteria('stock_areaid', $ar_areaid));
+					$criteria->add(new Criteria('stock_articleid', $articleid));
+					$stock_arr = $stockHandler->getall($criteria);
+					if (count($stock_arr) == 0){
+						$obj = $stockHandler->create();
+						$obj->setVar('stock_areaid', $ar_areaid);
+						$obj->setVar('stock_articleid', $articleid);
+						$obj->setVar('stock_amount', $amount);
+						if ($stockHandler->insert($obj)) {
+							return '';
+						} else {
+							return $obj->getHtmlErrors();
+						}
 					} else {
-						return $obj->getHtmlErrors();
+						foreach (array_keys($stock_arr) as $i) {
+							$obj = $stockHandler->get($i);
+						}
+						$old_amount = $obj->getVar('stock_amount');
+						$obj->setVar('stock_amount', $old_amount + $amount);
+						if ($stockHandler->insert($obj)) {
+							return '';
+						} else {
+							return $obj->getHtmlErrors();
+						}
 					}
 				}
 				break;
