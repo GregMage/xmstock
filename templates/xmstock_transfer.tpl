@@ -52,12 +52,21 @@
 		setInterval(function getInfoStock()
 		{
 			let xhttp = new XMLHttpRequest();
-			let areaid = document.getElementById('transfer_ar_areaid').options[document.getElementById('transfer_ar_areaid').selectedIndex].value;
+			let areaid;
+			if (typeof valid_areaid == "undefined")
+			{
+				areaid = document.getElementById('transfer_ar_areaid').options[document.getElementById('transfer_ar_areaid').selectedIndex].value;
+			} else {
+				areaid = valid_areaid;
+			}
+			//console.log('article: ' + articleId);
+			//console.log('areaid: ' + areaid);
 			xhttp.onreadystatechange = function()
 			{
 				if(this.readyState == 4 && this.status == 200)
 				{
 					let datas = xhttp.response;
+					console.log(datas);
 					if(datas['manage'] != true)
 					{
 						document.getElementById('location_label').style.display = "none";
@@ -79,7 +88,6 @@
 					}
 				}
 			};
-
 			xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);
 			xhttp.responseType = 'json';
 			xhttp.send();
@@ -116,7 +124,9 @@
 						<td class="text-center"><{$transfer_w.amount}></td>
 						<td class="text-center"><{$transfer_w.starea}></td>
 						<td class="text-center"><{$transfer_w.destination}></td>
-						<td class="text-center">A faire</td>
+						<td class="text-center">
+							<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=valid&transfer_id=<{$transfer_w.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_VALID}>"><span class="fa fa-check-square-o"></span></a>
+						</td>
 					</tr>
 					<{/foreach}>
 				</tbody>

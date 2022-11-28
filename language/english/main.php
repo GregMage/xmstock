@@ -46,6 +46,8 @@ define('_MA_XMSTOCK_STATUS_EXECUTED', 'Executed');
 define('_MA_XMSTOCK_STATUS_WAITING', 'Waiting');
 define('_MA_XMSTOCK_TITLE', 'Title');
 define('_MA_XMSTOCK_VIEW', 'View');
+define('_MA_XMSTOCK_VALID', 'Validation');
+define('_MA_XMSTOCK_REJECT', 'Refuser');
 define('_MA_XMSTOCK_WARNING', 'Warning');
 
 // Admin

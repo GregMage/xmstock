@@ -198,8 +198,8 @@ switch ($op) {
         $xoopsTpl->assign('form', $form->render());
         break;
 
-    // Edit
-    case 'edit':
+    // Validation
+    case 'valid':
         // Form
         $transfer_id = Request::getInt('transfer_id', 0);
         if ($transfer_id == 0) {
@@ -207,11 +207,17 @@ switch ($op) {
         } else {
             $obj = $transferHandler->get($transfer_id);
 			if ($obj->getVar('transfer_status') == 0){
-				$form = $obj->getForm();
+				$form = $obj->getForm('T', 0);
+				$payload = array(
+					'aud' => 'stockajax.php',
+					'cat' => '',
+					'uid' => (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->uid() : 0
+				);
+				$jwt = \Xmf\Jwt\TokenFactory::build('stock', $payload, 60*10); // token good for 10 minutes
+				$xoopsTpl->assign('jwt', $jwt);
 				$xoopsTpl->assign('form', $form->render());
 			}
         }
-
         break;
     // Save
     case 'save':
