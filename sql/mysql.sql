@@ -20,7 +20,7 @@ CREATE TABLE `xmstock_transfer` (
   `transfer_ar_areaid`      mediumint(8) unsigned   NOT NULL DEFAULT '0',
   `transfer_outputid`     	smallint(5)  unsigned   NOT NULL DEFAULT '0',
   `transfer_outputuserid`   smallint(5)  unsigned   NOT NULL DEFAULT '0',
-  `transfer_amount`         smallint(5)  unsigned   NOT NULL DEFAULT '0',
+  `transfer_amount`         smallint(6)  unsigned   NOT NULL DEFAULT '0',
   `transfer_date`           int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `transfer_userid`         smallint(5)  unsigned   NOT NULL DEFAULT '0',
   `transfer_type`           varchar(2)	 		    NOT NULL DEFAULT '',
@@ -35,7 +35,7 @@ CREATE TABLE `xmstock_stock` (
   `stock_id`            smallint(5)  unsigned    	NOT NULL AUTO_INCREMENT,
   `stock_areaid`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
   `stock_articleid`     mediumint(8) unsigned    	NOT NULL DEFAULT '0',
-  `stock_amount`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
+  `stock_amount`      	smallint(6)  unsigned   	NOT NULL DEFAULT '0',
   `stock_type`         	tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
   `stock_price`         double(8,2)             	NOT NULL default '0.00',
   `stock_location`      varchar(255)        		NOT NULL DEFAULT '',
@@ -79,7 +79,7 @@ CREATE TABLE `xmstock_itemorder` (
   `itemorder_orderid`     	int(11) 	 unsigned    	NOT NULL DEFAULT '0', 
   `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_amount`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',  
+  `itemorder_amount`      	smallint(6)  unsigned    	NOT NULL DEFAULT '0',  
   PRIMARY KEY (`itemorder_id`),
   KEY `itemorder_orderid` (`itemorder_articleid`)
 ) ENGINE=MyISAM;
@@ -88,7 +88,7 @@ CREATE TABLE `xmstock_price` (
   `price_id`            smallint(5)  unsigned    	NOT NULL AUTO_INCREMENT,
   `price_areaid`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
   `price_articleid`     mediumint(8) unsigned    	NOT NULL DEFAULT '0',
-  `price_amount`      	smallint(5)  unsigned   	NOT NULL DEFAULT '0',
+  `price_amount`      	smallint(6)  unsigned   	NOT NULL DEFAULT '0',
   `price_price`         double(8,2)             	NOT NULL default '0.00',
   `price_date`          int(10) 	 unsigned   	NOT NULL DEFAULT '0',
   

@@ -37,6 +37,7 @@ class xmstock_stock extends XoopsObject
 		$this->initVar('stock_amount', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('stock_price', XOBJ_DTYPE_OTHER, null, false, 10);
 		$this->initVar('stock_location', XOBJ_DTYPE_TXTBOX, null, false);
+		$this->initVar('stock_type', XOBJ_DTYPE_INT, null, false, 1);
 		$this->initVar('area_id', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('area_name', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('area_logo', XOBJ_DTYPE_TXTBOX, null, false);
@@ -83,6 +84,12 @@ class xmstock_stock extends XoopsObject
 		$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'stock_location', 50, 255, $this->getVar('stock_location'));
 		$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
 		$form->addElement($location, true);
+
+		// type
+		$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'stock_type', $this->getVar('stock_type'));
+		$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML);
+		$form_type->addOptionArray($options);
+		$form->addElement($form_type);
 
 		$form->addElement(new XoopsFormHidden('stock_areaid', $this->getVar('stock_areaid')));
         $form->addElement(new XoopsFormHidden('return', $return));

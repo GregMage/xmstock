@@ -103,7 +103,7 @@ class XmstockUtility
      * @param string   $location	emplacement
      * @return string   			Vide ou message d'erreur.
      */
-	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0, $location = '')
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0, $location = '', $stocktype = 1)
     {
 		include __DIR__ . '/../include/common.php';
 		$error_message = '';
@@ -120,6 +120,7 @@ class XmstockUtility
 					$obj->setVar('stock_articleid', $articleid);
 					$obj->setVar('stock_amount', $amount);
 					$obj->setVar('stock_location', $location);
+					$obj->setVar('stock_type', $stocktype);
 					if ($helper->getConfig('general_price', 0) != 0) {
 						$obj->setVar('stock_price', number_format($price, 2));
 						$error_message = self::setPrice($articleid, $ar_areaid, $amount, $price);
@@ -141,6 +142,7 @@ class XmstockUtility
 					$old_price = $obj->getVar('stock_price');
 					$obj->setVar('stock_amount', $old_amount + $amount);
 					$obj->setVar('stock_location', $location);
+					$obj->setVar('stock_type', $stocktype);
 					//price
 					if ($helper->getConfig('general_price', 0) != 0) {
 						if ($helper->getConfig('general_price', 0) == 1) {
@@ -208,6 +210,8 @@ class XmstockUtility
 					$obj = $stockHandler->get($i);
 				}
 				$old_amount = $obj->getVar('stock_amount');
+				$old_price = $obj->getVar('stock_price');
+				$old_stocktype = $obj->getVar('stock_type');
 
 				// Get Permission to manage
 				$managePermissionArea =  self::getPermissionArea('xmstock_manage');
@@ -232,6 +236,8 @@ class XmstockUtility
 						$obj->setVar('stock_articleid', $articleid);
 						$obj->setVar('stock_amount', $amount);
 						$obj->setVar('stock_location', $location);
+						$obj->setVar('stock_type', $old_stocktype);
+						$obj->setVar('stock_price', $old_price);
 						if ($stockHandler->insert($obj)) {
 							return '';
 						} else {
