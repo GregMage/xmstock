@@ -20,7 +20,7 @@
 				<{/if}>
 			<{else}>
 				<li class="breadcrumb-item"><a href="viewarea.php?area_id=<{$area_id}>"><{$area_name}></a></li>
-				<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_EDIT}></li>
+				<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MA_XMSTOCK_ACTION_EDITSTOCK}></li>
 			<{/if}>
 		  </ol>
 		</nav>

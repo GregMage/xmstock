@@ -119,6 +119,9 @@ define('_MA_XMSTOCK_STOCK_AMOUNT', 'Amount in stock');
 define('_MA_XMSTOCK_STOCK_AREA', 'Stock');
 define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
+define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
+define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
+define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
@@ -263,6 +266,7 @@ define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
 
 //action.php
 define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande'); //Edition of an order
+define('_MA_XMSTOCK_ACTION_EDITSTOCK', 'Edition d\'un stock');
 define('_MA_XMSTOCK_ACTION_ARTICLES', 'Articles');
 define('_MA_XMSTOCK_ACTION_INFODELARTICLE', 'Mettre "0" pour supprimer un article');
 define('_MA_XMSTOCK_ACTION_NEXT1', 'Formulaire de validation de la commande');
