@@ -142,6 +142,7 @@ define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
 define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'affichera pas de prix');
 define('_MA_XMSTOCK_TRANSFER_REF', 'Transfer reference');
 define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
+define('_MA_XMSTOCK_TRANSFER_TRANSFER', 'Transfert');
 define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
 define('_MA_XMSTOCK_TRANSFER_TIME', 'Heure');

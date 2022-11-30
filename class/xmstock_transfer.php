@@ -158,7 +158,10 @@ class xmstock_transfer extends XoopsObject
 			}			
 		} else {
 			xoops_load('utility', 'xmarticle');
-			$transfer_articleid = XmarticleUtility::renderArticleIdSave();
+			$transfer_articleid = Request::getInt('transfer_articleid', 0);
+			if ($transfer_articleid == 0) {
+				$transfer_articleid = XmarticleUtility::renderArticleIdSave();
+			}
 			$error_message .= XmstockUtility::checkTransfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid);
 			$this->setVar('transfer_articleid', $transfer_articleid);
 			$this->setVar('transfer_amount', $transfer_amount);

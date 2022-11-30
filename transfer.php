@@ -79,7 +79,7 @@ switch ($op) {
 				$output[$i] = $output_arr[$i]->getVar('output_name');
 			}
 		}
-		
+
 		// Criteria warning
         $criteria = new CriteriaCompo();
         $criteria->setSort('transfer_date');
@@ -113,7 +113,7 @@ switch ($op) {
 		$criteria->setStart($start);
 		$criteria->setLimit($filter);
 		$criteria->setOrder($sort);
-		
+
 		if ($area_id == 0){
 			$criteria->add(new Criteria('(transfer_st_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
 			$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'), 'OR');
@@ -207,6 +207,19 @@ switch ($op) {
         } else {
             $obj = $transferHandler->get($transfer_id);
 			if ($obj->getVar('transfer_status') == 0){
+				xoops_load('utility', 'xmarticle');
+				$xoopsTpl->assign('transfert_id', $transfer_id);
+				$xoopsTpl->assign('transfer_description', $obj->getVar('transfer_description'));
+				$xoopsTpl->assign('transfer_article', XmarticleUtility::getArticleName($obj->getVar('transfer_articleid')));
+				$xoopsTpl->assign('transfer_ref', $obj->getVar('transfer_ref'));
+				$xoopsTpl->assign('transfer_type', _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK);
+				$xoopsTpl->assign('transfer_date', formatTimestamp($obj->getVar('transfer_date'), 'm'));
+				$xoopsTpl->assign('transfer_amount', $obj->getVar('transfer_amount'));
+				$area = $areaHandler->get($obj->getVar('transfer_st_areaid'));
+				$xoopsTpl->assign('transfer_starea', $area->getVar('area_name'));
+				$area = $areaHandler->get($obj->getVar('transfer_ar_areaid'));
+				$xoopsTpl->assign('transfer_destination', $area->getVar('area_name'));
+				$xoopsTpl->assign('transfer_user', XoopsUser::getUnameFromId($obj->getVar('transfer_userid')));
 				$form = $obj->getForm('T', 0);
 				$payload = array(
 					'aud' => 'stockajax.php',

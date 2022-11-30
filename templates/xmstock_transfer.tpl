@@ -45,7 +45,69 @@
 	<{/if}>
 	<{if $form|default:'' != ''}>
 	<div>
+		<{if $op == 'valid'}>
+		<div class="card">
+			<div class="card-header">
+				<{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFER}> #<{$transfert_id}>
+			</div>
+			<div class="card-body">
+				<span><{$transfer_description}></span>
+				<hr>
+				<div class="row mt-2">
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<{$transfer_article}>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<{$transfer_ref}>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<{$transfer_type}>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></b>
+					</div>
+						<div class="col-6 col-md-3">
+						<{$transfer_date}>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<span class="badge badge-pill badge-info"><{$transfer_amount}></span>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_STAREA}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<{$transfer_starea}>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<{$transfer_destination}>
+					</div>
+					<div class="col-6 col-md-3">
+						<b><{$smarty.const._MA_XMSTOCK_TRANSFER_USER}></b>
+					</div>
+					<div class="col-6 col-md-3">
+						<{$transfer_user}>
+					</div>
+				</div>
+			</div>
+		</div>
+		<{/if}>
 		<{$form|default:''}>
+
 		<{if $type|default:'E' != 'O'}>
 		<script>
 		let oldareaid = 0;
