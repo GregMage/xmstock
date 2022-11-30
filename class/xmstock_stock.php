@@ -63,7 +63,7 @@ class xmstock_stock extends XoopsObject
      * @param bool $action
      * @return XoopsThemeForm
      */
-    public function getForm($action = false)
+    public function getForm($return = 'stock', $action = false)
     {
         $helper = \Xmf\Module\Helper::getHelper('xmstock');
         if ($action === false) {
@@ -85,6 +85,7 @@ class xmstock_stock extends XoopsObject
 		$form->addElement($location, true);
 
 		$form->addElement(new XoopsFormHidden('stock_areaid', $this->getVar('stock_areaid')));
+        $form->addElement(new XoopsFormHidden('return', $return));
         $form->addElement(new XoopsFormHidden('op', 'savestock'));
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
@@ -104,6 +105,7 @@ class xmstock_stock extends XoopsObject
         $error_message = '';
         // test error
 		$location = Request::getString('stock_location', '');
+		$this->setVar('stock_type', Request::getInt('stock_type', 1));
 		if ($location == '') {
 			$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
 			$this->setVar('stock_location', '');

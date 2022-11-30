@@ -13,7 +13,7 @@
 					<a href="<{$xoops_url}>/modules/xmstock/viewprice.php?article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="badge badge-info" target="_blank"><{$stock.price}></a>
 				<{/if}>
 				<{if $stock.manage|default:false == true}>
-					<a href="<{$xoops_url}>/modules/xmstock/action.php?op=editstock&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
+					<a href="<{$xoops_url}>/modules/xmstock/action.php?op=editstock&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>&amp;return=article" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 				<{/if}>
 				<{if $stock.order|default:false == true}>
 					<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>

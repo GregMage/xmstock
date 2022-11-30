@@ -118,6 +118,7 @@ if ($op == 'next' || $op == 'edit' || $op == 'editstock' || $op == 'del' || $op 
         case 'editstock':
 			$article_id = Request::getInt('article_id', 0);
 			$area_id = Request::getInt('area_id', 0);
+			$return = Request::getString('return', 'stock');
 			$xoopsTpl->assign('area_id', $area_id);
 			if ($article_id == 0 || $area_id == 0) {
                 $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOSTOCK);
@@ -139,7 +140,7 @@ if ($op == 'next' || $op == 'edit' || $op == 'editstock' || $op == 'del' || $op 
 					$permHelper->checkPermissionRedirect('xmstock_manage', $area_id, 'index.php', 2, _NOPERM);
 					$area = $areaHandler->get($area_id);
 					$xoopsTpl->assign('area_name', $area->getVar('area_name'));
-					$form = $obj->getForm();
+					$form = $obj->getForm($return);
 					$xoopsTpl->assign('form', $form->render());
 				}
             }
@@ -204,13 +205,19 @@ if ($op == 'next' || $op == 'edit' || $op == 'editstock' || $op == 'del' || $op 
             } else {
                 $obj = $stockHandler->get($stock_id);
             }
-            $error_message = $obj->saveStock($stockHandler, XOOPS_URL . '/modules/xmstock/viewarea.php?area_id=' . $stock_areaid);
+			$return = Request::getString('return', 'stock');
+			if ($return == 'article') {
+				$action = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $stock_areaid . '&article_id=' . $obj->getVar('stock_articleid');
+			} else {
+				$action = XOOPS_URL . '/modules/xmstock/viewarea.php?area_id=' . $stock_areaid;
+			}
+            $error_message = $obj->saveStock($stockHandler, $action);
             if ($error_message != '') {
                 $xoopsTpl->assign('error_message', $error_message);
 				$xoopsTpl->assign('area_id', $stock_areaid);
 				$area = $areaHandler->get($stock_areaid);
 				$xoopsTpl->assign('area_name', $area->getVar('area_name'));
-				$form = $obj->getForm();
+				$form = $obj->getForm($return);
                 $xoopsTpl->assign('form', $form->render());
             }
             break;
