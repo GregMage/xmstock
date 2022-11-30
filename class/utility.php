@@ -231,6 +231,7 @@ class XmstockUtility
 						$obj->setVar('stock_areaid', $ar_areaid);
 						$obj->setVar('stock_articleid', $articleid);
 						$obj->setVar('stock_amount', $amount);
+						$obj->setVar('stock_location', $location);
 						if ($stockHandler->insert($obj)) {
 							return '';
 						} else {

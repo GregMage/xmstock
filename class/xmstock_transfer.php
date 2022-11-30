@@ -131,7 +131,6 @@ class xmstock_transfer extends XoopsObject
 			$this->setVar('transfer_price', number_format($price, 2));
 		}
 		$location = Request::getString('transfer_location', '');
-
 		if ($transfer_type != 'O') {
 			if (in_array($transfer_ar_areaid, $managePermissionArea) == true){
 				if ($location == '') {
@@ -140,7 +139,9 @@ class xmstock_transfer extends XoopsObject
 				} else {
 					$this->setVar('transfer_location', $location);
 				}
-				$this->setVar('transfer_status', $transfer_status);
+				if ($error_message == '') {
+					$this->setVar('transfer_status', $transfer_status);
+				}
 			} else {
 				$this->setVar('transfer_status', 0);
 			}
