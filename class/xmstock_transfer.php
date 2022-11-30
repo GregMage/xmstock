@@ -156,7 +156,7 @@ class xmstock_transfer extends XoopsObject
 				redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 			} else {
 				return $this->getHtmlErrors();
-			}			
+			}
 		} else {
 			xoops_load('utility', 'xmarticle');
 			$transfer_articleid = Request::getInt('transfer_articleid', 0);
@@ -276,7 +276,7 @@ class xmstock_transfer extends XoopsObject
 
 			// ref
 			$form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
-		} else {			
+		} else {
 			// status
 			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', 1);
 			$options = array(1 => _MA_XMSTOCK_VALID, 0 =>_MA_XMSTOCK_STATUS_WAITING , 2 => _MA_XMSTOCK_REJECT);
@@ -301,7 +301,7 @@ class xmstock_transfer extends XoopsObject
 				$add_script = "<script>";
 				$add_script .= "let articleId = " . $this->getVar('transfer_articleid') . ";";
 				$add_script .= "let valid_areaid = " . $this->getVar('transfer_ar_areaid') . ";";
-				$add_script .= "</script>";				
+				$add_script .= "</script>";
 				$location->addElement(new XoopsFormLabel('', $add_script));
 			}
 			$form->addElement($location);
