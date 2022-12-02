@@ -16,7 +16,7 @@
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
 					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
-					<th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}></th>
+					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}></th>
 					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 				</tr>
 				<{foreach item=article from=$articles}>
@@ -28,7 +28,7 @@
 							<span class="badge badge-info badge-pill"><{$article.amount}></span>
 						</td>
 						<td>
-							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}>>
+							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1"> <{$article.unit}>
 						</td>
 						<td class="txtcenter width10">
 							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-secondary"><span class="fa fa-trash"></span></a>

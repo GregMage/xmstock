@@ -69,15 +69,14 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 			$articles['areaid'] = $datas['area'];
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
-			$articles['qty']   	= $datas['qty'];
+			if (XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr) == 1) {
+				$articles['unit'] = '';
+			} else {
+				$articles['unit'] = 'mml';
+			}
 			$articles['count']  = $count;
 			$count++;
 			$total += $datas['qty'];
-			/*if ($general_area[0] == ''){
-				$articles['max']  = 'max="' . $articles['amount'] . '"';
-			} else {*/
-				$articles['max']  = '';
-			//}
 			$xoopsTpl->append_by_ref('articles', $articles);
 			unset($articles);
 		}
