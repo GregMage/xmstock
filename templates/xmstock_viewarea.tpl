@@ -36,8 +36,11 @@
 					<{if $manage == true}>
 						<a href="<{$xoops_url}>/modules/xmstock/action.php?op=editstock&article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 					<{/if}>
-					<{if $order == true}>
+					<{if $order == true && $stock.type != 3}>
 						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
+					<{/if}>
+					<{if $order == true && $stock.type == 3}>
+						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_LOAN}></a>
 					<{/if}>
 				</div>
 				<span class="badge badge-info badge-pill"><{$stock.amount}></span>

@@ -36,6 +36,7 @@ define('_MA_XMSTOCK_DEL', 'Delete');
 define('_MA_XMSTOCK_EDIT', 'Edit');
 define('_MA_XMSTOCK_INFORMATION', 'Informations');
 define('_MA_XMSTOCK_ORDER', 'Order');
+define('_MA_XMSTOCK_LOAN', 'Emprunter');
 define('_MA_XMSTOCK_PROCESS', 'Faire avancer'); // progress
 define('_MA_XMSTOCK_REDIRECT_SAVE', 'Successfully saved');
 define('_MA_XMSTOCK_SORTBY', 'Trier par'); //Sort by
@@ -120,10 +121,12 @@ define('_MA_XMSTOCK_STOCK_AREA', 'Stock');
 define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
-define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire');
+define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
 define('_MA_XMSTOCK_STOCK_ML_DESC', 'A renseigner en mm');
+define('_MA_XMSTOCK_STOCK_LOAN', 'Emprunt');
+define('_MA_XMSTOCK_STOCK_LOAN_DESC', 'En prêt');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');

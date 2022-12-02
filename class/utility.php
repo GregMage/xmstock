@@ -372,10 +372,18 @@ class XmstockUtility
                 $stock['location_s'] = $stock_arr[$i]->getVar('stock_location');
                 $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
 				$stock['price']   	 = self::getPrice($stock_arr[$i]->getVar('stock_price'));
+				$stock['type']   	 = $stock_arr[$i]->getVar('stock_type');
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
-					$stock['order']  = true;
+					if ($stock['type'] == 3) {
+						$stock['order'] = false;
+						$stock['loan'] = true;
+					} else {
+						$stock['order'] = true;
+						$stock['loan'] = false;
+					}
 				} else {
-					$stock['order']  = false;
+					$stock['order'] = false;
+					$stock['loan'] = false;
 				}
 				if (in_array($stock['area_id'], $managePermissionArea) == true){
 					$stock['manage']  = true;

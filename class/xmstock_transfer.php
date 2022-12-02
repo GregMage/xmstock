@@ -222,8 +222,10 @@ class xmstock_transfer extends XoopsObject
             $form->addElement(new XoopsFormHidden('transfer_id', $this->getVar('transfer_id')));
 			$type = $this->getVar('transfer_type');
 			$price = $this->getVar('transfer_price');
+			$transfer_stocktype = $this->getVar('transfer_stocktype');
         } else {
 			$price = 0;
+			$transfer_stocktype = 1;
 		}
 		if ($status == 1) {
 			//articleid
@@ -311,9 +313,10 @@ class xmstock_transfer extends XoopsObject
 		}		
 		// type
 		if ($type == 'E') {
-			$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'transfer_stocktype', $this->getVar('transfer_stocktype'));
-			$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML);
+			$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'transfer_stocktype', $transfer_stocktype);
+			$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN);
 			$form_type->addOptionArray($options);
+			$form_type->setDescription(_MA_XMSTOCK_STOCK_TYPE_DESC);
 			$form->addElement($form_type);
 		}
 		$form->addElement(new XoopsFormHidden('transfer_type', $type));

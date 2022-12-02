@@ -184,6 +184,7 @@ if ($stock_count > 0) {
 		$stock['amount']      = $stock_arr[$i]->getVar('stock_amount');
 		$stock['location_s']  = $stock_arr[$i]->getVar('stock_location');
 		$stock['price']   	  = XmstockUtility::getPrice($stock_arr[$i]->getVar('stock_price'));
+		$stock['type']   	  = $stock_arr[$i]->getVar('stock_type');
 		$xoopsTpl->append_by_ref('stock', $stock);
 		unset($stock);
 	}

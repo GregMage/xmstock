@@ -69,10 +69,16 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 			$articles['areaid'] = $datas['area'];
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
-			if (XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr) == 1) {
-				$articles['unit'] = '';
-			} else {
-				$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
+			switch (XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr)) {
+				case 1:
+					$articles['unit'] = '';
+					break;
+				case 2:
+					$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
+					break;
+				case 3:
+					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN_DESC;
+					break;
 			}
 			$articles['count']  = $count;
 			$count++;
