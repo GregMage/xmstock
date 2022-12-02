@@ -72,7 +72,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 			if (XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr) == 1) {
 				$articles['unit'] = '';
 			} else {
-				$articles['unit'] = 'mml';
+				$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
 			}
 			$articles['count']  = $count;
 			$count++;
