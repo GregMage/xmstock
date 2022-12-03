@@ -18,7 +18,7 @@
 				<{if $stock.order|default:false == true}>
 					<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
 				<{/if}>
-				<{if $stock.loan|default:false == true}>
+				<{if $stock.loan|default:false == true && $stock.amount != 0}>
 					<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_LOAN}></a>
 				<{/if}>
 			</div>

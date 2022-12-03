@@ -501,6 +501,24 @@ class XmstockUtility
     }
 
 	/**
+     * Fonction qui donne qui retourne le type de stockage
+     * @param int      $area_id 	Id du lieu de stockage
+	 * @param int      $articleid	Id de l'article
+     * @param array    $stock_arr   Tableau des stocks
+     * @return int     $type		le type de stockage
+     */
+	public static function typeOfStock($area_id, $article_id, $stock_arr)
+    {
+        $type = 1;
+        foreach (array_keys($stock_arr) as $i) {
+            if ($stock_arr[$i]->getVar('stock_areaid') == $area_id && $stock_arr[$i]->getVar('stock_articleid') == $article_id) {
+                $type = $stock_arr[$i]->getVar('stock_type');
+            }
+        }
+        return $type;
+    }
+
+	/**
      * Fonction qui donne l'emplacement dans le stock
      * @param int      $area_id 	Id du lieu de stockage
 	 * @param int      $articleid	Id de l'article

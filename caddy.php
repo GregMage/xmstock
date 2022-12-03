@@ -69,6 +69,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 			$articles['areaid'] = $datas['area'];
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
+			$articles['qty']   	= $datas['qty'];
 			switch (XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr)) {
 				case 1:
 					$articles['unit'] = '';
@@ -120,14 +121,21 @@ switch ($op) {
 		if ($article->getVar('article_status') == 0){
 			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE . ' B');
 		}
+		$criteria = new CriteriaCompo();
+		$stock_arr = $stockHandler->getall($criteria);
 		if ($general_area[0] == ''){
 			//Vérification que l'article existe dans le lieu de stockage
-			$criteria = new CriteriaCompo();
-			$stock_arr = $stockHandler->getall($criteria);
-			if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0){
-				redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE  . ' C');
+			if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0) {
+				redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
 			}
 		}
+		// Vérification si l'article est un article à emprunter
+		if (XmstockUtility::typeOfStock($area_id, $article_id, $stock_arr) == 3) {
+			if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0) {
+				redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOLOAN);
+			}
+        }
+
 		//Vérification si l'article peut être commandé (permission order)
 		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
 		if (in_array($area_id, $orderPermissionArea) == false){
