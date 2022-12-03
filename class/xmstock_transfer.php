@@ -88,6 +88,7 @@ class xmstock_transfer extends XoopsObject
 		$transfer_ar_areaid = Request::getInt('transfer_ar_areaid', 0);
 		$transfer_outputid = Request::getInt('transfer_outputid', 0);
 		$transfer_status = Request::getInt('transfer_status', 1);
+		$transfer_newstatus = Request::getInt('transfer_newstatus', 1);
         if ((int)$_REQUEST['transfer_amount'] == 0 && $_REQUEST['transfer_amount'] != '0') {
             $error_message .= _MA_XMSTOCK_ERROR_AMOUNT . '<br>';
             $transfer_amount = 0;
@@ -140,20 +141,14 @@ class xmstock_transfer extends XoopsObject
 				} else {
 					$this->setVar('transfer_location', $location);
 				}
-				if ($error_message == '') {
-					$this->setVar('transfer_status', $transfer_status);
-				}
-			} else {
-				$this->setVar('transfer_status', 0);
 			}
-		} else {
-			$this->setVar('transfer_status', $transfer_status);
 		}
+		$this->setVar('transfer_status', $transfer_status);
 		$stocktype = Request::getInt('transfer_stocktype', 1);
-		if ($transfer_status == 0) {
+		if ($transfer_newstatus == 0) {
 			redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 		}
-		if ($transfer_status == 2) {
+		if ($transfer_newstatus == 2) {
 			if ($transferHandler->delete($this)) {
 				redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 			} else {
@@ -180,6 +175,13 @@ class xmstock_transfer extends XoopsObject
 				if ($transfer_articleid == 0){
 					$error_message .= _MA_XMSTOCK_ERROR_ARTICLEID . '<br>';
 				} else {
+					if ($transfer_type == 'T') {
+						if (in_array($transfer_ar_areaid, $managePermissionArea) == true){
+							$this->setVar('transfer_status', $transfer_newstatus);
+						} else {
+							$this->setVar('transfer_status', 0);
+						}
+					}
 					$this->setVar('transfer_articleid', $transfer_articleid);
 					$price = $price / $transfer_amount;
 					$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price, $location, $stocktype);
@@ -283,7 +285,7 @@ class xmstock_transfer extends XoopsObject
 			$form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
 		} else {
 			// status
-			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_status', 1);
+			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_newstatus', 1);
 			$options = array(1 => _MA_XMSTOCK_VALID, 0 =>_MA_XMSTOCK_STATUS_WAITING , 2 => _MA_XMSTOCK_REJECT);
 			$form_status->addOptionArray($options);
 			$form->addElement($form_status);
@@ -310,7 +312,7 @@ class xmstock_transfer extends XoopsObject
 				$location->addElement(new XoopsFormLabel('', $add_script));
 			}
 			$form->addElement($location);
-		}		
+		}
 		// type
 		if ($type == 'E') {
 			$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'transfer_stocktype', $transfer_stocktype);
@@ -320,6 +322,7 @@ class xmstock_transfer extends XoopsObject
 			$form->addElement($form_type);
 		}
 		$form->addElement(new XoopsFormHidden('transfer_type', $type));
+		$form->addElement(new XoopsFormHidden('transfer_status', $status));
         $form->addElement(new XoopsFormHidden('op', 'save'));
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
