@@ -70,7 +70,8 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
 			$articles['qty']   	= $datas['qty'];
-			switch (XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr)) {
+			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
+			switch ($type) {
 				case 1:
 					$articles['unit'] = '';
 					break;
@@ -80,6 +81,11 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 				case 3:
 					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN_DESC;
 					break;
+			}
+			if ($type == 3){
+				$articles['max']  = 'max="' . $articles['amount'] . '"';
+			} else {
+				$articles['max']  = '';
 			}
 			$articles['count']  = $count;
 			$count++;
