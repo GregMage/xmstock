@@ -185,10 +185,20 @@ class XmstockUtility
 				$old_amount = $obj->getVar('stock_amount');
 
 				if ($old_amount == $amount){
-					if ($stockHandler->delete($obj)) {
-						return '';
+					// si l'article est en prêt, il reste en stock même avec un montant de 0
+					if ($obj->getVar('stock_type') != 3) {
+						if ($stockHandler->delete($obj)) {
+							return '';
+						} else {
+							return $obj->getHtmlErrors();
+						}
 					} else {
-						return $obj->getHtmlErrors();
+						$obj->setVar('stock_amount', $old_amount - $amount);
+						if ($stockHandler->insert($obj)) {
+							return '';
+						} else {
+							return $obj->getHtmlErrors();
+						}
 					}
 				} else {
 					$obj->setVar('stock_amount', $old_amount - $amount);
@@ -217,8 +227,16 @@ class XmstockUtility
 				$managePermissionArea =  self::getPermissionArea('xmstock_manage');
 				if (in_array($ar_areaid, $managePermissionArea)){
 					if ($old_amount == $amount){
-						if (!$stockHandler->delete($obj)) {
-							return $obj->getHtmlErrors();
+						// si l'article est en prêt, il reste en stock même avec un montant de 0
+						if ($obj->getVar('stock_type') != 3) {
+							if (!$stockHandler->delete($obj)) {
+								return $obj->getHtmlErrors();
+							}
+						} else {
+							$obj->setVar('stock_amount', $old_amount - $amount);
+							if (!$stockHandler->insert($obj)) {
+								return $obj->getHtmlErrors();
+							}
 						}
 					} else {
 						$obj->setVar('stock_amount', $old_amount - $amount);
@@ -463,7 +481,7 @@ class XmstockUtility
         }
         return $count;
     }
-	
+
 	/**
      * Fonction qui donne le type de l'article dans le lieu de stockage défini
      * @param int      $area_id 	Id du lieu de stockage
