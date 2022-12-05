@@ -135,6 +135,9 @@
 											<{$article.name}>
 										</a>
 										(<{$article.reference}>)
+										<{if $article.type|default:'' != ''}>
+											<span class="badge badge-pill badge-info"><{$article.type}></span>
+										<{/if}>
 									</td>
 									<td class="text-center"><span class='badge badge-primary badge-pill'><{$article.amount}></span></td>
 								</tr>

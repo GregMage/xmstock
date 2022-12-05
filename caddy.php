@@ -79,7 +79,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $ge
 					$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
 					break;
 				case 3:
-					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN_DESC;
+					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN;
 					break;
 			}
 			if ($type == 3){

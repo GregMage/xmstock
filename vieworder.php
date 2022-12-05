@@ -111,6 +111,9 @@ if ($order_id == 0) {
 		$itemorderHandler->field_link = "article_id";
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
+		// Get stock
+		$criteria = new CriteriaCompo();
+		$stock_arr = $stockHandler->getall($criteria);
 		foreach (array_keys($itemorder_arr) as $i) {
 			$item['id']        = $itemorder_arr[$i]->getVar('itemorder_articleid');
 			$item['name']      = $itemorder_arr[$i]->getVar('article_name');
@@ -118,6 +121,18 @@ if ($order_id == 0) {
 			$item['cid']   	   = $itemorder_arr[$i]->getVar('article_cid');
 			$item['amount']    = $itemorder_arr[$i]->getVar('itemorder_amount');
 			$item['status']    = $itemorder_arr[$i]->getVar('itemorder_status');
+			$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+			switch ($type) {
+				case 1:
+					$item['type'] = '';
+					break;
+				case 2:
+					$item['type'] = '';
+					break;
+				case 3:
+					$item['type'] = _MA_XMSTOCK_STOCK_LOAN;
+					break;
+			}
 			$xoopsTpl->append_by_ref('item', $item);
 			unset($item);
 		}

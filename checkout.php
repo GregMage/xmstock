@@ -141,12 +141,27 @@ switch ($op) {
 		$itemorderHandler->field_link = "article_id";
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
+		// Get stock
+		$criteria = new CriteriaCompo();
+		$stock_arr = $stockHandler->getall($criteria);
 		$caddy_items = array();
 		foreach (array_keys($itemorder_arr) as $i) {
 			$caddy_items[$i]['id'] = $itemorder_arr[$i]->getVar('itemorder_articleid');
 			$caddy_items[$i]['name'] = $itemorder_arr[$i]->getVar('article_name');
 			$caddy_items[$i]['amount'] = $itemorder_arr[$i]->getVar('itemorder_amount');
 			$caddy_items[$i]['cid'] = $itemorder_arr[$i]->getVar('article_cid');
+			$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+			switch ($type) {
+				case 1:
+					$caddy_items[$i]['type'] = '';
+					break;
+				case 2:
+					$caddy_items[$i]['type'] = '';
+					break;
+				case 3:
+					$caddy_items[$i]['type'] = _MA_XMSTOCK_STOCK_LOAN;
+					break;
+			}
 		}
 		$xoopsTpl->assign('order_title', sprintf(_MA_XMSTOCK_ORDER_ORDER, $order->getVar('order_id')));
 		$xoopsTpl->assign('order_id', $order_id);

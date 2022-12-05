@@ -21,7 +21,11 @@
 						<div class="list-group">
 						<{foreach from=$information key=item_id item=item_info}>
 							<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$item_info.cid}>&article_id=<{$item_info.id}>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" target="_blank">
-							<{$item_info.name}><span class="badge badge-primary badge-pill"><{$item_info.amount}></span>
+							<{$item_info.name}>
+							<{if $item_info.type|default:'' != ''}>
+								<span class="badge badge-pill badge-info"><{$item_info.type}></span>
+							<{/if}>
+							<span class="badge badge-primary badge-pill"><{$item_info.amount}></span>
 							</a>
 
 							</div>

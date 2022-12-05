@@ -473,6 +473,7 @@ class xmstock_order extends XoopsObject
 		if ($status == 1 || $status == 2){
 			$articles .= "<th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th>";
 			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th>";
+			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_LOAN . "</th>";
 		}
 		if ($status == 2){
 			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_LOCATION . "</th>";
@@ -497,6 +498,12 @@ class xmstock_order extends XoopsObject
 					}
 				}
 				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . "</span> " . $area_name . "</td>";
+				$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+				if ($type == 3) {
+					$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . _YES . "</span></td>";
+				} else {
+					$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . _NO . "</span></td>";
+				}
 			}
 			if ($status == 2){
 				$location =  XmstockUtility::getLocation($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);

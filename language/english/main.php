@@ -125,8 +125,7 @@ define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée p
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
 define('_MA_XMSTOCK_STOCK_ML_DESC', 'A renseigner en mm');
-define('_MA_XMSTOCK_STOCK_LOAN', 'Emprunt');
-define('_MA_XMSTOCK_STOCK_LOAN_DESC', 'En prêt');
+define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
