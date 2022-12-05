@@ -33,13 +33,10 @@ $area_id = Request::getInt('area_id', 0);
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
-$general_area = $helper->getConfig('general_area', '');
-
-
 // ********************************************************************************************************************
 // Liste le contenu du caddy
 // ********************************************************************************************************************
-function listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area)
+function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 {
 	global $xoopsTpl;
 	if ($article_id == 0){
@@ -129,12 +126,6 @@ switch ($op) {
 		}
 		$criteria = new CriteriaCompo();
 		$stock_arr = $stockHandler->getall($criteria);
-		if ($general_area[0] == ''){
-			//Vérification que l'article existe dans le lieu de stockage
-			if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0) {
-				redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOARTICLE);
-			}
-		}
 		// Vérification si l'article est un article à emprunter
 		if (XmstockUtility::typeOfStock($area_id, $article_id, $stock_arr) == 3) {
 			if (XmstockUtility::articleAmountPerArea($area_id, $article_id, $stock_arr) == 0) {
@@ -180,12 +171,12 @@ switch ($op) {
 		} else {
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
 		break;
 
 	// List: Liste des articles dans le caddy
 	case 'list':
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
 		break;
 
 	// Update: recalcul les quantités des articles dans le caddy
@@ -207,13 +198,13 @@ switch ($op) {
 			}
 			$sessionHelper->set($session_name, $datasUpdate);
 		}
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
 		break;
 
 	// empty: Vide le panier
 	case 'empty':
 		$sessionHelper->del($session_name);
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
 		break;
 
 	// del: Supprime un article
@@ -234,7 +225,7 @@ switch ($op) {
 				}
 			}
 		}
-		listCart($sessionHelper, $session_name, $article_id, $stockHandler, $general_area);
+		listCart($sessionHelper, $session_name, $article_id, $stockHandler);
 		break;
 }
 

@@ -39,8 +39,6 @@ define('_MI_XMSTOCK_SUB_TRANSFER', 'Transfert');
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>General</span>");
 define('_MI_XMSTOCK_PREF_GENERALITEMPERPAGE', 'Number of items per page in the general view');
-define('_MI_XMSTOCK_PREF_DEFAULTAREA', 'Default area for commands');
-define('_MI_XMSTOCK_PREF_DEFAULTAREA_DESC', 'To display all areas, you have to update the module!');
 define('_MI_XMSTOCK_PREF_PRICE', 'Gestion des prix');
 define('_MI_XMSTOCK_PREF_PRICE_DESC', 'Option qui permet de savoir comment sont gérer les prix');
 define('_MI_XMSTOCK_PREF_PRICE_0', 'Désactivé les prix');
