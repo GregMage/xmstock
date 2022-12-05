@@ -93,10 +93,6 @@ class xmstock_transfer extends XoopsObject
             $error_message .= _MA_XMSTOCK_ERROR_AMOUNT . '<br>';
             $transfer_amount = 0;
         }
-		if ($_REQUEST['transfer_amount'] == 0) {
-			$error_message .= _MA_XMSTOCK_ERROR_AMOUNTNOTZERO . '<br>';
-            $transfer_amount = 0;
-        }
 		if ($transfer_type == 'E' && $transfer_ar_areaid == 0) {
 			$error_message .= _MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID . '<br>';
 			$transfer_ar_areaid = 0;
@@ -183,7 +179,9 @@ class xmstock_transfer extends XoopsObject
 						}
 					}
 					$this->setVar('transfer_articleid', $transfer_articleid);
-					$price = $price / $transfer_amount;
+					if ($transfer_amount != 0) {
+						$price = $price / $transfer_amount;
+					}
 					$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price, $location, $stocktype);
 					if ($error_message == '') {
 						$this->destroyVars('transfer_price');
