@@ -70,7 +70,7 @@ function listOrder($obj, $order_id)
 				$xoopsTpl->assign('status_icon', '<span class="fa fa-ban fa-fw" aria-hidden="true"></span>');
 				break;
 		}
-		$form = $obj->getFormNext();
+		$form = $obj->getFormNext(false, $obj->getVar('order_ddesired'));
 		$xoopsTpl->assign('form', $form->render());
 	} else {
 		redirect_header('index.php', 2, _NOPERM);

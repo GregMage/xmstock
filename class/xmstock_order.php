@@ -420,7 +420,7 @@ class xmstock_order extends XoopsObject
      * @param bool $action
      * @return XoopsThemeForm
      */
-    public function getFormNext($action = false)
+    public function getFormNext($action = false, $ddesired = '')
     {
         $helper = Helper::getHelper('xmstock');
         if ($action === false) {
@@ -446,7 +446,7 @@ class xmstock_order extends XoopsObject
 
 		if ($status == 1){
 			//Date de livraison
-			$form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_ORDER_DATEDELIVERY, 'order_ddelivery', 2, time()), false);
+			$form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_ORDER_DATEDELIVERY, 'order_ddelivery', 2, $ddesired), false);
 			//Livraison
 			$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', $this->getVar('order_delivery'));
 			$options        = [0 => _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL, 1 => _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY];
