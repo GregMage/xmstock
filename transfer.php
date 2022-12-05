@@ -43,13 +43,15 @@ switch ($op) {
     case 'list':
         // Get start pager
         $start = Request::getInt('start', 0);
-		//filter
+		//filters
 		$area_id = Request::getInt('area_id', 0);
         $xoopsTpl->assign('area_id', $area_id);
 		$sort = Request::getString('sort', 'DESC');
 		$filter = Request::getInt('filter', 10);
 		$xoopsTpl->assign('sort', $sort);
 		$xoopsTpl->assign('filter', $filter);
+		//external filters
+		$article_id = Request::getInt('article_id', 0);
 
 		//area
 		$area = array();
@@ -121,7 +123,12 @@ switch ($op) {
 			$criteria->add(new Criteria('(transfer_st_areaid', $area_id ), 'OR');
 			$criteria->add(new Criteria('transfer_ar_areaid', $area_id), 'OR');
 		}
-		$criteria->add(new Criteria('transfer_status', 1), ')AND');
+		if ($article_id != 0) {
+			$criteria->add(new Criteria('article_id', $article_id), ') AND');
+			$criteria->add(new Criteria('transfer_status', 1), 'AND');
+		} else {
+			$criteria->add(new Criteria('transfer_status', 1), ') AND');
+		}
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
@@ -175,7 +182,7 @@ switch ($op) {
             }
             // Display Page Navigation
             if ($transfer_count > $filter) {
-                $nav = new XoopsPageNav($transfer_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter);
+                $nav = new XoopsPageNav($transfer_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter . '&article_id=' . $article_id);
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         }
