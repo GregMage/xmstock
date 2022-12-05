@@ -28,7 +28,7 @@
 							<span class="badge badge-info badge-pill"><{$article.amount}></span>
 						</td>
 						<td>
-							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}>>
+							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}> onchange="refreshcaddy()">
 							<{if $article.unit|default:'' != ''}>
 								<span class="badge badge-pill badge-info"><{$article.unit}></span>
 							<{/if}>
@@ -54,6 +54,11 @@
 				</div>
 			</div>
 		</form>
+		<script>
+		function refreshcaddy() {
+			document.forms["formcaddy"].submit();
+		}
+		</script>
 		<div class="xm-stock-general-button">
 			<a href="<{$xoops_url}>/modules/xmstock/checkout.php" class="btn btn-success"><span class="fa fa-check-circle"></span> <{$smarty.const._MA_XMSTOCK_CADDY_STEP1_2}></a>
 		</div>
