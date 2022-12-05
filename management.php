@@ -70,13 +70,9 @@ switch ($op) {
 		$order_2_arr = $orderHandler->getall($criteria);
 		if (!empty($order_2_arr)) {
 			foreach (array_keys($order_2_arr) as $i) {
-				$order_2['id']              = $order_2_arr[$i]->getVar('order_id');
-				if ($order_2_arr[$i]->getVar('order_delivery') == 1){
-					$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_ddelivery'), 's');
-				} else {
-					$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_dwithdrawal'), 's');
-				}
-				$order_2['dorder']          = formatTimestamp($order_2_arr[$i]->getVar('order_dorder'), 's');
+				$order_2['id']          = $order_2_arr[$i]->getVar('order_id');
+				$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_ddelivery'), 's');
+				$order_2['dorder']      = formatTimestamp($order_2_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_2', $order_2);
 				unset($order_2);
 			}
