@@ -44,10 +44,8 @@ class xmstock_order extends XoopsObject
 		$this->initVar('order_dorder', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dvalidation', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_ddelivery', XOBJ_DTYPE_INT, null, false, 10);
-		$this->initVar('order_dwithdrawal', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dready', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_ddelivery_r', XOBJ_DTYPE_INT, null, false, 10);
-		$this->initVar('order_dwithdrawal_r', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('order_dcancellation', XOBJ_DTYPE_INT, null, false, 10);;
 		$this->initVar('order_delivery', XOBJ_DTYPE_INT, null, false, 2);
         $this->initVar('order_status', XOBJ_DTYPE_INT, null, false, 1);
