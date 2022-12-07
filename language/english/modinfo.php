@@ -34,7 +34,7 @@ define('_MI_XMSTOCK_SUB_CADDY', 'Caddy');
 define('_MI_XMSTOCK_SUB_ORDERS', 'My orders');
 define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Order management');
 define('_MI_XMSTOCK_SUB_TRANSFER', 'Transfert');
-
+define('_MI_XMSTOCK_SUB_LOAN', 'Gestion des prêts');
 
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>General</span>");

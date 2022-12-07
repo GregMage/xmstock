@@ -52,7 +52,7 @@ CREATE TABLE `xmstock_output` (
   `output_status`        tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
   
   PRIMARY KEY (`output_id`),
-  KEY `output_name` (`output_userid`)
+  KEY `output_name` (`output_weight`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_order` (
@@ -94,4 +94,17 @@ CREATE TABLE `xmstock_price` (
   
   PRIMARY KEY (`price_id`),
   KEY `price_areaid` (`price_articleid`)
+) ENGINE=MyISAM;
+
+CREATE TABLE `xmstock_loan` (
+  `loan_id`            int(11)		 unsigned    	NOT NULL AUTO_INCREMENT,
+  `loan_areaid`        smallint(5)   unsigned   	NOT NULL DEFAULT '0',
+  `loan_articleid`     mediumint(8)  unsigned    	NOT NULL DEFAULT '0',
+  `loan_date`      	   int(10) 	 	 unsigned   	NOT NULL DEFAULT '0',
+  `loan_rdate`         int(10) 	 	 unsigned   	NOT NULL DEFAULT '0',
+  `loan_userid`        smallint(5)   unsigned   	NOT NULL DEFAULT '0',
+  `loan_status`        tinyint(1)    unsigned 		NOT NULL DEFAULT '1',
+  
+  PRIMARY KEY (`loan_id`),
+  KEY `loan_areaid` (`loan_articleid`)
 ) ENGINE=MyISAM;

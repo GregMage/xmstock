@@ -38,6 +38,14 @@
 				</div>
 			</a>
 		</div>
+		<div class="col-lg-3">
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_LOAN}>" href="<{$xoops_url}>/modules/xmstock/loan.php">
+				<div class="btn m-2 border">
+					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Loan.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_LOAN}>">
+					<h5><{$smarty.const._MI_XMSTOCK_SUB_LOAN}></h5>
+				</div>
+			</a>
+		</div>
 		<{/if}>
     </div>
 	<{if $area_count != 0}>

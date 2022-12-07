@@ -85,6 +85,8 @@ define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'There is no output selected');
 define('_MA_XMSTOCK_ERROR_TRANSFER_NOARTICLE', 'Selected article is not available in the selected stock');
 define('_MA_XMSTOCK_ERROR_TRANSFER_TBAMOUNT', 'The quantity requested (%s) is more important than that available (%s)');
 define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
+define('_MA_XMSTOCK_ERROR_USER', 'Aucun utilisateur séléctionné');
+define('_MA_XMSTOCK_ERROR_NOLOAN', 'There are no loan in the database');
 
 // area
 define('_MA_XMSTOCK_AREA_ARTICLENAME', 'Name');
@@ -293,6 +295,23 @@ define('_MA_XMSTOCK_VIEWPRICE_PRICE', 'Prix');
 define('_MA_XMSTOCK_VIEWPRICE_EXPORT', 'Exporter');
 define('_MA_XMSTOCK_VIEWPRICE_FILTER', 'Filtre');
 define('_MA_XMSTOCK_VIEWPRICE_PERPAGE', 'par page');
+
+// loan.php
+
+define('_MA_XMSTOCK_LOAN_ARTICLE', 'Article à mettre en prêt');
+define('_MA_XMSTOCK_LOAN_LARTICLE', 'Article en prêt');
+define('_MA_XMSTOCK_LOAN_DATE', 'Date de l\'emprunt');
+define('_MA_XMSTOCK_LOAN_RDATE', 'Date de retour');
+define('_MA_XMSTOCK_LOAN_USERID', 'Déstinataire du prêt');
+define('_MA_XMSTOCK_LOAN_STATUS', 'Statut du prêt');
+define('_MA_XMSTOCK_LOAN_STATUS_L', 'En prêt');
+define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt cloturé');
+define('_MA_XMSTOCK_LOAN_FORM', 'Formulaire de prêt');
+define('_MA_XMSTOCK_LOAN_ADD', 'Ajout d\'un prêt');
+define('_MA_XMSTOCK_LOAN_AREA', 'Stock');
+define('_MA_XMSTOCK_LOAN_TRANSFERT_DESC', 'Prêt du %s avec le numéro %s');
+define('_MA_XMSTOCK_LOAN_TRANSFERT_REF', 'Prêt %s');
+define('_MA_XMSTOCK_LOAN_LIST', 'Liste des prêts');
 
 
 

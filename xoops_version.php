@@ -48,6 +48,10 @@ $modversion['sub'][]   = [
     'name' => _MI_XMSTOCK_SUB_TRANSFER,
     'url'  => 'transfer.php'
 ];
+$modversion['sub'][]   = [
+    'name' => _MI_XMSTOCK_SUB_LOAN,
+    'url'  => 'loan.php'
+];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -69,6 +73,7 @@ $modversion['tables'][4] = 'xmstock_output';
 $modversion['tables'][6] = 'xmstock_order';
 $modversion['tables'][7] = 'xmstock_itemorder';
 $modversion['tables'][8] = 'xmstock_price';
+$modversion['tables'][9] = 'xmstock_loan';
 
 
 // Admin Templates
@@ -89,6 +94,7 @@ $modversion['templates'][] = ['file' => 'xmstock_management.tpl', 'description' 
 $modversion['templates'][] = ['file' => 'xmstock_action.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_viewprice.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_transfer.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_loan.tpl', 'description' => ''];
 
 // Configs
 $modversion['config'] = [];
