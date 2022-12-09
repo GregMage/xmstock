@@ -391,7 +391,7 @@ class XmstockUtility
 					if ($stock['type'] == 3) {
 						$stock['order'] = false;
 						$stock['loan']  = true;
-						$stock['borrower'] = implode(',', self::getBorrowerPerArticle($stock['area_id'], $article_id));
+						$stock['borrower'] = implode(', ', self::getBorrowerPerArticle($stock['area_id'], $article_id));
 					} else {
 						$stock['order'] = true;
 						$stock['loan'] 	= false;
