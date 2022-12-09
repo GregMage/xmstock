@@ -101,7 +101,8 @@ class XmstockUtility
      * @param int      $ar_areaid	Id de l'area d'arrivée
      * @param float    $price		prix
      * @param string   $location	emplacement
-     * @return string   			Vide ou message d'erreur.
+     * @param int	   $stocktype	Type de stock (1 standard, 2 matière en mml et 3 emprunt)
+     * @return string   			Vide ou message d'erreur
      */
 	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0, $location = '', $stocktype = 1)
     {
@@ -189,7 +190,6 @@ class XmstockUtility
 				} else {
 					return $obj->getHtmlErrors();
 				}
-
 				break;
 
 			case 'T':

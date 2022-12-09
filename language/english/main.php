@@ -308,6 +308,7 @@ define('_MA_XMSTOCK_LOAN_STATUS_L', 'En prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt cloturé');
 define('_MA_XMSTOCK_LOAN_FORM', 'Formulaire de prêt');
 define('_MA_XMSTOCK_LOAN_ADD', 'Ajout d\'un prêt');
+define('_MA_XMSTOCK_LOAN_EDIT', 'Edition d\'un prêt');
 define('_MA_XMSTOCK_LOAN_AREA', 'Stock');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_DESC', 'Prêt du %s avec le numéro %s');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_REF', 'Prêt %s');

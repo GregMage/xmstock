@@ -82,15 +82,19 @@ class xmstock_loan extends XoopsObject
 		if ($transfer_articleid == 0) {
 			$transfer_articleid = XmarticleUtility::renderArticleIdSave();
 		}
-		$error_message .= XmstockUtility::checkTransfert('O', $transfer_articleid, 1, $areaid);
+		if ($status != 0) {
+			$error_message .= XmstockUtility::checkTransfert('O', $transfer_articleid, 1, $areaid);
+		}
 		$this->setVar('loan_articleid', $transfer_articleid);
 
         if ($error_message == '') {
 			if ($status == 0) {
 				$this->setVar('loan_rdate', time());
-				// todo prévoir la réentrée en stock!!!!!
+				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, 1, 0, $areaid);
+			} else {
+				$error_message .= XmstockUtility::transfert('O', $transfer_articleid, 1, $areaid);
 			}
-			$error_message .= XmstockUtility::transfert('O', $transfer_articleid, 1, $areaid);
+
 			if ($error_message == '') {
 				if ($loanHandler->insert($this)) {
 					$new_transfer = $transferHandler->create();
@@ -131,13 +135,11 @@ class xmstock_loan extends XoopsObject
 		include __DIR__ . '/formselectstock.php';
 
         //form title
-        $title = $this->isNew() ? sprintf(_MA_XMSTOCK_LOAN_ADD) : sprintf(_MA_XMSTOCK_EDIT);
+        $title = $this->isNew() ? sprintf(_MA_XMSTOCK_LOAN_ADD) : sprintf(_MA_XMSTOCK_LOAN_EDIT);
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
-
-		//articleid
 		xoops_load('utility', 'xmarticle');
-		XmarticleUtility::renderArticleForm($form, _MA_XMSTOCK_LOAN_ARTICLE, $this->getVar('transfer_articleid'));
+		XmarticleUtility::renderArticleForm($form, _MA_XMSTOCK_LOAN_ARTICLE, $this->getVar('loan_articleid'));
 
 		if ($this->isNew()) {
 			//areaid
@@ -150,9 +152,11 @@ class xmstock_loan extends XoopsObject
 			$form->addElement(new XoopsFormHidden('status', 1));
 		} else {
 			//date
-			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_DATE, $this->getVar('loan_date')), false);
+			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_DATE, formatTimestamp($this->getVar('loan_date'), 's')), false);
+			$form->addElement(new XoopsFormHidden('loan_date', $this->getVar('loan_date')));
 			//user
-			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_USERID, $this->getVar('loan_userid')), false);
+			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_USERID, XoopsUser::getUnameFromId($this->getVar('loan_userid'))), false);
+			$form->addElement(new XoopsFormHidden('loan_userid', $this->getVar('loan_userid')));
 			//status
 			$form_status = new XoopsFormRadio(_MA_XMSTOCK_LOAN_STATUS, 'loan_status', $this->getVar('loan_status'));
 			$options = array(1 => _MA_XMSTOCK_LOAN_STATUS_L, 0 =>_MA_XMSTOCK_LOAN_STATUS_C,);
@@ -167,7 +171,6 @@ class xmstock_loan extends XoopsObject
 		}
 
 		$form->addElement(new XoopsFormHidden('op', 'save'));
-
 
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));

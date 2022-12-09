@@ -47,9 +47,11 @@ switch ($op) {
 		$area_id = Request::getInt('area_id', 0);
         $xoopsTpl->assign('area_id', $area_id);
 		$sort = Request::getString('sort', 'DESC');
-		$filter = Request::getInt('filter', 10);
 		$xoopsTpl->assign('sort', $sort);
+		$filter = Request::getInt('filter', 10);
 		$xoopsTpl->assign('filter', $filter);
+		$status = Request::getInt('status', 1);
+		$xoopsTpl->assign('status', $status);
 		//external filters
 		$article_id = Request::getInt('article_id', 0);
 
@@ -72,13 +74,21 @@ switch ($op) {
 
 		}
 
+		//status
+		$status_options = '<option value=2' . ($status == 2 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
+		$status_options .= '<option value=1' . ($status == 1 ? ' selected="selected"' : '') . '>' . _MA_XMSTOCK_LOAN_STATUS_L . '</option>';
+		$status_options .= '<option value=0' . ($status == 0 ? ' selected="selected"' : '') . '>' . _MA_XMSTOCK_LOAN_STATUS_C . '</option>';
+		$xoopsTpl->assign('status_options', $status_options);
+
         // Criteria loan
         $criteria = new CriteriaCompo();
         $criteria->setSort('loan_date');
 		$criteria->setStart($start);
 		$criteria->setLimit($filter);
 		$criteria->setOrder($sort);
-
+		if ($status != 2) {
+			$criteria->add(new Criteria('loan_status', $status));
+		}
 		$loanHandler->table_link = $loanHandler->db->prefix("xmarticle_article");
         $loanHandler->field_link = "article_id";
         $loanHandler->field_object = "loan_articleid";
@@ -90,10 +100,15 @@ switch ($op) {
             foreach (array_keys($loan_arr) as $i) {
                 $loan_id               = $loan_arr[$i]->getVar('loan_id');
                 $loan['id']            = $loan_id;
-                $loan['date']          = formatTimestamp($loan_arr[$i]->getVar('loan_date'), 'm');
-                $loan['rdate']         = formatTimestamp($loan_arr[$i]->getVar('loan_rdate'), 'm');
-                $loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $loan_arr[$i]->getVar('article_cid') . '&article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('loan_reference') . ')';
-                $loan['status']        = $loan_arr[$i]->getVar('loan_status');
+                $loan['date']          = formatTimestamp($loan_arr[$i]->getVar('loan_date'), 's');
+				$loan['status']        = $loan_arr[$i]->getVar('loan_status');
+				if ($loan['status'] == 1) {
+					$loan['rdate']     = '/';
+				} else {
+					$loan['rdate']     = formatTimestamp($loan_arr[$i]->getVar('loan_rdate'), 's');
+				}
+                $loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $loan_arr[$i]->getVar('article_cid') . '&article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('article_reference') . ')';
+
                 $loan['user']     	   = XoopsUser::getUnameFromId($loan_arr[$i]->getVar('loan_userid'));
 				if ($loan['status'] == 0) {
 					$loan['text_status'] = _MA_XMSTOCK_LOAN_STATUS_C;
@@ -106,7 +121,7 @@ switch ($op) {
             }
             // Display Page Navigation
             if ($loan_count > $filter) {
-                $nav = new XoopsPageNav($loan_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter . '&article_id=' . $article_id);
+                $nav = new XoopsPageNav($loan_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter . '&status=' . $status);
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         }
@@ -119,6 +134,26 @@ switch ($op) {
         $form = $obj->getForm();
         $xoopsTpl->assign('form', $form->render());
         break;
+
+	// Edit
+	case 'edit':
+		$loan_id = Request::getInt('loan_id', 0);
+		if ($loan_id == 0) {
+			$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOLOAN);
+		} else {
+			$obj  = $loanHandler->get($loan_id);
+			if (empty($obj)) {
+				$xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOLOAN);
+			} else {
+				if ($obj->getVar('loan_status') == 0) {
+					redirect_header(XOOPS_URL . '/modules/xmstock/loan.php', 2, _NOPERM);
+				}
+				$permHelper->checkPermissionRedirect('xmstock_manage', $obj->getVar('loan_areaid'), 'index.php', 2, _NOPERM);
+				$form = $obj->getForm();
+				$xoopsTpl->assign('form', $form->render());
+			}
+		}
+		break;
 
     // Save
     case 'save':

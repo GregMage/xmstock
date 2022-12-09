@@ -353,6 +353,9 @@ class xmstock_order extends XoopsObject
 					//split de commandes
 					$new_orderid = 0;
 					$nb_split = 0;
+					$criteria = new CriteriaCompo();
+					$criteria->add(new Criteria('stock_areaid', $this->getVar('order_areaid')));
+					$stock_arr = $stockHandler->getall($criteria);
 					for ($i = 1; $i <= $count; $i++) {
 						$itemorder = Request::getInt('itemorder' . $i, 0);
 						$item = $itemorderHandler->get($itemorder);
@@ -384,6 +387,19 @@ class xmstock_order extends XoopsObject
 							// Sortie de stock uniquement en statut de 2 à 3
 							if ($status == 2) {
 								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+								// Si emprunt ajout d'une entrée dans le table d'emprunt
+								$type = XmstockUtility::articleTypePerArea($item->getVar('itemorder_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
+								if ($type == 3) {
+									$loan = $loanHandler->create();
+									$loan->setVar('loan_areaid', $item->getVar('itemorder_areaid'));
+									$loan->setVar('loan_articleid', $item->getVar('itemorder_articleid'));
+									$loan->setVar('loan_date', time());
+									$loan->setVar('loan_userid', $this->getVar('order_userid'));
+									$loan->setVar('loan_status', 1);
+									if (!$loanHandler->insert($loan)) {
+										$error_message .= $loan->getHtmlErrors();
+									}
+								}
 								$new_transfer = $transferHandler->create();
 								$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
 								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
