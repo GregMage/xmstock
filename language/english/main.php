@@ -303,6 +303,7 @@ define('_MA_XMSTOCK_LOAN_LARTICLE', 'Article en prêt');
 define('_MA_XMSTOCK_LOAN_DATE', 'Date de l\'emprunt');
 define('_MA_XMSTOCK_LOAN_RDATE', 'Date de retour');
 define('_MA_XMSTOCK_LOAN_USERID', 'Déstinataire du prêt');
+define('_MA_XMSTOCK_LOAN_USERSLIST', 'Liste des emprunteurs');
 define('_MA_XMSTOCK_LOAN_STATUS', 'Statut du prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_L', 'En prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt cloturé');

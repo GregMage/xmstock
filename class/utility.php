@@ -268,6 +268,32 @@ class XmstockUtility
 			return $obj->getHtmlErrors();
 		}
     }
+	
+	/**
+     * Fonction qui retourne la liste des emprunteurs actifs par rapport à un stock et un article
+     * @param int      $area_id 	Id du lieu de stockage
+	 * @param int      $articleid	Id de l'article
+     * @return array   $users		Liste des emprunteurs actifs
+     */
+	public static function getBorrowerPerArticle($area_id, $article_id)
+    {
+        include __DIR__ . '/../include/common.php';
+		$users = array();
+		// Criteria loan
+        $criteria = new CriteriaCompo();
+        $criteria->setSort('loan_date');
+		$criteria->setOrder('DESC');
+		$criteria->add(new Criteria('loan_status', 1));
+		$criteria->add(new Criteria('loan_areaid', $area_id));
+		$criteria->add(new Criteria('loan_articleid', $article_id));
+		$loan_arr = $loanHandler->getall($criteria);
+		if (count($loan_arr) > 0) {
+			foreach (array_keys($loan_arr) as $i) {
+				$users[] = XoopsUser::getUnameFromId($loan_arr[$i]->getVar('loan_userid'));
+			}
+		}
+        return $users;
+    }
 
 	/**
      * Fonction qui liste les areas qui respectent la permission demandées
@@ -350,29 +376,32 @@ class XmstockUtility
         if (count($stock_arr) > 0 && !empty($viewPermissionArea)) {
 			$total_amount = 0;
 			foreach (array_keys($stock_arr) as $i) {
-				$stock['area_id']    = $stock_arr[$i]->getVar('area_id');
-                $stock['name']       = $stock_arr[$i]->getVar('area_name');
-                $stock['location']   = $stock_arr[$i]->getVar('area_location');
-                $stock['location_s'] = $stock_arr[$i]->getVar('stock_location');
-                $stock['amount']     = $stock_arr[$i]->getVar('stock_amount');
-				$stock['price']   	 = self::getPrice($stock_arr[$i]->getVar('stock_price'));
-				$stock['type']   	 = $stock_arr[$i]->getVar('stock_type');
+				$stock['area_id']    	= $stock_arr[$i]->getVar('area_id');
+                $stock['name']       	= $stock_arr[$i]->getVar('area_name');
+                $stock['location']   	= $stock_arr[$i]->getVar('area_location');
+                $stock['location_s'] 	= $stock_arr[$i]->getVar('stock_location');
+                $stock['amount']     	= $stock_arr[$i]->getVar('stock_amount');
+				$stock['price']   	 	= self::getPrice($stock_arr[$i]->getVar('stock_price'));
+				$stock['type']   	 	= $stock_arr[$i]->getVar('stock_type');
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
 					if ($stock['type'] == 3) {
 						$stock['order'] = false;
-						$stock['loan'] = true;
+						$stock['loan']  = true;
+						$stock['borrower'] = implode(',', self::getBorrowerPerArticle($stock['area_id'], $article_id));
 					} else {
 						$stock['order'] = true;
-						$stock['loan'] = false;
+						$stock['loan'] 	= false;
+						$stock['borrower'] = '';
 					}
 				} else {
-					$stock['order'] = false;
-					$stock['loan'] = false;
+					$stock['order'] 	= false;
+					$stock['loan'] 		= false;
 				}
+				
 				if (in_array($stock['area_id'], $managePermissionArea) == true){
-					$stock['manage']  = true;
+					$stock['manage']  	= true;
 				} else {
-					$stock['manage']  = false;
+					$stock['manage']  	= false;
 				}
 				$total_amount += $stock['amount'];
                 $xoopsTpl->append_by_ref('stock', $stock);
