@@ -73,7 +73,10 @@ class xmstock_loan extends XoopsObject
 		$this->setVar('loan_status', $status);
         $userid = Request::getInt('loan_userid', 0);
         $this->setVar('loan_userid', $userid);
-        $this->setVar('loan_date', strtotime(Request::getString('loan_date', '')));
+		$date = Request::getString('loan_date', '');
+		if ($date != '') {
+			$this->setVar('loan_date', strtotime($date));
+		}
 		if ($userid == 0) {
 			$error_message .= _MA_XMSTOCK_ERROR_USER . '<br>';
 		}
@@ -90,7 +93,7 @@ class xmstock_loan extends XoopsObject
         if ($error_message == '') {
 			if ($status == 0) {
 				$this->setVar('loan_rdate', time());
-				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, 1, 0, $areaid);
+				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, 1, 0, $areaid, 0 , '', 3);
 			} else {
 				$error_message .= XmstockUtility::transfert('O', $transfer_articleid, 1, $areaid);
 			}
@@ -153,7 +156,6 @@ class xmstock_loan extends XoopsObject
 		} else {
 			//date
 			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_DATE, formatTimestamp($this->getVar('loan_date'), 's')), false);
-			$form->addElement(new XoopsFormHidden('loan_date', $this->getVar('loan_date')));
 			//user
 			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_USERID, XoopsUser::getUnameFromId($this->getVar('loan_userid'))), false);
 			$form->addElement(new XoopsFormHidden('loan_userid', $this->getVar('loan_userid')));

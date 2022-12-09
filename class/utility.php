@@ -120,7 +120,9 @@ class XmstockUtility
 					$obj->setVar('stock_areaid', $ar_areaid);
 					$obj->setVar('stock_articleid', $articleid);
 					$obj->setVar('stock_amount', $amount);
-					$obj->setVar('stock_location', $location);
+					if ($location != '') {
+						$obj->setVar('stock_location', $location);
+					}
 					$obj->setVar('stock_type', $stocktype);
 					if ($helper->getConfig('general_price', 0) != 0) {
 						$obj->setVar('stock_price', number_format($price, 2));
@@ -142,7 +144,9 @@ class XmstockUtility
 					$old_amount = $obj->getVar('stock_amount');
 					$old_price = $obj->getVar('stock_price');
 					$obj->setVar('stock_amount', $old_amount + $amount);
-					$obj->setVar('stock_location', $location);
+					if ($location != '') {
+						$obj->setVar('stock_location', $location);
+					}
 					$obj->setVar('stock_type', $stocktype);
 					//price
 					if ($helper->getConfig('general_price', 0) != 0) {
