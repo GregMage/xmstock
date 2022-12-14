@@ -131,7 +131,7 @@ class xmstock_transfer extends XoopsObject
 			$error_message .= _MA_XMSTOCK_ERROR_PRICE . '<br>';
 			$this->setVar('transfer_price', 0.0);
 		} else {
-			$this->setVar('transfer_price', number_format($price, 2));
+			$this->setVar('transfer_price', number_format($price, 2, '.', ''));
 		}
 		$location = Request::getString('transfer_location', '');
 		if ($transfer_type != 'O') {

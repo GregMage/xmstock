@@ -124,9 +124,11 @@ class XmstockUtility
 						$obj->setVar('stock_location', $location);
 					}
 					$obj->setVar('stock_type', $stocktype);
-					if ($helper->getConfig('general_price', 0) != 0) {
-						$obj->setVar('stock_price', number_format($price, 2));
-						$error_message = self::setPrice($articleid, $ar_areaid, $amount, $price);
+					//price
+					$price = self::priceCalculation($price, $amount, 0, 0);
+					if ($price > 0) {
+						$obj->setVar('stock_price', number_format($price, 2, '.', ''));
+						$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
 					}
 					if ($error_message == '') {
 						if ($stockHandler->insert($obj)) {
@@ -149,23 +151,10 @@ class XmstockUtility
 					}
 					$obj->setVar('stock_type', $stocktype);
 					//price
-					if ($helper->getConfig('general_price', 0) != 0) {
-						if ($helper->getConfig('general_price', 0) == 1) {
-							$obj->setVar('stock_price', $price);
-						} else {
-							if ($old_price > 0 && $price > 0) {
-								$obj->setVar('stock_price', number_format((($old_amount * $old_price) + ($amount * $price))/($old_amount + $amount), 2));
-							} else {
-								if ($old_price > 0 && $price == 0) {
-									$obj->setVar('stock_price', $old_price);
-								} else {
-									$obj->setVar('stock_price', $price);
-								}
-							}
-						}
-						if ($price > 0) {
-							$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
-						}
+					$price = self::priceCalculation($price, $amount, $old_price, $old_amount);
+					if ($price > 0) {
+						$obj->setVar('stock_price', number_format($price, 2, '.', ''));
+						$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
 					}
 					if ($error_message == '') {
 						if ($stockHandler->insert($obj)) {
@@ -204,14 +193,14 @@ class XmstockUtility
 				foreach (array_keys($stock_arr) as $i) {
 					$obj = $stockHandler->get($i);
 				}
-				$old_amount = $obj->getVar('stock_amount');
-				$old_price = $obj->getVar('stock_price');
-				$old_stocktype = $obj->getVar('stock_type');
+				$st_amount = $obj->getVar('stock_amount');
+				$st_price = $obj->getVar('stock_price');
+				$st_stocktype = $obj->getVar('stock_type');
 
 				// Get Permission to manage
 				$managePermissionArea =  self::getPermissionArea('xmstock_manage');
 				if (in_array($ar_areaid, $managePermissionArea)){
-					$obj->setVar('stock_amount', $old_amount - $amount);
+					$obj->setVar('stock_amount', $st_amount - $amount);
 					if (!$stockHandler->insert($obj)) {
 						return $obj->getHtmlErrors();
 					}
@@ -225,9 +214,10 @@ class XmstockUtility
 						$obj->setVar('stock_articleid', $articleid);
 						$obj->setVar('stock_amount', $amount);
 						$obj->setVar('stock_location', $location);
-						$obj->setVar('stock_type', $old_stocktype);
-						$obj->setVar('stock_price', $old_price);
+						$obj->setVar('stock_type', $st_stocktype);
+						$obj->setVar('stock_price', $st_price);
 						if ($stockHandler->insert($obj)) {
+							self::setPrice($articleid, $ar_areaid, $amount, $st_price);
 							return '';
 						} else {
 							return $obj->getHtmlErrors();
@@ -237,7 +227,14 @@ class XmstockUtility
 							$obj = $stockHandler->get($i);
 						}
 						$old_amount = $obj->getVar('stock_amount');
+						$old_price = $obj->getVar('stock_price');
 						$obj->setVar('stock_amount', $old_amount + $amount);
+						//price
+						$price = self::priceCalculation($st_price, $amount, $old_price, $old_amount);
+						if ($price > 0) {
+							$obj->setVar('stock_price', number_format($price, 2, '.', ''));
+							$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
+						}
 						if ($stockHandler->insert($obj)) {
 							return '';
 						} else {
@@ -250,11 +247,45 @@ class XmstockUtility
     }
 
 	/**
+     * Fonction qui calcul le prix d'un article
+     * @param float    $price		prix
+     * @param int      $amount		montant
+     * @param float    $oldPrice	ancien prix
+     * @param int      $oldAmount	ancien montant
+     * @return int   				nouveau prix
+     */
+	public static function priceCalculation($price, $amount, $oldPrice, $oldAmount)
+    {
+		include __DIR__ . '/../include/common.php';
+		$newPrice = 0;
+		if ($helper->getConfig('general_price', 0) != 0) {
+			if ($helper->getConfig('general_price', 0) == 1) {
+				$newPrice = $price;
+			} else {
+				if ($oldPrice > 0 && $price > 0) {
+					$newPrice = (($oldAmount * $oldPrice) + ($amount * $price))/($oldAmount + $amount);
+				} else {
+					if ($oldPrice > 0 && $price == 0) {
+						$newPrice = $oldPrice;
+					} else {
+						$newPrice = $price;
+					}
+				}
+			}
+		} else {
+			if ($oldPrice > 0 ) {
+				$newPrice = $oldPrice;
+			}
+		}
+		return $newPrice;
+    }
+
+	/**
      * Fonction qui enregistre les prix dans la table price
      * @param int      $articleid	Id de l'article
 	 * @param int      $areaid		Id de l'area
      * @param int      $amount		montant
-     * @param float    $prix		prix
+     * @param float    $price		prix
      * @return string   			Vide ou message d'erreur.
      */
 	public static function setPrice($articleid, $areaid, $amount, $price)
@@ -264,7 +295,7 @@ class XmstockUtility
 		$obj->setVar('price_articleid', $articleid);
 		$obj->setVar('price_areaid', $areaid);
 		$obj->setVar('price_amount', $amount);
-		$obj->setVar('price_price', number_format($price, 2));
+		$obj->setVar('price_price', number_format($price, 2, '.', ''));
 		$obj->setVar('price_date', time());
 		if ($priceHandler->insert($obj)) {
 			return '';
@@ -272,7 +303,7 @@ class XmstockUtility
 			return $obj->getHtmlErrors();
 		}
     }
-	
+
 	/**
      * Fonction qui retourne la liste des emprunteurs actifs par rapport à un stock et un article
      * @param int      $area_id 	Id du lieu de stockage
@@ -401,7 +432,7 @@ class XmstockUtility
 					$stock['order'] 	= false;
 					$stock['loan'] 		= false;
 				}
-				
+
 				if (in_array($stock['area_id'], $managePermissionArea) == true){
 					$stock['manage']  	= true;
 				} else {
