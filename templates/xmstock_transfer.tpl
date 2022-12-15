@@ -10,7 +10,7 @@
 			<{/if}>
 		</ol>
 	</nav>
-
+	<{if $form|default:'' == ''}>
 	<div class="row text-center">
 		<div class="col-lg-4">
 			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}>" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=E">
@@ -37,6 +37,7 @@
 			</a>
 		</div>
     </div>
+	<{/if}>
 	<{if $error_message|default:'' != ''}>
 	<div class="alert alert-danger alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

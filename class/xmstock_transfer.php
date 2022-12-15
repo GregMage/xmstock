@@ -220,7 +220,17 @@ class xmstock_transfer extends XoopsObject
 		include __DIR__ . '/formselectstock.php';
 
         //form title
-        $title = $this->isNew() ? sprintf(_MA_XMSTOCK_ADD) : sprintf(_MA_XMSTOCK_EDIT);
+		switch($type) {
+			case 'E':
+				$title = _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
+				break;
+			case 'O':
+				$title = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
+				break;
+			case 'T':
+				$title = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
+				break;
+		}
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
 
