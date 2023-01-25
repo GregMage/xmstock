@@ -36,6 +36,12 @@ define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Order management');
 define('_MI_XMSTOCK_SUB_TRANSFER', 'Transfert');
 define('_MI_XMSTOCK_SUB_LOAN', 'Gestion des prêts');
 
+// Block
+define('_MI_XMSTOCK_BLOCK_MYORDERS', 'Mes commandes');
+define('_MI_XMSTOCK_BLOCK_MYORDERS_DESC', 'Afficher mes commandes');
+define('_MI_XMSTOCK_BLOCK_PROCESS', 'Commandes à traiter');
+define('_MI_XMSTOCK_BLOCK_PROCESS_DESC', 'Afficher les commandes à traiter');
+
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>General</span>");
 define('_MI_XMSTOCK_PREF_GENERALITEMPERPAGE', 'Number of items per page in the general view');
