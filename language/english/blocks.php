@@ -10,12 +10,12 @@
 */
 
 /**
- * xmdoc module
+ * xmstock module
  *
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
 // index.php
-define('_MB_XMSTOCK_STATUS', 'Display status:');
 define('_MB_XMSTOCK_NBORDER', 'Number of orders to display');
+define('_MB_XMSTOCK_STATUS', 'Display status:');

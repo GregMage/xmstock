@@ -31,10 +31,10 @@ define('_MI_XMSTOCK_MENU_ABOUT', 'About');
 
 // Sub menu
 define('_MI_XMSTOCK_SUB_CADDY', 'Caddy');
+define('_MI_XMSTOCK_SUB_LOAN', 'Gestion des prêts');
 define('_MI_XMSTOCK_SUB_ORDERS', 'My orders');
 define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Order management');
 define('_MI_XMSTOCK_SUB_TRANSFER', 'Transfert');
-define('_MI_XMSTOCK_SUB_LOAN', 'Gestion des prêts');
 
 // Block
 define('_MI_XMSTOCK_BLOCK_MYORDERS', 'Mes commandes');
@@ -56,6 +56,5 @@ define('_MI_XMSTOCK_PREF_CAPTCHA_DESC', 'Select Yes to use Captcha in the submit
 define('_MI_XMSTOCK_PREF_MAXUPLOADSIZE', 'Max uploaded files size');
 define('_MI_XMSTOCK_PREF_MAXUPLOADSIZE_DESC', 'This concerns the logos that are uploaded for categories and news');
 define('_MI_XMSTOCK_PREF_MAXUPLOADSIZE_MBYTES', 'MB');
-
 define('_MI_XMSTOCK_PREF_HEAD_ADMIN', "<span style='font-size: large; font-weight: bold;'>Administration</span>");
 define('_MI_XMSTOCK_PREF_ITEMPERPAGE', 'Number of items per page in the administration view');

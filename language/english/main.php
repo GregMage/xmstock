@@ -39,6 +39,7 @@ define('_MA_XMSTOCK_ORDER', 'Order');
 define('_MA_XMSTOCK_LOAN', 'Emprunter');
 define('_MA_XMSTOCK_PROCESS', 'Faire avancer'); // progress
 define('_MA_XMSTOCK_REDIRECT_SAVE', 'Successfully saved');
+define('_MA_XMSTOCK_REJECT', 'Refuser');
 define('_MA_XMSTOCK_SORTBY', 'Trier par'); //Sort by
 define('_MA_XMSTOCK_STATUS', 'Status');
 define('_MA_XMSTOCK_STATUS_A', 'Active');
@@ -48,7 +49,6 @@ define('_MA_XMSTOCK_STATUS_WAITING', 'Waiting');
 define('_MA_XMSTOCK_TITLE', 'Title');
 define('_MA_XMSTOCK_VIEW', 'View');
 define('_MA_XMSTOCK_VALID', 'Validation');
-define('_MA_XMSTOCK_REJECT', 'Refuser');
 define('_MA_XMSTOCK_WARNING', 'Warning');
 
 // Admin
@@ -69,6 +69,7 @@ define('_MA_XMSTOCK_ERROR_LOCATION', 'L\'emplacement n\'est pas défini');
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
 define('_MA_XMSTOCK_ERROR_NOARTICLE', 'Il n\'y a pas d\'article, il est nécessaire d\'avoir au minimum un article!');
+define('_MA_XMSTOCK_ERROR_NOLOAN', 'There are no loan in the database');
 define('_MA_XMSTOCK_ERROR_NOORDER', 'There are no order in the database');
 define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
 define('_MA_XMSTOCK_ERROR_NOPRICE', 'Pas de prix dans la base de donnée');
@@ -85,9 +86,8 @@ define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUT', 'Vous devez choisir un déstinataire
 define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'There is no output selected');
 define('_MA_XMSTOCK_ERROR_TRANSFER_NOARTICLE', 'Selected article is not available in the selected stock');
 define('_MA_XMSTOCK_ERROR_TRANSFER_TBAMOUNT', 'The quantity requested (%s) is more important than that available (%s)');
-define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
 define('_MA_XMSTOCK_ERROR_USER', 'Aucun utilisateur séléctionné');
-define('_MA_XMSTOCK_ERROR_NOLOAN', 'There are no loan in the database');
+define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
 
 // area
 define('_MA_XMSTOCK_AREA_ARTICLENAME', 'Name');
@@ -121,13 +121,13 @@ define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
 define('_MA_XMSTOCK_STOCK_AMOUNT', 'Amount in stock');
 define('_MA_XMSTOCK_STOCK_AREA', 'Stock');
 define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
+define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
+define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
+define('_MA_XMSTOCK_STOCK_ML_DESC', 'A renseigner en mm');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
 define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
-define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
-define('_MA_XMSTOCK_STOCK_ML_DESC', 'A renseigner en mm');
-define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
@@ -144,6 +144,7 @@ define('_MA_XMSTOCK_TRANSFER_DESC', 'Description of the transfer');
 define('_MA_XMSTOCK_TRANSFER_DESTINATION', 'Destination');
 define('_MA_XMSTOCK_TRANSFER_FORM', 'Formulaire de transfert');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
+define('_MA_XMSTOCK_TRANSFER_LIST_WARNING', 'Transferts en attente de validation');
 define('_MA_XMSTOCK_TRANSFER_LOCATION', 'Emplacement*');
 define('_MA_XMSTOCK_TRANSFER_LOCATION_DSC', 'Emplacement de l\'article dans le stock');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Déstinataire');
@@ -153,14 +154,13 @@ define('_MA_XMSTOCK_TRANSFER_OUTPUTUSERID', 'Déstinataire interne');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
 define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'affichera pas de prix');
 define('_MA_XMSTOCK_TRANSFER_REF', 'Transfer reference');
-define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
-define('_MA_XMSTOCK_TRANSFER_TRANSFER', 'Transfert');
 define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
+define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
 define('_MA_XMSTOCK_TRANSFER_TIME', 'Heure');
+define('_MA_XMSTOCK_TRANSFER_TRANSFER', 'Transfert');
 define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
 define('_MA_XMSTOCK_TRANSFER_USER', 'Auteur du transfert');
-define('_MA_XMSTOCK_TRANSFER_LIST_WARNING', 'Transferts en attente de validation');
 
 // permission
 define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');
@@ -175,12 +175,16 @@ define('_MA_XMSTOCK_PERMISSION_VIEW', 'View Permissions');
 define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this area');
 
 // renderStocks
-define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
 define('_MA_XMSTOCK_RENDERSTOCKS_PRICE', 'Prix: %s CHF');
+define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
 
 // user
-define('_MA_XMSTOCK_HOME', 'Home page');
+define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
 define('_MA_XMSTOCK_CADDY', 'Caddy');
+define('_MA_XMSTOCK_HOME', 'Home page');
+define('_MA_XMSTOCK_VIEWORDER', 'Visualization of the order');
+
+// checkout
 define('_MA_XMSTOCK_CHECKOUT', 'Checkout');
 define('_MA_XMSTOCK_CHECKOUT_DESC', 'Description');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Delivery options');
@@ -192,8 +196,11 @@ define('_MA_XMSTOCK_CHECKOUT_SEND', 'Commande envoyée');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM', 'Confirmation');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM_SEND', 'Votre commande a bien été envoyée avec les informations suivantes :');
 define('_MA_XMSTOCK_CHECKOUT_SUMMARY', 'Summary of your cart');
+define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'The quantity requested for items with the logo <span class="badge badge-pill badge-warning">Warning</span> is greater than that available in stock. <br>The delivery time could be longer!');
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffissante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
+
+// caddy
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
 define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');
@@ -212,11 +219,25 @@ define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to or
 define('_MA_XMSTOCK_CADDY_ERROR_NOLOAN', 'Cette article ne peut pas être emprunter pour le moment!');
 define('_MA_XMSTOCK_CADDY_WARNING_AREA', 'Attention, vous pouvez commander plusieurs articles mais uniquement si ils sont dans le même stock.<br>Si vous voulez commander l\'article ci dessous, il faut faire une autre commande');
 
-define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
-
-define('_MA_XMSTOCK_ORDERS', 'Orders');
-define('_MA_XMSTOCK_VIEWORDER', 'Visualization of the order');
-
+// order
+define('_MA_XMSTOCK_ORDER_ARTICLES', 'Articles commandés');
+define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Cancellation date');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Date de livraison prévue');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Delivery Date');//
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Validated delivery/withdrawal date');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Order ready date');
+define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Desired date');
+define('_MA_XMSTOCK_ORDER_DATEORDER', 'Order date');
+define('_MA_XMSTOCK_ORDER_DATEREADY', 'Order ready date');
+define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Order validation date');
+define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL', 'lanned withdrawal date');
+define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R', 'Date of withdrawal');
+define('_MA_XMSTOCK_ORDER_HISTORY', 'Historique de la commande');
+define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
+define('_MA_XMSTOCK_ORDER_DESCRIPTION', 'Description');
+define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
+define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
+define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_ORDER_STATUS_0', 'Annulée');
 define('_MA_XMSTOCK_ORDER_STATUS_1', 'En attente');
 define('_MA_XMSTOCK_ORDER_STATUS_2', 'En cours');
@@ -227,57 +248,31 @@ define('_MA_XMSTOCK_ORDER_STATUS_TITLE_1', 'Commandes en attentes');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_2', 'Commandes en cours');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_3', 'Commandes prêtes (livraison/retrait)');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_4', 'Commandes livrées');
-
-// order
-define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
-define('_MA_XMSTOCK_ORDER_NUMBE', 'Order number');
-define('_MA_XMSTOCK_ORDER_DESCRIPTION', 'Description');
-define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
-define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
-define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_ORDER_SUREDEL', 'Sure to delete this order? #%s');
+define('_MA_XMSTOCK_ORDERS', 'Orders');
 
-
-
-define('_MA_XMSTOCK_ORDER_DATEORDER', 'Date de commande');//Order date
-define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Date désirée');//Desired date
-define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Date de validation');//Order validation date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Date de livraison prévue');//Delivery Date
-define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL', 'Date de retrait prévu');//Planned withdrawal date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Date de livraison / retrait prévue'); //Validated delivery/withdrawal date
-define('_MA_XMSTOCK_ORDER_DATEREADY', 'Date commande prête');//Order ready date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Date de la livraison');//
-define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R', 'Date du retrait');//Date of withdrawal
-define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Date de livraison / retrait'); //Order ready date
-define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Date d\'annulation');//Cancellation date
-define('_MA_XMSTOCK_ORDER_HISTORY', 'Historique de la commande');//
-define('_MA_XMSTOCK_ORDER_ARTICLES', 'Articles commandés');
-
-
-define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
-
-
-define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
-define('_MA_XMSTOCK_VIEWORDER_ARTICLE', 'Article');
+// vieworder
 define('_MA_XMSTOCK_VIEWORDER_AMOUNT', 'Amount');
+define('_MA_XMSTOCK_VIEWORDER_ARTICLE', 'Article');
+define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
 
 // management
 define('_MA_XMSTOCK_MANAGEMENT', 'Orders management');
-define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Commandes à traiter'); //Orders to process
-define('_MA_XMSTOCK_MANAGEMENT_PREPARATION', 'Commandes en préparation'); //Orders in preparation
-define('_MA_XMSTOCK_MANAGEMENT_READY', 'Commandes prêtes'); //Orders ready
-define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Commandes livrées'); //Orders delivered
-define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Commandes annulées'); //Canceled orders
-define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes'); //All orders
-define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande'); //Viewing an order
-define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders'); //Viewing an order
-define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande'); //Order number
-define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
+define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'All orders');
+define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Canceled orders');
+define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Customer');
+define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Orders delivered');
+define('_MA_XMSTOCK_MANAGEMENT_PREPARATION', 'Orders in preparation');
+define('_MA_XMSTOCK_MANAGEMENT_READY', 'Orders ready');
+define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'Order number');
+define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Orders to process');
+define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualization an order');
+define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders');
 
 //action.php
-define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande'); //Edition of an order
-define('_MA_XMSTOCK_ACTION_EDITSTOCK', 'Edition d\'un stock');
 define('_MA_XMSTOCK_ACTION_ARTICLES', 'Articles');
+define('_MA_XMSTOCK_ACTION_EDIT', 'Edition of an order');
+define('_MA_XMSTOCK_ACTION_EDITSTOCK', 'Edition d\'un stock');
 define('_MA_XMSTOCK_ACTION_INFODELARTICLE', 'Mettre "0" pour supprimer un article');
 define('_MA_XMSTOCK_ACTION_NEXT1', 'Formulaire de validation de la commande');
 define('_MA_XMSTOCK_ACTION_NEXT2', 'Formulaire de préparation de la commande');
@@ -285,45 +280,35 @@ define('_MA_XMSTOCK_ACTION_NEXT3', 'Formulaire de livraison de la commande');
 define('_MA_XMSTOCK_ACTION_SPLIT', 'Diviser');
 define('_MA_XMSTOCK_ACTION_SPLIT_DESC', 'Les articles sélectionnés dans "Diviser" seront regroupés dans une nouvelle commande');
 define('_MA_XMSTOCK_ACTION_SPLIT_TEXT', 'Cette commande est une commande divisée (commande d\'origine: %s)');
-define('_MA_XMSTOCK_ACTION_WARNING_STATUS2', 'Une fois ce formulaire validé, les articles seront décomptés du stock!');
-define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la commande sera considérée comme livrée (article livrés ou retirés).');
 define('_MA_XMSTOCK_ACTION_TRANSFERT_REF', 'Commande %s');
 define('_MA_XMSTOCK_ACTION_TRANSFERT_DESC', 'Commande du %s avec le numéro %s');
+define('_MA_XMSTOCK_ACTION_WARNING_STATUS2', 'Une fois ce formulaire validé, les articles seront décomptés du stock!');
+define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la commande sera considérée comme livrée (article livrés ou retirés).');
 
 // viewprice.php
+define('_MA_XMSTOCK_VIEWPRICE_AMOUNT', 'Quantité transférée');
 define('_MA_XMSTOCK_VIEWPRICE_DASHBOARD', 'Tableau de bord');
 define('_MA_XMSTOCK_VIEWPRICE_DATE', 'Date');
-define('_MA_XMSTOCK_VIEWPRICE_AMOUNT', 'Quantité transférée');
-define('_MA_XMSTOCK_VIEWPRICE_PRICECHF', 'Prix en CHF');
-define('_MA_XMSTOCK_VIEWPRICE_PRICE', 'Prix');
 define('_MA_XMSTOCK_VIEWPRICE_EXPORT', 'Exporter');
 define('_MA_XMSTOCK_VIEWPRICE_FILTER', 'Filtre');
 define('_MA_XMSTOCK_VIEWPRICE_PERPAGE', 'par page');
+define('_MA_XMSTOCK_VIEWPRICE_PRICE', 'Prix');
+define('_MA_XMSTOCK_VIEWPRICE_PRICECHF', 'Prix en CHF');
 
 // loan.php
-
+define('_MA_XMSTOCK_LOAN_ADD', 'Ajout d\'un prêt');
+define('_MA_XMSTOCK_LOAN_AREA', 'Stock');
 define('_MA_XMSTOCK_LOAN_ARTICLE', 'Article à mettre en prêt');
-define('_MA_XMSTOCK_LOAN_LARTICLE', 'Article en prêt');
 define('_MA_XMSTOCK_LOAN_DATE', 'Date de l\'emprunt');
+define('_MA_XMSTOCK_LOAN_EDIT', 'Edition d\'un prêt');
+define('_MA_XMSTOCK_LOAN_FORM', 'Formulaire de prêt');
+define('_MA_XMSTOCK_LOAN_LARTICLE', 'Article en prêt');
+define('_MA_XMSTOCK_LOAN_LIST', 'Liste des prêts');
 define('_MA_XMSTOCK_LOAN_RDATE', 'Date de retour');
-define('_MA_XMSTOCK_LOAN_USERID', 'Déstinataire du prêt');
-define('_MA_XMSTOCK_LOAN_USERSLIST', 'Liste des emprunteurs');
 define('_MA_XMSTOCK_LOAN_STATUS', 'Statut du prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_L', 'En prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt cloturé');
-define('_MA_XMSTOCK_LOAN_FORM', 'Formulaire de prêt');
-define('_MA_XMSTOCK_LOAN_ADD', 'Ajout d\'un prêt');
-define('_MA_XMSTOCK_LOAN_EDIT', 'Edition d\'un prêt');
-define('_MA_XMSTOCK_LOAN_AREA', 'Stock');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_DESC', 'Prêt du %s avec le numéro %s');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_REF', 'Prêt %s');
-define('_MA_XMSTOCK_LOAN_LIST', 'Liste des prêts');
-
-
-
-
-
-
-
-
-
+define('_MA_XMSTOCK_LOAN_USERID', 'Déstinataire du prêt');
+define('_MA_XMSTOCK_LOAN_USERSLIST', 'Liste des emprunteurs');
