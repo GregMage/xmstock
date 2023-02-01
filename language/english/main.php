@@ -106,7 +106,6 @@ define('_MA_XMSTOCK_AREA_LOCATION', 'Location');
 define('_MA_XMSTOCK_AREA_LOGO', 'Logo');
 define('_MA_XMSTOCK_AREA_LOGOFILE', 'Logo file');
 define('_MA_XMSTOCK_AREA_NAME', 'Name');
-define('_MA_XMSTOCK_AREA_SIZE', 'Maximum upload size');
 define('_MA_XMSTOCK_AREA_SORT', 'Sort');
 define('_MA_XMSTOCK_AREA_SORT1', 'Name Up');
 define('_MA_XMSTOCK_AREA_SORT2', 'Name Down');

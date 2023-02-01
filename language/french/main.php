@@ -18,109 +18,108 @@
  */
 
 // Button
-define('_MA_XMSTOCK_AREA_ADD', 'Add area');
-define('_MA_XMSTOCK_AREA_LIST', 'Area list');
-define('_MA_XMSTOCK_OUTPUT_ADD', 'Add Output');
-define('_MA_XMSTOCK_OUTPUT_LIST', 'Output list');
-define('_MA_XMSTOCK_STOCK_ADD', 'Add stock');
-define('_MA_XMSTOCK_STOCK_LIST', 'stock list');
-define('_MA_XMSTOCK_TRANSFER_ENTRYINSTOCK', 'Entry in stock');
-define('_MA_XMSTOCK_TRANSFER_LIST', 'Transfer list');
-define('_MA_XMSTOCK_TRANSFER_OUTOFSTOCK', 'Out of stock');
-define('_MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK', 'Transfer of stock');
+define('_MA_XMSTOCK_AREA_ADD', 'Ajouter une zone de stockage');
+define('_MA_XMSTOCK_AREA_LIST', 'Liste des zones de stockage');
+define('_MA_XMSTOCK_OUTPUT_ADD', 'Ajouter une sortie');
+define('_MA_XMSTOCK_OUTPUT_LIST', 'Liste de sortie');
+define('_MA_XMSTOCK_STOCK_ADD', 'Ajouter un stock');
+define('_MA_XMSTOCK_STOCK_LIST', 'Liste des stocks');
+define('_MA_XMSTOCK_TRANSFER_ENTRYINSTOCK', 'Entrée en stock');
+define('_MA_XMSTOCK_TRANSFER_LIST', 'Liste des transferts');
+define('_MA_XMSTOCK_TRANSFER_OUTOFSTOCK', 'Sortie de stock');
+define('_MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK', 'Transfert de stock');
 
 // Shared
-define('_MA_XMSTOCK_ADD', 'Add');
+define('_MA_XMSTOCK_ADD', 'Ajouter');
 define('_MA_XMSTOCK_ACTION', 'Action');
-define('_MA_XMSTOCK_DEL', 'Delete');
-define('_MA_XMSTOCK_EDIT', 'Edit');
+define('_MA_XMSTOCK_DEL', 'Supprimer');
+define('_MA_XMSTOCK_EDIT', 'Modifier');
 define('_MA_XMSTOCK_INFORMATION', 'Informations');
-define('_MA_XMSTOCK_ORDER', 'Order');
+define('_MA_XMSTOCK_ORDER', 'Commander');
 define('_MA_XMSTOCK_LOAN', 'Emprunter');
-define('_MA_XMSTOCK_PROCESS', 'Faire avancer'); // progress
-define('_MA_XMSTOCK_REDIRECT_SAVE', 'Successfully saved');
+define('_MA_XMSTOCK_PROCESS', 'Faire avancer');
+define('_MA_XMSTOCK_REDIRECT_SAVE', 'Enregistré avec succès');
 define('_MA_XMSTOCK_REJECT', 'Refuser');
-define('_MA_XMSTOCK_SORTBY', 'Trier par'); //Sort by
-define('_MA_XMSTOCK_STATUS', 'Status');
-define('_MA_XMSTOCK_STATUS_A', 'Active');
-define('_MA_XMSTOCK_STATUS_NA', 'Disabled');
-define('_MA_XMSTOCK_STATUS_EXECUTED', 'Executed');
-define('_MA_XMSTOCK_STATUS_WAITING', 'Waiting');
-define('_MA_XMSTOCK_TITLE', 'Title');
-define('_MA_XMSTOCK_VIEW', 'View');
+define('_MA_XMSTOCK_SORTBY', 'Trier par');
+define('_MA_XMSTOCK_STATUS', 'Statut');
+define('_MA_XMSTOCK_STATUS_A', 'Actif');
+define('_MA_XMSTOCK_STATUS_NA', 'Désactivé');
+define('_MA_XMSTOCK_STATUS_EXECUTED', 'Réalisé');
+define('_MA_XMSTOCK_STATUS_WAITING', 'En attente');
+define('_MA_XMSTOCK_TITLE', 'Titre');
+define('_MA_XMSTOCK_VIEW', 'Voir');
 define('_MA_XMSTOCK_VALID', 'Validation');
-define('_MA_XMSTOCK_WARNING', 'Warning');
+define('_MA_XMSTOCK_WARNING', 'Avertissement');
 
 // Admin
-define('_MA_XMSTOCK_INDEX_IMAGEINFO', 'Server status');
-define('_MA_XMSTOCK_INDEX_MAXPOSTSIZE', 'Max post size permitted (post_max_size directive in php.ini): ');
-define('_MA_XMSTOCK_INDEX_MAXUPLOADSIZE', 'Max upload size permitted (upload_max_filesize directive in php.ini): ');
-define('_MA_XMSTOCK_INDEX_MEMORYLIMIT', 'Memory limit (memory_limit directive in php.ini): ');
+define('_MA_XMSTOCK_INDEX_IMAGEINFO', 'Statut du serveur');
+define('_MA_XMSTOCK_INDEX_MAXPOSTSIZE', 'Taille d\'envoi maximal autorisé (directive post_max_size dans php.ini) : ');
+define('_MA_XMSTOCK_INDEX_MAXUPLOADSIZE', 'Taille d\'envoi maximal autorisé (directive upload_max_filesize dans le fichier php.ini) : ');
+define('_MA_XMSTOCK_INDEX_MEMORYLIMIT', 'Limite de mémoire (directive memory_limit dans php.ini) : ');
 define('_MA_XMSTOCK_INDEX_ON', "<span style='font-weight: bold;'>ON</span>");
 define('_MA_XMSTOCK_INDEX_OFF', "<span style='font-weight: bold;'>OFF</span>");
-define('_MA_XMSTOCK_INDEX_SERVERUPLOADSTATUS', 'Server uploads status: ');
-define('_MA_XMSTOCK_INDEX_SPHPINI', "<span style='font-weight: bold;'>Information taken from PHP ini file:</span>");
-define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
+define('_MA_XMSTOCK_INDEX_SERVERUPLOADSTATUS', 'Statut d\'envoi du serveur : ');
+define('_MA_XMSTOCK_INDEX_SPHPINI', "<span style='font-weight: bold;'>Informations extraites du fichier php.ini :</span>");
+define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'Vous devez installer le module xmarticle pour utiliser xmstock');
 
 // Error message
-define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
-define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
+define('_MA_XMSTOCK_ERROR_AMOUNT', 'La Quantité doit être un nombre');
+define('_MA_XMSTOCK_ERROR_ARTICLEID', 'Il n\'y a pas d\'article sélectionné');
 define('_MA_XMSTOCK_ERROR_LOCATION', 'L\'emplacement n\'est pas défini');
-define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
-define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');
+define('_MA_XMSTOCK_ERROR_NACTIVE', 'Erreur: Le contenu est désactivé!');
+define('_MA_XMSTOCK_ERROR_NOAREA', 'Il n\'y a pas de zones de stockage dans la base de données');
 define('_MA_XMSTOCK_ERROR_NOARTICLE', 'Il n\'y a pas d\'article, il est nécessaire d\'avoir au minimum un article!');
-define('_MA_XMSTOCK_ERROR_NOLOAN', 'There are no loan in the database');
-define('_MA_XMSTOCK_ERROR_NOORDER', 'There are no order in the database');
-define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'There are no outputs in the database');
+define('_MA_XMSTOCK_ERROR_NOLOAN', 'Il n\'y a pas de prêt dans la base de données');
+define('_MA_XMSTOCK_ERROR_NOORDER', 'Il n\'y a pas de commande dans la base de données');
+define('_MA_XMSTOCK_ERROR_NOOUTPUT', 'Il n\'y a pas de sorties dans la base de données');
 define('_MA_XMSTOCK_ERROR_NOPRICE', 'Pas de prix dans la base de donnée');
-define('_MA_XMSTOCK_ERROR_NOSTOCK', 'There are no stocks in the database');
-define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'There are no transfers in the database');
+define('_MA_XMSTOCK_ERROR_NOSTOCK', 'Il n\'y a pas de stock dans la base de données');
+define('_MA_XMSTOCK_ERROR_NOTRANSFER', 'Il n\'y a pas de transferts dans la base de données');
 define('_MA_XMSTOCK_ERROR_ONEARTICLE', 'Vous devez avoir au minimum un article (pas de valeur 0 sur l\'article restant)');
-define('_MA_XMSTOCK_ERROR_ORDER_DEL', 'You cannot delete this order!');
+define('_MA_XMSTOCK_ERROR_ORDER_DEL', 'Vous ne pouvez pas supprimer cette commande !');
 define('_MA_XMSTOCK_ERROR_PRICE', 'Le prix doit être un nombre et supérieur à 0');
-define('_MA_XMSTOCK_ERROR_SIZE', "The size in préférence (Max uploaded files size) exceeds the maximum values defined in 'post_max_size' or 'upload_max_filesize' in your configuration in php.ini");
-define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'There is no destination stock selected');
-define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'There is no starting stock selected');
+define('_MA_XMSTOCK_ERROR_SIZE', "La taille dans les préférences du module (taille maximale des fichiers téléchargés) dépasse les valeurs maximales définies dans 'post_max_size' ou 'upload_max_filesize' dans la configuration du fichier php.ini.");
+define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'Il n\'y a pas de stock de destination sélectionné');
+define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'Il n\'y a pas de stock de départ sélectionné');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_TO_AR', 'Les stocks de départ et d\'arrivée sont identiques');
 define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUT', 'Vous devez choisir un déstinataire externe <b>ou</b> interne. Pas les deux!');
-define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'There is no output selected');
-define('_MA_XMSTOCK_ERROR_TRANSFER_NOARTICLE', 'Selected article is not available in the selected stock');
-define('_MA_XMSTOCK_ERROR_TRANSFER_TBAMOUNT', 'The quantity requested (%s) is more important than that available (%s)');
+define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'Il n\'y a pas de sortie sélectionnée');
+define('_MA_XMSTOCK_ERROR_TRANSFER_NOARTICLE', 'L\'article sélectionné n\'est pas disponible dans le stock sélectionné');
+define('_MA_XMSTOCK_ERROR_TRANSFER_TBAMOUNT', 'La quantité demandée (%s) est plus importante que celle disponible (%s)');
 define('_MA_XMSTOCK_ERROR_USER', 'Aucun utilisateur séléctionné');
-define('_MA_XMSTOCK_ERROR_WEIGHT', 'Weight must be a number');
+define('_MA_XMSTOCK_ERROR_WEIGHT', 'Le poids doit être un nombre');
 
 // area
-define('_MA_XMSTOCK_AREA_ARTICLENAME', 'Name');
-define('_MA_XMSTOCK_AREA_ARTICLEREFERENCE', 'Reference');
-define('_MA_XMSTOCK_AREA_AMOUNT', 'Amount');
+define('_MA_XMSTOCK_AREA_ARTICLENAME', 'Nom');
+define('_MA_XMSTOCK_AREA_ARTICLEREFERENCE', 'Référence');
+define('_MA_XMSTOCK_AREA_AMOUNT', 'Quantité');
 define('_MA_XMSTOCK_AREA_AMOUNTTYPE1', '<');
 define('_MA_XMSTOCK_AREA_AMOUNTTYPE2', '≤');
 define('_MA_XMSTOCK_AREA_AMOUNTTYPE3', '=');
 define('_MA_XMSTOCK_AREA_AMOUNTTYPE4', '>');
 define('_MA_XMSTOCK_AREA_AMOUNTTYPE5', '≥');
-define('_MA_XMSTOCK_AREA_COLOR', 'Color');
+define('_MA_XMSTOCK_AREA_COLOR', 'Couleur');
 define('_MA_XMSTOCK_AREA_DESC', 'Description');
-define('_MA_XMSTOCK_AREA_FILTERFORM', 'Filter');
-define('_MA_XMSTOCK_AREA_FORMPATH', 'Files are in: %s');
-define('_MA_XMSTOCK_AREA_LOCATION', 'Location');
+define('_MA_XMSTOCK_AREA_FILTERFORM', 'Filtre');
+define('_MA_XMSTOCK_AREA_FORMPATH', 'Les fichiers sont dans : %s');
+define('_MA_XMSTOCK_AREA_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_AREA_LOGO', 'Logo');
-define('_MA_XMSTOCK_AREA_LOGOFILE', 'Logo file');
-define('_MA_XMSTOCK_AREA_NAME', 'Name');
-define('_MA_XMSTOCK_AREA_SIZE', 'Maximum upload size');
-define('_MA_XMSTOCK_AREA_SORT', 'Sort');
-define('_MA_XMSTOCK_AREA_SORT1', 'Name Up');
-define('_MA_XMSTOCK_AREA_SORT2', 'Name Down');
-define('_MA_XMSTOCK_AREA_SORT3', 'Amount Up');
-define('_MA_XMSTOCK_AREA_SORT4', 'Amount Down');
-define('_MA_XMSTOCK_AREA_SUREDEL', 'Sure to delete this area? %s');
+define('_MA_XMSTOCK_AREA_LOGOFILE', 'Fichier logo');
+define('_MA_XMSTOCK_AREA_NAME', 'Nom');
+define('_MA_XMSTOCK_AREA_SORT', 'Trier');
+define('_MA_XMSTOCK_AREA_SORT1', 'Nom vers le haut');
+define('_MA_XMSTOCK_AREA_SORT2', 'Nom vers le bas');
+define('_MA_XMSTOCK_AREA_SORT3', 'Quantité vers le haut');
+define('_MA_XMSTOCK_AREA_SORT4', 'Quantité vers le bas');
+define('_MA_XMSTOCK_AREA_SUREDEL', 'Voulez-vous vraiment supprimer cette zone de stockage ? %s');
 define('_MA_XMSTOCK_AREA_UPLOAD', 'Upload');
-define('_MA_XMSTOCK_AREA_UPLOADSIZE', 'Maximum size: %s kB');
-define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
+define('_MA_XMSTOCK_AREA_UPLOADSIZE', 'Taille maximum : %s Ko');
+define('_MA_XMSTOCK_AREA_WEIGHT', 'Poids');
 
 // stock
-define('_MA_XMSTOCK_STOCK_AMOUNT', 'Amount in stock');
+define('_MA_XMSTOCK_STOCK_AMOUNT', 'Quantité en stock');
 define('_MA_XMSTOCK_STOCK_AREA', 'Stock');
-define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
+define('_MA_XMSTOCK_STOCK_ARTICLE', 'Articles en stock');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
@@ -131,16 +130,16 @@ define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');
-define('_MA_XMSTOCK_OUTPUT_NAME', 'Name');
-define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Sure to delete this output? %s');
-define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Weight');
+define('_MA_XMSTOCK_OUTPUT_NAME', 'Nom');
+define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Voulez-vous vraiment supprimer cette sortie ? %s');
+define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Poids');
 
 //transfer
-define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Amount');
-define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Destination stock');
-define('_MA_XMSTOCK_TRANSFER_ARTICLE', 'Article to transfer');
+define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Quantité');
+define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Stock de destination');
+define('_MA_XMSTOCK_TRANSFER_ARTICLE', 'Article à transférer');
 define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');
-define('_MA_XMSTOCK_TRANSFER_DESC', 'Description of the transfer');
+define('_MA_XMSTOCK_TRANSFER_DESC', 'Description du transfert');
 define('_MA_XMSTOCK_TRANSFER_DESTINATION', 'Destination');
 define('_MA_XMSTOCK_TRANSFER_FORM', 'Formulaire de transfert');
 define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
@@ -153,91 +152,91 @@ define('_MA_XMSTOCK_TRANSFER_OUTPUTID', 'Déstinataire externe');
 define('_MA_XMSTOCK_TRANSFER_OUTPUTUSERID', 'Déstinataire interne');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
 define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'affichera pas de prix');
-define('_MA_XMSTOCK_TRANSFER_REF', 'Transfer reference');
+define('_MA_XMSTOCK_TRANSFER_REF', 'Référence de transfert');
 define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
-define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Sure to delete this transfer? %s');
-define('_MA_XMSTOCK_TRANSFER_STAREA', 'Starting stock');
+define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Voulez-vous vraiment supprimer ce transfert ? %s');
+define('_MA_XMSTOCK_TRANSFER_STAREA', 'Stock de départ');
 define('_MA_XMSTOCK_TRANSFER_TIME', 'Heure');
 define('_MA_XMSTOCK_TRANSFER_TRANSFER', 'Transfert');
-define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type of transfer');
+define('_MA_XMSTOCK_TRANSFER_TYPE', 'Type de transfert');
 define('_MA_XMSTOCK_TRANSFER_USER', 'Auteur du transfert');
 
 // permission
-define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');
-define('_MA_XMSTOCK_PERMISSION_MANAGE_DSC', 'Select groups that can manage this area');
-define('_MA_XMSTOCK_PERMISSION_ORDER', 'Order permission');
-define('_MA_XMSTOCK_PERMISSION_ORDER_DSC', 'Select groups that can order an article in this area');
-define('_MA_XMSTOCK_PERMISSION_OTHER', 'Other permissions');
-define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Select groups that can:');
+define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Autorisation de gestion');
+define('_MA_XMSTOCK_PERMISSION_MANAGE_DSC', 'Choisissez les groupes qui peuvent gérer ces zones de stockage');
+define('_MA_XMSTOCK_PERMISSION_ORDER', 'Autorisation de commander');
+define('_MA_XMSTOCK_PERMISSION_ORDER_DSC', 'Choisissez les groupes qui peuvent commander des articles dans ces zones de stockage');
+define('_MA_XMSTOCK_PERMISSION_OTHER', 'Autres autorisations');
+define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Sélectionnez des groupes qui peuvent :');
 define('_MA_XMSTOCK_PERMISSION_OTHER_4', 'Permission de voir le prix');
 define('_MA_XMSTOCK_PERMISSION_OTHER_8', 'Permission de voir les statistiques prix');
-define('_MA_XMSTOCK_PERMISSION_VIEW', 'View Permissions');
-define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this area');
+define('_MA_XMSTOCK_PERMISSION_VIEW', 'Autorisation de voir un article');
+define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Choisissez les groupes qui peuvent voir un article dans ces zones de stockage');
 
 // renderStocks
 define('_MA_XMSTOCK_RENDERSTOCKS_PRICE', 'Prix: %s CHF');
 define('_MA_XMSTOCK_RENDERSTOCKS_TOTAL', 'Total: ');
 
 // user
-define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'There are <strong>%s</strong> articles in this area!');
-define('_MA_XMSTOCK_CADDY', 'Caddy');
-define('_MA_XMSTOCK_HOME', 'Home page');
-define('_MA_XMSTOCK_VIEWORDER', 'Visualization of the order');
+define('_MA_XMSTOCK_AREA_THEREAREARTICLE', 'Il y a <strong>%s</strong> articles dans cette zone de stockage !');
+define('_MA_XMSTOCK_CADDY', 'Panier');
+define('_MA_XMSTOCK_HOME', 'Page d\'accueil');
+define('_MA_XMSTOCK_VIEWORDER', 'Visualisation de la commande');
 
 // checkout
-define('_MA_XMSTOCK_CHECKOUT', 'Checkout');
+define('_MA_XMSTOCK_CHECKOUT', 'Valider la commande');
 define('_MA_XMSTOCK_CHECKOUT_DESC', 'Description');
-define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Delivery options');
-define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Withdrawal');
-define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Delivery');
-define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Desired date');
-define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Input information');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Options de livraison');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Retrait');
+define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Livraison');
+define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Date souhaitée');
+define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Informations sur la commande');
 define('_MA_XMSTOCK_CHECKOUT_SEND', 'Commande envoyée');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM', 'Confirmation');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM_SEND', 'Votre commande a bien été envoyée avec les informations suivantes :');
-define('_MA_XMSTOCK_CHECKOUT_SUMMARY', 'Summary of your cart');
-define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Track this order');
-define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'The quantity requested for items with the logo <span class="badge badge-pill badge-warning">Warning</span> is greater than that available in stock. <br>The delivery time could be longer!');
+define('_MA_XMSTOCK_CHECKOUT_SUMMARY', 'Récapitulatif de votre panier');
+define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Suivre cette commande');
+define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'La quantité demandée pour les articles avec le logo <span class="badge badge-pill badge-warning">Avertissement</span> est supérieure à celle disponible en stock. <br>Le délai de livraison pourrait être plus long !');
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffissante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
 
 // caddy
-define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
-define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
-define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');
-define('_MA_XMSTOCK_CADDY_STEP2', '2- Input information');
-define('_MA_XMSTOCK_CADDY_STEP3', '3- Confirm information');
-define('_MA_XMSTOCK_CADDY_CONTINUE', 'Continue the selection of articles');
-define('_MA_XMSTOCK_CADDY_UPDATE', 'Update quantity');
-define('_MA_XMSTOCK_CADDY_STEP1_2', 'Next (Input information)');
-define('_MA_XMSTOCK_CADDY_STEP2_2', 'Next (Confirm information)');
-define('_MA_XMSTOCK_CADDY_QUANTITY', 'Quantity');
-define('_MA_XMSTOCK_CADDY_ITMES', 'Items');
-define('_MA_XMSTOCK_CADDY_ERROR_EMPTY', 'Your cart is empty');
-define('_MA_XMSTOCK_CADDY_ERROR_NOARTICLE', 'The requested item does not exist or is not activated!');
-define('_MA_XMSTOCK_CADDY_ERROR_NOAREA', 'The requested area does not exist or is not activated!');
-define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'You do not have permission to order in this area');
+define('_MA_XMSTOCK_CADDY_EMPTY', 'Vider le panier');
+define('_MA_XMSTOCK_CADDY_AREA', 'Zone de stockage');
+define('_MA_XMSTOCK_CADDY_STEP1', '1- Ajouter au panier');
+define('_MA_XMSTOCK_CADDY_STEP2', '2- Informations sur la commande');
+define('_MA_XMSTOCK_CADDY_STEP3', '3- Confirmer les informations');
+define('_MA_XMSTOCK_CADDY_CONTINUE', 'Continuer la sélection d\'articles');
+define('_MA_XMSTOCK_CADDY_UPDATE', 'Mettre à jour la quantité');
+define('_MA_XMSTOCK_CADDY_STEP1_2', 'Suivant (informations sur la commande)');
+define('_MA_XMSTOCK_CADDY_STEP2_2', 'Suivant (Confirmer les informations)');
+define('_MA_XMSTOCK_CADDY_QUANTITY', 'Quantité');
+define('_MA_XMSTOCK_CADDY_ITMES', 'Articles');
+define('_MA_XMSTOCK_CADDY_ERROR_EMPTY', 'Votre panier est vide');
+define('_MA_XMSTOCK_CADDY_ERROR_NOARTICLE', 'L\'élément demandé n\'existe pas ou n\'est pas activé !');
+define('_MA_XMSTOCK_CADDY_ERROR_NOAREA', 'La zone de stockage demandée n\'existe pas ou n\'est pas activée !');
+define('_MA_XMSTOCK_CADDY_ERROR_NOPERMISSION', 'Vous n\'êtes pas autorisé à commander dans cette zone de stockage');
 define('_MA_XMSTOCK_CADDY_ERROR_NOLOAN', 'Cette article ne peut pas être emprunter pour le moment!');
 define('_MA_XMSTOCK_CADDY_WARNING_AREA', 'Attention, vous pouvez commander plusieurs articles mais uniquement si ils sont dans le même stock.<br>Si vous voulez commander l\'article ci dessous, il faut faire une autre commande');
 
 // order
 define('_MA_XMSTOCK_ORDER_ARTICLES', 'Articles commandés');
-define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Date d\'annulation');//Cancellation date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Date de livraison prévue');//Delivery Date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Date de la livraison');//
-define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Date de livraison / retrait prévue'); //Validated delivery/withdrawal date
-define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Date de livraison / retrait'); //Order ready date
-define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Date désirée');//Desired date
-define('_MA_XMSTOCK_ORDER_DATEORDER', 'Date de commande');//Order date
-define('_MA_XMSTOCK_ORDER_DATEREADY', 'Date commande prête');//Order ready date
-define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Date de validation');//Order validation date
-define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL', 'Date de retrait prévu');//Planned withdrawal date
-define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R', 'Date du retrait');//Date of withdrawal
-define('_MA_XMSTOCK_ORDER_HISTORY', 'Historique de la commande');//
-define('_MA_XMSTOCK_ORDER_ORDER', 'Order No. %s');
+define('_MA_XMSTOCK_ORDER_DATECANCELLATION', 'Date d\'annulation');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY', 'Date de livraison prévue');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERY_R', 'Date de la livraison');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL', 'Date de livraison / retrait prévue');
+define('_MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R', 'Date de livraison / retrait');
+define('_MA_XMSTOCK_ORDER_DATEDESIRED', 'Date désirée');
+define('_MA_XMSTOCK_ORDER_DATEORDER', 'Date de commande');
+define('_MA_XMSTOCK_ORDER_DATEREADY', 'Date commande prête');
+define('_MA_XMSTOCK_ORDER_DATEVALIDATION', 'Date de validation');
+define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL', 'Date de retrait prévu');
+define('_MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R', 'Date du retrait');
+define('_MA_XMSTOCK_ORDER_HISTORY', 'Historique de la commande');
+define('_MA_XMSTOCK_ORDER_ORDER', 'N° de commande %s');
 define('_MA_XMSTOCK_ORDER_DESCRIPTION', 'Description');
-define('_MA_XMSTOCK_ORDER_DELIVERY', 'Delivery options');
-define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Withdrawal');
-define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Delivery');
+define('_MA_XMSTOCK_ORDER_DELIVERY', 'Options de livraison');
+define('_MA_XMSTOCK_ORDER_DELIVERY_WITHDRAWAL', 'Retrait');
+define('_MA_XMSTOCK_ORDER_DELIVERY_DELIVERY', 'Livraison');
 define('_MA_XMSTOCK_ORDER_STATUS_0', 'Annulée');
 define('_MA_XMSTOCK_ORDER_STATUS_1', 'En attente');
 define('_MA_XMSTOCK_ORDER_STATUS_2', 'En cours');
@@ -248,30 +247,30 @@ define('_MA_XMSTOCK_ORDER_STATUS_TITLE_1', 'Commandes en attentes');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_2', 'Commandes en cours');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_3', 'Commandes prêtes (livraison/retrait)');
 define('_MA_XMSTOCK_ORDER_STATUS_TITLE_4', 'Commandes livrées');
-define('_MA_XMSTOCK_ORDER_SUREDEL', 'Sure to delete this order? #%s');
-define('_MA_XMSTOCK_ORDERS', 'Orders');
+define('_MA_XMSTOCK_ORDER_SUREDEL', 'Voulez-vous vraiment supprimer cette commande ? #%s');
+define('_MA_XMSTOCK_ORDERS', 'Commandes');
 
 // vieworder
-define('_MA_XMSTOCK_VIEWORDER_AMOUNT', 'Amount');
+define('_MA_XMSTOCK_VIEWORDER_AMOUNT', 'Quantité');
 define('_MA_XMSTOCK_VIEWORDER_ARTICLE', 'Article');
-define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
+define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Commande #');
 
 // management
-define('_MA_XMSTOCK_MANAGEMENT', 'Orders management');
-define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes'); //All orders
-define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Commandes annulées'); //Canceled orders
-define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client'); //Customer
-define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Commandes livrées'); //Orders delivered
-define('_MA_XMSTOCK_MANAGEMENT_PREPARATION', 'Commandes en préparation'); //Orders in preparation
-define('_MA_XMSTOCK_MANAGEMENT_READY', 'Commandes prêtes'); //Orders ready
-define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande'); //Order number
-define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Commandes à traiter'); //Orders to process
-define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande'); //Viewing an order
-define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders'); //Viewing an order
+define('_MA_XMSTOCK_MANAGEMENT', 'Gestion des commandes');
+define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes');
+define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Commandes annulées');
+define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client');
+define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Commandes livrées');
+define('_MA_XMSTOCK_MANAGEMENT_PREPARATION', 'Commandes en préparation');
+define('_MA_XMSTOCK_MANAGEMENT_READY', 'Commandes prêtes');
+define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande');
+define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Commandes à traiter');
+define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande');
+define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders');
 
 //action.php
 define('_MA_XMSTOCK_ACTION_ARTICLES', 'Articles');
-define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande'); //Edition of an order
+define('_MA_XMSTOCK_ACTION_EDIT', 'Edition d\'une commande');
 define('_MA_XMSTOCK_ACTION_EDITSTOCK', 'Edition d\'un stock');
 define('_MA_XMSTOCK_ACTION_INFODELARTICLE', 'Mettre "0" pour supprimer un article');
 define('_MA_XMSTOCK_ACTION_NEXT1', 'Formulaire de validation de la commande');

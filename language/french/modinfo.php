@@ -30,7 +30,7 @@ define('_MI_XMSTOCK_MENU_PERMISSION', 'Autorisations');
 define('_MI_XMSTOCK_MENU_ABOUT', 'À propos');
 
 // Sub menu
-define('_MI_XMSTOCK_SUB_CADDY', 'Caddie');
+define('_MI_XMSTOCK_SUB_CADDY', 'Panier');
 define('_MI_XMSTOCK_SUB_LOAN', 'Gestion des prêts');
 define('_MI_XMSTOCK_SUB_ORDERS', 'Mes commandes');
 define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Gestion des commandes');
