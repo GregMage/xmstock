@@ -92,6 +92,6 @@ if (isset($tab_perm)){
 } else {
     $xoopsTpl->assign('error_message', _MA_XMDOC_ERROR_PERMISSION);
 }
-$xoopsTpl->display("db:xmdoc_admin_permission.tpl");
+$xoopsTpl->display("db:xmstock_admin_permission.tpl");
 
 require __DIR__ . '/admin_footer.php';

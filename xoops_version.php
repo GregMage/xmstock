@@ -81,6 +81,7 @@ $modversion['templates'][] = array('file' => 'xmstock_admin_area.tpl', 'descript
 $modversion['templates'][] = array('file' => 'xmstock_admin_output.tpl', 'description' => '', 'type' => 'admin');
 $modversion['templates'][] = array('file' => 'xmstock_admin_stock.tpl', 'description' => '', 'type' => 'admin');
 $modversion['templates'][] = array('file' => 'xmstock_admin_transfer.tpl', 'description' => '', 'type' => 'admin');
+$modversion['templates'][] = array('file' => 'xmstock_admin_permission.tpl', 'description' => '', 'type' => 'admin');
 
 // User Templates
 $modversion['templates'][] = ['file' => 'xmstock_index.tpl', 'description' => ''];
