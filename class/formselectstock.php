@@ -33,19 +33,20 @@ class XmstockFormSelectArea extends XoopsFormSelect
      * @param string  $name    "name" attribute
      * @param mixed   $value   Pre-selected value (or array of them).
      *                         Legal are all 2-letter country codes (in capitals).
-	 * @param boolean $efl     If true added an empty first line 
-	 * @param boolean $filter  If true area filtred 
+	 * @param boolean $efl     If true added an empty first line
+	 * @param boolean $filter  If true area filtred
      * @param int     $size    Number or rows. "1" makes a drop-down-list
      */
     public function __construct($caption, $name, $value = null, $efl = false, $filter = false, $size = 1)
     {
         parent::__construct($caption, $name, $value, $size);
-		
+
 		include __DIR__ . '/../include/common.php';
-		
+
 		// Get Permission to manage
+        xoops_load('utility', 'xmstock');
 		$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
-		
+
 		$arealist = array();
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('area_status', 1));
@@ -81,7 +82,7 @@ class XmstockFormSelectOutput extends XoopsFormSelect
      * @param string  $name    "name" attribute
      * @param mixed   $value   Pre-selected value (or array of them).
      *                         Legal are all 2-letter country codes (in capitals).
-	 * @param boolean $efl     If true added an empty first line 
+	 * @param boolean $efl     If true added an empty first line
      * @param int     $size    Number or rows. "1" makes a drop-down-list
      */
     public function __construct($caption, $name, $value = null, $efl = false, $size = 1)
