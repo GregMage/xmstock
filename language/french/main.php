@@ -190,6 +190,7 @@ define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Options de livraison');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Retrait');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Livraison');
 define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Date souhaitée');
+define('_MA_XMSTOCK_CHECKOUT_DORDER_DSC', '<div class="alert alert-warning">Le délai standard pour une livraison est de 2 jours!</div>');
 define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Informations sur la commande');
 define('_MA_XMSTOCK_CHECKOUT_SEND', 'Commande envoyée');
 define('_MA_XMSTOCK_CHECKOUT_CONFIRM', 'Confirmation');

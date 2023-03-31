@@ -91,7 +91,10 @@ switch ($op) {
         $editor_configs['height'] = '100px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_CHECKOUT_DESC, 'order_description', $editor_configs), true);
-        $form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time()), false);
+        $ddesired = new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time());
+		$ddesired->setDescription(_MA_XMSTOCK_CHECKOUT_DORDER_DSC);
+        $form->addElement($ddesired, false);
+
 		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', 0);
 		$options        = [0 => _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL, 1 => _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY];
 		$delivery->addOptionArray($options);
