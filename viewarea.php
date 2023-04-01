@@ -184,7 +184,13 @@ if ($stock_count > 0) {
 		$stock['amount']      = $stock_arr[$i]->getVar('stock_amount');
 		$stock['location_s']  = $stock_arr[$i]->getVar('stock_location');
 		$stock['price']   	  = XmstockUtility::getPrice($stock_arr[$i]->getVar('stock_price'));
+		$stock['borrower'] 	  = implode(', ', XmstockUtility::getBorrowerPerArticle($area_id , $stock['article_id']));
 		$stock['type']   	  = $stock_arr[$i]->getVar('stock_type');
+		if ($stock['type'] == 3){
+			$stock['loan']    = true;
+		} else {
+			$stock['loan']    = false;
+		}
 		$xoopsTpl->append_by_ref('stock', $stock);
 		unset($stock);
 	}

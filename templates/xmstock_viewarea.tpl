@@ -36,12 +36,19 @@
 					<{if $manage == true}>
 						<a href="<{$xoops_url}>/modules/xmstock/action.php?op=editstock&article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 						<a href="<{$xoops_url}>/modules/xmstock/transfer.php?article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-search"></span> <{$smarty.const._MI_XMSTOCK_SUB_TRANSFER}></a>
+						<{if $stock.loan|default:false == true && $stock.amount == 0}>
+							<span class="fa fa-exchange" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_LOAN_USERSLIST}>: <{$stock.borrower|default:''}>"></span>
+						<{/if}>
 					<{/if}>
 					<{if $order == true && $stock.type != 3}>
 						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
 					<{/if}>
 					<{if $order == true && $stock.type == 3 && $stock.amount != 0}>
-						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_LOAN}></a>
+						<{if $manage == true}>
+							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_LOAN_USERSLIST}>: <{$stock.borrower|default:''}>"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_LOAN}></a>
+						<{else}>
+							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_LOAN}></a>
+						<{/if}>
 					<{/if}>
 				</div>
 				<span class="badge badge-info badge-pill"><{$stock.amount}></span>
