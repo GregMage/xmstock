@@ -64,7 +64,7 @@ switch ($op) {
 		if ($helper->isUserAdmin() != true){
 			$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		}
-		$criteria->setSort('order_dorder');
+		$criteria->setSort('order_ddelivery');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
 		$order_2_arr = $orderHandler->getall($criteria);
@@ -85,7 +85,7 @@ switch ($op) {
 		if ($helper->isUserAdmin() != true){
 			$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		}
-		$criteria->setSort('order_dorder');
+		$criteria->setSort('order_dready');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
 		$order_3_arr = $orderHandler->getall($criteria);
@@ -106,14 +106,14 @@ switch ($op) {
 		if ($helper->isUserAdmin() != true){
 			$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		}
-		$criteria->setSort('order_dorder');
+		$criteria->setSort('order_ddelivery_r');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
 		$order_4_arr = $orderHandler->getall($criteria);
 		if (!empty($order_4_arr)) {
 			foreach (array_keys($order_4_arr) as $i) {
 				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
-				$order_4['delivery_r']  = formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
+				$order_4['delivery_r']  	= formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
 				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->append_by_ref('order_4', $order_4);
 				unset($order_4);
@@ -127,7 +127,7 @@ switch ($op) {
 		if ($helper->isUserAdmin() != true){
 			$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		}
-		$criteria->setSort('order_dorder');
+		$criteria->setSort('order_dcancellation');
 		$criteria->setOrder('DESC');
 		$criteria->setLimit(10);
 		$order_0_arr = $orderHandler->getall($criteria);

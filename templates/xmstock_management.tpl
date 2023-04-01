@@ -32,7 +32,7 @@
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">#</th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
@@ -72,7 +72,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
@@ -111,7 +111,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
@@ -149,7 +149,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}> <span class="fa fa-long-arrow-down"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -183,7 +183,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
-											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 										</tr>
 									</thead>
