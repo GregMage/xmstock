@@ -104,7 +104,7 @@ switch ($op) {
 				$transfer_w['type']   = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
 				$transfer_w['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_w_arr[$i]->getVar('transfer_ar_areaid')];
 				$transfer_w['starea'] = $area[$transfer_w_arr[$i]->getVar('transfer_st_areaid')];
-				$xoopsTpl->append_by_ref('transfers_w', $transfer_w);
+				$xoopsTpl->appendByRef('transfers_w', $transfer_w);
                 unset($transfer_w);
             }
 		}
@@ -177,7 +177,7 @@ switch ($op) {
 						break;
 				}
 				$transfer['export'] = $transfer_id . ';' . $transfer['description'] . ';' . $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')' . ';' . $transfer['ref'] . ';' . $transfer['type'] . ';' . formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 's') . ';' . substr(formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm'), -5) . ';' . $transfer['amount'] . ';' . $transfer['destination'] . ';' . $transfer['user'] . '\n';
-                $xoopsTpl->append_by_ref('transfers', $transfer);
+                $xoopsTpl->appendByRef('transfers', $transfer);
                 unset($transfer);
             }
             // Display Page Navigation

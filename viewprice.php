@@ -79,13 +79,13 @@ if ($price_count > 0) {
 		$price['date']   = formatTimestamp($price_arr[$i]->getVar('price_date'), 's');
 		$price['amount'] = $price_arr[$i]->getVar('price_amount');
 		$price['price']  = $price_arr[$i]->getVar('price_price');
-		$xoopsTpl->append_by_ref('prices', $price);
+		$xoopsTpl->appendByRef('prices', $price);
         unset($price);
     }
 	foreach (array_keys($price_grapharr) as $i) {
 		$price_graph['price']  = $price_grapharr[$i]->getVar('price_price');
 		$price_graph['date']   = formatTimestamp($price_grapharr[$i]->getVar('price_date'), 's');
-		$xoopsTpl->append_by_ref('price_graph', $price_graph);
+		$xoopsTpl->appendByRef('price_graph', $price_graph);
         unset($price_graph);
 	}
     // Display Page Navigation

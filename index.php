@@ -81,7 +81,7 @@ if ($area_count > 0 && !empty($viewPermissionArea)) {
 		} else {
 			$area['color']	  	 = $color;
 		}
-		$xoopsTpl->append_by_ref('areas', $area);
+		$xoopsTpl->appendByRef('areas', $area);
         if ($keywords == '') {
             $keywords = $area_arr[$i]->getVar('area_name');
         } else {

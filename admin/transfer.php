@@ -36,7 +36,7 @@ switch ($op) {
         $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_ENTRYINSTOCK, 'transfer.php?op=add&type=E', 'add');
         $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_OUTOFSTOCK, 'transfer.php?op=add&type=O', 'add');
         $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK, 'transfer.php?op=add&type=T', 'add');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Get start pager
         $start = Request::getInt('start', 0);
         // Criteria
@@ -65,17 +65,17 @@ switch ($op) {
 					case 'E':
 						$transfer['type'] = _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
 						break;
-						
+
 					case 'O':
 						$transfer['type'] = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
 						break;
-						
+
 					case 'T':
 						$transfer['type'] = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
 						break;
 				}
                 $transfer['status']        = $transfer_arr[$i]->getVar('transfer_status');
-                $xoopsTpl->append_by_ref('transfer', $transfer);
+                $xoopsTpl->appendByRef('transfer', $transfer);
                 unset($transfer);
             }
             // Display Page Navigation
@@ -87,24 +87,24 @@ switch ($op) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOTRANSFER);
         }
         break;
-    
+
     // Add
     case 'add':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_LIST, 'transfer.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
 		$type = Request::getString('type', 'E');
         $obj  = $transferHandler->create();
         $form = $obj->getForm($type);
         $xoopsTpl->assign('form', $form->render());
         break;
-        
+
     // Edit
     case 'edit':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_LIST, 'transfer.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
         $transfer_id = Request::getInt('transfer_id', 0);
         if ($transfer_id == 0) {
@@ -114,7 +114,7 @@ switch ($op) {
 			if ($obj->getVar('transfer_status') == 0){
 				$form = $obj->getForm();
 				$xoopsTpl->assign('form', $form->render());
-			}				
+			}
         }
 
         break;
@@ -125,7 +125,7 @@ switch ($op) {
         }
         $transfer_id = Request::getInt('transfer_id', 0);
         if ($transfer_id == 0) {
-            $obj = $transferHandler->create();            
+            $obj = $transferHandler->create();
         } else {
             $obj = $transferHandler->get($transfer_id);
         }
@@ -134,11 +134,11 @@ switch ($op) {
             $xoopsTpl->assign('error_message', $error_message);
             $form = $obj->getForm($obj->getVar('transfer_type'), $obj->getVar('transfer_status'));
             $xoopsTpl->assign('form', $form->render());
-        }        
+        }
         break;
-		
+
 	// del
-    case 'del':    
+    case 'del':
         $transfer_id = Request::getInt('transfer_id', 0);
         if ($transfer_id == 0) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOTRANSFER);
@@ -150,24 +150,24 @@ switch ($op) {
 					if (!$GLOBALS['xoopsSecurity']->check()) {
 						redirect_header('transfer.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
 					}
-					if ($transferHandler->delete($obj)) {					
+					if ($transferHandler->delete($obj)) {
 						redirect_header('transfer.php', 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					} else {
 						$xoopsTpl->assign('error_message', $obj->getHtmlErrors());
 					}
 				} else {
-					xoops_confirm(array('surdel' => true, 'transfer_id' => $transfer_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
+					xoops_confirm(array('surdel' => true, 'transfer_id' => $transfer_id, 'op' => 'del'), $_SERVER['REQUEST_URI'],
 										sprintf(_MA_XMSTOCK_TRANSFER_SUREDEL, $obj->getVar('transfer_ref')));
 				}
 			}
-        }        
+        }
         break;
-	
+
 	// view transfer
     case 'view':
 		// Module admin
         $moduleAdmin->addItemButton(_MA_XMSTOCK_TRANSFER_LIST, 'transfer.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton()); 
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Define Stylesheet
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
         $xoopsTpl->assign('view', 'view');
@@ -183,7 +183,7 @@ switch ($op) {
 				$area = $areaHandler->get($transfer->getVar('transfer_ar_areaid'));
 				$information = _MA_XMSTOCK_TRANSFER_ARAREA . ': <b>' . $area->getVar('area_name') . '</b>';
 				break;
-				
+
 			case 'O':
 				$type = _MA_XMSTOCK_TRANSFER_OUTOFSTOCK;
 				$area = $areaHandler->get($transfer->getVar('transfer_st_areaid'));
@@ -191,7 +191,7 @@ switch ($op) {
 				$output = $outputHandler->get($transfer->getVar('transfer_outputid'));
 				$information .= _MA_XMSTOCK_TRANSFER_OUTPUT . ': <b>' . $output->getVar('output_name') . '</b>';
 				break;
-				
+
 			case 'T':
 				$type = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
 				$area = $areaHandler->get($transfer->getVar('transfer_st_areaid'));
@@ -212,7 +212,7 @@ switch ($op) {
         );
         $xoopsTpl->assign('transfer_arr', $transfer_arr);
         break;
-		
+
 	// Update status
     case 'update_status':
         $transfer_id = Request::getInt('transfer_id', 0);

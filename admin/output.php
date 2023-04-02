@@ -55,7 +55,7 @@ switch ($op) {
                 $output['description']   = \Xmf\Metagen::generateDescription($output_arr[$i]->getVar('output_description', 'show'), 30);
                 $output['weight']        = $output_arr[$i]->getVar('output_weight');
                 $output['status']        = $output_arr[$i]->getVar('output_status');
-                $xoopsTpl->append_by_ref('output', $output);
+                $xoopsTpl->appendByRef('output', $output);
                 unset($output);
             }
             // Display Page Navigation

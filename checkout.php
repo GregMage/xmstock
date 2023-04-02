@@ -64,7 +64,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			}
 			$count++;
 			$total += $datas['qty'];
-			$xoopsTpl->append_by_ref('articles', $articles);
+			$xoopsTpl->appendByRef('articles', $articles);
 			unset($articles);
 		}
 		$xoopsTpl->assign('total', $total);

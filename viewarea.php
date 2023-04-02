@@ -191,7 +191,7 @@ if ($stock_count > 0) {
 		} else {
 			$stock['loan']    = false;
 		}
-		$xoopsTpl->append_by_ref('stock', $stock);
+		$xoopsTpl->appendByRef('stock', $stock);
 		unset($stock);
 	}
 	if ($stock_count > $nb_limit) {

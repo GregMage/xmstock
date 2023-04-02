@@ -439,7 +439,7 @@ class XmstockUtility
 					$stock['manage']  	= false;
 				}
 				$total_amount += $stock['amount'];
-                $xoopsTpl->append_by_ref('stock', $stock);
+                $xoopsTpl->appendByRef('stock', $stock);
 				$area[] = $stock['area_id'];
 				unset($stock);
             }

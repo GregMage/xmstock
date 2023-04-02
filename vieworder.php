@@ -133,7 +133,7 @@ if ($order_id == 0) {
 					$item['type'] = _MA_XMSTOCK_STOCK_LOAN;
 					break;
 			}
-			$xoopsTpl->append_by_ref('item', $item);
+			$xoopsTpl->appendByRef('item', $item);
 			unset($item);
 		}
 	}

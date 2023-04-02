@@ -116,7 +116,7 @@ switch ($op) {
 					$loan['text_status'] = _MA_XMSTOCK_LOAN_STATUS_L;
 				}
 				$loan['export'] = $loan_id . ';' . $loan['date'] . ';' . $loan_arr[$i]->getVar('article_name') . '(' . $loan_arr[$i]->getVar('article_reference') . ')' . ';' . $loan['rdate'] . ';' . $loan['user'] . ';' . $loan['text_status'] . '\n';
-                $xoopsTpl->append_by_ref('loans', $loan);
+                $xoopsTpl->appendByRef('loans', $loan);
                 unset($loan);
             }
             // Display Page Navigation
