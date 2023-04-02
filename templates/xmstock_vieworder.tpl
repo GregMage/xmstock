@@ -56,17 +56,17 @@
 						<{if $status > 1 || $status ==0}>
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
 							<{if $delivery == 1}>
-								<span class="fa fa-long-arrow-right"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY}>
+								<span class="fa fa-long-arrow-right fa-fw"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY}>
 								<figcaption class="figure-caption text-center"><{$ddelivery}></figcaption>
 							<{/if}>
 							<{if $delivery == 0}>
-								<span class="fa fa-exchange"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL}>
+								<span class="fa fa-exchange fa-fw"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL}>
 								<figcaption class="figure-caption text-center"><{$ddelivery}></figcaption>
 							<{/if}>
 						</figure>
 						<{/if}>
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
-								<span class="fa fa fa-user" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}>
+								<span class="fa fa fa-user fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}>
 								<figcaption class="figure-caption text-center"><{$user}></figcaption>
 						</figure>
 					</div>
@@ -85,7 +85,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-md-4 col-sm-8">
-									<span class="fa fa-calendar-o  fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
+									<span class="fa fa-calendar-o fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
 								</div>
 								<div class="col-md-2 col-sm-4">
 									<{$dvalidation}>
