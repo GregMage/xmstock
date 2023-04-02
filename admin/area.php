@@ -69,7 +69,7 @@ switch ($op) {
 				} else {
 					$area['logo']    	 = $url_logo_area . $area_img;
 				}
-                $xoopsTpl->appendByRef('area', $area);
+                $xoopsTpl->appendByRef('areas', $area);
                 unset($area);
             }
             // Display Page Navigation

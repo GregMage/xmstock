@@ -53,7 +53,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<{foreach item=order from=$order}>
+					<{foreach item=order from=$orders}>
 					<tr>
 						<th class="text-center" scope="row"><{$order.id}></th>
 						<td><{$order.description}></td>

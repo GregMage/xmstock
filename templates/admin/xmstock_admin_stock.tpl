@@ -31,7 +31,7 @@
         </tr>
         </thead>
         <tbody>
-        <{foreach item=stock from=$stock}>
+        <{foreach item=stock from=$stocks}>
             <tr class="<{cycle values='even,odd'}> alignmiddle">
                 <td class="txtleft"><{$stock.area}></td>
                 <td class="txtleft"><{$stock.article}></td>

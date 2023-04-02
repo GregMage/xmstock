@@ -16,7 +16,7 @@
             <th class="txtleft width15"><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></th>
             <th class="txtleft width20"><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
             <th class="txtleft"><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></th>
-            <th class="txtleft width5"><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></th>            
+            <th class="txtleft width5"><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></th>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSTOCK_TRANSFER_USER}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
@@ -24,7 +24,7 @@
         </tr>
         </thead>
         <tbody>
-        <{foreach item=transfer from=$transfer}>
+        <{foreach item=transfer from=$transfers}>
             <tr class="<{cycle values='even,odd'}> alignmiddle">
                 <td class="txtleft"><{$transfer.date}></td>
                 <td class="txtleft"><{$transfer.article}></td>
@@ -35,23 +35,23 @@
                 <td class="xo-actions txtcenter">
 					<{if $transfer.status == 0}>
 						<a class="tooltip" href="transfer.php?op=update_status&amp;transfer_id=<{$transfer.id}>" title="<{$smarty.const._MA_XMSTOCK_STATUS_WAITING}>">
-							<img src="<{xoAdminIcons exec.png}>" alt="<{$smarty.const._MA_XMSTOCK_STATUS_WAITING}>"/>
+							<img src="<{xoAdminIcons 'exec.png'}>" alt="<{$smarty.const._MA_XMSTOCK_STATUS_WAITING}>"/>
 						</a>
 					<{else}>
-						<img src="<{xoAdminIcons success.png}>" alt="<{$smarty.const._MA_XMSTOCK_STATUS_EXECUTED}>"/>
+						<img src="<{xoAdminIcons 'success.png'}>" alt="<{$smarty.const._MA_XMSTOCK_STATUS_EXECUTED}>"/>
 					<{/if}>
                 </td>
                 <td class="xo-actions txtcenter">
 					<{if $transfer.status == 0}>
 						<a class="tooltip" href="transfer.php?op=edit&amp;transfer_id=<{$transfer.id}>" title="<{$smarty.const._MA_XMSTOCK_EDIT}>">
-							<img src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._MA_XMSTOCK_EDIT}>"/>
+							<img src="<{xoAdminIcons 'edit.png'}>" alt="<{$smarty.const._MA_XMSTOCK_EDIT}>"/>
 						</a>
 						<a class="tooltip" href="transfer.php?op=del&amp;transfer_id=<{$transfer.id}>" title="<{$smarty.const._MA_XMSTOCK_DEL}>">
-							<img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSTOCK_DEL}>"/>
+							<img src="<{xoAdminIcons 'delete.png'}>" alt="<{$smarty.const._MA_XMSTOCK_DEL}>"/>
 						</a>
-					<{else}>	
+					<{else}>
 						<a class="tooltip" href="transfer.php?op=view&amp;transfer_id=<{$transfer.id}>" title="<{$smarty.const._MA_XMSTOCK_VIEW}>">
-                        <img src="<{xoAdminIcons view.png}>" alt="<{$smarty.const._MA_XMSTOCK_VIEW}>">
+                        <img src="<{xoAdminIcons 'view.png'}>" alt="<{$smarty.const._MA_XMSTOCK_VIEW}>">
 						</a>
 					<{/if}>
                 </td>

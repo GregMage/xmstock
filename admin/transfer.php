@@ -75,7 +75,7 @@ switch ($op) {
 						break;
 				}
                 $transfer['status']        = $transfer_arr[$i]->getVar('transfer_status');
-                $xoopsTpl->appendByRef('transfer', $transfer);
+                $xoopsTpl->appendByRef('transfers', $transfer);
                 unset($transfer);
             }
             // Display Page Navigation

@@ -52,7 +52,7 @@ switch ($op) {
 				$order_1['id']              = $order_1_arr[$i]->getVar('order_id');
 				$order_1['ddesired']        = formatTimestamp($order_1_arr[$i]->getVar('order_ddesired'), 's');
 				$order_1['dorder']          = formatTimestamp($order_1_arr[$i]->getVar('order_dorder'), 's');
-				$xoopsTpl->appendByRef('order_1', $order_1);
+				$xoopsTpl->appendByRef('orders_1', $order_1);
 				unset($order_1);
 			}
 		} else {
@@ -73,7 +73,7 @@ switch ($op) {
 				$order_2['id']          = $order_2_arr[$i]->getVar('order_id');
 				$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_ddelivery'), 's');
 				$order_2['dorder']      = formatTimestamp($order_2_arr[$i]->getVar('order_dorder'), 's');
-				$xoopsTpl->appendByRef('order_2', $order_2);
+				$xoopsTpl->appendByRef('orders_2', $order_2);
 				unset($order_2);
 			}
 		} else {
@@ -94,7 +94,7 @@ switch ($op) {
 				$order_3['id']              = $order_3_arr[$i]->getVar('order_id');
 				$order_3['dready']        	= formatTimestamp($order_3_arr[$i]->getVar('order_dready'), 's');
 				$order_3['dorder']          = formatTimestamp($order_3_arr[$i]->getVar('order_dorder'), 's');
-				$xoopsTpl->appendByRef('order_3', $order_3);
+				$xoopsTpl->appendByRef('orders_3', $order_3);
 				unset($order_3);
 			}
 		} else {
@@ -115,7 +115,7 @@ switch ($op) {
 				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
 				$order_4['delivery_r']  	= formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
 				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
-				$xoopsTpl->appendByRef('order_4', $order_4);
+				$xoopsTpl->appendByRef('orders_4', $order_4);
 				unset($order_4);
 			}
 		} else {
@@ -136,7 +136,7 @@ switch ($op) {
 				$order_0['id']              = $order_0_arr[$i]->getVar('order_id');
 				$order_0['dcancellation']        = formatTimestamp($order_0_arr[$i]->getVar('order_dcancellation'), 's');
 				$order_0['dorder']          = formatTimestamp($order_0_arr[$i]->getVar('order_dorder'), 's');
-				$xoopsTpl->appendByRef('order_0', $order_0);
+				$xoopsTpl->appendByRef('orders_0', $order_0);
 				unset($order_0);
 			}
 		} else {
@@ -274,7 +274,7 @@ switch ($op) {
 						break;
 
 				}
-				$xoopsTpl->appendByRef('order', $order);
+				$xoopsTpl->appendByRef('orders', $order);
 				unset($order);
 			}
 			// Display Page Navigation

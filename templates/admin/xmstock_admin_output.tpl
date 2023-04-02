@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    IMG_ON = '<{xoAdminIcons success.png}>';
-    IMG_OFF = '<{xoAdminIcons cancel.png}>';
+    IMG_ON = '<{xoAdminIcons "success.png"}>';
+    IMG_OFF = '<{xoAdminIcons "cancel.png"}>';
 </script>
 <div>
     <{$renderbutton|default:''}>
@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <{foreach item=output from=$output}>
+        <{foreach item=output from=$outputs}>
             <tr class="<{cycle values='even,odd'}> alignmiddle">
                 <td class="txtleft"><{$output.name}></td>
                 <td class="txtleft"><{$output.description}></td>
@@ -34,15 +34,15 @@
                     <img id="loading_sml<{$output.id}>" src="../assets/images/spinner.gif" style="display:none;" title="<{$smarty.const._AM_SYSTEM_LOADING}>"
                     alt="<{$smarty.const._AM_SYSTEM_LOADING}>"/><img class="cursorpointer tooltip" id="sml<{$output.id}>"
                     onclick="system_setStatus( { op: 'output_update_status', output_id: <{$output.id}> }, 'sml<{$output.id}>', 'output.php' )"
-                    src="<{if $output.status}><{xoAdminIcons success.png}><{else}><{xoAdminIcons cancel.png}><{/if}>"
+                    src="<{if $output.status}><{xoAdminIcons 'success.png'}><{else}><{xoAdminIcons 'cancel.png'}><{/if}>"
                     alt="<{if $output.status}><{$smarty.const._MA_XMSTOCK_STATUS_NA}><{else}><{$smarty.const._MA_XMSTOCK_STATUS_A}><{/if}>"
                     title="<{if $output.status}><{$smarty.const._MA_XMSTOCK_STATUS_NA}><{else}><{$smarty.const._MA_XMSTOCK_STATUS_A}><{/if}>"/>
                 </td>
                 <td class="xo-actions txtcenter">
                     <a class="tooltip" href="output.php?op=edit&amp;output_id=<{$output.id}>" title="<{$smarty.const._MA_XMSTOCK_EDIT}>">
-                        <img src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._MA_XMSTOCK_EDIT}>"/></a>
+                        <img src="<{xoAdminIcons 'edit.png'}>" alt="<{$smarty.const._MA_XMSTOCK_EDIT}>"/></a>
                     <a class="tooltip" href="output.php?op=del&amp;output_id=<{$output.id}>" title="<{$smarty.const._MA_XMSTOCK_DEL}>">
-                        <img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSTOCK_DEL}>"/></a>
+                        <img src="<{xoAdminIcons 'delete.png'}>" alt="<{$smarty.const._MA_XMSTOCK_DEL}>"/></a>
                 </td>
             </tr>
         <{/foreach}>

@@ -96,7 +96,7 @@ switch ($op) {
 				$order['dorder']          = formatTimestamp($order_arr[$i]->getVar('order_dorder'), 'm');
 				$order['delivery']        = $order_arr[$i]->getVar('order_delivery');
 				$order['status']       	  = $order_arr[$i]->getVar('order_status');
-				$xoopsTpl->appendByRef('order', $order);
+				$xoopsTpl->appendByRef('orders', $order);
 				unset($order);
 			}
 			// Display Page Navigation

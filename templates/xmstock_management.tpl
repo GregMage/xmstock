@@ -38,7 +38,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<{foreach item=order_1 from=$order_1}>
+										<{foreach item=order_1 from=$orders_1}>
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_1.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_1.id}></a></th>
 											<td class="text-center"><{$order_1.dorder}></td>
@@ -77,7 +77,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<{foreach item=order_2 from=$order_2}>
+										<{foreach item=order_2 from=$orders_2}>
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_2.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_2.id}></a></th>
 											<td class="text-center"><{$order_2.dorder}></td>
@@ -116,7 +116,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<{foreach item=order_3 from=$order_3}>
+										<{foreach item=order_3 from=$orders_3}>
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_3.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_3.id}></a></th>
 											<td class="text-center"><{$order_3.dorder}></td>
@@ -153,7 +153,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<{foreach item=order_4 from=$order_4}>
+										<{foreach item=order_4 from=$orders_4}>
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_4.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_4.id}></a></th>
 											<td class="text-center"><{$order_4.dorder}></td>
@@ -188,7 +188,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<{foreach item=order_0 from=$order_0}>
+										<{foreach item=order_0 from=$orders_0}>
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_0.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_0.id}></a></th>
 											<td class="text-center"><{$order_0.dorder}></td>
@@ -290,7 +290,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<{foreach item=order from=$order}>
+					<{foreach item=order from=$orders}>
 					<tr>
 						<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order.id}></a></th>
 						<td><{$order.user}></td>
