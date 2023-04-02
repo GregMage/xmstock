@@ -82,16 +82,17 @@
 						</p>
 						<{if $status != 1}>
 							<h4><{$smarty.const._MA_XMSTOCK_ORDER_HISTORY}></h4>
+							<hr>
 							<div class="row">
 								<div class="col-md-4 col-sm-8">
-									<{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
+									<span class="fa fa-calendar-o  fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEVALIDATION}>
 								</div>
 								<div class="col-md-2 col-sm-4">
 									<{$dvalidation}>
 								</div>
 								<{if $status > 2 || $status == 0}>
 									<div class="col-md-4 col-sm-8">
-										<{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}>
+										<span class="fa fa-calendar-check-o fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}>
 									</div>
 									<div class="col-md-2 col-sm-4">
 										<{$dready}>
@@ -99,9 +100,9 @@
 									<{if $status > 3 || $status == 0}>
 										<div class="col-md-4 col-sm-8">
 											<{if $delivery == 1}>
-											<{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_R}>
+												<span class="fa fa-repeat fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERY_R}>
 											<{else}>
-											<{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R}>
+												<span class="fa fa-repeat fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEWITHDRAWAL_R}>
 											<{/if}>
 										</div>
 										<div class="col-md-2 col-sm-4">
@@ -110,7 +111,7 @@
 									<{/if}>
 									<{if $status == 0}>
 										<div class="col-md-4 col-sm-8">
-											<{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}>
+										<span class="fa fa-calendar-times-o fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}>
 										</div>
 										<div class="col-md-2 col-sm-4">
 											<{$dcancellation}>
