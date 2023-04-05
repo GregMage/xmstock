@@ -23,6 +23,13 @@ include_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'xmstock_caddy.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
+// Get Permission to order
+$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
+
+if (empty($orderPermissionArea)) {
+	redirect_header('index.php', 2, _NOPERM);
+}
+
 $session_name = 'caddy';
 $sessionHelper = new Helper\Session();
 

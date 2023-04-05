@@ -31,10 +31,23 @@ $viewPermissionArea = XmstockUtility::getPermissionArea('xmstock_view');
 // Get Permission to manage
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 
+// Get Permission to order
+$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
+
+if (empty($viewPermissionArea) && empty($managePermissionArea) && empty($orderPermissionArea)){
+	redirect_header(XOOPS_URL, 2, _NOPERM);
+}
+
 if (!empty($managePermissionArea)) {
 	$xoopsTpl->assign('manage', true);
 } else {
 	$xoopsTpl->assign('manage', false);
+}
+
+if (!empty($orderPermissionArea)) {
+	$xoopsTpl->assign('order', true);
+} else {
+	$xoopsTpl->assign('order', false);
 }
 
 // Get stock

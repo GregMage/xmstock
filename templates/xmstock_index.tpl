@@ -5,6 +5,7 @@
 		</ol>
 	</nav>
 	<div class="row text-center">
+		<{if $order == true}>
 		<div class="col-lg-<{if $manage == true}>3<{else}>6<{/if}>">
 			<a title="<{$smarty.const._MI_XMSTOCK_SUB_CADDY}>" href="<{$xoops_url}>/modules/xmstock/caddy.php">
 				<div class="btn m-2 border">
@@ -21,8 +22,9 @@
 				</div>
 			</a>
 		</div>
+		<{/if}>
 		<{if $manage == true}>
-		<div class="col-lg-3">
+		<div class="col-lg-<{if $order == true}>3<{else}>6<{/if}>">
 			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>" href="<{$xoops_url}>/modules/xmstock/management.php">
 				<div class="btn m-2 border">
 					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Management.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>">
@@ -30,7 +32,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="col-lg-3">
+		<div class="col-lg-<{if $order == true}>3<{else}>6<{/if}>">
 			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>" href="<{$xoops_url}>/modules/xmstock/transfer.php">
 				<div class="btn m-2 border">
 					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Manage.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>">
