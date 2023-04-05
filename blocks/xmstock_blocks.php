@@ -30,18 +30,22 @@ function block_xmstock_show($options) {
 
 	$block = array();
 	$criteria = new CriteriaCompo();
-	$criteria->setSort('order_dorder DESC, order_status');
-	$criteria->setOrder('ASC');
 
 	switch ($options[2]) {
 		case "myorders":
+			$criteria->setSort('order_dorder DESC, order_status');
+			$criteria->setOrder('ASC');
 			$criteria->add(new Criteria('order_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0));
 			$block['type'] = 'myorders';
 			break;
 
 		case "process":
+			$criteria->setSort('order_dorder DESC, order_status');
+			$criteria->setOrder('ASC');
 			if (!empty($managePermissionArea)) {
 				$criteria->add(new Criteria('order_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+			} else {
+				$criteria->add(new Criteria('order_areaid', 0));
 			}
 			$block['type'] = 'process';
 			break;
