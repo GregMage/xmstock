@@ -170,8 +170,8 @@ define('_MA_XMSTOCK_PERMISSION_OTHER', 'Autres autorisations');
 define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Sélectionnez des groupes qui peuvent :');
 define('_MA_XMSTOCK_PERMISSION_OTHER_4', 'Permission de voir le prix');
 define('_MA_XMSTOCK_PERMISSION_OTHER_8', 'Permission de voir les statistiques prix');
-define('_MA_XMSTOCK_PERMISSION_VIEW', 'Autorisation de voir un article');
-define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Choisissez les groupes qui peuvent voir un article dans ces zones de stockage');
+define('_MA_XMSTOCK_PERMISSION_VIEW', 'Autorisation de voir un stock');
+define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Choisissez les groupes qui peuvent voir ces stocks');
 
 // renderStocks
 define('_MA_XMSTOCK_RENDERSTOCKS_PRICE', 'Prix: %s CHF');
