@@ -87,7 +87,6 @@ switch ($op) {
         $criteria->setSort('transfer_date');
 		$criteria->setOrder('ASC');
 		$criteria->add(new Criteria('transfer_status', 0));
-		$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
@@ -101,9 +100,18 @@ switch ($op) {
                 $transfer_w['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_w_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_w_arr[$i]->getVar('article_id') . '" title="' . $transfer_w_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_w_arr[$i]->getVar('article_name') . '</a> (' . $transfer_w_arr[$i]->getVar('article_reference') . ')';
                 $transfer_w['ref']           = $transfer_w_arr[$i]->getVar('transfer_ref');
                 $transfer_w['amount']        = $transfer_w_arr[$i]->getVar('transfer_amount');
-				$transfer_w['type']   = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
-				$transfer_w['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_w_arr[$i]->getVar('transfer_ar_areaid')];
-				$transfer_w['starea'] = $area[$transfer_w_arr[$i]->getVar('transfer_st_areaid')];
+				$transfer_w['description']   = $transfer_w_arr[$i]->getVar('transfer_description');
+                $transfer_w['user']     	 = XoopsUser::getUnameFromId($transfer_w_arr[$i]->getVar('transfer_userid'), 0, true);
+				$transfer_w['type']   		 = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
+				$transfer_w['destination'] 	 = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_w_arr[$i]->getVar('transfer_ar_areaid')];
+				$transfer_w['starea'] 		 = $area[$transfer_w_arr[$i]->getVar('transfer_st_areaid')];
+				if (in_array($transfer_w_arr[$i]->getVar('transfer_ar_areaid'), $managePermissionArea) == true){
+					$transfer_w['action']    = true;
+				} else {
+					$transfer_w['action']    = false;
+				}
+
+
 				$xoopsTpl->appendByRef('transfers_w', $transfer_w);
                 unset($transfer_w);
             }
@@ -146,7 +154,7 @@ switch ($op) {
                 $transfer['description']   = $transfer_arr[$i]->getVar('transfer_description');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
                 $transfer['code_type']     = $transfer_arr[$i]->getVar('transfer_type');
-                $transfer['user']     	   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'));
+                $transfer['user']     	   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, true);
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
 					default:
 					case 'E':
@@ -213,6 +221,9 @@ switch ($op) {
             $xoopsTpl->assign('error_message', _MA_XMSTOCK_ERROR_NOTRANSFER);
         } else {
             $obj = $transferHandler->get($transfer_id);
+			if (in_array($obj->getVar('transfer_ar_areaid'), $managePermissionArea) != true){
+				redirect_header('transfer.php', 3, _NOPERM);
+			}
 			if ($obj->getVar('transfer_status') == 0){
 				xoops_load('utility', 'xmarticle');
 				$xoopsTpl->assign('transfert_id', $transfer_id);
