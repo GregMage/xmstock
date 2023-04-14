@@ -5,7 +5,7 @@
 		})
 	</script>
 	<ul class="list-group">
-    <{foreach item=stock from=$stock}>
+    <{foreach item=stock from=$stocks}>
 		<li class="list-group-item d-flex justify-content-between align-items-center">
 			<div>
 				<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmstock/viewarea.php?area_id=<{$stock.area_id}>" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_AREA_LOCATION}>: <{$stock.location_s|default:''}>"><{$stock.name}></a></span> (<{$stock.location}>)
