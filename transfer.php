@@ -103,7 +103,11 @@ switch ($op) {
 				$transfer_w['description']   = $transfer_w_arr[$i]->getVar('transfer_description');
                 $transfer_w['user']     	 = XoopsUser::getUnameFromId($transfer_w_arr[$i]->getVar('transfer_userid'), 0, true);
 				$transfer_w['type']   		 = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
-				$transfer_w['destination'] 	 = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_w_arr[$i]->getVar('transfer_ar_areaid')];
+				if ($transfer_w_arr[$i]->getVar('transfer_ar_areaid') != 0) {
+					$transfer_w['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_w_arr[$i]->getVar('transfer_ar_areaid')];
+				} else {
+					$transfer_w['destination'] = '';
+				}
 				$transfer_w['starea'] 		 = $area[$transfer_w_arr[$i]->getVar('transfer_st_areaid')];
 				if (in_array($transfer_w_arr[$i]->getVar('transfer_ar_areaid'), $managePermissionArea) == true){
 					$transfer_w['action']    = true;
