@@ -104,7 +104,7 @@ $modversion['blocks'][] = array(
     'description' => _MI_XMSTOCK_BLOCK_MYORDERS_DESC,
     'show_func'   => 'block_xmstock_show',
     'edit_func'   => 'block_xmstock_edit',
-	'options'     => '1|5|myorders',
+	'options'     => '1|0|0|5|myorders',
     'template'    => 'xmstock_block.tpl'
 );
 $modversion['blocks'][] = array(
@@ -113,8 +113,17 @@ $modversion['blocks'][] = array(
     'description' => _MI_XMSTOCK_BLOCK_PROCESS_DESC,
     'show_func'   => 'block_xmstock_show',
     'edit_func'   => 'block_xmstock_edit',
-	'options'     => '1|5|process',
+	'options'     => '1|0|0|5|process',
     'template'    => 'xmstock_block.tpl'
+);
+$modversion['blocks'][] = array(
+    'file'        => 'xmstock_blocks.php',
+    'name'        => _MI_XMSTOCK_BLOCK_TRANSFERT,
+    'description' => _MI_XMSTOCK_BLOCK_TRANSFERT_DESC,
+    'show_func'   => 'block_xmstock_show',
+    'edit_func'   => 'block_xmstock_edit',
+	'options'     => '0|DESC|0|5|transfert',
+    'template'    => 'xmstock_block_transfert.tpl'
 );
 
 // Configs

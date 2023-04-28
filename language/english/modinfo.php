@@ -41,6 +41,8 @@ define('_MI_XMSTOCK_BLOCK_MYORDERS', 'Mes commandes');
 define('_MI_XMSTOCK_BLOCK_MYORDERS_DESC', 'Afficher mes commandes');
 define('_MI_XMSTOCK_BLOCK_PROCESS', 'Commandes à traiter');
 define('_MI_XMSTOCK_BLOCK_PROCESS_DESC', 'Afficher les commandes à traiter');
+define('_MI_XMSTOCK_BLOCK_TRANSFERT', 'Transferts');
+define('_MI_XMSTOCK_BLOCK_TRANSFERT_DESC', 'Afficher les transferts');
 
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>General</span>");
