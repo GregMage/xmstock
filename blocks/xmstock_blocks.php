@@ -107,12 +107,14 @@ function block_xmstock_show($options) {
 		if (!in_array(0, $area_ids)) {
 			$criteria->add(new Criteria('transfer_ar_areaid', '(' . $options[0] . ')', 'IN'));
 		}
-		$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+		if (!empty($managePermissionArea)) {
+			$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+		}
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
         $transfer_arr = $transferHandler->getByLink($criteria);
-		if (count($transfer_arr) > 0) {
+		if (count($transfer_arr) > 0 && !empty($managePermissionArea)) {
             foreach (array_keys($transfer_arr) as $i) {
                 $transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
                 $transfer['id']            = $transfer_id;
