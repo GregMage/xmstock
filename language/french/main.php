@@ -106,6 +106,8 @@ define('_MA_XMSTOCK_AREA_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_AREA_LOGO', 'Logo');
 define('_MA_XMSTOCK_AREA_LOGOFILE', 'Fichier logo');
 define('_MA_XMSTOCK_AREA_NAME', 'Nom');
+define('_MA_XMSTOCK_AREA_PRODUCTION', 'Production');
+define('_MA_XMSTOCK_AREA_PRODUCTION_DESC', 'Intégrer ce stock dans l\'analyse du plan de production?');
 define('_MA_XMSTOCK_AREA_SORT', 'Trier');
 define('_MA_XMSTOCK_AREA_SORT1', 'Nom vers le haut');
 define('_MA_XMSTOCK_AREA_SORT2', 'Nom vers le bas');

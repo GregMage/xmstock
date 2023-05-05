@@ -40,6 +40,7 @@ class xmstock_area extends XoopsObject
 		$this->initVar('area_color', XOBJ_DTYPE_TXTBOX, '#ffffff', false);
         $this->initVar('area_location', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('area_weight', XOBJ_DTYPE_INT, null, false, 11);
+        $this->initVar('area_production', XOBJ_DTYPE_INT, 0, false, 1);
         $this->initVar('area_status', XOBJ_DTYPE_INT, null, false, 1);
     }
 
@@ -94,6 +95,7 @@ class xmstock_area extends XoopsObject
         $this->setVar('area_description',  Request::getText('area_description', ''));
         $this->setVar('area_color', Request::getString('area_color', ''));
 		$this->setVar('area_location',Request::getString('area_location', ''));
+        $this->setVar('area_production', Request::getInt('area_production', 1));
         $this->setVar('area_status', Request::getInt('area_status', 1));
         if ($error_message == '') {
             $this->setVar('area_weight', Request::getInt('area_weight', 0));
@@ -191,6 +193,15 @@ class xmstock_area extends XoopsObject
 
         // weight
         $form->addElement(new XoopsFormText(_MA_XMSTOCK_AREA_WEIGHT, 'area_weight', 5, 5, $weight));
+
+        // production
+        if (xoops_isActiveModule('xmprod')) {
+            $production = new XoopsFormRadioYN(_MA_XMSTOCK_AREA_PRODUCTION, 'area_production', $this->getVar('area_production'));
+            $production->setDescription(_MA_XMSTOCK_AREA_PRODUCTION_DESC);
+            $form->addElement($production);
+        } else {
+            $form->addElement(new XoopsFormHidden('area_production', $this->getVar('area_production')));
+        }
 
 		// status
         $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'area_status', $status);

@@ -3,11 +3,12 @@ CREATE TABLE `xmstock_area` (
   `area_name`           varchar(255)        	NOT NULL DEFAULT '',
   `area_description`    text,
   `area_logo`           varchar(50)         	NOT NULL DEFAULT '',
-  `area_color`    		varchar(7)          	NOT NULL DEFAULT '#ffffff',
+  `area_color`    		  varchar(7)          	NOT NULL DEFAULT '#ffffff',
   `area_location`       varchar(255)        	NOT NULL DEFAULT '',
-  `area_weight`         smallint(5)  unsigned   NOT NULL DEFAULT '0',
+  `area_weight`         smallint(5)  unsigned NOT NULL DEFAULT '0',
+  `area_production`     tinyint(1)	 unsigned	NOT NULL DEFAULT '0',
   `area_status`         tinyint(1)	 unsigned	NOT NULL DEFAULT '1',
-  
+
   PRIMARY KEY (`area_id`),
   KEY `area_name` (`area_name`)
 ) ENGINE=MyISAM;
@@ -26,7 +27,7 @@ CREATE TABLE `xmstock_transfer` (
   `transfer_type`           varchar(2)	 		    NOT NULL DEFAULT '',
   `transfer_ref`            varchar(255)        	NOT NULL DEFAULT '',
   `transfer_status`         tinyint(1) unsigned 	NOT NULL DEFAULT '1',
-  
+
   PRIMARY KEY (`transfer_id`),
   KEY `transfer_articleid` (`transfer_amount`)
 ) ENGINE=MyISAM;
@@ -39,7 +40,7 @@ CREATE TABLE `xmstock_stock` (
   `stock_type`         	tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
   `stock_price`         double(8,2)             	NOT NULL default '0.00',
   `stock_location`      varchar(255)        		NOT NULL DEFAULT '',
-  
+
   PRIMARY KEY (`stock_id`),
   KEY `stock_areaid` (`stock_articleid`)
 ) ENGINE=MyISAM;
@@ -50,7 +51,7 @@ CREATE TABLE `xmstock_output` (
   `output_description`   text,
   `output_weight`        smallint(5)  unsigned      NOT NULL DEFAULT '0',
   `output_status`        tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
-  
+
   PRIMARY KEY (`output_id`),
   KEY `output_name` (`output_weight`)
 ) ENGINE=MyISAM;
@@ -69,17 +70,17 @@ CREATE TABLE `xmstock_order` (
   `order_dcancellation`  int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_delivery`       tinyint(1)  unsigned   NOT NULL DEFAULT '1',
   `order_status`         tinyint(1)  unsigned 	NOT NULL DEFAULT '1',
-  
+
   PRIMARY KEY (`order_id`),
   KEY `order_userid` (`order_userid`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_itemorder` (
   `itemorder_id`          	int(11) 	 unsigned    	NOT NULL AUTO_INCREMENT,
-  `itemorder_orderid`     	int(11) 	 unsigned    	NOT NULL DEFAULT '0', 
+  `itemorder_orderid`     	int(11) 	 unsigned    	NOT NULL DEFAULT '0',
   `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_amount`      	smallint(6)  unsigned    	NOT NULL DEFAULT '0',  
+  `itemorder_amount`      	smallint(6)  unsigned    	NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemorder_id`),
   KEY `itemorder_orderid` (`itemorder_articleid`)
 ) ENGINE=MyISAM;
@@ -91,7 +92,7 @@ CREATE TABLE `xmstock_price` (
   `price_amount`      	smallint(6)  unsigned   	NOT NULL DEFAULT '0',
   `price_price`         double(8,2)             	NOT NULL default '0.00',
   `price_date`          int(10) 	 unsigned   	NOT NULL DEFAULT '0',
-  
+
   PRIMARY KEY (`price_id`),
   KEY `price_areaid` (`price_articleid`)
 ) ENGINE=MyISAM;
@@ -104,7 +105,7 @@ CREATE TABLE `xmstock_loan` (
   `loan_rdate`         int(10) 	 	 unsigned   	NOT NULL DEFAULT '0',
   `loan_userid`        smallint(5)   unsigned   	NOT NULL DEFAULT '0',
   `loan_status`        tinyint(1)    unsigned 		NOT NULL DEFAULT '1',
-  
+
   PRIMARY KEY (`loan_id`),
   KEY `loan_areaid` (`loan_articleid`)
 ) ENGINE=MyISAM;
