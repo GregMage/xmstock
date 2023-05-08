@@ -2,7 +2,7 @@
     <h1 class="head">Help:
         <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/xmstock/admin/index.php"
            title="Back to the administration of xmstock"> Stock
-            <img src="<{xoAdminIcons home.png}>"
+            <img src="<{xoAdminIcons 'home.png'}>"
                  alt="Back to the Administration of xmstock">
         </a></h1>
 
