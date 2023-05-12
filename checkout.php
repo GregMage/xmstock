@@ -55,7 +55,15 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
 			$articles['qty']   	= $datas['qty'];
+			$articles['lenght'] = $datas['lenght'];
 			$articles['count']  = $count;
+			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
+			if ($type == 2) {
+				$articles['unit'] = 'mm';
+			} else {
+				$articles['unit'] = '';
+			}
+
 			if ($articles['qty'] > $articles['amount']) {
 				$warning = true;
 				$articles['warning']  = true;

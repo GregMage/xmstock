@@ -11,12 +11,12 @@
 	<{if $error_message|default:'' != ''}>
 		<div class="alert alert-danger" role="alert"><{$error_message}></div>
 	<{else}>
-		<form name="formcaddy" id="formcaddy" action="caddy.php" method="post">
+		<form class="" name="formcaddy" id="formcaddy" action="caddy.php" method="post">
 			<table class="table table-striped">
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
 					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
-					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}></th>
+					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}></th>
 					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 				</tr>
 				<{foreach item=article from=$articles}>
@@ -28,10 +28,17 @@
 							<span class="badge badge-info badge-pill"><{$article.amount}></span>
 						</td>
 						<td>
-							<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}> onchange="refreshcaddy()">
-							<{if $article.unit|default:'' != ''}>
-								<span class="badge badge-pill badge-info"><{$article.unit}></span>
-							<{/if}>
+							<div class="form-row">
+								<div class="col">
+									<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}> onchange="refreshcaddy()">
+								</div>
+								<div class="col">
+									<{if $article.unit|default:'' != ''}>
+										<input class="form-control" type="number" name="lenght_<{$article.count}>" id="lenght_<{$article.count}>" value="<{$article.lenght}>" onchange="refreshcaddy()">
+										<span class="badge badge-pill badge-info"><{$article.unit}></span>
+									<{/if}>
+								</div>
+							</div>
 						</td>
 						<td class="txtcenter width10">
 							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-secondary"><span class="fa fa-trash"></span></a>

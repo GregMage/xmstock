@@ -60,12 +60,12 @@ CREATE TABLE `xmstock_order` (
   `order_id`             int(11)     unsigned   NOT NULL AUTO_INCREMENT,
   `order_description`    text,
   `order_userid`         smallint(5) unsigned   NOT NULL DEFAULT '0',
-  `order_areaid`     	 smallint(5) unsigned   NOT NULL DEFAULT '0',
+  `order_areaid`     	   smallint(5) unsigned   NOT NULL DEFAULT '0',
   `order_ddesired`       int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_dorder`         int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_dvalidation`    int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_ddelivery`      int(10) 	 unsigned   NOT NULL DEFAULT '0',
-  `order_dready`    	 int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `order_dready`    	   int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_ddelivery_r`    int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_dcancellation`  int(10) 	 unsigned   NOT NULL DEFAULT '0',
   `order_delivery`       tinyint(1)  unsigned   NOT NULL DEFAULT '1',
@@ -81,6 +81,8 @@ CREATE TABLE `xmstock_itemorder` (
   `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
   `itemorder_amount`      	smallint(6)  unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_length`        double(10,4),
+
   PRIMARY KEY (`itemorder_id`),
   KEY `itemorder_orderid` (`itemorder_articleid`)
 ) ENGINE=MyISAM;

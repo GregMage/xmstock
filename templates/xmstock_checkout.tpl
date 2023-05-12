@@ -73,7 +73,7 @@
 							<span class="badge badge-info badge-pill"><{$article.amount}></span>
 						</td>
 						<td class="txtcenter width10">
-							<{$article.qty}>
+							<{$article.qty}><{if $article.unit|default:'' != ''}> x <{$article.lenght}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
 						</td>
 					</tr>
 				<{/foreach}>

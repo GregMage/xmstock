@@ -125,7 +125,7 @@ define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
-define('_MA_XMSTOCK_STOCK_ML_DESC', 'A renseigner en mm');
+define('_MA_XMSTOCK_STOCK_ML_DESC', 'Longueur en mm');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
 define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
