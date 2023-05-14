@@ -78,7 +78,6 @@ class xmstock_order extends XoopsObject
 		$this->setVar('order_delivery',  Request::getInt('order_delivery', 0));
         $this->setVar('order_status', Request::getInt('order_status', 1));
 
-		//
         if ($error_message == '') {
 			$sessionHelper = new \Xmf\Module\Helper\Session();
 			$arr_selectionArticles = $sessionHelper->get($session_name);
@@ -100,6 +99,7 @@ class xmstock_order extends XoopsObject
 						$obj->setVar('itemorder_articleid', $datas['id']);
 						$obj->setVar('itemorder_areaid', $datas['area']);
 						$obj->setVar('itemorder_amount', $datas['qty']);
+						$obj->setVar('itemorder_length', $datas['length']);
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
 						}

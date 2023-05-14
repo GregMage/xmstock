@@ -55,7 +55,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
 			$articles['qty']   	= $datas['qty'];
-			$articles['lenght'] = $datas['lenght'];
+			$articles['length'] = $datas['length'];
 			$articles['count']  = $count;
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
 			if ($type == 2) {
@@ -64,7 +64,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 				$articles['unit'] = '';
 			}
 			if ($type == 2){
-				if (($articles['qty'] * $articles['lenght']) > $articles['amount']) {
+				if (($articles['qty'] * $articles['length']) > $articles['amount']) {
 					$warning = true;
 					$articles['warning']  = true;
 				} else {
@@ -165,9 +165,14 @@ switch ($op) {
 		$stock_arr = $stockHandler->getall($criteria);
 		$caddy_items = array();
 		foreach (array_keys($itemorder_arr) as $i) {
+			//var_dump($itemorder_arr[$i]);
 			$caddy_items[$i]['id'] = $itemorder_arr[$i]->getVar('itemorder_articleid');
 			$caddy_items[$i]['name'] = $itemorder_arr[$i]->getVar('article_name');
 			$caddy_items[$i]['amount'] = $itemorder_arr[$i]->getVar('itemorder_amount');
+			$caddy_items[$i]['length'] = $itemorder_arr[$i]->getVar('itemorder_length');
+			if ($caddy_items[$i]['length'] == 0) {
+				$caddy_items[$i]['length'] = '';
+			}
 			$caddy_items[$i]['cid'] = $itemorder_arr[$i]->getVar('article_cid');
 			$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			switch ($type) {

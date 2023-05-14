@@ -34,7 +34,7 @@
 								</div>
 								<div class="col">
 									<{if $article.unit|default:'' != ''}>
-										<input class="form-control" type="number" name="lenght_<{$article.count}>" id="lenght_<{$article.count}>" value="<{$article.lenght}>" onchange="refreshcaddy()">
+										<input class="form-control" type="number" name="length_<{$article.count}>" id="length_<{$article.count}>" value="<{$article.length}>" onchange="refreshcaddy()">
 										<span class="badge badge-pill badge-info"><{$article.unit}></span>
 									<{/if}>
 								</div>

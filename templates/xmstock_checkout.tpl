@@ -25,7 +25,7 @@
 							<{if $item_info.type|default:'' != ''}>
 								<span class="badge badge-pill badge-info"><{$item_info.type}></span>
 							<{/if}>
-							<span class="badge badge-primary badge-pill"><{$item_info.amount}></span>
+							<span class="badge badge-primary badge-pill"><{$item_info.amount}><{if $item_info.length|default:'' != ''}> x <{$item_info.length}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span>
 							</a>
 
 							</div>
@@ -73,7 +73,7 @@
 							<span class="badge badge-info badge-pill"><{$article.amount}></span>
 						</td>
 						<td class="txtcenter width10">
-							<{$article.qty}><{if $article.unit|default:'' != ''}> x <{$article.lenght}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
+							<{$article.qty}><{if $article.unit|default:'' != ''}> x <{$article.length}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
 						</td>
 					</tr>
 				<{/foreach}>

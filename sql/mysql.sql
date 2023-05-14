@@ -76,12 +76,12 @@ CREATE TABLE `xmstock_order` (
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_itemorder` (
-  `itemorder_id`          	int(11) 	 unsigned    	NOT NULL AUTO_INCREMENT,
-  `itemorder_orderid`     	int(11) 	 unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_id`          	int(11) 	  unsigned    	NOT NULL AUTO_INCREMENT,
+  `itemorder_orderid`     	int(11) 	  unsigned    	NOT NULL DEFAULT '0',
   `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
   `itemorder_amount`      	smallint(6)  unsigned    	NOT NULL DEFAULT '0',
-  `itemorder_length`        double(10,4),
+  `itemorder_length`        double(10,4)              NOT NULL DEFAULT '0.0000',
 
   PRIMARY KEY (`itemorder_id`),
   KEY `itemorder_orderid` (`itemorder_articleid`)

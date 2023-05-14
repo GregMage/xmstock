@@ -75,7 +75,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
 			$articles['qty']   	= $datas['qty'];
-			$articles['lenght'] = $datas['lenght'];
+			$articles['length'] = $datas['length'];
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
 			switch ($type) {
 				case 1:
@@ -173,7 +173,7 @@ switch ($op) {
 				$datas['id']   = $article_id;
 				$datas['area'] = $area_id;
 				$datas['qty']  = 1;
-				$datas['lenght']  = 1;
+				$datas['length']  = 1;
 				$arr_selectionArticles[] = $datas;
 				$sessionHelper->set($session_name, $arr_selectionArticles);
 			} else {
@@ -199,15 +199,15 @@ switch ($op) {
 			$count = 1;
 			foreach ($arr_selectionArticles as $datas) {
 				$name_qty = 'qty_' . $count;
-				$name_lenght = 'lenght_' . $count;
+				$name_length = 'length_' . $count;
 				$name_area = 'area_' . $count;
 				$qty = Request::getInt($name_qty, 0, 'POST');
-				$lenght = Request::getFloat($name_lenght, 0, 'POST');
+				$length = Request::getFloat($name_length, 0, 'POST');
 				$area = Request::getInt($name_area, 0, 'POST');
 				$article['id']   = $datas['id'];
 				$article['area'] = $area;
 				$article['qty']  = $qty;
-				$article['lenght']  = $lenght;
+				$article['length']  = $length;
 				$datasUpdate[] = $article;
 				$count++;
 			}
