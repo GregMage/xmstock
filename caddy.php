@@ -67,6 +67,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 		$stock_arr = $stockHandler->getall($criteria);
 		xoops_load('utility', 'xmarticle');
 		$count = 1;
+		$mml = false;
 		foreach ($arr_selectionArticles as $datas) {
 			$articles['id']    	= $datas['id'];
 			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
@@ -82,6 +83,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 					break;
 				case 2:
 					$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
+					$mml = true;
 					break;
 				case 3:
 					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN;
@@ -98,6 +100,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			$xoopsTpl->appendByRef('articles', $articles);
 			unset($articles);
 		}
+		$xoopsTpl->assign('mml', $mml);
 		$xoopsTpl->assign('total', $total);
 	} else {
 		$xoopsTpl->assign('error_message', _MA_XMSTOCK_CADDY_ERROR_EMPTY);

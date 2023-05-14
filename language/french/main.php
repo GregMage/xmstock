@@ -187,6 +187,7 @@ define('_MA_XMSTOCK_VIEWORDER', 'Visualisation de la commande');
 
 // checkout
 define('_MA_XMSTOCK_CHECKOUT', 'Valider la commande');
+define('_MA_XMSTOCK_CHECKOUT_UNIT', 'mm');
 define('_MA_XMSTOCK_CHECKOUT_DESC', 'Description');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Options de livraison');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Retrait');
@@ -203,6 +204,7 @@ define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'La quantité demandée pour les artic
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffissante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
 
 // caddy
+define('_MA_XMSTOCK_CADDY_LENGHT', 'Longueur');
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Vider le panier');
 define('_MA_XMSTOCK_CADDY_AREA', 'Zone de stockage');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Ajouter au panier');
