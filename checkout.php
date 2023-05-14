@@ -48,6 +48,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		xoops_load('utility', 'xmarticle');
 		$count = 1;
 		$warning = false;
+		$mml = false;
 		foreach ($arr_selectionArticles as $datas) {
 			$articles['id']    	= $datas['id'];
 			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
@@ -64,6 +65,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 				$articles['unit'] = '';
 			}
 			if ($type == 2){
+				$mml = true;
 				if (($articles['qty'] * $articles['length']) > $articles['amount']) {
 					$warning = true;
 					$articles['warning']  = true;
@@ -83,6 +85,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$xoopsTpl->appendByRef('articles', $articles);
 			unset($articles);
 		}
+		$xoopsTpl->assign('mml', $mml);
 		$xoopsTpl->assign('total', $total);
 		$xoopsTpl->assign('warning', $warning);
 	} else {

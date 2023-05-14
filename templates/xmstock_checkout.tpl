@@ -58,7 +58,7 @@
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
 					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
-					<th class="txtcenter width20"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}></th>
+					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
 				</tr>
 				<{foreach item=article from=$articles}>
 					<tr>
