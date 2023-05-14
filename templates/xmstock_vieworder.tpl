@@ -125,7 +125,7 @@
 							<thead>
 								<tr>
 									<th scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_ARTICLE}></th>
-									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}></th>
+									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -140,7 +140,7 @@
 											<span class="badge badge-pill badge-info"><{$article.type}></span>
 										<{/if}>
 									</td>
-									<td class="text-center"><span class='badge badge-primary badge-pill'><{$article.amount}></span></td>
+									<td class="text-center"><span class='badge badge-primary badge-pill'><{$article.amount}><{if $article.length|default:'' != ''}> x <{$article.length}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span></td>
 								</tr>
 								<{/foreach}>
 							</tbody>

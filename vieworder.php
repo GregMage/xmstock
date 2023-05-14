@@ -114,12 +114,17 @@ if ($order_id == 0) {
 		// Get stock
 		$criteria = new CriteriaCompo();
 		$stock_arr = $stockHandler->getall($criteria);
+		$mml = false;
 		foreach (array_keys($itemorder_arr) as $i) {
 			$item['id']        = $itemorder_arr[$i]->getVar('itemorder_articleid');
 			$item['name']      = $itemorder_arr[$i]->getVar('article_name');
 			$item['reference'] = $itemorder_arr[$i]->getVar('article_reference');
 			$item['cid']   	   = $itemorder_arr[$i]->getVar('article_cid');
 			$item['amount']    = $itemorder_arr[$i]->getVar('itemorder_amount');
+			$item['length']    = $itemorder_arr[$i]->getVar('itemorder_length');
+			if ($item['length'] == 0) {
+				$item['length'] = '';
+			}
 			$item['status']    = $itemorder_arr[$i]->getVar('itemorder_status');
 			$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			switch ($type) {
@@ -127,6 +132,7 @@ if ($order_id == 0) {
 					$item['type'] = '';
 					break;
 				case 2:
+					$mml = true;
 					$item['type'] = '';
 					break;
 				case 3:
@@ -136,6 +142,7 @@ if ($order_id == 0) {
 			$xoopsTpl->appendByRef('item', $item);
 			unset($item);
 		}
+		$xoopsTpl->assign('mml', $mml);
 	}
 }
 //SEO
