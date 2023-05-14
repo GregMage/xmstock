@@ -32,12 +32,12 @@
 								<div class="col">
 									<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}> onchange="refreshcaddy()">
 								</div>
-								<div class="col">
-									<{if $article.unit|default:'' != ''}>
+								<{if $article.unit == $smarty.const._MA_XMSTOCK_STOCK_ML_DESC}>
+									<div class="col">
 										<input class="form-control" type="number" name="length_<{$article.count}>" id="length_<{$article.count}>" value="<{$article.length}>" onchange="refreshcaddy()">
 										<span class="badge badge-pill badge-info"><{$article.unit}></span>
-									<{/if}>
-								</div>
+									</div>
+								<{/if}>
 							</div>
 						</td>
 						<td class="txtcenter width10">

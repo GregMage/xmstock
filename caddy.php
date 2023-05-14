@@ -173,7 +173,7 @@ switch ($op) {
 				$datas['id']   = $article_id;
 				$datas['area'] = $area_id;
 				$datas['qty']  = 1;
-				$datas['length']  = 1;
+				$datas['length']  = 0;
 				$arr_selectionArticles[] = $datas;
 				$sessionHelper->set($session_name, $arr_selectionArticles);
 			} else {
