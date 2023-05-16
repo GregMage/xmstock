@@ -121,55 +121,6 @@ class xmstock_order extends XoopsObject
     }
 
     /**
-     * @param bool $action
-     * @return XoopsThemeForm
-     */
-    /*public function getForm($action = false)
-    {
-        $helper = Helper::getHelper('xmstock');
-        if ($action === false) {
-            $action = $_SERVER['REQUEST_URI'];
-        }
-        include __DIR__ . '/../include/common.php';
-
-        //form title
-        $title = $this->isNew() ? sprintf(_MA_XMSTOCK_ADD) : sprintf(_MA_XMSTOCK_EDIT);
-
-        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
-
-        if (!$this->isNew()) {
-            $form->addElement(new XoopsFormHidden('order_id', $this->getVar('order_id')));
-            $status = $this->getVar('order_status');
-        } else {
-            $status = 1;
-        }
-
-        // description
-        $editor_configs           =array();
-        $editor_configs['name']   = 'order_description';
-        $editor_configs['value']  = $this->getVar('order_description', 'e');
-        $editor_configs['rows']   = 20;
-        $editor_configs['cols']   = 160;
-        $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
-        $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
-        $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_AREA_DESC, 'order_description', $editor_configs), false);
-
-		// A faire (pour la gestion des commandes admin et user)
-		// status
-        $form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'order_status', $status);
-        $options = array(1 => _MA_XMSTOCK_STATUS_A, 0 =>_MA_XMSTOCK_STATUS_NA);
-        $form_status->addOptionArray($options);
-        $form->addElement($form_status);
-
-        $form->addElement(new XoopsFormHidden('op', 'save'));
-        // submit
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-
-        return $form;
-    }*/
-
-    /**
      * @return mixed
      */
     public function saveOrderEdit($orderHandler, $action = false)
