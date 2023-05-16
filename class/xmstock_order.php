@@ -329,6 +329,9 @@ class xmstock_order extends XoopsObject
 				break;
 		}
 		$count = Request::getInt('count', 0);
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('stock_areaid', $this->getVar('order_areaid')));
+		$stock_arr = $stockHandler->getall($criteria);
 		// Contrôle pour ne pas faire suivre si le stock d'un article n'est pas suffissant
 		if ($status == 2) {
 			if ($count > 0){
@@ -336,7 +339,12 @@ class xmstock_order extends XoopsObject
 					if (!isset($_POST['split' . $i])){
 						$itemorder = Request::getInt('itemorder' . $i, 0);
 						$item = $itemorderHandler->get($itemorder);
-						$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+						$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
+						if ($type == 2){
+							$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length'), $item->getVar('itemorder_areaid'));
+						} else {
+							$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+						}
 					}
 				}
 			}
@@ -348,14 +356,10 @@ class xmstock_order extends XoopsObject
 				redirect_header('index.php', 2, _NOPERM);
 			}
 			if ($orderHandler->insert($this)) {
-				$order_id = $this->getVar('order_id');
 				if ($count > 0){
 					//split de commandes
 					$new_orderid = 0;
 					$nb_split = 0;
-					$criteria = new CriteriaCompo();
-					$criteria->add(new Criteria('stock_areaid', $this->getVar('order_areaid')));
-					$stock_arr = $stockHandler->getall($criteria);
 					for ($i = 1; $i <= $count; $i++) {
 						$itemorder = Request::getInt('itemorder' . $i, 0);
 						$item = $itemorderHandler->get($itemorder);
@@ -386,9 +390,14 @@ class xmstock_order extends XoopsObject
 						} else {
 							// Sortie de stock uniquement en statut de 2 à 3
 							if ($status == 2) {
-								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
-								// Si emprunt ajout d'une entrée dans le table d'emprunt
 								$type = XmstockUtility::articleTypePerArea($item->getVar('itemorder_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
+								if ($type == 2){
+									$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length'), $item->getVar('itemorder_areaid'));
+								} else {
+									$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+								}
+
+								// Si emprunt ajout d'une entrée dans le table d'emprunt
 								if ($type == 3) {
 									$loan = $loanHandler->create();
 									$loan->setVar('loan_areaid', $item->getVar('itemorder_areaid'));
@@ -502,16 +511,33 @@ class xmstock_order extends XoopsObject
 			if ($status == 1 || $status == 2){
 				$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
 				$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
-				if ($amoutArea > $itemorder_arr[$i]->getVar('itemorder_amount')) {
-					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
-				} else {
-					if ($status == 1){
-						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
+				$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+				if ($type == 2){
+					$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
+					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit;
+					if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length')) > $amoutArea) {
+						if ($status == 1){
+							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+						} else {
+							$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+						}
 					} else {
-						$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $itemorder_arr[$i]->getVar('itemorder_amount') . "</span></td>";
+						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
+					}
+				} else {
+					$unit = '';
+					$amount = $itemorder_arr[$i]->getVar('itemorder_amount');
+					if ($amoutArea > $itemorder_arr[$i]->getVar('itemorder_amount')) {
+						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
+					} else {
+						if ($status == 1){
+							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+						} else {
+							$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+						}
 					}
 				}
-				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . "</span> " . $area_name . "</td>";
+				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . $unit . "</span> " . $area_name . "</td>";
 				$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 				if ($type == 3) {
 					$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . _YES . "</span></td>";
