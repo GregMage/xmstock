@@ -121,7 +121,7 @@ if ($order_id == 0) {
 			$item['reference'] = $itemorder_arr[$i]->getVar('article_reference');
 			$item['cid']   	   = $itemorder_arr[$i]->getVar('article_cid');
 			$item['amount']    = $itemorder_arr[$i]->getVar('itemorder_amount');
-			$item['length']    = $itemorder_arr[$i]->getVar('itemorder_length');
+			$item['length']    = number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2);
 			if ($item['length'] == 0) {
 				$item['length'] = '';
 			}

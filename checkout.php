@@ -59,12 +59,8 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$articles['length'] = $datas['length'];
 			$articles['count']  = $count;
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
-			if ($type == 2) {
-				$articles['unit'] = _MA_XMSTOCK_CHECKOUT_UNIT;
-			} else {
-				$articles['unit'] = '';
-			}
 			if ($type == 2){
+				$articles['unit'] = _MA_XMSTOCK_CHECKOUT_UNIT;
 				$mml = true;
 				if (($articles['qty'] * $articles['length']) > $articles['amount']) {
 					$warning = true;
@@ -73,6 +69,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 					$articles['warning']  = false;
 				}
 			} else {
+				$articles['unit'] = '';
 				if ($articles['qty'] > $articles['amount']) {
 					$warning = true;
 					$articles['warning']  = true;
@@ -172,7 +169,7 @@ switch ($op) {
 			$caddy_items[$i]['id'] = $itemorder_arr[$i]->getVar('itemorder_articleid');
 			$caddy_items[$i]['name'] = $itemorder_arr[$i]->getVar('article_name');
 			$caddy_items[$i]['amount'] = $itemorder_arr[$i]->getVar('itemorder_amount');
-			$caddy_items[$i]['length'] = $itemorder_arr[$i]->getVar('itemorder_length');
+			$caddy_items[$i]['length'] = number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2);
 			if ($caddy_items[$i]['length'] == 0) {
 				$caddy_items[$i]['length'] = '';
 			}
