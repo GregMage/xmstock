@@ -73,7 +73,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
 			$articles['areaid'] = $datas['area'];
 			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
-			$articles['name']  	= XmarticleUtility::getArticleName($datas['id']);
+			$articles['name']  	= XmarticleUtility::getArticleName($datas['id'], true);
 			$articles['qty']   	= $datas['qty'];
 			$articles['length'] = $datas['length'];
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);

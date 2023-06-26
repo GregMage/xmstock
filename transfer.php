@@ -232,7 +232,7 @@ switch ($op) {
 				xoops_load('utility', 'xmarticle');
 				$xoopsTpl->assign('transfert_id', $transfer_id);
 				$xoopsTpl->assign('transfer_description', $obj->getVar('transfer_description'));
-				$xoopsTpl->assign('transfer_article', XmarticleUtility::getArticleName($obj->getVar('transfer_articleid')));
+				$xoopsTpl->assign('transfer_article', XmarticleUtility::getArticleName($obj->getVar('transfer_articleid'), true));
 				$xoopsTpl->assign('transfer_ref', $obj->getVar('transfer_ref'));
 				$xoopsTpl->assign('transfer_type', _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK);
 				$xoopsTpl->assign('transfer_date', formatTimestamp($obj->getVar('transfer_date'), 'm'));

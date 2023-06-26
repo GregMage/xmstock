@@ -45,7 +45,7 @@ $permHelper->checkPermissionRedirect('xmstock_other', 8, 'index.php', 2, _NOPERM
 //Article
 xoops_load('utility', 'xmarticle');
 $xoopsTpl->assign('article_name', XmarticleUtility::getArticleName($article_id));
-$article_name = XmarticleUtility::getArticleName($article_id, false, false);
+$article_name = XmarticleUtility::getArticleName($article_id, true, false);
 $xoopsTpl->assign('file_name', 'Price-' . $article_name);
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
