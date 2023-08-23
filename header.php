@@ -27,6 +27,7 @@ $permHelper = new \Xmf\Module\Helper\Permission();
 
 // Load language files
 $helper->loadLanguage('main');
+$helper->loadLanguage('modinfo');
 
 // Config
 $nb_limit = $helper->getConfig('general_perpage', 15);

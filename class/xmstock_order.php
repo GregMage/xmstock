@@ -183,6 +183,7 @@ class xmstock_order extends XoopsObject
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
+		include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         include __DIR__ . '/../include/common.php';
 
         //form title
@@ -402,6 +403,7 @@ class xmstock_order extends XoopsObject
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
+		include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         include __DIR__ . '/../include/common.php';
 
 		$status = $this->getVar('order_status');

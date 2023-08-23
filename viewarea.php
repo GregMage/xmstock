@@ -22,6 +22,7 @@ use \Xmf\Request;
 include_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'xmstock_viewarea.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
+include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 
@@ -87,7 +88,6 @@ if ($reset == '') {
     $s_amval = 0;
     $s_sort = 'ADESC';
 }
-
 
 $form = new XoopsThemeForm(_MA_XMSTOCK_AREA_FILTERFORM, 'form', $_SERVER['REQUEST_URI'], 'post', true);
 // name
