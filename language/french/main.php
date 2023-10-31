@@ -138,6 +138,7 @@ define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Poids');
 
 //transfer
 define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Quantité');
+define('_MA_XMSTOCK_TRANSFER_AMOUNT_DSC', 'Si il s\'agit d\'une quantité en "linéaire", il faut entrer la quantité en [mm]');
 define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Stock de destination');
 define('_MA_XMSTOCK_TRANSFER_ARTICLE', 'Article à transférer');
 define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');

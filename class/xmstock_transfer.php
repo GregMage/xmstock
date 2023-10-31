@@ -170,7 +170,6 @@ class xmstock_transfer extends XoopsObject
 			$this->setVar('transfer_outputid', $transfer_outputid);
 			$this->setVar('transfer_outputuserid', $transfer_outputuserid);
 			$this->setVar('transfer_description',  Request::getText('transfer_description', ''));
-			$this->setVar('transfer_ref', Request::getString('transfer_ref', ''));
 			$this->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 			$this->setVar('transfer_date', time());
 			if ($error_message == '') {
@@ -298,7 +297,9 @@ class xmstock_transfer extends XoopsObject
 				$form->addElement(new XoopsFormHidden('transfer_outputuserid', 0));
 			}
 			// amount
-			$form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUNT, 'transfer_amount', 10, 10, $this->getVar('transfer_amount')), true);
+			$amount = new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUNT, 'transfer_amount', 10, 10, $this->getVar('transfer_amount'));
+			$amount->setDescription(_MA_XMSTOCK_TRANSFER_AMOUNT_DSC);
+			$form->addElement($amount, true);
 
 			// price
 			if ($helper->getConfig('general_price', 0) != 0 && $type == 'E') {
@@ -308,9 +309,6 @@ class xmstock_transfer extends XoopsObject
 			} else {
 				$form->addElement(new XoopsFormHidden('transfer_price', 0));
 			}
-
-			// ref
-			$form->addElement(new XoopsFormText(_MA_XMSTOCK_TRANSFER_REF, 'transfer_ref', 50, 50, $this->getVar('transfer_ref')), true);
 		} else {
 			// status
 			$form_status = new XoopsFormRadio(_MA_XMSTOCK_STATUS, 'transfer_newstatus', 1);
