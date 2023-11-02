@@ -159,12 +159,14 @@ switch ($op) {
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
                 $transfer['code_type']     = $transfer_arr[$i]->getVar('transfer_type');
                 $transfer['user']     	   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, true);
+                $transfer['user-export']   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, false);
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
 					default:
 					case 'E':
 						$transfer['type'] 	= _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
 						$transfer['starea'] = '';
 						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
+						$transfer['destination-export'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						break;
 
 					case 'O':
@@ -176,19 +178,21 @@ switch ($op) {
 							} else {
 								$transfer['destination'] = '';
 							}
+							$transfer['destination-export'] = $transfer['destination'];
 						} else {
 							$transfer['destination'] = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_outputuserid'), false, true);
+							$transfer['destination-export'] = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_outputuserid'), false, false);
 						}
-
 						break;
 
 					case 'T':
 						$transfer['type']   = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
 						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
+						$transfer['destination-export'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						$transfer['starea'] = $area[$transfer_arr[$i]->getVar('transfer_st_areaid')];
 						break;
 				}
-				$transfer['export'] = $transfer_id . ';' . $transfer['description'] . ';' . $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')' . ';' . $transfer['ref'] . ';' . $transfer['type'] . ';' . formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 's') . ';' . substr(formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm'), -5) . ';' . $transfer['amount'] . ';' . $transfer['destination'] . ';' . $transfer['user'] . '\n';
+				$transfer['export'] = $transfer_id . ';' . $transfer['description'] . ';' . $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')' . ';' . $transfer['ref'] . ';' . $transfer['type'] . ';' . formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 's') . ';' . substr(formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm'), -5) . ';' . $transfer['amount'] . ';' . $transfer['destination-export'] . ';' . $transfer['user-export'] . '\n';
                 $xoopsTpl->appendByRef('transfers', $transfer);
                 unset($transfer);
             }
