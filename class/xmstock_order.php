@@ -363,7 +363,11 @@ class xmstock_order extends XoopsObject
 								}
 								$new_transfer = $transferHandler->create();
 								$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
-								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
+								if ($type == 2){
+									$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount')*$item->getVar('itemorder_length'));
+								} else {
+									$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
+								}
 								$new_transfer->setVar('transfer_type', 'O');
 								$new_transfer->setVar('transfer_st_areaid', $item->getVar('itemorder_areaid'));
 								$new_transfer->setVar('transfer_outputuserid', $this->getVar('order_userid'));
