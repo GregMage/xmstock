@@ -93,7 +93,14 @@ class xmstock_loan extends XoopsObject
         if ($error_message == '') {
 			if ($status == 0) {
 				$this->setVar('loan_rdate', time());
-				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, 1, 0, $areaid, 0 , '', 3);
+				$criteria = new CriteriaCompo();
+				$criteria->add(new Criteria('stock_areaid', $areaid));
+				$criteria->add(new Criteria('stock_articleid', $transfer_articleid));
+				$stock_arr = $stockHandler->getall($criteria);
+				foreach (array_keys($stock_arr) as $i) {
+					$type = $stock_arr[$i]->getVar('stock_type');
+				}
+				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, 1, 0, $areaid, 0 , '', $type);
 			} else {
 				$error_message .= XmstockUtility::transfert('O', $transfer_articleid, 1, $areaid);
 			}
@@ -103,7 +110,11 @@ class xmstock_loan extends XoopsObject
 					$new_transfer = $transferHandler->create();
 					$new_transfer->setVar('transfer_articleid', $transfer_articleid);
 					$new_transfer->setVar('transfer_amount', 1);
-					$new_transfer->setVar('transfer_type', 'O');
+					if ($status == 0) {
+						$new_transfer->setVar('transfer_type', 'E');
+					} else {
+						$new_transfer->setVar('transfer_type', 'O');
+					}
 					$new_transfer->setVar('transfer_st_areaid', $areaid);
 					$new_transfer->setVar('transfer_outputuserid', $userid);
 					$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_LOAN_TRANSFERT_DESC, formatTimestamp($this->getVar('loan_date'), 'm'), $this->getVar('loan_id')));
