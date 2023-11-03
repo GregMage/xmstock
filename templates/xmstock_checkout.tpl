@@ -67,13 +67,19 @@
 							<{if $article.warning == true}>
 								<span class="badge badge-pill badge-warning"><{$smarty.const._MA_XMSTOCK_WARNING}></span>
 							<{/if}>
+							<{if $article.error == true}>
+								<span class="badge badge-pill badge-danger"><{$smarty.const._MA_XMSTOCK_ERROR}></span>
+							<{/if}>
 						</td>
 						<td>
 							<{$article.area}>
-							<span class="badge badge-info badge-pill"><{$article.amount}></span>
+							<span class="badge badge-info badge-pill">
+								<{$article.amount}> <{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{$article.unit}><{/if}>
+							</span>
+							<{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_STOCK_LOAN}><span class="badge badge-light badge-pill"><{$article.unit}></span><{/if}>
 						</td>
 						<td class="txtcenter width10">
-							<{$article.qty}><{if $article.unit|default:'' != ''}> x <{$article.length}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
+							<{$article.qty}><{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}> x <{$article.length}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
 						</td>
 					</tr>
 				<{/foreach}>
@@ -87,6 +93,24 @@
 					<h4 class="alert-heading"><{$smarty.const._MA_XMSTOCK_WARNING}></h4>
 					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_WARNINGQTY}></p>
 					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_WARNINGQTY2}></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			<{/if}>
+			<{if $error == true}>
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<h4 class="alert-heading"><{$smarty.const._MA_XMSTOCK_ERROR}></h4>
+					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_ERRORQTY}></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			<{/if}>
+			<{if $info == true}>
+				<div class="alert alert-info alert-dismissible fade show" role="alert">
+					<h4 class="alert-heading"><{$smarty.const._MA_XMSTOCK_INFORMATION}></h4>
+					<p><{$smarty.const._MA_XMSTOCK_CHECKOUT_INFORMATION}></p>
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				  </button>

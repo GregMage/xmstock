@@ -25,7 +25,7 @@
 						<td>
 							<{$article.area}>
 							<input type="hidden" name="area_<{$article.count}>" id="area_<{$article.count}>" value="<{$article.areaid}>">
-							<span class="badge badge-info badge-pill"><{$article.amount}></span>
+							<span class="badge badge-info badge-pill"><{$article.amount}></span> <{if $article.unit == $smarty.const._MA_XMSTOCK_STOCK_LOAN}><span class="badge badge-light badge-pill"><{$article.unit}></span><{/if}>
 						</td>
 						<td>
 							<div class="form-row">

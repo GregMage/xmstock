@@ -508,9 +508,6 @@ class XmstockUtility
         foreach (array_keys($stock_arr) as $i) {
             if ($stock_arr[$i]->getVar('stock_areaid') == $area_id && $stock_arr[$i]->getVar('stock_articleid') == $article_id) {
                 $amount = $stock_arr[$i]->getVar('stock_amount');
-				if ($stock_arr[$i]->getVar('stock_type') == 2){
-					$amount .= ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
-				}
             }
         }
         return $amount;

@@ -97,6 +97,9 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			$articles['count']  = $count;
 			$count++;
 			$total += $datas['qty'];
+			if ($type == 2){
+				$articles['amount'] .= ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
+			}
 			$xoopsTpl->appendByRef('articles', $articles);
 			unset($articles);
 		}

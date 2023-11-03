@@ -48,7 +48,10 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		xoops_load('utility', 'xmarticle');
 		$count = 1;
 		$warning = false;
+		$error = false;
+		$info = false;
 		$mml = false;
+		$datasUpdate = array();
 		foreach ($arr_selectionArticles as $datas) {
 			$articles['id']    	= $datas['id'];
 			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
@@ -58,33 +61,62 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$articles['qty']   	= $datas['qty'];
 			$articles['length'] = $datas['length'];
 			$articles['count']  = $count;
+			$savedata['id']     = $datas['id'];
+			$savedata['area']   = $datas['area'];
+			$savedata['qty']    = $datas['qty'];
+			$savedata['length'] = $datas['length'];
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
-			if ($type == 2){
-				$articles['unit'] = _MA_XMSTOCK_CHECKOUT_UNIT;
-				$mml = true;
-				if (($articles['qty'] * $articles['length']) > $articles['amount']) {
-					$warning = true;
-					$articles['warning']  = true;
-				} else {
-					$articles['warning']  = false;
-				}
-			} else {
-				$articles['unit'] = '';
-				if ($articles['qty'] > $articles['amount']) {
-					$warning = true;
-					$articles['warning']  = true;
-				} else {
-					$articles['warning']  = false;
-				}
+			switch ($type) {
+				case 1:
+					$articles['unit'] = '';
+					$articles['error'] = false;
+					$articles['info'] = false;
+					if ($articles['qty'] > $articles['amount']) {
+						$warning = true;
+						$articles['warning'] = true;
+					} else {
+						$articles['warning'] = false;
+					}
+					break;
+				case 2:
+					$articles['unit'] = _MA_XMSTOCK_CHECKOUT_UNIT;
+					$articles['error'] = false;
+					$articles['info'] = false;
+					$mml = true;
+					if (($articles['qty'] * $articles['length']) > $articles['amount']) {
+						$warning = true;
+						$articles['warning'] = true;
+					} else {
+						$articles['warning'] = false;
+					}
+					break;
+				case 3:
+					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN;
+					$articles['warning'] = false;
+					$articles['info'] = true;
+					$info = true;
+					if ($articles['qty'] > $articles['amount']) {
+						$error = true;
+						$articles['error'] = true;
+						$articles['qty'] = $articles['amount'];
+						$savedata['qty'] = $articles['amount'];
+					} else {
+						$articles['error'] = false;
+					}
+					break;
 			}
 			$count++;
-			$total += $datas['qty'];
+			$total += $articles['qty'];
+			$datasUpdate[] = $savedata;
 			$xoopsTpl->appendByRef('articles', $articles);
 			unset($articles);
 		}
+		$sessionHelper->set($session_name, $datasUpdate);
 		$xoopsTpl->assign('mml', $mml);
 		$xoopsTpl->assign('total', $total);
 		$xoopsTpl->assign('warning', $warning);
+		$xoopsTpl->assign('error', $error);
+		$xoopsTpl->assign('info', $info);
 	} else {
 		redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);
 	}

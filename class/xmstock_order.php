@@ -470,7 +470,8 @@ class xmstock_order extends XoopsObject
 				$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 				$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 				if ($type == 2){
-					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2);
+					$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
+					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit;
 					if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length')) > $amoutArea) {
 						if ($status == 1){
 							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
@@ -481,6 +482,7 @@ class xmstock_order extends XoopsObject
 						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
 					}
 				} else {
+					$unit = '';
 					$amount = $itemorder_arr[$i]->getVar('itemorder_amount');
 					if ($amoutArea > $itemorder_arr[$i]->getVar('itemorder_amount')) {
 						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
@@ -492,7 +494,7 @@ class xmstock_order extends XoopsObject
 						}
 					}
 				}
-				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . "</span> " . $area_name . "</td>";
+				$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . $amoutArea . $unit . "</span> " . $area_name . "</td>";
 				$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 				if ($type == 3) {
 					$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . _YES . "</span></td>";
