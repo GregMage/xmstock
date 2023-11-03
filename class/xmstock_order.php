@@ -484,7 +484,7 @@ class xmstock_order extends XoopsObject
 				} else {
 					$unit = '';
 					$amount = $itemorder_arr[$i]->getVar('itemorder_amount');
-					if ($amoutArea > $itemorder_arr[$i]->getVar('itemorder_amount')) {
+					if ($amoutArea >= $itemorder_arr[$i]->getVar('itemorder_amount')) {
 						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
 					} else {
 						if ($status == 1){
