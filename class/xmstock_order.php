@@ -354,6 +354,7 @@ class xmstock_order extends XoopsObject
 									$loan = $loanHandler->create();
 									$loan->setVar('loan_areaid', $item->getVar('itemorder_areaid'));
 									$loan->setVar('loan_articleid', $item->getVar('itemorder_articleid'));
+									$loan->setVar('loan_amount', $item->getVar('itemorder_amount'));
 									$loan->setVar('loan_date', time());
 									$loan->setVar('loan_userid', $this->getVar('order_userid'));
 									$loan->setVar('loan_status', 1);

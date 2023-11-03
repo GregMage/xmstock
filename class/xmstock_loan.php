@@ -37,6 +37,7 @@ class xmstock_loan extends XoopsObject
         $this->initVar('loan_id', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('loan_areaid', XOBJ_DTYPE_INT, null, false, 8);
 		$this->initVar('loan_articleid', XOBJ_DTYPE_INT, null, false, 8);
+		$this->initVar('loan_amount', XOBJ_DTYPE_INT, null, false, 6);
 		$this->initVar('loan_date', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('loan_rdate', XOBJ_DTYPE_INT, null, false, 10);
 		$this->initVar('loan_userid', XOBJ_DTYPE_INT, null, false, 8);
@@ -74,9 +75,14 @@ class xmstock_loan extends XoopsObject
         $userid = Request::getInt('loan_userid', 0);
         $this->setVar('loan_userid', $userid);
 		$date = Request::getString('loan_date', '');
+		$amount = Request::getInt('loan_amount', 0);
 		if ($date != '') {
 			$this->setVar('loan_date', strtotime($date));
 		}
+		if ((int)$_REQUEST['loan_amount'] == 0 && $_REQUEST['loan_amount'] != '0') {
+            $error_message .= _MA_XMSTOCK_ERROR_AMOUNT . '<br>';
+            $amount = 0;
+        }
 		if ($userid == 0) {
 			$error_message .= _MA_XMSTOCK_ERROR_USER . '<br>';
 		}
@@ -89,8 +95,8 @@ class xmstock_loan extends XoopsObject
 			$error_message .= XmstockUtility::checkTransfert('O', $transfer_articleid, 1, $areaid);
 		}
 		$this->setVar('loan_articleid', $transfer_articleid);
-
         if ($error_message == '') {
+			$this->setVar('loan_amount', $amount);
 			if ($status == 0) {
 				$this->setVar('loan_rdate', time());
 				$criteria = new CriteriaCompo();
@@ -100,22 +106,21 @@ class xmstock_loan extends XoopsObject
 				foreach (array_keys($stock_arr) as $i) {
 					$type = $stock_arr[$i]->getVar('stock_type');
 				}
-				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, 1, 0, $areaid, 0 , '', $type);
+				$error_message .= XmstockUtility::transfert('E', $transfer_articleid, $amount, 0, $areaid, 0, '', $type);
 			} else {
-				$error_message .= XmstockUtility::transfert('O', $transfer_articleid, 1, $areaid);
+				$error_message .= XmstockUtility::transfert('O', $transfer_articleid, $amount, $areaid);
 			}
-
 			if ($error_message == '') {
 				if ($loanHandler->insert($this)) {
 					$new_transfer = $transferHandler->create();
 					$new_transfer->setVar('transfer_articleid', $transfer_articleid);
-					$new_transfer->setVar('transfer_amount', 1);
+					$new_transfer->setVar('transfer_amount', $amount);
 					if ($status == 0) {
 						$new_transfer->setVar('transfer_type', 'E');
 					} else {
 						$new_transfer->setVar('transfer_type', 'O');
 					}
-					$new_transfer->setVar('transfer_st_areaid', $areaid);
+					$new_transfer->setVar('transfer_ar_areaid', $areaid);
 					$new_transfer->setVar('transfer_outputuserid', $userid);
 					$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_LOAN_TRANSFERT_DESC, formatTimestamp($this->getVar('loan_date'), 'm'), $this->getVar('loan_id')));
 					$new_transfer->setVar('transfer_ref', sprintf(_MA_XMSTOCK_LOAN_TRANSFERT_REF, $this->getVar('loan_id')));
@@ -163,6 +168,8 @@ class xmstock_loan extends XoopsObject
 			$form->addElement(new XoopsFormTextDateSelect(_MA_XMSTOCK_LOAN_DATE, 'loan_date', 2, time()), false);
 			//user
 			$form->addElement(new XoopsFormSelectUser(_MA_XMSTOCK_LOAN_USERID, 'loan_userid', true, ''), true);
+			//amount
+			$form->addElement(new XoopsFormText(_MA_XMSTOCK_LOAN_AMOUNT, 'loan_amount', 10, 10, 1), true);
 			//status
 			$form->addElement(new XoopsFormHidden('status', 1));
 		} else {
@@ -171,6 +178,9 @@ class xmstock_loan extends XoopsObject
 			//user
 			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_USERID, XoopsUser::getUnameFromId($this->getVar('loan_userid'))), false);
 			$form->addElement(new XoopsFormHidden('loan_userid', $this->getVar('loan_userid')));
+			//amount
+			$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_LOAN_AMOUNT, $this->getVar('loan_amount')), false);
+			$form->addElement(new XoopsFormHidden('loan_amount', $this->getVar('loan_amount')));
 			//status
 			$form_status = new XoopsFormRadio(_MA_XMSTOCK_LOAN_STATUS, 'loan_status', $this->getVar('loan_status'));
 			$options = array(1 => _MA_XMSTOCK_LOAN_STATUS_L, 0 =>_MA_XMSTOCK_LOAN_STATUS_C,);

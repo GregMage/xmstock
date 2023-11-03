@@ -103,6 +103,7 @@ CREATE TABLE `xmstock_loan` (
   `loan_id`            int(11)		 unsigned    	NOT NULL AUTO_INCREMENT,
   `loan_areaid`        smallint(5)   unsigned   	NOT NULL DEFAULT '0',
   `loan_articleid`     mediumint(8)  unsigned    	NOT NULL DEFAULT '0',
+  `loan_amount`      	 smallint(6)  unsigned    	NOT NULL DEFAULT '0',
   `loan_date`      	   int(10) 	 	 unsigned   	NOT NULL DEFAULT '0',
   `loan_rdate`         int(10) 	 	 unsigned   	NOT NULL DEFAULT '0',
   `loan_userid`        smallint(5)   unsigned   	NOT NULL DEFAULT '0',

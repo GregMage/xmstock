@@ -305,6 +305,7 @@ define('_MA_XMSTOCK_VIEWPRICE_PRICECHF', 'Prix en CHF');
 
 // loan.php
 define('_MA_XMSTOCK_LOAN_ADD', 'Ajout d\'un prêt');
+define('_MA_XMSTOCK_LOAN_AMOUNT', 'Quantité');
 define('_MA_XMSTOCK_LOAN_AREA', 'Stock');
 define('_MA_XMSTOCK_LOAN_ARTICLE', 'Article à mettre en prêt');
 define('_MA_XMSTOCK_LOAN_DATE', 'Date de l\'emprunt');

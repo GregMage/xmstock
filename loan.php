@@ -95,12 +95,13 @@ switch ($op) {
         $loan_arr = $loanHandler->getByLink($criteria);
         $loan_count = $loanHandler->getCountByLink($criteria);
         $xoopsTpl->assign('loan_count', $loan_count);
-		$xoopsTpl->assign('export_head', '#;' . _MA_XMSTOCK_LOAN_DATE . ';' . _MA_XMSTOCK_LOAN_LARTICLE . ';' . _MA_XMSTOCK_LOAN_RDATE . ';' . _MA_XMSTOCK_LOAN_USERID . ';' . _MA_XMSTOCK_LOAN_STATUS . '\n');
+		$xoopsTpl->assign('export_head', '#;' . _MA_XMSTOCK_LOAN_DATE . ';' . _MA_XMSTOCK_LOAN_LARTICLE . ';'. _MA_XMSTOCK_LOAN_AMOUNT . ';' . _MA_XMSTOCK_LOAN_RDATE . ';' . _MA_XMSTOCK_LOAN_USERID . ';' . _MA_XMSTOCK_LOAN_STATUS . '\n');
         if ($loan_count > 0) {
             foreach (array_keys($loan_arr) as $i) {
                 $loan_id               = $loan_arr[$i]->getVar('loan_id');
                 $loan['id']            = $loan_id;
                 $loan['date']          = formatTimestamp($loan_arr[$i]->getVar('loan_date'), 's');
+				$loan['amount']        = $loan_arr[$i]->getVar('loan_amount');
 				$loan['status']        = $loan_arr[$i]->getVar('loan_status');
 				if ($loan['status'] == 1) {
 					$loan['rdate']     = '/';
@@ -115,7 +116,7 @@ switch ($op) {
 				} else {
 					$loan['text_status'] = _MA_XMSTOCK_LOAN_STATUS_L;
 				}
-				$loan['export'] = $loan_id . ';' . $loan['date'] . ';' . $loan_arr[$i]->getVar('article_name') . '(' . $loan_arr[$i]->getVar('article_reference') . ')' . ';' . $loan['rdate'] . ';' . $loan['user'] . ';' . $loan['text_status'] . '\n';
+				$loan['export'] = $loan_id . ';' . $loan['date'] . ';' . $loan_arr[$i]->getVar('article_name') . '(' . $loan_arr[$i]->getVar('article_reference') . ')' . ';' . $loan['amount'] . ';' . $loan['rdate'] . ';' . $loan['user'] . ';' . $loan['text_status'] . '\n';
                 $xoopsTpl->appendByRef('loans', $loan);
                 unset($loan);
             }

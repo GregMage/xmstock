@@ -73,6 +73,7 @@
 						<th class="text-center" scope="col">#</th>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_DATE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_LARTICLE}></th>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_LOAN_AMOUNT}></th>
 						<{if $status == 0}>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_RDATE}></th>
 						<{/if}>
@@ -89,6 +90,7 @@
 						<th class="text-center" scope="row"><{$loan.id}></th>
 						<td><{$loan.date}></td>
 						<td><{$loan.article}></td>
+						<td class="text-center"><{$loan.amount}></td>
 						<{if $status == 0}>
 						<td><{$loan.rdate}></td>
 						<{/if}>
