@@ -160,6 +160,24 @@ $modversion['config'][] = [
 	'options' => $optionPrice,
 ];
 
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_0] = 0;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_1] = 1;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_2] = 2;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_3] = 3;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_4] = 4;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_5] = 5;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_6] = 6;
+$optionDayDelivery[_MI_XMSTOCK_PREF_DAYDELIVERY_7] = 7;
+$modversion['config'][] = [
+    'name'        => 'general_daydelivery',
+    'title'       => '_MI_XMSTOCK_PREF_DAYDELIVERY',
+    'description' => '_MI_XMSTOCK_PREF_DAYDELIVERY_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 2,
+	'options' => $optionDayDelivery,
+];
+
 xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [

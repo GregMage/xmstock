@@ -195,7 +195,7 @@ define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Delivery options');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Withdrawal');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Delivery');
 define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Desired date');
-define('_MA_XMSTOCK_CHECKOUT_DORDER_DSC', '<div class="alert alert-warning">The standard delivery time is 2 days!</div>');
+define('_MA_XMSTOCK_CHECKOUT_DORDER_DSC', '<div class="alert alert-warning">The standard delivery time is %s days!</div>');
 define('_MA_XMSTOCK_CHECKOUT_ERRORQTY', 'The quantity requested for items with the logo <span class="badge badge-pill badge-danger">Error</span> is greater than that available in stock. <br>This is not possible in the case of a loan! The quantity has therefore been adapted.');
 define('_MA_XMSTOCK_CHECKOUT_INFORMATION', 'Please return articles with the logo <span class="badge badge-pill badge-light">' . _MA_XMSTOCK_STOCK_LOAN . '</span> within a reasonable timeframe');
 define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Input information');

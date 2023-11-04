@@ -29,9 +29,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
-//$article_id = Request::getInt('article_id', 0);
-//$area_id = Request::getInt('area_id', 0);
-
+$day_delivery = $helper->getConfig('general_daydelivery', 0);
 
 // ********************************************************************************************************************
 // Liste le contenu du caddy
@@ -139,8 +137,23 @@ switch ($op) {
         $editor_configs['height'] = '100px';
         $editor_configs['editor'] = $helper->getConfig('general_editor', 'Plain Text');
         $form->addElement(new XoopsFormEditor(_MA_XMSTOCK_CHECKOUT_DESC, 'order_description', $editor_configs), true);
-        $ddesired = new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, time());
-		$ddesired->setDescription(_MA_XMSTOCK_CHECKOUT_DORDER_DSC);
+		if ($day_delivery != 0) {
+			$date = date('l');
+			$day_desired = 0;
+			if ($date == 'Saturday' || $date == 'Sunday'){
+				$day_desired = (2 * 86400);
+			}
+			$day_desired += time() + ($day_delivery * 86400);
+			if (date('l', $day_desired) == 'Saturday' || date('l', $day_desired) == 'Sunday'){
+				$day_desired += (2 * 86400);
+			}
+		} else {
+			$day_desired = time();
+		}
+        $ddesired = new XoopsFormTextDateSelect(_MA_XMSTOCK_CHECKOUT_DORDER, 'order_ddesired', 2, $day_desired);
+		if ($day_delivery != 0) {
+			$ddesired->setDescription(sprintf(_MA_XMSTOCK_CHECKOUT_DORDER_DSC, $day_delivery));
+		}
         $form->addElement($ddesired, false);
 
 		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', 0);
