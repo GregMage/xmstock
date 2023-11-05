@@ -166,6 +166,7 @@ function block_xmstock_edit($options) {
 		$form->addElement($status);
 		$form->addElement(new XoopsFormHidden('options[1]', $options[1]));
 		$form->addElement(new XoopsFormHidden('options[2]', $options[2]));
+		$form->addElement(new XoopsFormText(_MB_XMSTOCK_NBORDER, 'options[3]', 5, 5, $options[3]), true);
 	} else {
 		// Criteria
 		$criteria = new CriteriaCompo();
@@ -189,8 +190,9 @@ function block_xmstock_edit($options) {
 		$status->addOption(0, _MB_XMSTOCK_STATUS_WAITING);
 		$status->addOption(1, _MB_XMSTOCK_STATUS_VALID);
 		$form->addElement($status);
+
+		$form->addElement(new XoopsFormText(_MB_XMSTOCK_NBTRANSFERT, 'options[3]', 5, 5, $options[3]), true);
 	}
-	$form->addElement(new XoopsFormText(_MB_XMSTOCK_NBTRANSFERT, 'options[3]', 5, 5, $options[3]), true);
 	$form->addElement(new XoopsFormHidden('options[4]', $options[4]));
 
 	return $form->render();
