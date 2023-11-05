@@ -126,6 +126,26 @@ $modversion['blocks'][] = array(
     'template'    => 'xmstock_block_transfert.tpl'
 );
 
+$modversion['blocks'][] = array(
+    'file'        => 'xmstock_blocks.php',
+    'name'        => _MI_XMSTOCK_BLOCK_MYLOANS,
+    'description' => _MI_XMSTOCK_BLOCK_MYLOANS_DESC,
+    'show_func'   => 'block_xmstock_show',
+    'edit_func'   => 'block_xmstock_edit',
+	'options'     => '0|0|0|5|myloans',
+    'template'    => 'xmstock_block_myloans.tpl'
+);
+
+$modversion['blocks'][] = array(
+    'file'        => 'xmstock_blocks.php',
+    'name'        => _MI_XMSTOCK_BLOCK_LOANS,
+    'description' => _MI_XMSTOCK_BLOCK_LOANS_DESC,
+    'show_func'   => 'block_xmstock_show',
+    'edit_func'   => 'block_xmstock_edit',
+	'options'     => '1|0|0|5|loans',
+    'template'    => 'xmstock_block_loans.tpl'
+);
+
 // Configs
 $modversion['config'] = [];
 

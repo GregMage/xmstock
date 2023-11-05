@@ -43,6 +43,10 @@ define('_MI_XMSTOCK_BLOCK_PROCESS', 'Commandes à traiter');
 define('_MI_XMSTOCK_BLOCK_PROCESS_DESC', 'Afficher les commandes à traiter');
 define('_MI_XMSTOCK_BLOCK_TRANSFERT', 'Transferts');
 define('_MI_XMSTOCK_BLOCK_TRANSFERT_DESC', 'Afficher les transferts');
+define('_MI_XMSTOCK_BLOCK_MYLOANS', 'Mes emprunts');
+define('_MI_XMSTOCK_BLOCK_MYLOANS_DESC', 'Afficher les emprunts de l\'utilisateur');
+define('_MI_XMSTOCK_BLOCK_LOANS', 'Emprunts en cours');
+define('_MI_XMSTOCK_BLOCK_LOANS_DESC', 'Afficher les emprunts sous gestion de l\'utilisateur');
 
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>Général</span>");

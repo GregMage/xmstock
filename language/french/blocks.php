@@ -21,6 +21,7 @@ define('_MB_XMSTOCK_ALLAREA', 'Afficher toutes les zones de stockage');
 define('_MB_XMSTOCK_NBLOANS', 'Nombre d\'emprunts à afficher');
 define('_MB_XMSTOCK_NBORDER', 'Nombre de commandes à afficher');
 define('_MB_XMSTOCK_NBTRANSFERT', 'Nombre de transferts à afficher');
+define('_MB_XMSTOCK_NOLOAN', 'Pas d\'emprunt à afficher');
 define('_MB_XMSTOCK_NOORDER', 'Pas de commande à afficher');
 define('_MB_XMSTOCK_NOTRANSFER', 'Pas de transfert en attente de validation');
 define('_MB_XMSTOCK_SORTDATE', 'Tri par date:');
