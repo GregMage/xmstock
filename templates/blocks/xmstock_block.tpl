@@ -18,6 +18,10 @@
 			</a>
 			<{/foreach}>
 		</div>
+		<{else}>
+			<div class="alert alert-warning" role="alert">
+				<{$smarty.const._MB_XMSTOCK_NOORDER}>
+			</div>
 		<{/if}>
 	</div>
 </div>
