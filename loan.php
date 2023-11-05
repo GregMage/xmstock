@@ -89,6 +89,9 @@ switch ($op) {
 		if ($status != 2) {
 			$criteria->add(new Criteria('loan_status', $status));
 		}
+		if (!empty($managePermissionArea)) {
+			$criteria->add(new Criteria('loan_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+		}
 		$loanHandler->table_link = $loanHandler->db->prefix("xmarticle_article");
         $loanHandler->field_link = "article_id";
         $loanHandler->field_object = "loan_articleid";
@@ -96,7 +99,7 @@ switch ($op) {
         $loan_count = $loanHandler->getCountByLink($criteria);
         $xoopsTpl->assign('loan_count', $loan_count);
 		$xoopsTpl->assign('export_head', '#;' . _MA_XMSTOCK_LOAN_DATE . ';' . _MA_XMSTOCK_LOAN_LARTICLE . ';'. _MA_XMSTOCK_LOAN_AMOUNT . ';' . _MA_XMSTOCK_LOAN_RDATE . ';' . _MA_XMSTOCK_LOAN_USERID . ';' . _MA_XMSTOCK_LOAN_STATUS . '\n');
-        if ($loan_count > 0) {
+        if ($loan_count > 0 && !empty($managePermissionArea)) {
             foreach (array_keys($loan_arr) as $i) {
                 $loan_id               = $loan_arr[$i]->getVar('loan_id');
                 $loan['id']            = $loan_id;
