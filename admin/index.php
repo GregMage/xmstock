@@ -27,7 +27,7 @@ $moduleAdmin->displayNavigation('index.php');
 $iniPostMaxSize = XmstockUtility::returnBytes(ini_get('post_max_size'));
 $iniUploadMaxFileSize = XmstockUtility::returnBytes(ini_get('upload_max_filesize'));
 if (min($iniPostMaxSize, $iniUploadMaxFileSize) < $helper->getConfig('general_maxuploadsize', 104858)) {
-	echo '<div class="errorMsg" style="text-align: left;">' . _MA_XMSTOCK_ERROR_SIZE . '</div>';	
+	echo '<div class="errorMsg" style="text-align: left;">' . _MA_XMSTOCK_ERROR_SIZE . '</div>';
 }
 
 $moduleAdmin->addConfigModuleVersion('system', '2.1.2');

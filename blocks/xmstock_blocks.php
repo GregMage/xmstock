@@ -175,7 +175,7 @@ function block_xmstock_show($options) {
 					unset($loan);
 				}
 			} else {
-				$block['loans'] = '';
+				$block['loan'] = '';
 			}
 			break;
 	}
