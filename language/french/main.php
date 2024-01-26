@@ -123,6 +123,7 @@ define('_MA_XMSTOCK_AREA_WEIGHT', 'Poids');
 define('_MA_XMSTOCK_STOCK_AMOUNT', 'Quantité en stock');
 define('_MA_XMSTOCK_STOCK_AREA', 'Stock');
 define('_MA_XMSTOCK_STOCK_ARTICLE', 'Articles en stock');
+define('_MA_XMSTOCK_STOCK_FREE', 'Libre service');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');

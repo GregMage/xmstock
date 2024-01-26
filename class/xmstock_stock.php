@@ -87,7 +87,7 @@ class xmstock_stock extends XoopsObject
 
 		// type
 		$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'stock_type', $this->getVar('stock_type'));
-		$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN);
+		$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN, 4 =>_MA_XMSTOCK_STOCK_FREE);
 		$form_type->addOptionArray($options);
 		$form_type->setDescription(_MA_XMSTOCK_STOCK_TYPE_DESC);
 		$form->addElement($form_type);

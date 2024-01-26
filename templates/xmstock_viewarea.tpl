@@ -40,7 +40,7 @@
 							<span class="fa fa-exchange" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_LOAN_USERSLIST}>: <{$stock.borrower|default:''}>"></span>
 						<{/if}>
 					<{/if}>
-					<{if $order == true && $stock.type != 3}>
+					<{if $order == true && $stock.type != 3 && $stock.type != 4}>
 						<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
 					<{/if}>
 					<{if $order == true && $stock.type == 3 && $stock.amount != 0}>
@@ -51,7 +51,11 @@
 						<{/if}>
 					<{/if}>
 				</div>
-				<span class="badge badge-info badge-pill"><{$stock.amount}></span>
+				<{if $stock.type != 4}>
+					<span class="badge badge-info badge-pill"><{$stock.amount}></span>
+				<{else}>
+					<span class="badge badge-success badge-pill"><{$smarty.const._MA_XMSTOCK_STOCK_FREE}></span>
+				<{/if}>
 			</li>
 		<{/foreach}>
 		</ul>
