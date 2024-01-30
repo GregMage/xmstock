@@ -449,14 +449,17 @@ class XmstockUtility
 				$area[] = $stock['area_id'];
 				unset($stock);
             }
-			//self::addStocks($viewPermissionArea, $orderPermissionArea, $area);
 			if ($stock_type == true) {
 				$total_amount .= ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
 			}
 			$xoopsTpl->assign('total_amount', $total_amount);
             $xoopsTpl->assign('xmstock_viewstocks', true);
+			$xoopsTpl->assign('transfert', false);
         } else {
-			//self::addStocks($viewPermissionArea, $orderPermissionArea, $area);
+			if (!empty($managePermissionArea)){
+				$xoopsTpl->assign('xmstock_viewstocks', true);
+				$xoopsTpl->assign('transfert', true);
+			}
 		}
     }
 
