@@ -209,6 +209,11 @@ switch ($op) {
         // Form
 		$type = Request::getString('type', 'E');
         $obj  = $transferHandler->create();
+		$obj->setVar('transfer_articleid', Request::getInt('article_id', 0));
+		if ($type == 'E'){
+			$obj->setVar('transfer_ar_areaid', Request::getInt('area_id', 0));
+		}
+		$obj->setVar('transfer_st_areaid', Request::getInt('area_id', 0));
         $form = $obj->getForm($type);
 		$xoopsTpl->assign('type', $type);
 		$payload = array(
