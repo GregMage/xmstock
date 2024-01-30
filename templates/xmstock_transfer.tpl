@@ -149,6 +149,16 @@
 							oldareaid = areaid;
 						}
 					}
+					if(datas['type'] != '')
+					{
+						document.getElementById('transfer_stocktype' + datas['type']).checked = true;
+					} else {
+						if(oldareaid != areaid)
+						{
+							document.getElementById('transfer_stocktype1').checked = true;
+							oldareaid = areaid;
+						}
+					}
 				}
 			};
 			xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);

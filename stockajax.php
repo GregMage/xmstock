@@ -31,6 +31,7 @@ xoops_load('utility', 'xmstock');
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 
 $info['location'] = '';
+$info['type'] = '';
 $articleid = Request::getInt('articleid', 0);
 $areaid = Request::getInt('areaid', 0);
 
@@ -48,6 +49,7 @@ if ($articleid != 0 && $areaid != 0){
 	if (count($stock_arr) > 0) {
 		foreach (array_keys($stock_arr) as $i) {
 			$info['location'] =  $stock_arr[$i]->getVar('stock_location');
+			$info['type'] =  $stock_arr[$i]->getVar('stock_type');
 		}
 	}
 }
