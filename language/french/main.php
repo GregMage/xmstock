@@ -153,6 +153,8 @@ define('_MA_XMSTOCK_TRANSFER_INFORMATION', 'Transfer Information');
 define('_MA_XMSTOCK_TRANSFER_LIST_WARNING', 'Transferts en attente de validation');
 define('_MA_XMSTOCK_TRANSFER_LOCATION', 'Emplacement*');
 define('_MA_XMSTOCK_TRANSFER_LOCATION_DSC', 'Emplacement de l\'article dans le stock');
+define('_MA_XMSTOCK_TRANSFER_NEEDSYEAR', 'Période du besoin');
+define('_MA_XMSTOCK_TRANSFER_NEEDSYEAR_DSC', 'Cet article est dans le plan de production, vous devez indiquer pour quelle période est votre besoin');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Déstinataire');
 define('_MA_XMSTOCK_TRANSFER_OUTPUT_DSC', 'Vous devez choisir un déstinataire externe ou interne. Un seul choix entre les deux possibilités');
 define('_MA_XMSTOCK_TRANSFER_OUTPUTID', 'Déstinataire externe');

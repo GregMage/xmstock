@@ -301,6 +301,30 @@ class xmstock_transfer extends XoopsObject
 			$amount = new XoopsFormText(_MA_XMSTOCK_TRANSFER_AMOUNT, 'transfer_amount', 10, 10, $this->getVar('transfer_amount'));
 			$amount->setDescription(_MA_XMSTOCK_TRANSFER_AMOUNT_DSC);
 			$form->addElement($amount, true);
+			if ($type == 'O'){
+				if (xoops_isActiveModule('xmprod')){
+					if ($helper->getConfig('general_xmprod', 0) == 1) {
+						xoops_load('utility', 'xmprod');
+						$needs     = new XoopsFormElementTray('<section id="needsyear_label">' . _MA_XMSTOCK_TRANSFER_NEEDSYEAR . '</section>', '');
+						$needs->addElement(new XoopsFormLabel('<section id="needsyear_input">'), false);
+						$year = new XoopsFormSelect('', 'transfer_needsyear', $this->getVar('transfer_needsyear'));
+						$year_arr = XmprodUtility::getNeedsYears();
+						foreach (array_keys($year_arr) as $i) {
+							$year->addOption($year_arr[$i], $year_arr[$i]);
+						}
+
+
+						$needs->addElement($year);
+						$needs->addElement(new XoopsFormLabel('<p class="form-text text-muted text-left">' . _MA_XMSTOCK_TRANSFER_NEEDSYEAR_DSC . '</p>'), false);
+						$needs->addElement(new XoopsFormLabel('</section>'), false);
+						$form->addElement($needs, true);
+					}
+				} else {
+					$form->addElement(new XoopsFormHidden('transfer_needsyear', ''));
+				}
+			} else {
+				$form->addElement(new XoopsFormHidden('transfer_needsyear', ''));
+			}
 
 			// price
 			if ($helper->getConfig('general_price', 0) != 0 && $type == 'E') {

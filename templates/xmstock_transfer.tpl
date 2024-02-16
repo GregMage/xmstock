@@ -109,6 +109,36 @@
 		<{/if}>
 		<{$form|default:''}>
 
+		<{if $type|default:'E' == 'O'}>
+			<script>
+			let oldareaid = 0;
+			setInterval(function getInfoStock()
+			{
+				let xhttp = new XMLHttpRequest();
+				//console.log('article: ' + articleId);
+				xhttp.onreadystatechange = function()
+				{
+					if(this.readyState == 4 && this.status == 200)
+					{
+						let datas = xhttp.response;
+						console.log(datas);
+						if(datas['needs'] != true)
+						{
+							document.getElementById('needsyear_label').style.display = "none";
+							document.getElementById('needsyear_input').style.display = "none";
+						} else {
+							document.getElementById('needsyear_label').style.display = "block";
+							document.getElementById('needsyear_input').style.display = "block";
+						}
+					}
+				};
+				xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&needs=1', true);
+				xhttp.responseType = 'json';
+				xhttp.send();
+			}, 1000);
+			</script>
+		<{/if}>
+
 		<{if $type|default:'E' != 'O'}>
 		<script>
 		let oldareaid = 0;

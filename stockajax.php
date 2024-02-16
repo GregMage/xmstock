@@ -30,26 +30,38 @@ include __DIR__ . '/include/common.php';
 xoops_load('utility', 'xmstock');
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 
-$info['location'] = '';
-$info['type'] = '';
 $articleid = Request::getInt('articleid', 0);
 $areaid = Request::getInt('areaid', 0);
+$needs = Request::getInt('needs', 0);
 
-if (in_array($areaid, $managePermissionArea) == true){
-	$info['manage']  = true;
+if ($needs == 0){
+	if (in_array($areaid, $managePermissionArea) == true){
+		$info['manage']  = true;
+	} else {
+		$info['manage']  = false;
+	}
+	$info['location'] = '';
+	$info['type'] = '';
+	if ($articleid != 0 && $areaid != 0){
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('stock_areaid', $areaid));
+		$criteria->add(new Criteria('stock_articleid', $articleid));
+		$stock_arr = $stockHandler->getall($criteria);
+		if (count($stock_arr) > 0) {
+			foreach (array_keys($stock_arr) as $i) {
+				$info['location'] =  $stock_arr[$i]->getVar('stock_location');
+				$info['type'] =  $stock_arr[$i]->getVar('stock_type');
+			}
+		}
+	}
 } else {
-	$info['manage']  = false;
-}
-
-if ($articleid != 0 && $areaid != 0){
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('stock_areaid', $areaid));
-	$criteria->add(new Criteria('stock_articleid', $articleid));
-	$stock_arr = $stockHandler->getall($criteria);
-	if (count($stock_arr) > 0) {
-		foreach (array_keys($stock_arr) as $i) {
-			$info['location'] =  $stock_arr[$i]->getVar('stock_location');
-			$info['type'] =  $stock_arr[$i]->getVar('stock_type');
+	$info['needs'] = 0;
+	if (xoops_isActiveModule('xmprod')){
+		if ($helper->getConfig('general_xmprod', 0) == 1) {
+			xoops_load('utility', 'xmprod');
+			if (XmprodUtility::articleNeeds($articleid) === true){
+				$info['needs'] = 1;
+			}
 		}
 	}
 }
