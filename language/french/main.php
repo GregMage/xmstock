@@ -62,6 +62,8 @@ define('_MA_XMSTOCK_INDEX_OFF', "<span style='font-weight: bold;'>OFF</span>");
 define('_MA_XMSTOCK_INDEX_SERVERUPLOADSTATUS', 'Statut d\'envoi du serveur : ');
 define('_MA_XMSTOCK_INDEX_SPHPINI', "<span style='font-weight: bold;'>Informations extraites du fichier php.ini :</span>");
 define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'Vous devez installer le module xmarticle pour utiliser xmstock');
+define('_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTINSTALLED', 'Vous n\'avez pas installé le module xmprod, ce module est requis si vous souhaitez avoir une gestion de production');
+define('_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTACTIVATE', 'Vous devez activer dans les préférences du module xmstock l\'utilisation de xmprod (si vous souhaitez avoir une gestion de production)');
 
 // Error message
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'La Quantité doit être un nombre');

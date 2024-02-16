@@ -37,6 +37,16 @@ if (xoops_isActiveModule('xmarticle')) {
 } else {
     $moduleAdmin->addConfigError(_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR);
 }
+// xmprod
+if (xoops_isActiveModule('xmprod')){
+	if ($helper->getConfig('general_xmprod', 0) == 1) {
+		$moduleAdmin->addConfigModuleVersion('xmprod', '1.0.0');
+	} else {
+		$moduleAdmin->addConfigWarning(_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTACTIVATE);
+	}
+} else {
+	$moduleAdmin->addConfigWarning(_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTINSTALLED);
+}
 $folder[] = $path_logo_area;
 foreach (array_keys( $folder) as $i) {
     $moduleAdmin->addConfigBoxLine($folder[$i], 'folder');

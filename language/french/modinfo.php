@@ -66,6 +66,7 @@ define('_MI_XMSTOCK_PREF_PRICE_0', 'Désactivé');
 define('_MI_XMSTOCK_PREF_PRICE_1', 'Activé, écrase le prix enregistré');
 define('_MI_XMSTOCK_PREF_PRICE_2', 'Activé, prend le prix existant et le moyenne avec le nouveau');
 define('_MI_XMSTOCK_PREF_EDITOR', 'Éditeur de texte');
+define('_MI_XMSTOCK_PREF_XMPROD', 'Utiliser le module xmprod pour ajouter une gestion de production');
 define('_MI_XMSTOCK_PREF_CAPTCHA', 'Utiliser Captcha?');
 define('_MI_XMSTOCK_PREF_CAPTCHA_DESC', 'Sélectionnez Oui pour utiliser Captcha dans le formulaire de soumission.');
 define('_MI_XMSTOCK_PREF_MAXUPLOADSIZE', 'Taille maximale des fichiers uploadés');

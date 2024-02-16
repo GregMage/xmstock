@@ -211,6 +211,15 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'general_xmprod',
+    'title'       => '_MI_XMSTOCK_PREF_XMPROD',
+    'description' => '',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0
+];
+
+$modversion['config'][] = [
     'name'        => 'general_captcha',
     'title'       => '_MI_XMSTOCK_PREF_CAPTCHA',
     'description' => '_MI_XMSTOCK_PREF_CAPTCHA_DESC',

@@ -62,6 +62,8 @@ define('_MA_XMSTOCK_INDEX_OFF', "<span style='font-weight: bold;'>OFF</span>");
 define('_MA_XMSTOCK_INDEX_SERVERUPLOADSTATUS', 'Server uploads status: ');
 define('_MA_XMSTOCK_INDEX_SPHPINI', "<span style='font-weight: bold;'>Information taken from PHP ini file:</span>");
 define('_MA_XMSTOCK_INDEXCONFIG_XMARTICLE_ERROR', 'You must install the xmarticle module to use xmstock');
+define('_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTINSTALLED', 'Vous n\'avez pas installé le module xmprod, ce module est requis si vous souhaitez avoir une gestion de production');
+define('_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTACTIVATE', 'Vous devez activer dans les préférences du module xmstock l\'utilisation de xmprod (si vous souhaitez avoir une gestion de production)');
 
 // Error message
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
