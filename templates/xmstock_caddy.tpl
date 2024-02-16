@@ -15,8 +15,9 @@
 			<table class="table table-striped">
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
-					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
+					<th class="width20"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
 					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
+					<{if $displayneedsyear == true}><th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_CADDY_NEEDSYEARS}></th><{/if}>
 					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 				</tr>
 				<{foreach item=article from=$articles}>
@@ -40,6 +41,21 @@
 								<{/if}>
 							</div>
 						</td>
+						<{if $article.needsyear != ''}>
+							<td class="txtcenter">
+								<div class="form-group">
+									<select class="form-control" name="needsyear_<{$article.count}>" id="needsyear_<{$article.count}>" onchange="refreshcaddy()">
+										<{$article.needsoptions}>
+									</select>
+								</div>
+							</td>
+						<{else}>
+							<{if $displayneedsyear == true}>
+								<td>&nbsp;</td>
+							<{/if}>
+
+							<input type="hidden" id="needsyears_<{$article.count}>" name="needsyears_<{$article.count}>" value="" />
+						<{/if}>
 						<td class="txtcenter width10">
 							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=del&article_id=<{$article.id}>&area_id=<{$article.areaid}>" class="btn btn-secondary"><span class="fa fa-trash"></span></a>
 						</td>
@@ -50,6 +66,7 @@
 					<td class="txtright" colspan="2"><h3>Total</h3></td>
 					<td class="txtcenter"><h3><{$total}></h3></td>
 					<td>&nbsp;</td>
+					<{if $displayneedsyear == true}><td>&nbsp;</td><{/if}>
 				</tr>
 			</table>
 			<input type="hidden" name="op" id="op" value="update">

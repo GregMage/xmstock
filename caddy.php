@@ -46,6 +46,7 @@ $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 {
 	global $xoopsTpl;
+	$helper = Helper::getHelper('xmstock');
 	if ($article_id == 0){
 		$return_url = XOOPS_URL . '/modules/xmarticle';
 	} else {
@@ -61,6 +62,12 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 	$xoopsTpl->assign('return_url', $return_url);
 	$arr_selectionArticles = $sessionHelper->get($session_name);
 	$total = 0;
+	if (xoops_isActiveModule('xmprod')){
+		if ($helper->getConfig('general_xmprod', 0) == 1) {
+			xoops_load('utility', 'xmprod');
+			$year_arr = XmprodUtility::getNeedsYears();
+		}
+	}
 	if (is_array($arr_selectionArticles) == true){
 		// Get stock
 		$criteria = new CriteriaCompo();
@@ -68,14 +75,33 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 		xoops_load('utility', 'xmarticle');
 		$count = 1;
 		$mml = false;
+		$displayneedsyear = false;
 		foreach ($arr_selectionArticles as $datas) {
-			$articles['id']    	= $datas['id'];
-			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
-			$articles['areaid'] = $datas['area'];
-			$articles['amount'] = XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
-			$articles['name']  	= XmarticleUtility::getArticleName($datas['id'], true);
-			$articles['qty']   	= $datas['qty'];
-			$articles['length'] = $datas['length'];
+			$articles['id']			= $datas['id'];
+			$articles['area']		= XmstockUtility::getAreaName($datas['area'], false);
+			$articles['areaid']		= $datas['area'];
+			$articles['amount']		= XmstockUtility::articleAmountPerArea($datas['area'], $datas['id'], $stock_arr);
+			$articles['name']		= XmarticleUtility::getArticleName($datas['id'], true);
+			$articles['qty']		= $datas['qty'];
+			$articles['length']		= $datas['length'];
+			$articles['needsyear']  = $datas['needsyear'];
+			if (xoops_isActiveModule('xmprod')){
+				if ($helper->getConfig('general_xmprod', 0) == 1) {
+					if (XmprodUtility::articleNeeds($articles['id']) === true){
+						$needsoptions = '';
+						foreach (array_keys($year_arr) as $i) {
+							if ($year_arr[$i] == $articles['needsyear']){
+								$needsoptions .= '<option selected="selected">' . $year_arr[$i] . '</option>';
+							} else {
+								$needsoptions .= '<option>' . $year_arr[$i] . '</option>';
+							}
+						}
+						$articles['needsoptions']  = $needsoptions;
+						$articles['needsyear']  = '2024/2025';
+						$displayneedsyear = true;
+					}
+				}
+			}
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
 			switch ($type) {
 				case 1:
@@ -105,6 +131,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 		}
 		$xoopsTpl->assign('mml', $mml);
 		$xoopsTpl->assign('total', $total);
+		$xoopsTpl->assign('displayneedsyear', $displayneedsyear);
 	} else {
 		$xoopsTpl->assign('error_message', _MA_XMSTOCK_CADDY_ERROR_EMPTY);
 	}
@@ -177,6 +204,7 @@ switch ($op) {
 				$datas['area'] = $area_id;
 				$datas['qty']  = 1;
 				$datas['length']  = 0;
+				$datas['needsyear']  = '';
 				$arr_selectionArticles[] = $datas;
 				$sessionHelper->set($session_name, $arr_selectionArticles);
 			} else {
@@ -204,13 +232,16 @@ switch ($op) {
 				$name_qty = 'qty_' . $count;
 				$name_length = 'length_' . $count;
 				$name_area = 'area_' . $count;
+				$name_needsyear = 'needsyear_' . $count;
 				$qty = Request::getInt($name_qty, 0, 'POST');
 				$length = Request::getFloat($name_length, 0, 'POST');
 				$area = Request::getInt($name_area, 0, 'POST');
+				$needsyear = Request::getString($name_needsyear, '', 'POST');
 				$article['id']   = $datas['id'];
 				$article['area'] = $area;
 				$article['qty']  = $qty;
 				$article['length']  = $length;
+				$article['needsyear']  = $needsyear;
 				$datasUpdate[] = $article;
 				$count++;
 			}

@@ -50,6 +50,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		$info = false;
 		$mml = false;
 		$datasUpdate = array();
+		$displayneedsyear = false;
 		foreach ($arr_selectionArticles as $datas) {
 			$articles['id']    	= $datas['id'];
 			$articles['area']  	= XmstockUtility::getAreaName($datas['area'], false);
@@ -58,11 +59,16 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id'], true);
 			$articles['qty']   	= $datas['qty'];
 			$articles['length'] = $datas['length'];
+			$articles['needsyear'] = $datas['needsyear'];
+			if ($articles['needsyear'] != ''){
+				$displayneedsyear = true;
+			}
 			$articles['count']  = $count;
 			$savedata['id']     = $datas['id'];
 			$savedata['area']   = $datas['area'];
 			$savedata['qty']    = $datas['qty'];
 			$savedata['length'] = $datas['length'];
+			$savedata['needsyear'] = $datas['needsyear'];
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
 			switch ($type) {
 				case 1:
@@ -115,6 +121,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		$xoopsTpl->assign('warning', $warning);
 		$xoopsTpl->assign('error', $error);
 		$xoopsTpl->assign('info', $info);
+		$xoopsTpl->assign('displayneedsyear', $displayneedsyear);
 	} else {
 		redirect_header('index.php', 5, _MA_XMSTOCK_CADDY_ERROR_EMPTY);
 	}

@@ -58,6 +58,7 @@
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
 					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
+					<{if $displayneedsyear == true}><th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_CADDY_NEEDSYEARS}></th><{/if}>
 					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
 				</tr>
 				<{foreach item=article from=$articles}>
@@ -78,6 +79,13 @@
 							</span>
 							<{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_STOCK_LOAN}><span class="badge badge-light badge-pill"><{$article.unit}></span><{/if}>
 						</td>
+						<{if $article.needsyear != ''}>
+							<td class="txtcenter"><{$article.needsyear}></td>
+						<{else}>
+							<{if $displayneedsyear == true}>
+								<td>&nbsp;</td>
+							<{/if}>
+						<{/if}>
 						<td class="txtcenter width10">
 							<{$article.qty}><{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}> x <{$article.length}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
 						</td>
@@ -85,6 +93,7 @@
 				<{/foreach}>
 				<tr>
 					<td class="txtright" colspan="2"><h3>Total</h3></td>
+					<{if $displayneedsyear == true}><td>&nbsp;</td><{/if}>
 					<td class="txtcenter"><h3><{$total}></h3></td>
 				</tr>
 			</table>

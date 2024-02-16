@@ -22,11 +22,12 @@ CREATE TABLE `xmstock_transfer` (
   `transfer_outputid`     	smallint(5)  unsigned   NOT NULL DEFAULT '0',
   `transfer_outputuserid`   smallint(5)  unsigned   NOT NULL DEFAULT '0',
   `transfer_amount`         mediumint(8) unsigned   NOT NULL DEFAULT '0',
-  `transfer_date`           int(10) 	 unsigned   NOT NULL DEFAULT '0',
+  `transfer_date`           int(10)      unsigned   NOT NULL DEFAULT '0',
   `transfer_userid`         smallint(5)  unsigned   NOT NULL DEFAULT '0',
-  `transfer_type`           varchar(2)	 		    NOT NULL DEFAULT '',
-  `transfer_ref`            varchar(255)        	NOT NULL DEFAULT '',
-  `transfer_status`         tinyint(1) unsigned 	NOT NULL DEFAULT '1',
+  `transfer_needsyear`			varchar(10)         		NOT NULL DEFAULT '',
+  `transfer_type`           varchar(2)	 		        NOT NULL DEFAULT '',
+  `transfer_ref`            varchar(255)        	  NOT NULL DEFAULT '',
+  `transfer_status`         tinyint(1)   unsigned 	NOT NULL DEFAULT '1',
 
   PRIMARY KEY (`transfer_id`),
   KEY `transfer_articleid` (`transfer_amount`)
@@ -39,7 +40,7 @@ CREATE TABLE `xmstock_stock` (
   `stock_amount`      	mediumint(8) unsigned   	NOT NULL DEFAULT '0',
   `stock_type`         	tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
   `stock_price`         double(8,2)             	NOT NULL default '0.00',
-  `stock_location`      varchar(255)        		NOT NULL DEFAULT '',
+  `stock_location`      varchar(255)        		  NOT NULL DEFAULT '',
 
   PRIMARY KEY (`stock_id`),
   KEY `stock_areaid` (`stock_articleid`)
@@ -47,10 +48,10 @@ CREATE TABLE `xmstock_stock` (
 
 CREATE TABLE `xmstock_output` (
   `output_id`            smallint(5)  unsigned    	NOT NULL AUTO_INCREMENT,
-  `output_name`          varchar(255)        		NOT NULL DEFAULT '',
+  `output_name`          varchar(255)        		    NOT NULL DEFAULT '',
   `output_description`   text,
   `output_weight`        smallint(5)  unsigned      NOT NULL DEFAULT '0',
-  `output_status`        tinyint(1)   unsigned 		NOT NULL DEFAULT '1',
+  `output_status`        tinyint(1)   unsigned 		  NOT NULL DEFAULT '1',
 
   PRIMARY KEY (`output_id`),
   KEY `output_name` (`output_weight`)
@@ -76,11 +77,12 @@ CREATE TABLE `xmstock_order` (
 ) ENGINE=MyISAM;
 
 CREATE TABLE `xmstock_itemorder` (
-  `itemorder_id`          	int(11) 	  unsigned    	NOT NULL AUTO_INCREMENT,
-  `itemorder_orderid`     	int(11) 	  unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_id`          	int(11) 	   unsigned    	NOT NULL AUTO_INCREMENT,
+  `itemorder_orderid`     	int(11) 	   unsigned    	NOT NULL DEFAULT '0',
   `itemorder_articleid`   	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_areaid`      	smallint(5)  unsigned    	NOT NULL DEFAULT '0',
   `itemorder_amount`      	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
+  `itemorder_needsyear`			varchar(10)         		  NOT NULL DEFAULT '',
   `itemorder_length`        double(10,4)              NOT NULL DEFAULT '0.0000',
 
   PRIMARY KEY (`itemorder_id`),
