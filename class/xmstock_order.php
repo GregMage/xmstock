@@ -100,6 +100,7 @@ class xmstock_order extends XoopsObject
 						$obj->setVar('itemorder_areaid', $datas['area']);
 						$obj->setVar('itemorder_amount', $datas['qty']);
 						$obj->setVar('itemorder_length', $datas['length']);
+						$obj->setVar('itemorder_needsyear', $datas['needsyear']);
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
 						}
