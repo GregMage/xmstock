@@ -172,6 +172,7 @@ class xmstock_transfer extends XoopsObject
 			$this->setVar('transfer_outputuserid', $transfer_outputuserid);
 			$this->setVar('transfer_description',  Request::getText('transfer_description', ''));
 			$this->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
+			$this->setVar('transfer_needsyear', Request::getString('transfer_needsyear', ''));
 			$this->setVar('transfer_date', time());
 			if ($error_message == '') {
 				if ($transfer_articleid == 0){
