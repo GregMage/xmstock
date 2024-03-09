@@ -259,43 +259,43 @@
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_REF}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<{$transfer_w.ref}>
 										</div>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_TYPE}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<{$transfer_w.type}>
 										</div>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<{$transfer_w.date}>
 										</div>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<span class="badge badge-pill badge-info"><{$transfer_w.amount}></span>
 										</div>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_STAREA}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<{$transfer_w.starea}>
 										</div>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<{$transfer_w.destination}>
 										</div>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_USER}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<{$transfer_w.user}>
 										</div>
 									</div>
@@ -416,10 +416,18 @@
 											<div class="col-6">
 											<{$transfer.date}>
 										</div>
+										<{if $transfer.needsyear != ''}>
+										<div class="col-6">
+										<b><{$smarty.const._MA_XMSTOCK_CADDY_NEEDSYEARS}></b>
+										</div>
+										<div class="col-6">
+											<{$transfer.needsyear}>
+										</div>
+										<{/if}>
 										<div class="col-6">
 											<b><{$smarty.const._MA_XMSTOCK_TRANSFER_AMOUNT}></b>
 										</div>
-											<div class="col-6">
+										<div class="col-6">
 											<span class="badge badge-pill badge-info"><{$transfer.amount}></span>
 										</div>
 										<{if $transfer.code_type != 'E'}>

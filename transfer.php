@@ -158,6 +158,7 @@ switch ($op) {
                 $transfer['description']   = $transfer_arr[$i]->getVar('transfer_description');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
                 $transfer['code_type']     = $transfer_arr[$i]->getVar('transfer_type');
+                $transfer['needsyear']     = $transfer_arr[$i]->getVar('transfer_needsyear');
                 $transfer['user']     	   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, true);
                 $transfer['user-export']   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, false);
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
