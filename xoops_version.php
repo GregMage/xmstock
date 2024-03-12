@@ -198,6 +198,15 @@ $modversion['config'][] = [
 	'options' => $optionDayDelivery,
 ];
 
+$modversion['config'][] = [
+    'name'        => 'general_excesscut',
+    'title'       => '_MI_XMSTOCK_PREF_GENERALEXCESSCUT',
+    'description' => '_MI_XMSTOCK_PREF_GENERALEXCESSCUT_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 1
+];
+
 xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
