@@ -79,13 +79,13 @@ if ($reset == '') {
     $s_name  = Request::getString('s_name', '');
     $s_ref   = Request::getString('s_ref', '');
     $s_amty  = Request::getString('s_amty', '');
-    $s_amval = Request::getInt('s_amval', 0);
+    $s_amval = Request::getString('s_amval', '');
 	$s_sort  = Request::getString('s_sort', 'ADESC');
 } else {
     $s_name  = '';
     $s_ref   = '';
     $s_amty  = '';
-    $s_amval = 0;
+    $s_amval = '';
     $s_sort = 'ADESC';
 }
 
@@ -139,7 +139,7 @@ if ($s_ref != '') {
 	$criteria->add(new Criteria('article_reference', '%' . $s_ref . '%', 'LIKE'));
 	$arguments .= '&amp;s_ref=' . $s_ref;
 }
-if ($s_amty != '' && $s_amval != 0) {
+if ($s_amty != '' && $s_amval != '') {
 	$criteria->add(new Criteria('stock_amount', $s_amval, $s_amty));
 	$arguments .= '&amp;s_amty=' . $s_amty . '&amp;s_amval=' . $s_amval;
 }
