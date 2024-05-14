@@ -11,32 +11,19 @@
 		</ol>
 	</nav>
 	<{if $form|default:'' == ''}>
-	<div class="row text-center">
-		<div class="col-lg-4">
-			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}>" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=E">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/In.png" alt="<{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}>">
-					<h5><{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}></h5>
-				</div>
+	<div class="text-center pt-2">
+		<div class="btn-group text-center" role="group">
+			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=E">
+				<span class="fa fa-sign-in fa-2x"></span><p class="mt-2"><{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}></p>
+			</a>
+			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=O">
+				<span class="fa fa-sign-out fa-2x"></span><p class="mt-2"><{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}></p>
+			</a>
+			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=T">
+				<span class="fa fa-external-link fa-2x"></span><p class="mt-2"><{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}></p>
 			</a>
 		</div>
-		<div class="col-lg-4">
-			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}>" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=O">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Out.png" alt="<{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}>">
-					<h5><{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}></h5>
-				</div>
-			</a>
-		</div>
-		<div class="col-lg-4">
-			<a title="<{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}>" href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=T">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Transfer.png" alt="<{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}>">
-					<h5><{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}></h5>
-				</div>
-			</a>
-		</div>
-    </div>
+	</div>
 	<{/if}>
 	<{if $error_message|default:'' != ''}>
 	<div class="alert alert-danger alert-dismissible" role="alert">

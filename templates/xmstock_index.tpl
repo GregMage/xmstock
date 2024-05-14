@@ -4,52 +4,32 @@
 			<li class="active"><{$index_module}></li>
 		</ol>
 	</nav>
-	<div class="row text-center">
+	<{if ($order == true) || ($manage == true)}>
+	<div class="text-center pt-2">
+		<div class="btn-group text-center" role="group">
 		<{if $order == true}>
-		<div class="col-lg-<{if $manage == true}>3<{else}>6<{/if}>">
-			<a title="<{$smarty.const._MI_XMSTOCK_SUB_CADDY}>" href="<{$xoops_url}>/modules/xmstock/caddy.php">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Caddy.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_CADDY}>">
-					<h5><{$smarty.const._MI_XMSTOCK_SUB_CADDY}></h5>
-				</div>
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_CADDY}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/caddy.php">
+				<span class="fa fa-shopping-cart fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_CADDY}></p>
 			</a>
-		</div>
-		<div class="col-lg-<{if $manage == true}>3<{else}>6<{/if}>">
-			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERS}>" href="<{$xoops_url}>/modules/xmstock/order.php">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Orders.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERS}>">
-					<h5><{$smarty.const._MI_XMSTOCK_SUB_ORDERS}></h5>
-				</div>
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERS}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/order.php">
+				<span class="fa fa-list-alt fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_ORDERS}></p>
 			</a>
-		</div>
 		<{/if}>
 		<{if $manage == true}>
-		<div class="col-lg-<{if $order == true}>3<{else}>6<{/if}>">
-			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>" href="<{$xoops_url}>/modules/xmstock/management.php">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Management.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>">
-					<h5><{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}></h5>
-				</div>
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/management.php">
+				<span class="fa fa-cogs fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}></p>
 			</a>
-		</div>
-		<div class="col-lg-<{if $order == true}>3<{else}>6<{/if}>">
-			<a title="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>" href="<{$xoops_url}>/modules/xmstock/transfer.php">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Manage.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_ORDERSMANAGEMENT}>">
-					<h5><{$smarty.const._MI_XMSTOCK_SUB_TRANSFER}></h5>
-				</div>
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_TRANSFER}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/transfer.php">
+				<span class="fa fa-random fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_TRANSFER}></p>
 			</a>
-		</div>
-		<div class="col-lg-3">
-			<a title="<{$smarty.const._MI_XMSTOCK_SUB_LOAN}>" href="<{$xoops_url}>/modules/xmstock/loan.php">
-				<div class="btn m-2 border">
-					<img class="bd-placeholder-img mt-3 rounded" height="100" src="<{$xoops_url}>/modules/xmstock/assets/images/Loan.png" alt="<{$smarty.const._MI_XMSTOCK_SUB_LOAN}>">
-					<h5><{$smarty.const._MI_XMSTOCK_SUB_LOAN}></h5>
-				</div>
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_LOAN}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/loan.php">
+				<span class="fa fa-exchange fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_LOAN}></p>
 			</a>
-		</div>
 		<{/if}>
-    </div>
+		</div>
+	</div>
+	<{/if}>
+
 	<{if $area_count != 0}>
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_STOCK_AREA}></h1>
