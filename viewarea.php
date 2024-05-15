@@ -71,10 +71,14 @@ $xoopsTpl->assign('location', $area->getVar('area_location'));
 $area_img = $area->getVar('area_logo') ?: 'blank.gif';
 $xoopsTpl->assign('logo', $url_logo_area . $area_img);
 
+// Get start pager
+$start = Request::getInt('start', 0);
+
 //Search form
 // get values
 $search = Request::getString('search', '');
 $reset  = Request::getString('reset', '');
+
 if ($reset == '') {
     $s_name  = Request::getString('s_name', '');
     $s_ref   = Request::getString('s_ref', '');
@@ -87,6 +91,10 @@ if ($reset == '') {
     $s_amty  = '';
     $s_amval = '';
     $s_sort = 'ADESC';
+	$start = 0;
+}
+if ($search != '') {
+    $start = 0;
 }
 
 $form = new XoopsThemeForm(_MA_XMSTOCK_AREA_FILTERFORM, 'form', $_SERVER['REQUEST_URI'], 'post', true);
@@ -127,8 +135,7 @@ $form->addElement($button);
 $xoopsTpl->assign('form', $form->render());
 
 // Article
-// Get start pager
-$start = Request::getInt('start', 0);
+
 $criteria = new CriteriaCompo();
 $arguments = '';
 if ($s_name != '') {
