@@ -121,6 +121,7 @@ class xmstock_loan extends XoopsObject
 						$new_transfer->setVar('transfer_type', 'O');
 					}
 					$new_transfer->setVar('transfer_ar_areaid', $areaid);
+					$new_transfer->setVar('transfer_st_areaid', $areaid);
 					$new_transfer->setVar('transfer_outputuserid', $userid);
 					$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_LOAN_TRANSFERT_DESC, formatTimestamp($this->getVar('loan_date'), 'm'), $this->getVar('loan_id')));
 					$new_transfer->setVar('transfer_ref', sprintf(_MA_XMSTOCK_LOAN_TRANSFERT_REF, $this->getVar('loan_id')));

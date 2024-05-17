@@ -92,6 +92,9 @@ switch ($op) {
 		if (!empty($managePermissionArea)) {
 			$criteria->add(new Criteria('loan_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 		}
+		if ($area_id != 0) {
+			$criteria->add(new Criteria('loan_areaid', $area_id));
+		}
 		$loanHandler->table_link = $loanHandler->db->prefix("xmarticle_article");
         $loanHandler->field_link = "article_id";
         $loanHandler->field_object = "loan_articleid";
@@ -106,6 +109,7 @@ switch ($op) {
                 $loan['date']          = formatTimestamp($loan_arr[$i]->getVar('loan_date'), 's');
 				$loan['amount']        = $loan_arr[$i]->getVar('loan_amount');
 				$loan['status']        = $loan_arr[$i]->getVar('loan_status');
+				$loan['area']		   = $area[$loan_arr[$i]->getVar('loan_areaid')];
 				if ($loan['status'] == 1) {
 					$loan['rdate']     = '/';
 				} else {

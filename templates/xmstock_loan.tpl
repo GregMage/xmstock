@@ -74,6 +74,9 @@
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_DATE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_LARTICLE}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_LOAN_AMOUNT}></th>
+						<{if $area_id == 0}>
+						<th class="text-center"><{$smarty.const._MA_XMSTOCK_LOAN_AREA}></th>
+						<{/if}>
 						<{if $status == 0}>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_RDATE}></th>
 						<{/if}>
@@ -91,6 +94,9 @@
 						<td><{$loan.date}></td>
 						<td><{$loan.article}></td>
 						<td class="text-center"><{$loan.amount}></td>
+						<{if $area_id == 0}>
+						<td class="text-center"><{$loan.area}></td>
+						<{/if}>
 						<{if $status == 0}>
 						<td><{$loan.rdate}></td>
 						<{/if}>
