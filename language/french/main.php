@@ -200,7 +200,7 @@ define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Options de livraison');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Retrait');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY', 'Livraison');
 define('_MA_XMSTOCK_CHECKOUT_DORDER', 'Date souhaitée');
-define('_MA_XMSTOCK_CHECKOUT_DORDER_DSC', '<div class="alert alert-warning">Le délai standard pour une livraison est de %s jours ouvré!</div>');
+define('_MA_XMSTOCK_CHECKOUT_DORDER_DSC', '<div class="alert alert-warning">Le délai standard pour une livraison est de %s jours ouvrés!</div>');
 define('_MA_XMSTOCK_CHECKOUT_ERRORQTY', 'La quantité demandée pour les articles avec le logo <span class="badge badge-pill badge-danger">Erreur</span> est supérieure à celle disponible en stock. <br>Cela n\'est pas possible dans le cas d\'un emprunt! La quantité a donc été adaptée.');
 define('_MA_XMSTOCK_CHECKOUT_INFORMATION', 'Merci de rendre les articles avec le logo <span class="badge badge-pill badge-light">' . _MA_XMSTOCK_STOCK_LOAN . '</span> dans des délais raisonnables');
 define('_MA_XMSTOCK_CHECKOUT_INPUTINF', 'Informations sur la commande');
@@ -210,7 +210,7 @@ define('_MA_XMSTOCK_CHECKOUT_CONFIRM_SEND', 'Votre commande a bien été envoyé
 define('_MA_XMSTOCK_CHECKOUT_SUMMARY', 'Récapitulatif de votre panier');
 define('_MA_XMSTOCK_CHECKOUT_VIEW', 'Suivre cette commande');
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'La quantité demandée pour les articles avec le logo <span class="badge badge-pill badge-warning">Avertissement</span> est supérieure à celle disponible en stock. <br>Le délai de livraison pourrait être plus long !');
-define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffissante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
+define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffisante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
 
 // caddy
 define('_MA_XMSTOCK_CADDY_NEEDSYEARS', 'Besoin');
