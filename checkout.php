@@ -163,7 +163,7 @@ switch ($op) {
 		}
         $form->addElement($ddesired, false);
 
-		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', 0);
+		$delivery = new XoopsFormRadio(_MA_XMSTOCK_CHECKOUT_DELIVERY, 'order_delivery', 1);
 		$options        = [0 => _MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL, 1 => _MA_XMSTOCK_CHECKOUT_DELIVERY_DELIVERY];
 		$delivery->addOptionArray($options);
 		$form->addElement($delivery);
@@ -186,8 +186,6 @@ switch ($op) {
         $error_message = $obj->saveOrder($orderHandler);
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
-            $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render());
         }
 		break;
 
