@@ -334,19 +334,15 @@ class xmstock_order extends XoopsObject
 								$new_orderid = $new_order->get_new_enreg();
 							}
 							// changement de l'article dans la nouvelle commande uniquement si pas tous les articles sont splités
-							if ($nb_split < $count){
-
+							//if ($nb_split < $count){
 								$splitamount = Request::getInt('splitamount' . $i, 0);
-								echo 'splitamount: ' . $splitamount;
 								// si la quantité (split) = 0 alors on split l'article entier dans la nouvelle commande
 								if ($splitamount == 0) {
 									$item->setVar('itemorder_orderid', $new_orderid);
 								} else {
-									// on modifie la quantité dans la commande de base
-									$item->setVar('itemorder_amount', $splitamount);
 									// on ajoute l'articel avec le solde dans la nouvelle commande
 									$obj = $itemorderHandler->create();
-									$obj->setVar('itemorder_orderid', $item->getVar('itemorder_orderid'));
+									$obj->setVar('itemorder_orderid', $new_orderid);
 									$obj->setVar('itemorder_articleid', $item->getVar('itemorder_articleid'));
 									$obj->setVar('itemorder_areaid', $item->getVar('itemorder_areaid'));
 									$obj->setVar('itemorder_amount', $item->getVar('itemorder_amount') - $splitamount);
@@ -355,11 +351,13 @@ class xmstock_order extends XoopsObject
 									if (!$itemorderHandler->insert($obj)) {
 										$error_message .= $obj->getHtmlErrors();
 									}
+									// on modifie la quantité dans la commande de base
+									$item->setVar('itemorder_amount', $splitamount);
 								}
 								if (!$itemorderHandler->insert($item)) {
 									$error_message .= $item->getHtmlErrors();
 								}
-							}
+							//}
 						} else {
 							// Sortie de stock uniquement en statut de 2 à 3
 							if ($status == 2) {
@@ -407,7 +405,7 @@ class xmstock_order extends XoopsObject
 					}
 
 					if ($error_message == '') {
-						//redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					}
 				} else {
 					$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
