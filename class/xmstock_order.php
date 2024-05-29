@@ -335,9 +335,29 @@ class xmstock_order extends XoopsObject
 							}
 							// changement de l'article dans la nouvelle commande uniquement si pas tous les articles sont splités
 							if ($nb_split < $count){
-								$item->setVar('itemorder_orderid', $new_orderid);
+
+								$splitamount = Request::getInt('splitamount' . $i, 0);
+								echo 'splitamount: ' . $splitamount;
+								// si la quantité (split) = 0 alors on split l'article entier dans la nouvelle commande
+								if ($splitamount == 0) {
+									$item->setVar('itemorder_orderid', $new_orderid);
+								} else {
+									// on modifie la quantité dans la commande de base
+									$item->setVar('itemorder_amount', $splitamount);
+									// on ajoute l'articel avec le solde dans la nouvelle commande
+									$obj = $itemorderHandler->create();
+									$obj->setVar('itemorder_orderid', $item->getVar('itemorder_orderid'));
+									$obj->setVar('itemorder_articleid', $item->getVar('itemorder_articleid'));
+									$obj->setVar('itemorder_areaid', $item->getVar('itemorder_areaid'));
+									$obj->setVar('itemorder_amount', $item->getVar('itemorder_amount') - $splitamount);
+									$obj->setVar('itemorder_length', $item->getVar('itemorder_length'));
+									$obj->setVar('itemorder_needsyear', $item->getVar('itemorder_needsyear'));
+									if (!$itemorderHandler->insert($obj)) {
+										$error_message .= $obj->getHtmlErrors();
+									}
+								}
 								if (!$itemorderHandler->insert($item)) {
-									$error_message = $item->getHtmlErrors();
+									$error_message .= $item->getHtmlErrors();
 								}
 							}
 						} else {
@@ -387,7 +407,7 @@ class xmstock_order extends XoopsObject
 					}
 
 					if ($error_message == '') {
-						redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+						//redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 					}
 				} else {
 					$error_message = _MA_XMSTOCK_ERROR_NOARTICLE;
@@ -461,9 +481,10 @@ class xmstock_order extends XoopsObject
 		if ($status == 2){
 			$articles .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_LOCATION . "</th>";
 		}
-		if ($item_array_count > 1){
-			$articles .= "<th scope='col'>" . _MA_XMSTOCK_ACTION_SPLIT . "</th>";
-		}
+		//if ($item_array_count > 1){
+		$articles .= "<th scope='col'>" . _MA_XMSTOCK_ACTION_SPLIT . "</th>";
+		$articles .= "<th scope='col'>" . _MA_XMSTOCK_ACTION_SPLIT_AMOUNT . "</th>";
+		//}
 		$articles .= "</tr></thead><tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
@@ -509,15 +530,23 @@ class xmstock_order extends XoopsObject
 				$location =  XmstockUtility::getLocation($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 				$articles .= "<td class='text-center'>" . $location . "</td>";
 			}
-			if ($item_array_count > 1){
-				$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td></tr>";
+			//if ($item_array_count > 1){
+			$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td>";
+			if ($amoutArea < $amount){
+				$amoutSplit = $amoutArea;
+				$amountMax = $amoutArea;
+			} else {
+				$amoutSplit = 0;
+				$amountMax = $amount - 1;
 			}
+			$articles .= "<td class='text-center'><input type='number' class='form-control' name='splitamount" . $count . "' id='splitamount" . $count . "' size='4' min='0' max='" . $amountMax . "' value='" . $amoutSplit . "'></td></tr>";
+			//}
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
 		$articles .= "</tbody></table>";
-		if ($item_array_count > 1){
-			$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_SPLIT_DESC . "</small>";
-		}
+		//if ($item_array_count > 1){
+		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_SPLIT_DESC . "</small>";
+		//}
 		$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_ORDER_ARTICLES, $articles), true);
 		$form->addElement(new XoopsFormHidden('count', $count));
 
