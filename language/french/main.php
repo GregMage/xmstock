@@ -82,6 +82,7 @@ define('_MA_XMSTOCK_ERROR_ONEARTICLE', 'Vous devez avoir au minimum un article (
 define('_MA_XMSTOCK_ERROR_ORDER_DEL', 'Vous ne pouvez pas supprimer cette commande !');
 define('_MA_XMSTOCK_ERROR_PRICE', 'Le prix doit être un nombre et supérieur à 0');
 define('_MA_XMSTOCK_ERROR_SIZE', "La taille dans les préférences du module (taille maximale des fichiers téléchargés) dépasse les valeurs maximales définies dans 'post_max_size' ou 'upload_max_filesize' dans la configuration du fichier php.ini.");
+define('_MA_XMSTOCK_ERROR_SPLIT', 'Vous ne pouvez pas spliter l\'article complet (il n\'y a qu\'un article...)');
 define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'Il n\'y a pas de stock de destination sélectionné');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'Il n\'y a pas de stock de départ sélectionné');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_TO_AR', 'Les stocks de départ et d\'arrivée sont identiques');

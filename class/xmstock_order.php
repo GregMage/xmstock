@@ -302,6 +302,9 @@ class xmstock_order extends XoopsObject
 				}
 			}
 		}
+		if ($count == 1 && isset($_POST['split1']) && $_POST['splitamount1'] == 0){
+			$error_message .= _MA_XMSTOCK_ERROR_SPLIT;
+		}
 		if ($error_message == '') {
 			if ($status >= 1 &&  $status <= 3){
 				$this->setVar('order_status', $status + 1);
@@ -355,48 +358,47 @@ class xmstock_order extends XoopsObject
 							if (!$itemorderHandler->insert($item)) {
 								$error_message .= $item->getHtmlErrors();
 							}
-						} else {
-							// Sortie de stock uniquement en statut de 2 à 3
-							if ($status == 2) {
-								$type = XmstockUtility::articleTypePerArea($item->getVar('itemorder_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
-								if ($type == 2){
-									$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)), $item->getVar('itemorder_areaid'));
-								} else {
-									$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
-								}
+						}
+						// Sortie de stock uniquement en statut de 2 à 3
+						if ($status == 2) {
+							$type = XmstockUtility::articleTypePerArea($item->getVar('itemorder_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
+							if ($type == 2){
+								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)), $item->getVar('itemorder_areaid'));
+							} else {
+								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+							}
 
-								// Si emprunt ajout d'une entrée dans le table d'emprunt
-								if ($type == 3) {
-									$loan = $loanHandler->create();
-									$loan->setVar('loan_areaid', $item->getVar('itemorder_areaid'));
-									$loan->setVar('loan_articleid', $item->getVar('itemorder_articleid'));
-									$loan->setVar('loan_amount', $item->getVar('itemorder_amount'));
-									$loan->setVar('loan_date', time());
-									$loan->setVar('loan_userid', $this->getVar('order_userid'));
-									$loan->setVar('loan_status', 1);
-									if (!$loanHandler->insert($loan)) {
-										$error_message .= $loan->getHtmlErrors();
-									}
+							// Si emprunt ajout d'une entrée dans le table d'emprunt
+							if ($type == 3) {
+								$loan = $loanHandler->create();
+								$loan->setVar('loan_areaid', $item->getVar('itemorder_areaid'));
+								$loan->setVar('loan_articleid', $item->getVar('itemorder_articleid'));
+								$loan->setVar('loan_amount', $item->getVar('itemorder_amount'));
+								$loan->setVar('loan_date', time());
+								$loan->setVar('loan_userid', $this->getVar('order_userid'));
+								$loan->setVar('loan_status', 1);
+								if (!$loanHandler->insert($loan)) {
+									$error_message .= $loan->getHtmlErrors();
 								}
-								$new_transfer = $transferHandler->create();
-								$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
-								if ($type == 2){
-									$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)));
-								} else {
-									$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
-								}
-								$new_transfer->setVar('transfer_needsyear', $item->getVar('itemorder_needsyear'));
-								$new_transfer->setVar('transfer_type', 'O');
-								$new_transfer->setVar('transfer_st_areaid', $item->getVar('itemorder_areaid'));
-								$new_transfer->setVar('transfer_outputuserid', $this->getVar('order_userid'));
-								$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_DESC, formatTimestamp($this->getVar('order_dorder'), 'm'), $this->getVar('order_id')));
-								$new_transfer->setVar('transfer_ref', sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_REF, $this->getVar('order_id')));
-								$new_transfer->setVar('transfer_status', 1);
-								$new_transfer->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
-								$new_transfer->setVar('transfer_date', time());
-								if (!$transferHandler->insert($new_transfer)) {
-									$error_message .=  $new_transfer->getHtmlErrors();
-								}
+							}
+							$new_transfer = $transferHandler->create();
+							$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
+							if ($type == 2){
+								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)));
+							} else {
+								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
+							}
+							$new_transfer->setVar('transfer_needsyear', $item->getVar('itemorder_needsyear'));
+							$new_transfer->setVar('transfer_type', 'O');
+							$new_transfer->setVar('transfer_st_areaid', $item->getVar('itemorder_areaid'));
+							$new_transfer->setVar('transfer_outputuserid', $this->getVar('order_userid'));
+							$new_transfer->setVar('transfer_description',  sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_DESC, formatTimestamp($this->getVar('order_dorder'), 'm'), $this->getVar('order_id')));
+							$new_transfer->setVar('transfer_ref', sprintf(_MA_XMSTOCK_ACTION_TRANSFERT_REF, $this->getVar('order_id')));
+							$new_transfer->setVar('transfer_status', 1);
+							$new_transfer->setVar('transfer_userid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
+							$new_transfer->setVar('transfer_date', time());
+							if (!$transferHandler->insert($new_transfer)) {
+								$error_message .=  $new_transfer->getHtmlErrors();
 							}
 						}
 					}
@@ -409,7 +411,7 @@ class xmstock_order extends XoopsObject
 				}
 			} else {
 				$this->setVar('order_status', $status);
-				$error_message =  $this->getHtmlErrors();
+				$error_message .=  $this->getHtmlErrors();
 			}
 		}
         return $error_message;
