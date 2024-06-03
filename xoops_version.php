@@ -18,7 +18,7 @@
  */
 $modversion['dirname']     = basename(__DIR__);
 $modversion['name']        = ucfirst(basename(__DIR__));
-$modversion['version']     = '0.3.0-RC1';
+$modversion['version']     = '1.0.0-Stable';
 $modversion['description'] = _MI_XMSTOCK_DESC;
 $modversion['author']      = 'Grégory Mage (Mage)';
 $modversion['url']         = 'https://github.com/GregMage';
@@ -273,11 +273,11 @@ $modversion['config'][] = [
 ];
 
 // About stuff
-$modversion['release_date']  = '2023/10/31';
+$modversion['release_date']  = '2024/06/03';
 
 $modversion['developer_lead']      = 'Mage';
 $modversion['module_website_url']  = 'github.com/GregMage';
 $modversion['module_website_name'] = 'github.com/GregMage';
 
-$modversion['min_xoops'] = '2.5.10';
+$modversion['min_xoops'] = '2.5.11';
 $modversion['min_php']   = '7.0';
