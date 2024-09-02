@@ -145,6 +145,7 @@ class xmstock_order extends XoopsObject
 			if ($count > 0){
 				for ($i = 1; $i <= $count; $i++) {
 					$amount = Request::getInt('amount' . $i, 0);
+					$length = Request::getFloat('length' . $i, 0);
 					$itemorder = Request::getInt('itemorder' . $i, 0);
 					$obj = $itemorderHandler->get($itemorder);
 					if ($amount == 0){
@@ -157,6 +158,9 @@ class xmstock_order extends XoopsObject
 						}
 					} else {
 						$obj->setVar('itemorder_amount', $amount);
+						if ($length !=0){
+							$obj->setVar('itemorder_length', $length);
+						}
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
 						}
@@ -232,7 +236,13 @@ class xmstock_order extends XoopsObject
 			$count++;
 			$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
-			$articles .= "<td><input class='form-control' type='text' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'></td>";
+			$articles .= "<td><div class='form-row'>";
+			$articles .= "<div class='col-4'><input class='form-control' type='number' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'>";
+			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+			if ($type == 2){
+				$articles .= "</div><div class='col-8'><input class='form-control' type='text' name='length" . $count . "' id='length" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_length') . "'>";
+			}
+			$articles .= "</div></div></td>";
 			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span> " . $area_name . "</td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
