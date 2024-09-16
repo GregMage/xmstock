@@ -139,6 +139,8 @@ switch ($op) {
     case 'add':
         // Form
         $obj  = $loanHandler->create();
+		$obj->setVar('loan_articleid', Request::getInt('article_id', 0));
+		$obj->setVar('loan_areaid', Request::getInt('area_id', 0));
         $form = $obj->getForm();
         $xoopsTpl->assign('form', $form->render());
         break;

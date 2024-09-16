@@ -18,8 +18,11 @@
 					<{if $stock.manage|default:false == true}>
 						<a href="<{$xoops_url}>/modules/xmstock/action.php?op=editstock&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>&amp;return=article" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 						<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=E&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_ENTRYINSTOCK}>"><span class="fa fa-sign-in"></span></a>
-						<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=O&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}>"><span class="fa fa-sign-out"></span></a>
-						<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=T&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}>"><span class="fa fa-external-link"></span></a>
+						<{if $stock.amount > 0}>
+							<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=O&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_OUTOFSTOCK}>"><span class="fa fa-sign-out"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=T&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK}>"><span class="fa fa-external-link"></span></a>
+							<a href="<{$xoops_url}>/modules/xmstock/loan.php?op=add&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_LOAN}>"><span class="fa fa-share "></span></a>
+						<{/if}>
 						<a href="<{$xoops_url}>/modules/xmstock/transfer.php?article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}>"><span class="fa fa-search"></span></a>
 					<{/if}>
 					<{if $stock.loan|default:false == true && $stock.amount == 0}>
