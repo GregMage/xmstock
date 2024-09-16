@@ -48,7 +48,6 @@ class xmstock_stock extends XoopsObject
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_status', XOBJ_DTYPE_INT, 1);
-		$this->initVar('stock_del', XOBJ_DTYPE_INT, 0);
     }
 
     /**
