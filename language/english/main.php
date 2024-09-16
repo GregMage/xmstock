@@ -126,6 +126,8 @@ define('_MA_XMSTOCK_AREA_WEIGHT', 'Weight');
 define('_MA_XMSTOCK_STOCK_AMOUNT', 'Amount in stock');
 define('_MA_XMSTOCK_STOCK_AREA', 'Stock');
 define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
+define('_MA_XMSTOCK_STOCK_DEL', 'Supprimmer définitivement l\'article du stock');
+define('_MA_XMSTOCK_STOCK_DEL_DESC', 'Attention, l\'article ne sera plus dans ce stock et l\'historique des prix sera perdu!');
 define('_MA_XMSTOCK_STOCK_FREE', 'Libre service');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');

@@ -48,6 +48,7 @@ class xmstock_stock extends XoopsObject
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_status', XOBJ_DTYPE_INT, 1);
+		$this->initVar('stock_del', XOBJ_DTYPE_INT, 0);
     }
 
     /**
@@ -92,6 +93,11 @@ class xmstock_stock extends XoopsObject
 		$form_type->setDescription(_MA_XMSTOCK_STOCK_TYPE_DESC);
 		$form->addElement($form_type);
 
+        // Suppression total du stock
+        $form_del = new XoopsFormRadioYN(_MA_XMSTOCK_STOCK_DEL, 'stock_del', $this->getVar('stock_del'));
+        $form_del->setDescription(_MA_XMSTOCK_STOCK_DEL_DESC);
+        $form->addElement($form_del);
+
 		$form->addElement(new XoopsFormHidden('stock_areaid', $this->getVar('stock_areaid')));
         $form->addElement(new XoopsFormHidden('return', $return));
         $form->addElement(new XoopsFormHidden('op', 'savestock'));
@@ -113,6 +119,8 @@ class xmstock_stock extends XoopsObject
         $error_message = '';
         // test error
 		$location = Request::getString('stock_location', '');
+		$del = Request::getString('stock_del', '');
+		$this->setVar('stock_del', Request::getInt('stock_del', 0));
 		$this->setVar('stock_type', Request::getInt('stock_type', 1));
 		if ($location == '') {
 			$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
@@ -120,12 +128,27 @@ class xmstock_stock extends XoopsObject
 		} else {
 			$this->setVar('stock_location', $location);
 		}
+
         if ($error_message == '') {
-            if ($stockHandler->insert($this)) {
-                redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+            if ($del == 1) {
+                //on vide la table de prix
+                $criteria = new CriteriaCompo();
+                $criteria->add(new Criteria('price_areaid', $this->getVar('stock_areaid')));
+                $criteria->add(new Criteria('price_articleid', $this->getVar('stock_articleid')));
+                $price_count = $priceHandler->getCount($criteria);
+                if ($price_count > 0) {
+                    $priceHandler->deleteAll($criteria);
+                }
+                // on enlève la ligne dans le stock
+                $stockHandler->delete($this);
             } else {
-                $error_message =  $this->getHtmlErrors();
+                if ($stockHandler->insert($this)) {
+                    redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+                } else {
+                    $error_message =  $this->getHtmlErrors();
+                }
             }
+
         }
         return $error_message;
     }
