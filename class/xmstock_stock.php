@@ -139,7 +139,11 @@ class xmstock_stock extends XoopsObject
                     $priceHandler->deleteAll($criteria);
                 }
                 // on enlève la ligne dans le stock
-                $stockHandler->delete($this);
+                if ($stockHandler->delete($this)) {
+                    redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+                }  else {
+                    $error_message =  $this->getHtmlErrors();
+                }
             } else {
                 if ($stockHandler->insert($this)) {
                     redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
@@ -147,7 +151,6 @@ class xmstock_stock extends XoopsObject
                     $error_message =  $this->getHtmlErrors();
                 }
             }
-
         }
         return $error_message;
     }
