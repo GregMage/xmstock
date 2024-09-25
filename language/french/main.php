@@ -306,6 +306,7 @@ define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la
 
 // viewprice.php
 define('_MA_XMSTOCK_VIEWPRICE_AMOUNT', 'Quantité transférée');
+define('_MA_XMSTOCK_VIEWPRICE_AVERAGEPRICE', 'Prix moyen: ');
 define('_MA_XMSTOCK_VIEWPRICE_DASHBOARD', 'Tableau de bord');
 define('_MA_XMSTOCK_VIEWPRICE_DATE', 'Date');
 define('_MA_XMSTOCK_VIEWPRICE_EXPORT', 'Exporter');

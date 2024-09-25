@@ -74,12 +74,16 @@ $criteria->setLimit($filter);
 $criteria->setOrder($sort);
 $price_arr = $priceHandler->getall($criteria);
 $price_count = $priceHandler->getCount($criteria);
+$price_t = 0;
+$quantity_t = 0;
 if ($price_count > 0) {
 	foreach (array_keys($price_arr) as $i) {
 		$price['date']   = formatTimestamp($price_arr[$i]->getVar('price_date'), 's');
 		$price['amount'] = $price_arr[$i]->getVar('price_amount');
 		$price['price']  = $price_arr[$i]->getVar('price_price');
 		$xoopsTpl->appendByRef('prices', $price);
+		$price_t += ($price['price'] * $price['amount']);
+		$quantity_t += $price['amount'];
         unset($price);
     }
 	foreach (array_keys($price_grapharr) as $i) {
@@ -96,7 +100,7 @@ if ($price_count > 0) {
 } else {
 	redirect_header('index.php', 2, _MA_XMSTOCK_ERROR_NOPRICE);
 }
-
+$xoopsTpl->assign('price_a', number_format($price_t / $quantity_t, 2, '.', ''));
 //SEO
 // pagetitle
 $xoopsTpl->assign('xoops_pagetitle', strip_tags($article_name) . ' - ' . strip_tags(_MA_XMSTOCK_VIEWPRICE_DASHBOARD) . ' - ' . $xoopsModule->name());

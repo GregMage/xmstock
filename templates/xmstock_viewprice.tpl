@@ -9,6 +9,8 @@
 		<h1 class="h2"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_DASHBOARD}> "<{$article_name}>"</h1>
 	</div>
 	<canvas class="my-4 w-100" id="myChart" width="400" height="200"></canvas>
+	<h5><{$smarty.const._MA_XMSTOCK_VIEWPRICE_AVERAGEPRICE}> <{$price_a}></h5>
+	<hr>
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h2><{$smarty.const._MA_XMSTOCK_VIEWPRICE_PRICE}></h2>
 		<div class="btn-toolbar mb-2 mb-md-0">
