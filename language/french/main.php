@@ -164,7 +164,7 @@ define('_MA_XMSTOCK_TRANSFER_OUTPUT_DSC', 'Vous devez choisir un déstinataire e
 define('_MA_XMSTOCK_TRANSFER_OUTPUTID', 'Déstinataire externe');
 define('_MA_XMSTOCK_TRANSFER_OUTPUTUSERID', 'Déstinataire interne');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
-define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'affichera pas de prix');
+define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'enregistrera pas de prix (si un prix existe déjà dans le stock, il sera utilisé)');
 define('_MA_XMSTOCK_TRANSFER_REF', 'Référence de transfert');
 define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Voulez-vous vraiment supprimer ce transfert ? %s');
