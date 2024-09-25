@@ -125,9 +125,9 @@ class XmstockUtility
 					}
 					$obj->setVar('stock_type', $stocktype);
 					//price
-					$price = self::priceCalculation($price, $amount, 0, 0);
+					$price_stock = self::priceCalculation($price, $amount, 0, 0);
 					if ($price > 0) {
-						$obj->setVar('stock_price', number_format($price, 2, '.', ''));
+						$obj->setVar('stock_price', number_format($price_stock, 2, '.', ''));
 						$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
 					}
 					if ($error_message == '') {
@@ -151,9 +151,9 @@ class XmstockUtility
 					}
 					$obj->setVar('stock_type', $stocktype);
 					//price
-					$price = self::priceCalculation($price, $amount, $old_price, $old_amount);
+					$price_stock = self::priceCalculation($price, $amount, $old_price, $old_amount);
 					if ($price > 0) {
-						$obj->setVar('stock_price', number_format($price, 2, '.', ''));
+						$obj->setVar('stock_price', number_format($price_stock, 2, '.', ''));
 						$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
 					}
 					if ($error_message == '') {
@@ -230,9 +230,9 @@ class XmstockUtility
 						$old_price = $obj->getVar('stock_price');
 						$obj->setVar('stock_amount', $old_amount + $amount);
 						//price
-						$price = self::priceCalculation($st_price, $amount, $old_price, $old_amount);
+						$price_stock = self::priceCalculation($st_price, $amount, $old_price, $old_amount);
 						if ($price > 0) {
-							$obj->setVar('stock_price', number_format($price, 2, '.', ''));
+							$obj->setVar('stock_price', number_format($price_stock, 2, '.', ''));
 							$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
 						}
 						if ($stockHandler->insert($obj)) {
