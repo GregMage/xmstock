@@ -82,6 +82,11 @@ class xmstock_stock extends XoopsObject
         if (!$this->isNew()) {
             $form->addElement(new XoopsFormHidden('stock_id', $this->getVar('stock_id')));
         }
+
+        $mini = new XoopsFormText(_MA_XMSTOCK_STOCK_MINI, 'stock_mini', 50, 50, $this->getVar('stock_mini'));
+		$mini->setDescription(_MA_XMSTOCK_STOCK_MINI_DSC);
+        $form->addElement($mini, true);
+
 		$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'stock_location', 50, 255, $this->getVar('stock_location'));
 		$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
 		$form->addElement($location, true);
@@ -118,8 +123,10 @@ class xmstock_stock extends XoopsObject
 
         $error_message = '';
         // test error
+
 		$location = Request::getString('stock_location', '');
 		$del = Request::getString('stock_del', '');
+		$this->setVar('stock_mini', Request::getInt('stock_mini', 0));
 		$this->setVar('stock_del', Request::getInt('stock_del', 0));
 		$this->setVar('stock_type', Request::getInt('stock_type', 1));
 		if ($location == '') {

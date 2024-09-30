@@ -131,6 +131,8 @@ define('_MA_XMSTOCK_STOCK_DEL_DESC', 'Attention, l\'article ne sera plus dans ce
 define('_MA_XMSTOCK_STOCK_FREE', 'Libre service');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
+define('_MA_XMSTOCK_STOCK_MINI', 'Stock minimum');
+define('_MA_XMSTOCK_STOCK_MINI_DSC', 'Valeur qui défini le stock minimum (utilisé si il est nécessaire de faire un suivi de stock mini). Mettre la valeur 0 pour ne pas faire de suivi');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
 define('_MA_XMSTOCK_STOCK_ML_DESC', 'Longueur en mm');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
