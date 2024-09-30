@@ -26,5 +26,11 @@ function xoops_module_update_xmstock(XoopsModule $module, $previousVersion = nul
         $sql = "ALTER TABLE `" . $db->prefix('xmstock_transfer') . "` ADD `transfer_needsyear` varchar(10) NOT NULL DEFAULT '' AFTER `transfer_userid`;";
         $db->query($sql);
     }
+    // Passage de la version 1.1.1 à 1.2.0
+    if ($previousVersion < '1.2.0') {
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $sql = "ALTER TABLE `" . $db->prefix('xmstock_stock') . "` ADD `stock_mini` smallint(5) unsigned NOT NULL DEFAULT '0' AFTER `stock_location`;";
+        $db->query($sql);
+    }
     return true;
 }
