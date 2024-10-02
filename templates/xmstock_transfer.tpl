@@ -146,7 +146,6 @@
 				if(this.readyState == 4 && this.status == 200)
 				{
 					let datas = xhttp.response;
-					console.log(datas);
 					if(datas['manage'] != true)
 					{
 						document.getElementById('location_label').style.display = "none";
@@ -158,35 +157,24 @@
 					if(datas['location'] != '')
 					{
 						document.getElementById('transfer_location').value = datas['location'];
-						//oldareaid = areaid;
-					} else {
-						if(oldareaid != areaid)
-						{
-							document.getElementById('transfer_location').value = '';
-							//oldareaid = areaid;
-						}
 					}
 					if(datas['mini'] != 0)
 					{
 						document.getElementById('transfer_stockmini').value = datas['mini'];
-					} else {
-						if(oldareaid != areaid)
-						{
-							document.getElementById('transfer_stockmini').value = 0;
-							//oldareaid = areaid;
-						}
 					}
 					if(datas['type'] != '')
 					{
 						document.getElementById('transfer_stocktype' + datas['type']).checked = true;
-					} else {
-						if(oldareaid != areaid)
-						{
-							document.getElementById('transfer_stocktype1').checked = true;
-							//oldareaid = areaid;
-						}
 					}
-					oldareaid = areaid;
+					if(oldareaid != areaid)
+					{
+						if(datas['location'] != '')
+						{
+							document.getElementById('transfer_location').value = '';
+						}
+						document.getElementById('transfer_stockmini').value = 0;
+						oldareaid = areaid;
+					}
 				}
 			};
 			xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);
