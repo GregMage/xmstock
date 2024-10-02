@@ -368,13 +368,12 @@ class xmstock_transfer extends XoopsObject
 				$location->addElement(new XoopsFormLabel('', $add_script));
 			}
 			$form->addElement($location);
-		}
-		if ($type == 'E') {
 			// stock mini
 			$mini = new XoopsFormText(_MA_XMSTOCK_STOCK_MINI, 'transfer_stockmini', 50, 50, 0);
 			$mini->setDescription(_MA_XMSTOCK_STOCK_MINI_DSC);
 			$form->addElement($mini, true);
-
+		}
+		if ($type == 'E') {
 			// type
 			$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'transfer_stocktype', $transfer_stocktype);
 			$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN, 4 =>_MA_XMSTOCK_STOCK_FREE);

@@ -218,6 +218,9 @@ class XmstockUtility
 						$obj->setVar('stock_articleid', $articleid);
 						$obj->setVar('stock_amount', $amount);
 						$obj->setVar('stock_location', $location);
+						if ($stockmini != 0) {
+							$obj->setVar('stock_mini', $stockmini);
+						}
 						$obj->setVar('stock_type', $st_stocktype);
 						$obj->setVar('stock_price', $st_price);
 						if ($stockHandler->insert($obj)) {
