@@ -52,6 +52,7 @@ class xmstock_transfer extends XoopsObject
 		$this->initVar('transfer_price', XOBJ_DTYPE_OTHER, null, false, 10);
 		$this->initVar('transfer_location', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('transfer_stocktype', XOBJ_DTYPE_INT, null, false, 1);
+		$this->initVar('transfer_stockmini', XOBJ_DTYPE_INT, null, false, 1);
 		$this->initVar('article_id', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_cid', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);
@@ -135,6 +136,7 @@ class xmstock_transfer extends XoopsObject
 			$this->setVar('transfer_price', number_format($price, 2, '.', ''));
 		}
 		$location = Request::getString('transfer_location', '');
+		$transfer_stockmini = Request::getInt('transfer_stockmini', 0);
 		if ($transfer_type != 'O') {
 			if (in_array($transfer_ar_areaid, $managePermissionArea) == true){
 				if ($location == '') {
@@ -143,6 +145,7 @@ class xmstock_transfer extends XoopsObject
 				} else {
 					$this->setVar('transfer_location', $location);
 				}
+				$this->setVar('transfer_stockmini', $transfer_stockmini);
 			}
 		}
 		$this->setVar('transfer_status', $transfer_status);
@@ -192,11 +195,12 @@ class xmstock_transfer extends XoopsObject
 					if ($transfer_amount != 0) {
 						$price = $price / $transfer_amount;
 					}
-					$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price, $location, $stocktype);
+					$error_message .= XmstockUtility::transfert($transfer_type, $transfer_articleid, $transfer_amount, $transfer_st_areaid, $transfer_ar_areaid, $price, $location, $stocktype, $transfer_stockmini);
 					if ($error_message == '') {
 						$this->destroyVars('transfer_price');
 						$this->destroyVars('transfer_location');
 						$this->destroyVars('transfer_stocktype');
+						$this->destroyVars('transfer_stockmini');
 						if ($transferHandler->insert($this)) {
 							redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
 						} else {

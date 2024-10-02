@@ -125,7 +125,7 @@ class XmstockUtility
 						$obj->setVar('stock_location', $location);
 					}
 					if ($stockmini != 0) {
-						$obj->setVar('stockmini', $stockmini);
+						$obj->setVar('stock_mini', $stockmini);
 					}
 					$obj->setVar('stock_type', $stocktype);
 					//price
