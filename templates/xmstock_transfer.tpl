@@ -158,12 +158,22 @@
 					if(datas['location'] != '')
 					{
 						document.getElementById('transfer_location').value = datas['location'];
-						oldareaid = areaid;
+						//oldareaid = areaid;
 					} else {
 						if(oldareaid != areaid)
 						{
 							document.getElementById('transfer_location').value = '';
-							oldareaid = areaid;
+							//oldareaid = areaid;
+						}
+					}
+					if(datas['mini'] != 0)
+					{
+						document.getElementById('transfer_stockmini').value = datas['mini'];
+					} else {
+						if(oldareaid != areaid)
+						{
+							document.getElementById('transfer_stockmini').value = 0;
+							//oldareaid = areaid;
 						}
 					}
 					if(datas['type'] != '')
@@ -173,9 +183,10 @@
 						if(oldareaid != areaid)
 						{
 							document.getElementById('transfer_stocktype1').checked = true;
-							oldareaid = areaid;
+							//oldareaid = areaid;
 						}
 					}
+					oldareaid = areaid;
 				}
 			};
 			xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);

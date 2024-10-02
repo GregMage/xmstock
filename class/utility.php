@@ -102,9 +102,10 @@ class XmstockUtility
      * @param float    $price		prix
      * @param string   $location	emplacement
      * @param int	   $stocktype	Type de stock (1 standard, 2 matière en mml et 3 emprunt)
+	 * @param int	   $stockmini	Quantité mini de stock (0 pas de surveillance)
      * @return string   			Vide ou message d'erreur
      */
-	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0, $location = '', $stocktype = 1)
+	public static function transfert($type, $articleid, $amount, $st_areaid, $ar_areaid = 0, $price = 0.0, $location = '', $stocktype = 1, $stockmini = 0)
     {
 		include __DIR__ . '/../include/common.php';
 		$error_message = '';
@@ -122,6 +123,9 @@ class XmstockUtility
 					$obj->setVar('stock_amount', $amount);
 					if ($location != '') {
 						$obj->setVar('stock_location', $location);
+					}
+					if ($stockmini != 0) {
+						$obj->setVar('stockmini', $stockmini);
 					}
 					$obj->setVar('stock_type', $stocktype);
 					//price

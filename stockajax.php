@@ -42,6 +42,7 @@ if ($needs == 0){
 	}
 	$info['location'] = '';
 	$info['type'] = '';
+	$info['mini'] = 0;
 	if ($articleid != 0 && $areaid != 0){
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('stock_areaid', $areaid));
@@ -51,6 +52,7 @@ if ($needs == 0){
 			foreach (array_keys($stock_arr) as $i) {
 				$info['location'] =  $stock_arr[$i]->getVar('stock_location');
 				$info['type'] =  $stock_arr[$i]->getVar('stock_type');
+				$info['mini'] =  $stock_arr[$i]->getVar('stock_mini');
 			}
 		}
 	}
