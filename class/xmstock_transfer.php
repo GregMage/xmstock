@@ -354,7 +354,7 @@ class xmstock_transfer extends XoopsObject
 		}
 		// location
 		if ($type != 'O') {
-			$location     = new XoopsFormElementTray('<section id="location_label">' . _MA_XMSTOCK_TRANSFER_LOCATION . '</section>', '');
+			$location     = new XoopsFormElementTray('<section id="location_label">' . _MA_XMSTOCK_TRANSFER_LOCATION . '*</section>', '');
 			$location->addElement(new XoopsFormLabel('<section id="location_input">'), false);
 			$location_input = new XoopsFormText('', 'transfer_location', 25, 255, $this->getVar('transfer_location'));
 			$location->addElement($location_input);
