@@ -422,7 +422,8 @@ class XmstockUtility
                 $stock['name']       	= $stock_arr[$i]->getVar('area_name');
                 $stock['location']   	= $stock_arr[$i]->getVar('area_location');
                 $stock['location_s'] 	= $stock_arr[$i]->getVar('stock_location');
-				if ($stock_arr[$i]->getVar('stock_type') == 2) {
+				$stock['type']   	 	= $stock_arr[$i]->getVar('stock_type');
+				if ($stock['type'] == 2) {
 					$stock_type = true;
 					$stock['amount']    = $stock_arr[$i]->getVar('stock_amount') . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
 				} else {
@@ -430,7 +431,6 @@ class XmstockUtility
 					$stock_type = false;
 				}
 				$stock['price']   	 	= self::getPrice($stock_arr[$i]->getVar('stock_price'));
-				$stock['type']   	 	= $stock_arr[$i]->getVar('stock_type');
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
 					if ($stock['type'] == 3) {
 						$stock['order'] = false;
@@ -451,7 +451,9 @@ class XmstockUtility
 				} else {
 					$stock['manage']  	= false;
 				}
-				$total_amount += $stock_arr[$i]->getVar('stock_amount');
+				if ($stock['type'] != 4) {
+					$total_amount += $stock_arr[$i]->getVar('stock_amount');
+				}
                 $xoopsTpl->appendByRef('stocks', $stock);
 				$area[] = $stock['area_id'];
 				unset($stock);
