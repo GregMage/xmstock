@@ -42,7 +42,7 @@ if ($needs == 0){
 	}
 	$info['location'] = '';
 	$info['type'] = '';
-	$info['mini'] = 0;
+	$info['mini'] = '';
 	if ($articleid != 0 && $areaid != 0){
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('stock_areaid', $areaid));

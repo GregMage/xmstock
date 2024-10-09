@@ -108,7 +108,7 @@
 					if(this.readyState == 4 && this.status == 200)
 					{
 						let datas = xhttp.response;
-						console.log(datas);
+						//console.log(datas);
 						if(datas['needs'] != true)
 						{
 							document.getElementById('needsyear_label').style.display = "none";
@@ -127,60 +127,94 @@
 		<{/if}>
 
 		<{if $type|default:'E' != 'O'}>
-		<script>
-		let oldareaid = 0;
-		setInterval(function getInfoStock()
-		{
-			let xhttp = new XMLHttpRequest();
-			let areaid;
-			if (typeof valid_areaid == "undefined")
-			{
-				areaid = document.getElementById('transfer_ar_areaid').options[document.getElementById('transfer_ar_areaid').selectedIndex].value;
-			} else {
-				areaid = valid_areaid;
-			}
-			//console.log('article: ' + articleId);
-			//console.log('areaid: ' + areaid);
-			xhttp.onreadystatechange = function()
-			{
-				if(this.readyState == 4 && this.status == 200)
+			<script>
+				let areaid;
+				let typestock ='';
+				if (typeof valid_areaid == "undefined")
 				{
-					let datas = xhttp.response;
-					if(datas['manage'] != true)
-					{
-						document.getElementById('location_label').style.display = "none";
-						document.getElementById('location_input').style.display = "none";
-					} else {
-						document.getElementById('location_label').style.display = "block";
-						document.getElementById('location_input').style.display = "block";
-					}
-					if(datas['location'] != '')
-					{
-						document.getElementById('transfer_location').value = datas['location'];
-					}
-					if(datas['mini'] != 0)
-					{
-						document.getElementById('transfer_stockmini').value = datas['mini'];
-					}
-					if(datas['type'] != '')
-					{
-						document.getElementById('transfer_stocktype' + datas['type']).checked = true;
-					}
-					if(oldareaid != areaid)
-					{
-						if(datas['location'] != '')
-						{
-							document.getElementById('transfer_location').value = '';
-						}
-						document.getElementById('transfer_stockmini').value = 0;
-						oldareaid = areaid;
-					}
+					areaid = document.getElementById('transfer_ar_areaid').options[document.getElementById('transfer_ar_areaid').selectedIndex].value;
+				} else {
+					areaid = valid_areaid;
 				}
-			};
-			xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);
-			xhttp.responseType = 'json';
-			xhttp.send();
-		}, 1000);
+				if (articleId == 0) {
+					document.getElementById('transfer_ar_areaid').disabled = true;
+					document.getElementById('transfer_location').disabled = true;
+					document.getElementById('transfer_stockmini').disabled = true;
+					document.getElementById('transfer_stocktype1').disabled = true;
+					document.getElementById('transfer_stocktype2').disabled = true;
+					document.getElementById('transfer_stocktype3').disabled = true;
+					document.getElementById('transfer_stocktype4').disabled = true;
+				} else {
+					document.getElementById('transfer_ar_areaid').disabled = false;
+					getInfoStock();
+				}
+				function getInfoStock()
+				{
+					let xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if(this.readyState == 4 && this.status == 200) {
+							let datas = xhttp.response;
+							//console.log(datas);
+							if(datas['manage'] == false) {
+								document.getElementById('transfer_location').disabled = true;
+								document.getElementById('transfer_location').value = datas['location'];
+								document.getElementById('transfer_stockmini').disabled = true;
+								document.getElementById('transfer_stockmini').value = datas['mini'];
+								document.getElementById('transfer_stocktype1').disabled = true;
+								document.getElementById('transfer_stocktype2').disabled = true;
+								document.getElementById('transfer_stocktype3').disabled = true;
+								document.getElementById('transfer_stocktype4').disabled = true;
+								if(datas['type'] == '') {
+									document.getElementById('transfer_stocktype1').checked = true;
+								} else {
+									document.getElementById('transfer_stocktype' + datas['type']).checked = true;
+								}
+							} else {
+								if(datas['location'] == '') {
+									document.getElementById('transfer_location').disabled = false;
+									document.getElementById('transfer_location').value = '';
+								} else {
+									document.getElementById('transfer_location').disabled = true;
+									document.getElementById('transfer_location').value = datas['location'];
+								}
+								if(datas['mini'] == '') {
+									document.getElementById('transfer_stockmini').disabled = false;
+									document.getElementById('transfer_stockmini').value = 0;
+								} else {
+									document.getElementById('transfer_stockmini').disabled = true;
+									document.getElementById('transfer_stockmini').value = datas['mini'];
+								}
+								if(datas['type'] == '') {
+									document.getElementById('transfer_stocktype1').disabled = false;
+									document.getElementById('transfer_stocktype2').disabled = false;
+									document.getElementById('transfer_stocktype3').disabled = false;
+									document.getElementById('transfer_stocktype4').disabled = false;
+									if(typestock == '') {
+										document.getElementById('transfer_stocktype1').checked = true;
+									} else {
+										document.getElementById('transfer_stocktype' + typestock).checked = true;
+									}
+								} else {
+									let hiddenStocktype = document.createElement('input');
+									document.getElementById('transfer_stocktype1').disabled = true;
+									document.getElementById('transfer_stocktype2').disabled = true;
+									document.getElementById('transfer_stocktype3').disabled = true;
+									document.getElementById('transfer_stocktype4').disabled = true;
+									document.getElementById('transfer_stocktype' + datas['type']).checked = true;
+									typestock = datas['type'];
+								}
+							}
+						}
+					};
+					xhttp.open('GET', '<{$xoops_url}>/modules/xmstock/stockajax.php?Authorization=<{$jwt}>&articleid=' + articleId + '&areaid=' + areaid, true);
+					xhttp.responseType = 'json';
+					xhttp.send();
+				}
+
+				document.getElementById("transfer_ar_areaid").addEventListener("change", (event) => {
+				areaid = event.target.value;
+				getInfoStock();
+				});
 		</script>
 		<{/if}>
 	</div>

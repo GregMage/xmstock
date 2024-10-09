@@ -127,7 +127,9 @@ class XmstockUtility
 					if ($stockmini != 0) {
 						$obj->setVar('stock_mini', $stockmini);
 					}
-					$obj->setVar('stock_type', $stocktype);
+					if ($stocktype != 0) {
+						$obj->setVar('stock_type', $stocktype);
+					}
 					//price
 					$price_stock = self::priceCalculation($price, $amount, 0, 0);
 					if ($price > 0) {
@@ -153,7 +155,9 @@ class XmstockUtility
 					if ($location != '') {
 						$obj->setVar('stock_location', $location);
 					}
-					$obj->setVar('stock_type', $stocktype);
+					if ($stocktype != 0) {
+						$obj->setVar('stock_type', $stocktype);
+					}
 					//price
 					$price_stock = self::priceCalculation($price, $amount, $old_price, $old_amount);
 					if ($price > 0) {
