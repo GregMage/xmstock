@@ -240,6 +240,7 @@ switch ($op) {
 			}
 			if ($obj->getVar('transfer_status') == 0){
 				xoops_load('utility', 'xmarticle');
+				$xoopsTpl->assign('transfer_status', $obj->getVar('transfer_status'));
 				$xoopsTpl->assign('transfert_id', $transfer_id);
 				$xoopsTpl->assign('transfer_description', $obj->getVar('transfer_description'));
 				$xoopsTpl->assign('transfer_article', XmarticleUtility::getArticleName($obj->getVar('transfer_articleid'), true));

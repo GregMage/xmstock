@@ -140,10 +140,12 @@
 					document.getElementById('transfer_ar_areaid').disabled = true;
 					document.getElementById('transfer_location').disabled = true;
 					document.getElementById('transfer_stockmini').disabled = true;
+					<{if $type|default:'E' == 'E'}>
 					document.getElementById('transfer_stocktype1').disabled = true;
 					document.getElementById('transfer_stocktype2').disabled = true;
 					document.getElementById('transfer_stocktype3').disabled = true;
 					document.getElementById('transfer_stocktype4').disabled = true;
+					<{/if}>
 				} else {
 					document.getElementById('transfer_ar_areaid').disabled = false;
 					getInfoStock();
@@ -160,6 +162,7 @@
 								document.getElementById('transfer_location').value = datas['location'];
 								document.getElementById('transfer_stockmini').disabled = true;
 								document.getElementById('transfer_stockmini').value = datas['mini'];
+								<{if $type|default:'E' == 'E'}>
 								document.getElementById('transfer_stocktype1').disabled = true;
 								document.getElementById('transfer_stocktype2').disabled = true;
 								document.getElementById('transfer_stocktype3').disabled = true;
@@ -169,6 +172,7 @@
 								} else {
 									document.getElementById('transfer_stocktype' + datas['type']).checked = true;
 								}
+								<{/if}>
 							} else {
 								if(datas['location'] == '') {
 									document.getElementById('transfer_location').disabled = false;
@@ -184,6 +188,7 @@
 									document.getElementById('transfer_stockmini').disabled = true;
 									document.getElementById('transfer_stockmini').value = datas['mini'];
 								}
+								<{if $type|default:'E' == 'E' && $transfer_amount|default:1 == 1}>
 								if(datas['type'] == '') {
 									document.getElementById('transfer_stocktype1').disabled = false;
 									document.getElementById('transfer_stocktype2').disabled = false;
@@ -195,7 +200,6 @@
 										document.getElementById('transfer_stocktype' + typestock).checked = true;
 									}
 								} else {
-									let hiddenStocktype = document.createElement('input');
 									document.getElementById('transfer_stocktype1').disabled = true;
 									document.getElementById('transfer_stocktype2').disabled = true;
 									document.getElementById('transfer_stocktype3').disabled = true;
@@ -203,6 +207,7 @@
 									document.getElementById('transfer_stocktype' + datas['type']).checked = true;
 									typestock = datas['type'];
 								}
+								<{/if}>
 							}
 						}
 					};

@@ -346,10 +346,17 @@ class xmstock_transfer extends XoopsObject
 		}
 		// location
 		if ($type != 'O') {
+			if ($status == 0){
+				$add_script = "<script>";
+				$add_script .= "let articleId = " . $this->getVar('transfer_articleid') . ";";
+				$add_script .= "let valid_areaid = " . $this->getVar('transfer_ar_areaid') . ";";
+				$add_script .= "</script>";
+			} else {
+				$add_script = '';
+			}
 			$location = new XoopsFormText(_MA_XMSTOCK_TRANSFER_LOCATION, 'transfer_location', 50, 255, '');
-			$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
-			$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
-			$form->addElement($location, true);
+			$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC . $add_script);
+			$form->addElement($location, false);
 
 			$mini = new XoopsFormText(_MA_XMSTOCK_STOCK_MINI, 'transfer_stockmini', 50, 50, 0);
 			$mini->setDescription(_MA_XMSTOCK_STOCK_MINI_DSC);

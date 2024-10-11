@@ -221,7 +221,9 @@ class XmstockUtility
 						$obj->setVar('stock_areaid', $ar_areaid);
 						$obj->setVar('stock_articleid', $articleid);
 						$obj->setVar('stock_amount', $amount);
-						$obj->setVar('stock_location', $location);
+						if ($location != '') {
+							$obj->setVar('stock_location', $location);
+						}
 						if ($stockmini != 0) {
 							$obj->setVar('stock_mini', $stockmini);
 						}
