@@ -155,6 +155,9 @@ class XmstockUtility
 					if ($location != '') {
 						$obj->setVar('stock_location', $location);
 					}
+					if ($stockmini != 0) {
+						$obj->setVar('stock_mini', $stockmini);
+					}
 					if ($stocktype != 0) {
 						$obj->setVar('stock_type', $stocktype);
 					}
