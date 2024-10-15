@@ -23,6 +23,7 @@
 				<{/foreach}>
 				</tbody>
 			</table>
+			<a href="<{$xoops_url}>/modules/xmstock/loan.php" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_LOAN_LIST}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_LOAN_LIST}></a>
 		<{else}>
 			<div class="alert alert-warning" role="alert">
 				<{$smarty.const._MB_XMSTOCK_NOLOAN}>

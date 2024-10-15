@@ -18,6 +18,11 @@
 			</a>
 			<{/foreach}>
 		</div>
+		<{if $block.type == 'myorders'}>
+			<a href="<{$xoops_url}>/modules/xmstock/order.php" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
+		<{else}>
+			<a href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=1" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
+		<{/if}>
 		<{else}>
 			<div class="alert alert-warning" role="alert">
 				<{$smarty.const._MB_XMSTOCK_NOORDER}>
