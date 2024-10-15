@@ -129,6 +129,10 @@ class xmstock_stock extends XoopsObject
 		$this->setVar('stock_mini', Request::getInt('stock_mini', 0));
 		$this->setVar('stock_del', Request::getInt('stock_del', 0));
 		$this->setVar('stock_type', Request::getInt('stock_type', 1));
+        // si le stock est en libre service le total du stock passe à 0.
+        if (Request::getInt('stock_type', 1) == 4) {
+            $this->setVar('stock_amount', 0);
+        }
 		if ($location == '') {
 			$error_message .= _MA_XMSTOCK_ERROR_LOCATION . '<br>';
 			$this->setVar('stock_location', '');

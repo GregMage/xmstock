@@ -101,7 +101,7 @@ class XmstockUtility
      * @param int      $ar_areaid	Id de l'area d'arrivée
      * @param float    $price		prix
      * @param string   $location	emplacement
-     * @param int	   $stocktype	Type de stock (1 standard, 2 matière en mml et 3 emprunt)
+     * @param int	   $stocktype	Type de stock (1 standard, 2 matière en mml, 3 emprunt et 4 libre service)
 	 * @param int	   $stockmini	Quantité mini de stock (0 pas de surveillance)
      * @return string   			Vide ou message d'erreur
      */
@@ -120,7 +120,12 @@ class XmstockUtility
 					$obj = $stockHandler->create();
 					$obj->setVar('stock_areaid', $ar_areaid);
 					$obj->setVar('stock_articleid', $articleid);
-					$obj->setVar('stock_amount', $amount);
+					 // si le stock est en libre service le total du stock passe à 0.
+					if ($stocktype == 4) {
+						$obj->setVar('stock_amount', 0);
+					} else {
+						$obj->setVar('stock_amount', $amount);
+					}
 					if ($location != '') {
 						$obj->setVar('stock_location', $location);
 					}
@@ -151,16 +156,20 @@ class XmstockUtility
 					}
 					$old_amount = $obj->getVar('stock_amount');
 					$old_price = $obj->getVar('stock_price');
-					$obj->setVar('stock_amount', $old_amount + $amount);
+					$old_stocktype = $obj->getVar('stock_type');
+					// si le stock est en libre service le total du stock passe à 0.
+					if ($old_stocktype == 4) {
+						$obj->setVar('stock_amount', 0);
+					} else {
+						$obj->setVar('stock_amount', $old_amount + $amount);
+					}
 					if ($location != '') {
 						$obj->setVar('stock_location', $location);
 					}
 					if ($stockmini != 0) {
 						$obj->setVar('stock_mini', $stockmini);
 					}
-					if ($stocktype != 0) {
-						$obj->setVar('stock_type', $stocktype);
-					}
+					$obj->setVar('stock_type', $st_stocktype);
 					//price
 					$price_stock = self::priceCalculation($price, $amount, $old_price, $old_amount);
 					if ($price > 0) {
@@ -223,7 +232,12 @@ class XmstockUtility
 						$obj = $stockHandler->create();
 						$obj->setVar('stock_areaid', $ar_areaid);
 						$obj->setVar('stock_articleid', $articleid);
-						$obj->setVar('stock_amount', $amount);
+						// si le stock est en libre service le total du stock passe à 0.
+						if ($st_stocktype == 4) {
+							$obj->setVar('stock_amount', 0);
+						} else {
+							$obj->setVar('stock_amount', $amount);
+						}
 						if ($location != '') {
 							$obj->setVar('stock_location', $location);
 						}
@@ -244,7 +258,13 @@ class XmstockUtility
 						}
 						$old_amount = $obj->getVar('stock_amount');
 						$old_price = $obj->getVar('stock_price');
-						$obj->setVar('stock_amount', $old_amount + $amount);
+						$old_stocktype = $obj->getVar('stock_type');
+						// si le stock est en libre service le total du stock passe à 0.
+						if ($old_stocktype == 4) {
+							$obj->setVar('stock_amount', 0);
+						} else {
+							$obj->setVar('stock_amount', $old_amount + $amount);
+						}
 						//price
 						$price_stock = self::priceCalculation($st_price, $amount, $old_price, $old_amount);
 						if ($price > 0) {
