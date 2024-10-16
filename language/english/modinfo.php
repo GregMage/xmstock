@@ -47,6 +47,8 @@ define('_MI_XMSTOCK_BLOCK_MYLOANS', 'Mes emprunts');
 define('_MI_XMSTOCK_BLOCK_MYLOANS_DESC', 'Afficher les emprunts de l\'utilisateur');
 define('_MI_XMSTOCK_BLOCK_LOANS', 'Emprunts en cours');
 define('_MI_XMSTOCK_BLOCK_LOANS_DESC', 'Afficher les emprunts sous gestion de l\'utilisateur');
+define('_MI_XMSTOCK_BLOCK_OVERDRAFT', 'Articles stock minimum');
+define('_MI_XMSTOCK_BLOCK_OVERDRAFT_DESC', 'Afficher les articles qui ont atteint le stock minimum');
 
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>General</span>");
