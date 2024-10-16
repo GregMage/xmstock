@@ -287,7 +287,7 @@ define('_MA_XMSTOCK_MANAGEMENT_READY', 'Commandes prêtes');
 define('_MA_XMSTOCK_MANAGEMENT_SORTORDER', 'N° de commande');
 define('_MA_XMSTOCK_MANAGEMENT_TOPROCESS', 'Commandes à traiter');
 define('_MA_XMSTOCK_MANAGEMENT_VIEW', 'Visualisation d\'une commande');
-define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualization of orders');
+define('_MA_XMSTOCK_MANAGEMENT_VIEWALL', 'Visualisation des commandes');
 
 //action.php
 define('_MA_XMSTOCK_ACTION_ARTICLES', 'Articles');
