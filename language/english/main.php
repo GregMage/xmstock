@@ -334,3 +334,6 @@ define('_MA_XMSTOCK_LOAN_TRANSFERT_DESC', 'Prêt du %s avec le numéro %s');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_REF', 'Prêt %s');
 define('_MA_XMSTOCK_LOAN_USERID', 'Déstinataire du prêt');
 define('_MA_XMSTOCK_LOAN_USERSLIST', 'Liste des emprunteurs');
+
+//overdraft.php
+define('_MA_XMSTOCK_OVERDRAFT_ALL', 'Tous les découverts');

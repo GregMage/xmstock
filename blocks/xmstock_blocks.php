@@ -178,6 +178,52 @@ function block_xmstock_show($options) {
 				$block['loan'] = '';
 			}
 			break;
+
+		case 'overdraft':
+			//area
+			$area = array();
+			$area[0] = '';
+			$criteria->setSort('area_weight ASC, area_name');
+			$criteria->setOrder('ASC');
+			$area_arr = $areaHandler->getall($criteria);
+			if (count($area_arr) > 0) {
+				foreach (array_keys($area_arr) as $i) {
+					$area[$i] = $area_arr[$i]->getVar('area_name');
+				}
+			}
+			$criteria->setSort('stock_amount');
+			$criteria->setOrder($options[1]);
+			$criteria->add(new Criteria('stock_amount', '`stock_mini`', '<='));
+			$criteria->add(new Criteria('article_status', 1));
+			$criteria->setLimit($options[3]);
+			$area_ids = explode(',', $options[0]);
+			if (!in_array(0, $area_ids)) {
+				$criteria->add(new Criteria('stock_areaid', '(' . $options[0] . ')', 'IN'));
+			}
+			if (!empty($managePermissionArea)) {
+				$criteria->add(new Criteria('stock_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+			}
+			$stockHandler->table_link = $stockHandler->db->prefix("xmarticle_article");
+			$stockHandler->field_link = "article_id";
+			$stockHandler->field_object = "stock_articleid";
+			$stock_arr = $stockHandler->getByLink($criteria);
+			if (count($stock_arr) > 0 && !empty($managePermissionArea)) {
+				foreach (array_keys($stock_arr) as $i) {
+					$stock['article_id']    = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $stock_arr[$i]->getVar('article_cid') . '&article_id=' . $stock_arr[$i]->getVar('article_id') . '" title="' . $stock_arr[$i]->getVar('article_name') . '" target="_blank">' . $stock_arr[$i]->getVar('article_name') . '</a> (' . $stock_arr[$i]->getVar('article_reference') . ')';
+					$stock['article_id']    = $stock_arr[$i]->getVar('article_id');
+					$stock['article_cid']   = $stock_arr[$i]->getVar('article_cid');
+					$stock['article_name']  = $stock_arr[$i]->getVar('article_name');
+					$stock['article_ref']   = $stock_arr[$i]->getVar('article_reference');
+					$stock['area_name']   	= $area[$stock_arr[$i]->getVar('stock_areaid')];
+					$stock['amount']        = $stock_arr[$i]->getVar('stock_amount');
+					$stock['mini']   		= $stock_arr[$i]->getVar('stock_mini');
+					$block['overdraft'][] = $stock;
+					unset($stock);
+				}
+			} else {
+				$block['overdraft'] = '';
+			}
+			break;
 	}
 	$GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/xmstock/assets/css/styles.css');
 	return $block;
@@ -256,6 +302,27 @@ function block_xmstock_edit($options) {
 			$form->addElement(new XoopsFormHidden('options[1]', $options[1]));
 			$form->addElement(new XoopsFormHidden('options[2]', $options[2]));
 			$form->addElement(new XoopsFormText(_MB_XMSTOCK_NBLOANS, 'options[3]', 5, 5, $options[3]), true);
+			break;
+
+		case 'overdraft':
+			// Criteria
+			$criteria = new CriteriaCompo();
+			$criteria->setSort('area_weight ASC, area_name');
+			$criteria->setOrder('ASC');
+			$criteria->add(new Criteria('area_status', 1));
+			$area_arr = $areaHandler->getall($criteria);
+			$area = new XoopsFormSelect(_MB_XMSTOCK_AREA, 'options[0]', explode(',', $options[0]), 5, true);
+			$area->addOption(0, _MB_XMSTOCK_ALLAREA);
+			foreach (array_keys($area_arr) as $i) {
+				$area->addOption($area_arr[$i]->getVar('area_id'), $area_arr[$i]->getVar('area_name'));
+			}
+			$form->addElement($area);
+			$amount = new XoopsFormRadio(_MB_XMSTOCK_SORTAMOUNT, 'options[1]', $options[1]);
+			$amount->addOption('DESC', '<span class="fa fa-arrow-down"></span>');
+			$amount->addOption('ASC', '<span class="fa fa-arrow-up"></span>');
+			$form->addElement($amount);
+			$form->addElement(new XoopsFormHidden('options[2]', $options[2]));
+			$form->addElement(new XoopsFormText(_MB_XMSTOCK_NBARTICLES, 'options[3]', 5, 5, $options[3]), true);
 			break;
 	}
 	$form->addElement(new XoopsFormHidden('options[4]', $options[4]));

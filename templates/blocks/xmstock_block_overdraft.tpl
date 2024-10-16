@@ -3,26 +3,32 @@
 		<{if $block.overdraft|default:'' != ''}>
 		<div class="list-group">
 			<{foreach item=blockoverdraft from=$block.overdraft}>
-				<a href="<{$xoops_url}>/modules/xmarticle/vieworder.php?op=view&order_id=<{$blockorder.id}>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-				<b><{$smarty.const._MA_XMSTOCK_VIEWORDER_ORDER}> <{$blockorder.id}></b>
-				<div>
-					<span class="fa fa-calendar fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}>
-					<{$blockoverdraft.dorder}>
-				</div>
-				<span class="badge badge-secondary fa-lg text-primary ml-2">
-				<small><{$blockorder.status_icon}> <{$blockorder.status_text}></small>
-				</span>
-			</a>
+				<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$blockoverdraft.article_cid}>&article_id=<{$blockoverdraft.article_id}>" class="list-group-item list-group-item-action">
+					<div class="row">
+						<div class="col-7 text-left">
+							<b><{$blockoverdraft.article_ref}></b> <{$blockoverdraft.article_name}>
+						</div>
+						<div class="col-3 text-center">
+							<span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$blockoverdraft.area_name}>
+						</div>
+						<div class="col-2 text-right">
+							<{if $blockoverdraft.amount == $blockoverdraft.mini}>
+							<span class="badge badge-pill badge-warning">
+							<{else}>
+							<span class="badge badge-pill badge-danger">
+							<{/if}>
+							<{$blockoverdraft.amount}>/<{$blockoverdraft.mini}>
+							</span>
+						</div>
+					</div>
+
+				</a>
 			<{/foreach}>
 		</div>
-		<{if $block.type == 'myorders'}>
-			<a href="<{$xoops_url}>/modules/xmstock/order.php" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
-		<{else}>
-			<a href="<{$xoops_url}>/modules/xmstock/management.php?op=viewall&status=1" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_ALLORDERS}></a>
-		<{/if}>
+		<a href="<{$xoops_url}>/modules/xmstock/overdraft.php" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_OVERDRAFT_ALL}></a>
 		<{else}>
 			<div class="alert alert-warning" role="alert">
-				<{$smarty.const._MB_XMSTOCK_NOORDER}>
+				<{$smarty.const._MB_XMSTOCK_NOOVERDRAFT}>
 			</div>
 		<{/if}>
 	</div>

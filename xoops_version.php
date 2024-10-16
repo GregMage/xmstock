@@ -152,7 +152,7 @@ $modversion['blocks'][] = array(
     'description' => _MI_XMSTOCK_BLOCK_OVERDRAFT_DESC,
     'show_func'   => 'block_xmstock_show',
     'edit_func'   => 'block_xmstock_edit',
-	'options'     => '1|0|0|5|overdraft',
+	'options'     => '0|DESC|0|5|overdraft',
     'template'    => 'xmstock_block_overdraft.tpl'
 );
 
