@@ -25,6 +25,9 @@
 			<a title="<{$smarty.const._MI_XMSTOCK_SUB_LOAN}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/loan.php">
 				<span class="fa fa-exchange fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_LOAN}></p>
 			</a>
+			<a title="<{$smarty.const._MI_XMSTOCK_SUB_OVERDRAFT}>" class="btn btn-light btn-lg" href="<{$xoops_url}>/modules/xmstock/overdraft.php">
+				<span class="fa fa-battery-quarter fa-2x"></span><p class="mt-2"><{$smarty.const._MI_XMSTOCK_SUB_OVERDRAFT}></p>
+			</a>
 		<{/if}>
 		</div>
 	</div>

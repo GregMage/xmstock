@@ -34,6 +34,7 @@ define('_MI_XMSTOCK_SUB_CADDY', 'Panier');
 define('_MI_XMSTOCK_SUB_LOAN', 'Gestion des prêts');
 define('_MI_XMSTOCK_SUB_ORDERS', 'Mes commandes');
 define('_MI_XMSTOCK_SUB_ORDERSMANAGEMENT', 'Gestion des commandes');
+define('_MI_XMSTOCK_SUB_OVERDRAFT', 'Liste des découverts');
 define('_MI_XMSTOCK_SUB_TRANSFER', 'Transferts');
 
 // Block

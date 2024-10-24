@@ -337,3 +337,7 @@ define('_MA_XMSTOCK_LOAN_USERSLIST', 'Liste des emprunteurs');
 
 //overdraft.php
 define('_MA_XMSTOCK_OVERDRAFT_ALL', 'Tous les découverts');
+define('_MA_XMSTOCK_OVERDRAFT_AMOUNT', 'Quantité');
+define('_MA_XMSTOCK_OVERDRAFT_AREA', 'Stock');
+define('_MA_XMSTOCK_OVERDRAFT_ARTICLE', 'Article');
+define('_MA_XMSTOCK_OVERDRAFT_NOOVERDRAFT', 'Pas d\'articles en dessous du montant minimum');

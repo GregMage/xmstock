@@ -52,6 +52,10 @@ $modversion['sub'][]   = [
     'name' => _MI_XMSTOCK_SUB_LOAN,
     'url'  => 'loan.php'
 ];
+$modversion['sub'][]   = [
+    'name' => _MI_XMSTOCK_SUB_OVERDRAFT,
+    'url'  => 'overdraft.php'
+];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -96,6 +100,7 @@ $modversion['templates'][] = ['file' => 'xmstock_action.tpl', 'description' => '
 $modversion['templates'][] = ['file' => 'xmstock_viewprice.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_transfer.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'xmstock_loan.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'xmstock_overdraft.tpl', 'description' => ''];
 
 // Blocks
 $modversion['blocks'][] = array(
