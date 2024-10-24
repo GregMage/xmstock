@@ -1,4 +1,63 @@
 ﻿-------------------------------------------------
+Version: 1.2.0 Stable
+Date:    ??.??.2024
+-------------------------------------------------
+Correction de bogues:
+	- Le total d'un article était faux si il y était en libre service.
+    - Le transfert d'un article en libre service n'ajoute pas de quantité au stock.
+
+Améliorations:
+	- Nouveau système pour les transferts (formulaire)
+    - Ajout du système de stock minimum
+
+Sécurités:
+	- /
+-------------------------------------------------
+Version: 1.1.1 Stable
+Date:    25.09.2024
+-------------------------------------------------
+Correction de bogues:
+	- Bogue calcul de prix moyen
+
+Améliorations:
+    - Affichage des liens rapide de la fiche article uniquement si l'article n'est pas en libre service
+    - Ajout de l'affichage du prix moyen
+
+Sécurités:
+	- /
+
+-------------------------------------------------
+Version: 1.1.0 Stable
+Date:    16.09.2024
+-------------------------------------------------
+Correction de bogues:
+	- Il n'était pas possible de supprimer définitivement un article du stock
+
+Améliorations:
+	- Ajout d'un bouton pour les prêts (directement depuis la fiche article)
+
+Sécurités:
+	- /
+
+-------------------------------------------------
+Version: 1.0.1 Stable
+Date:    02.09.2024
+-------------------------------------------------
+Correction de bogues:
+	- Pas possible d'éditer une longueur pour le gestionnaire de stock
+
+Améliorations:
+	- /
+
+Sécurités:
+	- /
+-------------------------------------------------
+Version: 1.0.0 Stable
+Date:    03.06.2024
+-------------------------------------------------
+Première version stable
+
+-------------------------------------------------
 Version: 0.10 Alpha
 Date:    04.11.2017
 -------------------------------------------------
