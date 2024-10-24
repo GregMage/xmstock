@@ -209,7 +209,6 @@ function block_xmstock_show($options) {
 			$stock_arr = $stockHandler->getByLink($criteria);
 			if (count($stock_arr) > 0 && !empty($managePermissionArea)) {
 				foreach (array_keys($stock_arr) as $i) {
-					$stock['article_id']    = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $stock_arr[$i]->getVar('article_cid') . '&article_id=' . $stock_arr[$i]->getVar('article_id') . '" title="' . $stock_arr[$i]->getVar('article_name') . '" target="_blank">' . $stock_arr[$i]->getVar('article_name') . '</a> (' . $stock_arr[$i]->getVar('article_reference') . ')';
 					$stock['article_id']    = $stock_arr[$i]->getVar('article_id');
 					$stock['article_cid']   = $stock_arr[$i]->getVar('article_cid');
 					$stock['article_name']  = $stock_arr[$i]->getVar('article_name');
