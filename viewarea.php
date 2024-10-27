@@ -188,11 +188,8 @@ if ($stock_count > 0) {
 		$stock['article_cid'] = $stock_arr[$i]->getVar('article_cid');
 		$stock['name']        = $stock_arr[$i]->getVar('article_name');
 		$stock['reference']   = $stock_arr[$i]->getVar('article_reference');
-		if ($stock_arr[$i]->getVar('stock_type') == 2) {
-			$stock['amount']  = $stock_arr[$i]->getVar('stock_amount') . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
-		} else {
-			$stock['amount']  = $stock_arr[$i]->getVar('stock_amount');
-		}
+		$stock['mini']		  = $stock_arr[$i]->getVar('stock_mini');
+		$stock['amount']	  = $stock_arr[$i]->getVar('stock_amount');
 		$stock['location_s']  = $stock_arr[$i]->getVar('stock_location');
 		$stock['price']   	  = XmstockUtility::getPrice($stock_arr[$i]->getVar('stock_price'));
 		$stock['borrower'] 	  = implode(', ', XmstockUtility::getBorrowerPerArticle($area_id , $stock['article_id']));

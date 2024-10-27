@@ -451,12 +451,12 @@ class XmstockUtility
                 $stock['name']       	= $stock_arr[$i]->getVar('area_name');
                 $stock['location']   	= $stock_arr[$i]->getVar('area_location');
                 $stock['location_s'] 	= $stock_arr[$i]->getVar('stock_location');
+                $stock['mini'] 			= $stock_arr[$i]->getVar('stock_mini');
+				$stock['amount']		= $stock_arr[$i]->getVar('stock_amount');
 				$stock['type']   	 	= $stock_arr[$i]->getVar('stock_type');
 				if ($stock['type'] == 2) {
 					$stock_type = true;
-					$stock['amount']    = $stock_arr[$i]->getVar('stock_amount') . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
 				} else {
-					$stock['amount']    = $stock_arr[$i]->getVar('stock_amount');
 					$stock_type = false;
 				}
 				$stock['price']   	 	= self::getPrice($stock_arr[$i]->getVar('stock_price'));
