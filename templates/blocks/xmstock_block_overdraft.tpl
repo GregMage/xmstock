@@ -8,7 +8,7 @@
 						<div class="col-7 text-left">
 							<b><{$blockoverdraft.article_ref}></b> <{$blockoverdraft.article_name}>
 						</div>
-						<div class="col-3 text-center">
+						<div class="col-3 text-left">
 							<span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$blockoverdraft.area_name}>
 						</div>
 						<div class="col-2 text-right">
@@ -21,7 +21,6 @@
 							</span>
 						</div>
 					</div>
-
 				</a>
 			<{/foreach}>
 		</div>
