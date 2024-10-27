@@ -194,6 +194,7 @@ function block_xmstock_show($options) {
 			$criteria->setSort('stock_amount');
 			$criteria->setOrder($options[1]);
 			$criteria->add(new Criteria('stock_amount', '`stock_mini`', '<='));
+			$criteria->add(new Criteria('stock_amount', 0, '!='));
 			$criteria->add(new Criteria('article_status', 1));
 			$criteria->setLimit($options[3]);
 			$area_ids = explode(',', $options[0]);
