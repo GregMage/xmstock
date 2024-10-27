@@ -142,7 +142,7 @@ function block_xmstock_show($options) {
 		case "loans":
 			$acces = true;
 			$criteria->setSort('loan_date');
-			$criteria->setOrder('ASC');
+			$criteria->setOrder('DESC');
 			$criteria->add(new Criteria('loan_status', 1));
 			$criteria->setLimit($options[3]);
 			if ($options[4] == 'myloans') {
