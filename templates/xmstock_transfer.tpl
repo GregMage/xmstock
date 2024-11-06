@@ -145,6 +145,7 @@
 					document.getElementById('transfer_stocktype2').disabled = true;
 					document.getElementById('transfer_stocktype3').disabled = true;
 					document.getElementById('transfer_stocktype4').disabled = true;
+					document.getElementById('transfer_stocktype5').disabled = true;
 					<{/if}>
 				} else {
 					document.getElementById('transfer_ar_areaid').disabled = false;
@@ -167,6 +168,7 @@
 								document.getElementById('transfer_stocktype2').disabled = true;
 								document.getElementById('transfer_stocktype3').disabled = true;
 								document.getElementById('transfer_stocktype4').disabled = true;
+								document.getElementById('transfer_stocktype5').disabled = true;
 								if(datas['type'] == '') {
 									document.getElementById('transfer_stocktype1').checked = true;
 								} else {
@@ -194,6 +196,7 @@
 									document.getElementById('transfer_stocktype2').disabled = false;
 									document.getElementById('transfer_stocktype3').disabled = false;
 									document.getElementById('transfer_stocktype4').disabled = false;
+									document.getElementById('transfer_stocktype5').disabled = false;
 									if(typestock == '') {
 										document.getElementById('transfer_stocktype1').checked = true;
 									} else {
@@ -204,6 +207,7 @@
 									document.getElementById('transfer_stocktype2').disabled = true;
 									document.getElementById('transfer_stocktype3').disabled = true;
 									document.getElementById('transfer_stocktype4').disabled = true;
+									document.getElementById('transfer_stocktype5').disabled = true;
 									document.getElementById('transfer_stocktype' + datas['type']).checked = true;
 									typestock = datas['type'];
 								}

@@ -38,6 +38,10 @@ function xoops_module_update_xmstock(XoopsModule $module, $previousVersion = nul
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $sql = "ALTER TABLE `" . $db->prefix('xmstock_stock') . "` ADD `stock_order` tinyint(1) unsigned NOT NULL DEFAULT '0' AFTER `stock_mini`;";
         $db->query($sql);
+
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $sql = "ALTER TABLE `" . $db->prefix('xmstock_itemorder') . "` ADD `itemorder_width` double(10,4) NOT NULL DEFAULT '0.0000' AFTER `itemorder_length`;";
+        $db->query($sql);
     }
     return true;
 }

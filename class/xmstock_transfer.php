@@ -365,7 +365,7 @@ class xmstock_transfer extends XoopsObject
 		if ($type == 'E') {
 			// type
 			$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'transfer_stocktype', $transfer_stocktype);
-			$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN, 4 =>_MA_XMSTOCK_STOCK_FREE);
+			$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN, 4 =>_MA_XMSTOCK_STOCK_FREE, 5 =>_MA_XMSTOCK_STOCK_SURFACE);
 			$form_type->addOptionArray($options);
 			$form_type->setDescription(_MA_XMSTOCK_STOCK_TYPE_DESC);
 			$form->addElement($form_type);

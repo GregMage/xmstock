@@ -35,6 +35,7 @@
 								</div>
 								<{if $article.unit == $smarty.const._MA_XMSTOCK_STOCK_ML_DESC}>
 									<div class="col">
+										<label>Long:</label>
 										<input class="form-control" type="number" name="length_<{$article.count}>" id="length_<{$article.count}>" value="<{$article.length}>" onchange="refreshcaddy()">
 										<span class="badge badge-pill badge-info"><{$article.unit}></span>
 									</div>

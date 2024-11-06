@@ -446,21 +446,20 @@ class XmstockUtility
         $stock_arr = $stockHandler->getByLink($criteria);
         if (count($stock_arr) > 0 && !empty($viewPermissionArea)) {
 			$total_amount = 0;
+			$stock_type = 0;
 			foreach (array_keys($stock_arr) as $i) {
 				$stock['area_id']    	= $stock_arr[$i]->getVar('area_id');
                 $stock['name']       	= $stock_arr[$i]->getVar('area_name');
                 $stock['location']   	= $stock_arr[$i]->getVar('area_location');
                 $stock['location_s'] 	= $stock_arr[$i]->getVar('stock_location');
                 $stock['mini'] 			= $stock_arr[$i]->getVar('stock_mini');
-                $stock['order'] 		= $stock_arr[$i]->getVar('stock_order');
+                $stock['permorder'] 	= $stock_arr[$i]->getVar('stock_order');
 				$stock['amount']		= $stock_arr[$i]->getVar('stock_amount');
 				$stock['type']   	 	= $stock_arr[$i]->getVar('stock_type');
-				if ($stock['type'] == 2) {
-					$stock_type = true;
-				} else {
-					$stock_type = false;
-				}
 				$stock['price']   	 	= self::getPrice($stock_arr[$i]->getVar('stock_price'));
+				if ($stock['type'] == 2 || $stock['type'] == 5) {
+					$stock_type = $stock['type'];
+				}
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
 					if ($stock['type'] == 3) {
 						$stock['order'] = false;
@@ -488,8 +487,11 @@ class XmstockUtility
 				$area[] = $stock['area_id'];
 				unset($stock);
             }
-			if ($stock_type == true) {
+			if ($stock_type == 2) {
 				$total_amount .= ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
+			}
+			if ($stock_type == 5) {
+				$total_amount .= ' ' . _MA_XMSTOCK_CHECKOUT_UNITS;
 			}
 			$xoopsTpl->assign('total_amount', $total_amount);
             $xoopsTpl->assign('xmstock_viewstocks', true);

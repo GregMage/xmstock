@@ -137,6 +137,7 @@ define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
 define('_MA_XMSTOCK_STOCK_ML_DESC', 'A renseigner en mm');
 define('_MA_XMSTOCK_STOCK_ORDER', 'Désactiver la commande');
 define('_MA_XMSTOCK_STOCK_ORDER_DESC', 'Cette option permet de désactiver la commande');
+define('_MA_XMSTOCK_STOCK_SURFACE', 'Surface (mm²)');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
 define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
@@ -203,6 +204,7 @@ define('_MA_XMSTOCK_VIEWORDER', 'Visualisation de la commande');
 // checkout
 define('_MA_XMSTOCK_CHECKOUT', 'Valider la commande');
 define('_MA_XMSTOCK_CHECKOUT_UNIT', 'mm');
+define('_MA_XMSTOCK_CHECKOUT_UNITS', 'mm²');
 define('_MA_XMSTOCK_CHECKOUT_DESC', 'Description');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY', 'Options de livraison');
 define('_MA_XMSTOCK_CHECKOUT_DELIVERY_WITHDRAWAL', 'Retrait');

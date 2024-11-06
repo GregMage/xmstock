@@ -75,6 +75,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 		xoops_load('utility', 'xmarticle');
 		$count = 1;
 		$mml = false;
+		$mm2 = false;
 		$displayneedsyear = false;
 		foreach ($arr_selectionArticles as $datas) {
 			$articles['id']			= $datas['id'];
@@ -114,6 +115,11 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 				case 3:
 					$articles['unit'] = _MA_XMSTOCK_STOCK_LOAN;
 					break;
+
+				case 5:
+					$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
+					$mm2 = true;
+					break;
 			}
 			if ($type == 3){
 				$articles['max']  = 'max="' . $articles['amount'] . '"';
@@ -126,10 +132,14 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			if ($type == 2){
 				$articles['amount'] .= ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
 			}
+			if ($type == 5){
+				$articles['amount'] .= ' ' . _MA_XMSTOCK_CHECKOUT_UNITS;
+			}
 			$xoopsTpl->appendByRef('articles', $articles);
 			unset($articles);
 		}
 		$xoopsTpl->assign('mml', $mml);
+		$xoopsTpl->assign('mm2', $mm2);
 		$xoopsTpl->assign('total', $total);
 		$xoopsTpl->assign('displayneedsyear', $displayneedsyear);
 	} else {

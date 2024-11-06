@@ -37,6 +37,7 @@ class xmstock_itemorder extends XoopsObject
         $this->initVar('itemorder_amount', XOBJ_DTYPE_INT, null);
         $this->initVar('itemorder_needsyear', XOBJ_DTYPE_TXTBOX, null);
         $this->initVar('itemorder_length', XOBJ_DTYPE_OTHER, null);
+        $this->initVar('itemorder_width', XOBJ_DTYPE_OTHER, null);
 		$this->initVar('article_reference', XOBJ_DTYPE_TXTBOX, null);
 		$this->initVar('article_cid', XOBJ_DTYPE_INT, null);
 		$this->initVar('article_name', XOBJ_DTYPE_TXTBOX, null);

@@ -49,6 +49,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		$error = false;
 		$info = false;
 		$mml = false;
+		$mm2 = false;
 		$datasUpdate = array();
 		$displayneedsyear = false;
 		foreach ($arr_selectionArticles as $datas) {
@@ -108,6 +109,19 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 						$articles['error'] = false;
 					}
 					break;
+
+				case 5:
+					$articles['unit'] = _MA_XMSTOCK_CHECKOUT_UNITS;
+					$articles['error'] = false;
+					$articles['info'] = false;
+					$mm2 = true;
+					if (($articles['qty'] * $articles['length'] * $articles['width']) > $articles['amount']) {
+						$warning = true;
+						$articles['warning'] = true;
+					} else {
+						$articles['warning'] = false;
+					}
+					break;
 			}
 			$count++;
 			$total += $articles['qty'];
@@ -117,6 +131,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 		}
 		$sessionHelper->set($session_name, $datasUpdate);
 		$xoopsTpl->assign('mml', $mml);
+		$xoopsTpl->assign('mm2', $mm2);
 		$xoopsTpl->assign('total', $total);
 		$xoopsTpl->assign('warning', $warning);
 		$xoopsTpl->assign('error', $error);

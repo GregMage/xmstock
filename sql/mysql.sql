@@ -86,6 +86,7 @@ CREATE TABLE `xmstock_itemorder` (
   `itemorder_amount`      	mediumint(8) unsigned    	NOT NULL DEFAULT '0',
   `itemorder_needsyear`			varchar(10)         		  NOT NULL DEFAULT '',
   `itemorder_length`        double(10,4)              NOT NULL DEFAULT '0.0000',
+  `itemorder_width`         double(10,4)              NOT NULL DEFAULT '0.0000',
 
   PRIMARY KEY (`itemorder_id`),
   KEY `itemorder_orderid` (`itemorder_articleid`)

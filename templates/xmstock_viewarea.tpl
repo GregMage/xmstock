@@ -72,14 +72,14 @@
 							<{if $stock.amount > $stock.mini}>
 								<span class="badge badge-pill badge-success" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_STOCK_MINI}>">
 							<{/if}>
-							<{$stock.mini}> <{if $stock.type == 2}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}>
+							<{$stock.mini}> <{if $stock.type == 2}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}><{if $stock.type == 5}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}><{/if}>
 							</span>
 						<{/if}>
 					<{/if}>
 					</div>
 					<div class="col-2 text-right">
 					<{if $stock.type != 4}>
-						<span class="badge badge-info badge-pill"><{$stock.amount}> <{if $stock.type == 2}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span>
+						<span class="badge badge-info badge-pill"><{$stock.amount}> <{if $stock.type == 2}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}><{if $stock.type == 5}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}><{/if}></span>
 					<{else}>
 						<span class="badge badge-success badge-pill"><{$smarty.const._MA_XMSTOCK_STOCK_FREE}></span>
 					<{/if}>
