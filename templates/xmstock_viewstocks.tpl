@@ -32,7 +32,7 @@
 							<span class="fa fa-exchange" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_LOAN_USERSLIST}>: <{$stock.borrower|default:''}>"></span>
 						<{/if}>
 						<{if $stock.order|default:false == true && $stock.type != 4}>
-							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
+							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm <{if $stock.order|default:0 == 1}>disabled<{/if}>"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
 						<{/if}>
 						<{if $stock.loan|default:false == true && $stock.amount != 0}>
 							<{if $stock.manage|default:false == true}>

@@ -32,5 +32,12 @@ function xoops_module_update_xmstock(XoopsModule $module, $previousVersion = nul
         $sql = "ALTER TABLE `" . $db->prefix('xmstock_stock') . "` ADD `stock_mini` smallint(5) unsigned NOT NULL DEFAULT '0' AFTER `stock_location`;";
         $db->query($sql);
     }
+
+    // Passage de la version 1.2.0 à 1.3.0
+    if ($previousVersion < '1.3.0') {
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $sql = "ALTER TABLE `" . $db->prefix('xmstock_stock') . "` ADD `stock_order` tinyint(1) unsigned NOT NULL DEFAULT '0' AFTER `stock_mini`;";
+        $db->query($sql);
+    }
     return true;
 }

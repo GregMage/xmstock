@@ -174,6 +174,16 @@ switch ($op) {
 			}
         }
 
+		// Vérification si l'article peut être commandé
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('stock_areaid', $area_id));
+		$criteria->add(new Criteria('stock_articleid', $article_id));
+		$criteria->add(new Criteria('stock_order', 0));
+		$stock_count = $stockHandler->getCount($criteria);
+		if ($stock_count == 0) {
+			redirect_header( XOOPS_URL . '/modules/xmarticle', 5, _MA_XMSTOCK_CADDY_ERROR_NOORDER);
+		}
+
 		//Vérification si l'article peut être commandé (permission order)
 		$orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
 		if (in_array($area_id, $orderPermissionArea) == false){

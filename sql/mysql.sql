@@ -42,6 +42,7 @@ CREATE TABLE `xmstock_stock` (
   `stock_price`         double(8,2)             	NOT NULL default '0.00',
   `stock_location`      varchar(255)        		  NOT NULL DEFAULT '',
   `stock_mini`          smallint(5) unsigned      NOT NULL DEFAULT '0',
+  `stock_order`         tinyint(1)   unsigned 	  NOT NULL DEFAULT '1',
 
   PRIMARY KEY (`stock_id`),
   KEY `stock_areaid` (`stock_articleid`)

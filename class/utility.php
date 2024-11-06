@@ -452,6 +452,7 @@ class XmstockUtility
                 $stock['location']   	= $stock_arr[$i]->getVar('area_location');
                 $stock['location_s'] 	= $stock_arr[$i]->getVar('stock_location');
                 $stock['mini'] 			= $stock_arr[$i]->getVar('stock_mini');
+                $stock['order'] 		= $stock_arr[$i]->getVar('stock_order');
 				$stock['amount']		= $stock_arr[$i]->getVar('stock_amount');
 				$stock['type']   	 	= $stock_arr[$i]->getVar('stock_type');
 				if ($stock['type'] == 2) {

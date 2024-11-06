@@ -39,6 +39,7 @@ class xmstock_stock extends XoopsObject
 		$this->initVar('stock_location', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('stock_type', XOBJ_DTYPE_INT, null, false, 1);
         $this->initVar('stock_mini', XOBJ_DTYPE_INT, null, false, 11);
+        $this->initVar('stock_order', XOBJ_DTYPE_INT, null, false, 1);
 		$this->initVar('area_id', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('area_name', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('area_logo', XOBJ_DTYPE_TXTBOX, null, false);
@@ -91,6 +92,13 @@ class xmstock_stock extends XoopsObject
 		$location->setDescription(_MA_XMSTOCK_TRANSFER_LOCATION_DSC);
 		$form->addElement($location, true);
 
+		// order
+		$form_order = new XoopsFormCheckBox(_MA_XMSTOCK_STOCK_ORDER, 'stock_order', $this->getVar('stock_order'));
+		$options = array(1 => ' ');
+		$form_order->addOptionArray($options);
+		$form_order->setDescription(_MA_XMSTOCK_STOCK_ORDER_DESC);
+		$form->addElement($form_order);
+
 		// type
 		$form_type = new XoopsFormRadio(_MA_XMSTOCK_STOCK_TYPE, 'stock_type', $this->getVar('stock_type'));
 		$options = array(1 => _MA_XMSTOCK_STOCK_STANDARD, 2 =>_MA_XMSTOCK_STOCK_ML, 3 =>_MA_XMSTOCK_STOCK_LOAN, 4 =>_MA_XMSTOCK_STOCK_FREE);
@@ -127,6 +135,7 @@ class xmstock_stock extends XoopsObject
 		$location = Request::getString('stock_location', '');
 		$del = Request::getString('stock_del', '');
 		$this->setVar('stock_mini', Request::getInt('stock_mini', 0));
+		$this->setVar('stock_order', Request::getInt('stock_order', 0));
 		$this->setVar('stock_del', Request::getInt('stock_del', 0));
 		$this->setVar('stock_type', Request::getInt('stock_type', 1));
         // si le stock est en libre service le total du stock passe à 0.

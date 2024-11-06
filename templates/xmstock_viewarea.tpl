@@ -50,7 +50,7 @@
 							<{/if}>
 						<{/if}>
 						<{if $order == true && $stock.type != 3 && $stock.type != 4}>
-							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light btn-sm"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
+							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="btn btn-light btn-sm <{if $stock.order|default:0 == 1}>disabled<{/if}>"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_ORDER}></a>
 						<{/if}>
 						<{if $order == true && $stock.type == 3 && $stock.amount != 0}>
 							<{if $manage == true}>
