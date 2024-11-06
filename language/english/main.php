@@ -129,18 +129,19 @@ define('_MA_XMSTOCK_STOCK_ARTICLE', 'Article in stock');
 define('_MA_XMSTOCK_STOCK_DEL', 'Supprimer définitivement l\'article du stock');
 define('_MA_XMSTOCK_STOCK_DEL_DESC', 'Attention, l\'article ne sera plus dans ce stock et l\'historique des prix sera perdu!');
 define('_MA_XMSTOCK_STOCK_FREE', 'Libre service');
+define('_MA_XMSTOCK_STOCK_LENGHT', 'Long. (mm)');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_STOCK_MINI', 'Stock minimum');
 define('_MA_XMSTOCK_STOCK_MINI_DSC', 'Valeur qui défini le stock minimum (utilisé si il est nécessaire de faire un suivi de stock mini). Mettre la valeur 0 pour ne pas faire de suivi');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
-define('_MA_XMSTOCK_STOCK_ML_DESC', 'Longueur en mm');
 define('_MA_XMSTOCK_STOCK_ORDER', 'Désactiver la commande');
 define('_MA_XMSTOCK_STOCK_ORDER_DESC', 'Cette option permet de désactiver la commande');
 define('_MA_XMSTOCK_STOCK_SURFACE', 'Surface (mm²)');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
 define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
+define('_MA_XMSTOCK_STOCK_WIDTH', 'Larg. (mm)');
 
 //output
 define('_MA_XMSTOCK_OUTPUT_DESC', 'Description');

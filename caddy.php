@@ -85,6 +85,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 			$articles['name']		= XmarticleUtility::getArticleName($datas['id'], true);
 			$articles['qty']		= $datas['qty'];
 			$articles['length']		= $datas['length'];
+			$articles['width']		= $datas['width'];
 			$articles['needsyear']  = $datas['needsyear'];
 			if (xoops_isActiveModule('xmprod')){
 				if ($helper->getConfig('general_xmprod', 0) == 1) {
@@ -109,7 +110,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 					$articles['unit'] = '';
 					break;
 				case 2:
-					$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
+					$articles['unit'] = _MA_XMSTOCK_STOCK_LENGHT;
 					$mml = true;
 					break;
 				case 3:
@@ -117,8 +118,9 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 					break;
 
 				case 5:
-					$articles['unit'] = _MA_XMSTOCK_STOCK_ML_DESC;
+					$articles['unit'] = _MA_XMSTOCK_STOCK_WIDTH;
 					$mm2 = true;
+					$mml = true;
 					break;
 			}
 			if ($type == 3){
@@ -224,6 +226,7 @@ switch ($op) {
 				$datas['area'] = $area_id;
 				$datas['qty']  = 1;
 				$datas['length']  = 0;
+				$datas['width']  = 0;
 				$datas['needsyear']  = '';
 				$arr_selectionArticles[] = $datas;
 				$sessionHelper->set($session_name, $arr_selectionArticles);
@@ -251,16 +254,19 @@ switch ($op) {
 			foreach ($arr_selectionArticles as $datas) {
 				$name_qty = 'qty_' . $count;
 				$name_length = 'length_' . $count;
+				$name_width = 'width_' . $count;
 				$name_area = 'area_' . $count;
 				$name_needsyear = 'needsyear_' . $count;
 				$qty = Request::getInt($name_qty, 0, 'POST');
 				$length = Request::getFloat($name_length, 0, 'POST');
+				$width = Request::getFloat($name_width, 0, 'POST');
 				$area = Request::getInt($name_area, 0, 'POST');
 				$needsyear = Request::getString($name_needsyear, '', 'POST');
 				$article['id']   = $datas['id'];
 				$article['area'] = $area;
 				$article['qty']  = $qty;
 				$article['length']  = $length;
+				$article['width']  = $width;
 				$article['needsyear']  = $needsyear;
 				$datasUpdate[] = $article;
 				$count++;

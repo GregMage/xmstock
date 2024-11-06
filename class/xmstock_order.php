@@ -100,6 +100,7 @@ class xmstock_order extends XoopsObject
 						$obj->setVar('itemorder_areaid', $datas['area']);
 						$obj->setVar('itemorder_amount', $datas['qty']);
 						$obj->setVar('itemorder_length', $datas['length']);
+						$obj->setVar('itemorder_width', $datas['width']);
 						$obj->setVar('itemorder_needsyear', $datas['needsyear']);
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
@@ -146,6 +147,7 @@ class xmstock_order extends XoopsObject
 				for ($i = 1; $i <= $count; $i++) {
 					$amount = Request::getInt('amount' . $i, 0);
 					$length = Request::getFloat('length' . $i, 0);
+					$width = Request::getFloat('width' . $i, 0);
 					$itemorder = Request::getInt('itemorder' . $i, 0);
 					$obj = $itemorderHandler->get($itemorder);
 					if ($amount == 0){
@@ -160,6 +162,9 @@ class xmstock_order extends XoopsObject
 						$obj->setVar('itemorder_amount', $amount);
 						if ($length !=0){
 							$obj->setVar('itemorder_length', $length);
+						}
+						if ($width !=0){
+							$obj->setVar('itemorder_width', $width);
 						}
 						if (!$itemorderHandler->insert($obj)) {
 							$error_message = $obj->getHtmlErrors();
@@ -239,8 +244,11 @@ class xmstock_order extends XoopsObject
 			$articles .= "<td><div class='form-row'>";
 			$articles .= "<div class='col-4'><input class='form-control' type='number' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'>";
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
-			if ($type == 2){
+			if ($type == 2 || $type == 5){
 				$articles .= "</div><div class='col-8'><input class='form-control' type='text' name='length" . $count . "' id='length" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_length') . "'>";
+			}
+			if ($type == 5){
+				$articles .= "</div><div class='col-8'><input class='form-control' type='text' name='width" . $count . "' id='width" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_width') . "'>";
 			}
 			$articles .= "</div></div></td>";
 			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span> " . $area_name . "</td></tr>";
@@ -304,6 +312,7 @@ class xmstock_order extends XoopsObject
 						$item = $itemorderHandler->get($itemorder);
 						$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
 						if ($type == 2){
+// IMPORTANT!!! Intégrer width
 							$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+$item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0), $item->getVar('itemorder_areaid'));
 						} else {
 							$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
@@ -358,6 +367,7 @@ class xmstock_order extends XoopsObject
 								$obj->setVar('itemorder_areaid', $item->getVar('itemorder_areaid'));
 								$obj->setVar('itemorder_amount', $item->getVar('itemorder_amount') - $splitamount);
 								$obj->setVar('itemorder_length', $item->getVar('itemorder_length'));
+								$obj->setVar('itemorder_width', $item->getVar('itemorder_width'));
 								$obj->setVar('itemorder_needsyear', $item->getVar('itemorder_needsyear'));
 								if (!$itemorderHandler->insert($obj)) {
 									$error_message .= $obj->getHtmlErrors();
@@ -394,6 +404,7 @@ class xmstock_order extends XoopsObject
 							$new_transfer = $transferHandler->create();
 							$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
 							if ($type == 2){
+// IMPORTANT!!! Intégrer width
 								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)));
 							} else {
 								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
@@ -499,6 +510,7 @@ class xmstock_order extends XoopsObject
 			$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			if ($type == 2){
+// IMPORTANT!!! Intégrer width
 				$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
 				$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit . ' + ' . $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0). $unit;
 				if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') + $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)) > $amoutArea) {

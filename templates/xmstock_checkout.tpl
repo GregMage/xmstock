@@ -25,11 +25,10 @@
 							<{if $item_info.type|default:'' != ''}>
 								<span class="badge badge-pill badge-info"><{$item_info.type}></span>
 							<{/if}>
-							<span class="badge badge-primary badge-pill"><{$item_info.amount}><{if $item_info.length|default:'' != ''}> x <{$item_info.length}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span>
+							<span class="badge badge-primary badge-pill"><{$item_info.amount}><{if $item_info.length|default:'' != ''}> x <{$item_info.length}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}><{if $item_info.width|default:'' != ''}> x <{$item_info.width}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span>
 							</a>
-
-							</div>
 						<{/foreach}>
+						</div>
 						</td>
 					<{else}>
 						<td class="txtleft"><{$information}></td>
@@ -59,7 +58,7 @@
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
 					<th class="width30"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
 					<{if $displayneedsyear == true}><th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_CADDY_NEEDSYEARS}></th><{/if}>
-					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
+					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}><{if $mm2 == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_WIDTH}><{/if}></th>
 				</tr>
 				<{foreach item=article from=$articles}>
 					<tr>
@@ -75,7 +74,7 @@
 						<td>
 							<{$article.area}>
 							<span class="badge badge-info badge-pill">
-								<{$article.amount}> <{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{$article.unit}><{/if}>
+								<{$article.amount}> <{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT || $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}><{$article.unit}><{/if}>
 							</span>
 							<{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_STOCK_LOAN}><span class="badge badge-light badge-pill"><{$article.unit}></span><{/if}>
 						</td>
@@ -87,7 +86,9 @@
 							<{/if}>
 						<{/if}>
 						<td class="txtcenter width10">
-							<{$article.qty}><{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}> x <{$article.length}> <span class="badge badge-pill badge-info"><{$article.unit}></span><{/if}>
+							<{$article.qty}>
+							<{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNIT || $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}> x <{$article.length}> <span class="badge badge-pill badge-info"><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}></span><{/if}>
+							<{if $article.unit|default:'' == $smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}> x <{$article.width}> <span class="badge badge-pill badge-info"><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}></span><{/if}>
 						</td>
 					</tr>
 				<{/foreach}>

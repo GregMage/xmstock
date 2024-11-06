@@ -140,7 +140,7 @@
 											<span class="badge badge-pill badge-info"><{$article.type}></span>
 										<{/if}>
 									</td>
-									<td class="text-center"><span class='badge badge-primary badge-pill'><{$article.amount}><{if $article.length|default:'' != ''}> x <{$article.length}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span></td>
+									<td class="text-center"><span class='badge badge-primary badge-pill'><{$article.amount}><{if $article.length|default:'' != ''}> x <{$article.length}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}><{if $article.width|default:'' != ''}> x <{$article.width}> <{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}></span></td>
 								</tr>
 								<{/foreach}>
 							</tbody>

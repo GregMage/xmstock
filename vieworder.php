@@ -125,6 +125,10 @@ if ($order_id == 0) {
 			if ($item['length'] == 0) {
 				$item['length'] = '';
 			}
+			$item['width']    = number_format($itemorder_arr[$i]->getVar('itemorder_width'), 2);
+			if ($item['width'] == 0) {
+				$item['width'] = '';
+			}
 			$item['status']    = $itemorder_arr[$i]->getVar('itemorder_status');
 			$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			switch ($type) {

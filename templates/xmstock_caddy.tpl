@@ -16,7 +16,7 @@
 				<tr>
 					<th><{$smarty.const._MA_XMSTOCK_CADDY_ITMES}></th>
 					<th class="width20"><{$smarty.const._MA_XMSTOCK_CADDY_AREA}></th>
-					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
+					<th class="txtcenter width30"><{$smarty.const._MA_XMSTOCK_CADDY_QUANTITY}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}><{if $mm2 == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_WIDTH}><{/if}></th>
 					<{if $displayneedsyear == true}><th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_CADDY_NEEDSYEARS}></th><{/if}>
 					<th class="txtcenter width15"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 				</tr>
@@ -30,14 +30,19 @@
 						</td>
 						<td>
 							<div class="form-row">
-								<div class="col">
+								<div class="form-group col-4">
 									<input class="form-control" type="number" name="qty_<{$article.count}>" id="qty_<{$article.count}>" value="<{$article.qty}>" min = "1" <{$article.max}> onchange="refreshcaddy()">
 								</div>
-								<{if $article.unit == $smarty.const._MA_XMSTOCK_STOCK_ML_DESC}>
-									<div class="col">
-										<label>Long:</label>
+								<{if $article.unit == $smarty.const._MA_XMSTOCK_STOCK_LENGHT || $article.unit == $smarty.const._MA_XMSTOCK_STOCK_WIDTH}>
+									<div class="form-group col-4">
 										<input class="form-control" type="number" name="length_<{$article.count}>" id="length_<{$article.count}>" value="<{$article.length}>" onchange="refreshcaddy()">
-										<span class="badge badge-pill badge-info"><{$article.unit}></span>
+										<span class="badge badge-pill badge-info"><{$smarty.const._MA_XMSTOCK_STOCK_LENGHT}></span>
+									</div>
+								<{/if}>
+								<{if $article.unit == $smarty.const._MA_XMSTOCK_STOCK_WIDTH}>
+									<div class="form-group col-4">
+										<input class="form-control" type="number" name="width_<{$article.count}>" id="width_<{$article.count}>" value="<{$article.width}>" onchange="refreshcaddy()">
+										<span class="badge badge-pill badge-info"><{$smarty.const._MA_XMSTOCK_STOCK_WIDTH}></span>
 									</div>
 								<{/if}>
 							</div>

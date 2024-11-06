@@ -60,6 +60,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$articles['name']  	= XmarticleUtility::getArticleName($datas['id'], true);
 			$articles['qty']   	= $datas['qty'];
 			$articles['length'] = $datas['length'];
+			$articles['width'] = $datas['width'];
 			$articles['needsyear'] = $datas['needsyear'];
 			if ($articles['needsyear'] != ''){
 				$displayneedsyear = true;
@@ -69,6 +70,7 @@ function listCart($sessionHelper, $session_name, $stockHandler)
 			$savedata['area']   = $datas['area'];
 			$savedata['qty']    = $datas['qty'];
 			$savedata['length'] = $datas['length'];
+			$savedata['width'] 	= $datas['width'];
 			$savedata['needsyear'] = $datas['needsyear'];
 			$type = XmstockUtility::articleTypePerArea($datas['area'], $datas['id'], $stock_arr);
 			switch ($type) {
@@ -237,6 +239,10 @@ switch ($op) {
 			$caddy_items[$i]['length'] = number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2);
 			if ($caddy_items[$i]['length'] == 0) {
 				$caddy_items[$i]['length'] = '';
+			}
+			$caddy_items[$i]['width'] = number_format($itemorder_arr[$i]->getVar('itemorder_width'), 2);
+			if ($caddy_items[$i]['width'] == 0) {
+				$caddy_items[$i]['width'] = '';
 			}
 			$caddy_items[$i]['cid'] = $itemorder_arr[$i]->getVar('article_cid');
 			$type = XmstockUtility::articleTypePerArea($itemorder_arr[$i]->getVar('itemorder_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
