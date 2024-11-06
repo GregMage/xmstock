@@ -1,4 +1,19 @@
 ﻿-------------------------------------------------
+Version: 1.3.0 Stable
+Date:    ?.2024
+-------------------------------------------------
+Correction de bogues:
+	-
+
+Améliorations:
+	- Ajout d'une option pour qu'un article ne soit pas commandable
+	- Ajout du système de gestion des plaques
+	- Changement ordre affichage du bloc des emprunteurs
+
+Sécurités:
+	- /
+
+-------------------------------------------------
 Version: 1.2.0 Stable
 Date:    27.10.2024
 -------------------------------------------------
