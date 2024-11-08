@@ -235,27 +235,55 @@ class xmstock_order extends XoopsObject
 		$itemorderHandler->field_object = "itemorder_articleid";
 		$itemorder_arr = $itemorderHandler->getByLink($criteria);
 		$count = 0;
-		$articles = "<table  class='table table-bordered'><thead class='table-primary'><tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th><th scope='col'>" . _MA_XMSTOCK_VIEWORDER_AMOUNT . "</th><th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th></tr></thead>";
-		$articles .= "<tbody>";
+		$mml = false;
+		$mm2 = false;
+		$articles = "";
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
 			$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
 			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			$articles .= "<td><div class='form-row'>";
-			$articles .= "<div class='col-4'><input class='form-control' type='number' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'>";
+			$articles .= "<div class='form-group col-4'><input class='form-control' type='number' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'>";
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			if ($type == 2 || $type == 5){
-				$articles .= "</div><div class='col-8'><input class='form-control' type='text' name='length" . $count . "' id='length" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_length') . "'>";
+				$mml = true;
+				$articles .= "</div><div class='form-group col-4'><input class='form-control' type='text' name='length" . $count . "' id='length" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_length') . "'>";
 			}
 			if ($type == 5){
-				$articles .= "</div><div class='col-8'><input class='form-control' type='text' name='width" . $count . "' id='width" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_width') . "'>";
+				$mm2 = true;
+				$articles .= "</div><div class='form-group col-4'><input class='form-control' type='text' name='width" . $count . "' id='width" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_width') . "'>";
 			}
 			$articles .= "</div></div></td>";
-			$articles .= "<td class='text-center'><span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr) . "</span> " . $area_name . "</td></tr>";
+			$articles .= "<td class='text-center'>";
+			$articles .= "<span class='badge badge-primary badge-pill'>" . XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
+			if ($type == 2){
+				$articles .= " " . _MA_XMSTOCK_CHECKOUT_UNIT;
+			}
+			if ($type == 5){
+				$articles .=  " " . _MA_XMSTOCK_CHECKOUT_UNITS;
+			}
+			$articles .= "</span> " . $area_name;
+			$articles .= "</td></tr>";
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
 		$articles .= "</tbody></table>";
 		$articles .= "<small class='form-text text-muted'>" . _MA_XMSTOCK_ACTION_INFODELARTICLE . "</small>";
+
+		$articles_h = "<table  class='table table-bordered'><thead class='table-primary'>";
+		$articles_h .= "<tr><th scope='col'>" . _MA_XMSTOCK_ACTION_ARTICLES . "</th>";
+		$articles_h .= "<th scope='col'>". _MA_XMSTOCK_VIEWORDER_AMOUNT;
+		if ($mml == true){
+			$articles_h .= " - " . _MA_XMSTOCK_CADDY_LENGHT;
+		}
+		if ($mm2 == true){
+			$articles_h .= " - " . _MA_XMSTOCK_CADDY_WIDTH;
+		}
+		$articles_h .= "</th>";
+		$articles_h .= "<th scope='col'>" . _MA_XMSTOCK_STOCK_AMOUNT . "</th></tr></thead>";
+		$articles_h .= "<tbody>";
+
+		$articles = $articles_h . $articles;
+
 		$form->addElement(new XoopsFormLabel(_MA_XMSTOCK_ORDER_ARTICLES, $articles), true);
 		$form->addElement(new XoopsFormHidden('count', $count));
 
@@ -312,10 +340,14 @@ class xmstock_order extends XoopsObject
 						$item = $itemorderHandler->get($itemorder);
 						$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $item->getVar('itemorder_articleid'), $stock_arr);
 						if ($type == 2){
-// IMPORTANT!!! Intégrer width
 							$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+$item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0), $item->getVar('itemorder_areaid'));
 						} else {
-							$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+							if ($type == 5){
+								$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')*$item->getVar('itemorder_width'), $item->getVar('itemorder_areaid'));
+							} else {
+								$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+							}
+
 						}
 					}
 				}
@@ -510,9 +542,8 @@ class xmstock_order extends XoopsObject
 			$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			if ($type == 2){
-// IMPORTANT!!! Intégrer width
 				$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
-				$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit . ' + ' . $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0). $unit;
+				$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x ' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit . ' + ' . $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0). $unit;
 				if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') + $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)) > $amoutArea) {
 					if ($status == 1){
 						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
@@ -523,15 +554,29 @@ class xmstock_order extends XoopsObject
 					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
 				}
 			} else {
-				$unit = '';
-				$amount = $itemorder_arr[$i]->getVar('itemorder_amount');
-				if ($amoutArea >= $itemorder_arr[$i]->getVar('itemorder_amount')) {
-					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
-				} else {
-					if ($status == 1){
-						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+				if ($type == 5){
+					$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNITS;
+					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x (' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ' x ' .  number_format($itemorder_arr[$i]->getVar('itemorder_width'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ')';
+					if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') * $itemorder_arr[$i]->getVar('itemorder_width')) > $amoutArea) {
+						if ($status == 1){
+							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+						} else {
+							$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+						}
 					} else {
-						$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
+					}
+				} else {
+					$unit = '';
+					$amount = $itemorder_arr[$i]->getVar('itemorder_amount');
+					if ($amoutArea >= $itemorder_arr[$i]->getVar('itemorder_amount')) {
+						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
+					} else {
+						if ($status == 1){
+							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+						} else {
+							$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+						}
 					}
 				}
 			}

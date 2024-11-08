@@ -115,6 +115,7 @@ if ($order_id == 0) {
 		$criteria = new CriteriaCompo();
 		$stock_arr = $stockHandler->getall($criteria);
 		$mml = false;
+		$mm2 = false;
 		foreach (array_keys($itemorder_arr) as $i) {
 			$item['id']        = $itemorder_arr[$i]->getVar('itemorder_articleid');
 			$item['name']      = $itemorder_arr[$i]->getVar('article_name');
@@ -142,11 +143,18 @@ if ($order_id == 0) {
 				case 3:
 					$item['type'] = _MA_XMSTOCK_STOCK_LOAN;
 					break;
+
+				case 5:
+					$mml = true;
+					$mm2 = true;
+					$item['type'] = '';
+					break;
 			}
 			$xoopsTpl->appendByRef('item', $item);
 			unset($item);
 		}
 		$xoopsTpl->assign('mml', $mml);
+		$xoopsTpl->assign('mm2', $mm2);
 	}
 }
 //SEO

@@ -125,7 +125,7 @@
 							<thead>
 								<tr>
 									<th scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_ARTICLE}></th>
-									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}></th>
+									<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_VIEWORDER_AMOUNT}><{if $mml == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_LENGHT}><{/if}><{if $mm2 == true}> - <{$smarty.const._MA_XMSTOCK_CADDY_WIDTH}><{/if}></th>
 								</tr>
 							</thead>
 							<tbody>
