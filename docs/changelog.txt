@@ -1,9 +1,9 @@
 ﻿-------------------------------------------------
 Version: 1.3.0 Stable
-Date:    ?.2024
+Date:    10.11.2024
 -------------------------------------------------
 Correction de bogues:
-	-
+	- le split de commande ne fontionnait pas avec les mml.
 
 Améliorations:
 	- Ajout d'une option pour qu'un article ne soit pas commandable
