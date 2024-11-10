@@ -101,7 +101,7 @@ class XmstockUtility
      * @param int      $ar_areaid	Id de l'area d'arrivée
      * @param float    $price		prix
      * @param string   $location	emplacement
-     * @param int	   $stocktype	Type de stock (1 standard, 2 matière en mml, 3 emprunt et 4 libre service)
+     * @param int	   $stocktype	Type de stock (1 standard, 2 matière en mml, 3 emprunt, 4 libre service et 5 en mm2)
 	 * @param int	   $stockmini	Quantité mini de stock (0 pas de surveillance)
      * @return string   			Vide ou message d'erreur
      */

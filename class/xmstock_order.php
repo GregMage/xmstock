@@ -347,7 +347,6 @@ class xmstock_order extends XoopsObject
 							} else {
 								$error_message .= XmstockUtility::checkTransfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
 							}
-
 						}
 					}
 				}
@@ -417,9 +416,12 @@ class xmstock_order extends XoopsObject
 							if ($type == 2){
 								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)), $item->getVar('itemorder_areaid'));
 							} else {
-								$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+								if ($type == 5){
+									$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')*$item->getVar('itemorder_width'), $item->getVar('itemorder_areaid'));
+								} else {
+									$error_message .= XmstockUtility::transfert('O', $item->getVar('itemorder_articleid'), $item->getVar('itemorder_amount'), $item->getVar('itemorder_areaid'));
+								}
 							}
-
 							// Si emprunt ajout d'une entrée dans le table d'emprunt
 							if ($type == 3) {
 								$loan = $loanHandler->create();
@@ -436,10 +438,13 @@ class xmstock_order extends XoopsObject
 							$new_transfer = $transferHandler->create();
 							$new_transfer->setVar('transfer_articleid', $item->getVar('itemorder_articleid'));
 							if ($type == 2){
-// IMPORTANT!!! Intégrer width
 								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')+($item->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)));
 							} else {
-								$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
+								if ($type == 5){
+									$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount')*$item->getVar('itemorder_length')*$item->getVar('itemorder_width'));
+								} else {
+									$new_transfer->setVar('transfer_amount', $item->getVar('itemorder_amount'));
+								}
 							}
 							$new_transfer->setVar('transfer_needsyear', $item->getVar('itemorder_needsyear'));
 							$new_transfer->setVar('transfer_type', 'O');
@@ -544,7 +549,7 @@ class xmstock_order extends XoopsObject
 			if ($type == 2){
 				$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
 				$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x ' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit . ' + ' . $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0). $unit;
-				if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') + $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)) > $amoutArea) {
+				if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') + $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)) > $amoutArea && $status != 3) {
 					if ($status == 1){
 						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
 					} else {
@@ -557,7 +562,7 @@ class xmstock_order extends XoopsObject
 				if ($type == 5){
 					$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNITS;
 					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x (' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ' x ' .  number_format($itemorder_arr[$i]->getVar('itemorder_width'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ')';
-					if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') * $itemorder_arr[$i]->getVar('itemorder_width')) > $amoutArea) {
+					if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') * $itemorder_arr[$i]->getVar('itemorder_width')) > $amoutArea && $status != 3) {
 						if ($status == 1){
 							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
 						} else {
