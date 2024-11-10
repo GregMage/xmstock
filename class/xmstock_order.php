@@ -548,28 +548,30 @@ class xmstock_order extends XoopsObject
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			if ($type == 2){
 				$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNIT;
-				$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x ' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit . ' + ' . $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0). $unit;
+				$amount = $itemorder_arr[$i]->getVar('itemorder_amount') * number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) + $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0);
+				$amount_text = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x ' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . $unit . ' + ' . $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0). $unit;
 				if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') + $itemorder_arr[$i]->getVar('itemorder_amount')*$helper->getConfig('general_excesscut', 0)) > $amoutArea && $status != 3) {
 					if ($status == 1){
-						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+						$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount_text . "</span></td>";
 					} else {
-						$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+						$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount_text . "</span></td>";
 					}
 				} else {
-					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
+					$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount_text . "</span></td>";
 				}
 			} else {
 				if ($type == 5){
 					$unit = ' ' . _MA_XMSTOCK_CHECKOUT_UNITS;
-					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x (' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ' x ' .  number_format($itemorder_arr[$i]->getVar('itemorder_width'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ')';
+					$amount = $itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') * $itemorder_arr[$i]->getVar('itemorder_width');
+					$amount_text = $itemorder_arr[$i]->getVar('itemorder_amount') . 'x (' . number_format($itemorder_arr[$i]->getVar('itemorder_length'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ' x ' .  number_format($itemorder_arr[$i]->getVar('itemorder_width'), 2) . ' ' . _MA_XMSTOCK_CHECKOUT_UNIT . ')';
 					if (($itemorder_arr[$i]->getVar('itemorder_amount') * $itemorder_arr[$i]->getVar('itemorder_length') * $itemorder_arr[$i]->getVar('itemorder_width')) > $amoutArea && $status != 3) {
 						if ($status == 1){
-							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount . "</span></td>";
+							$articles .= "<td class='text-center'><span class='badge badge-warning badge-pill'>" . $amount_text . "</span></td>";
 						} else {
-							$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount . "</span></td>";
+							$articles .= "<td class='text-center'><span class='badge badge-danger badge-pill'>" . $amount_text . "</span></td>";
 						}
 					} else {
-						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount . "</span></td>";
+						$articles .= "<td class='text-center'><span class='badge badge-success badge-pill'>" . $amount_text . "</span></td>";
 					}
 				} else {
 					$unit = '';
@@ -601,13 +603,24 @@ class xmstock_order extends XoopsObject
 			if ($status <= 2){
 				$articles .= "<td class='text-center'><input type='checkbox' class='form-check-input' name='split" . $count . "' id='split" . $count . "'></td>";
 				if ($amoutArea < $amount){
-					$amoutSplit = $amoutArea;
-					$amountMax = $amoutArea;
+					if ($type == 2 || $type == 5){
+						if ($type == 2){
+							$amoutSplit = floor($amoutArea / ($itemorder_arr[$i]->getVar('itemorder_length') + $helper->getConfig('general_excesscut', 0)));
+						} else {
+							$amoutSplit = floor($amoutArea / ($itemorder_arr[$i]->getVar('itemorder_length') * $itemorder_arr[$i]->getVar('itemorder_width')));
+						}
+						$amountMax = $amoutSplit;
+					} else {
+						$amoutSplit = $amoutArea;
+						$amountMax = $amoutArea;
+					}
 				} else {
 					$amoutSplit = 0;
 					$amountMax = $amount - 1;
 				}
-				$articles .= "<td class='text-center'><input type='number' class='form-control' name='splitamount" . $count . "' id='splitamount" . $count . "' size='4' min='0' max='" . $amountMax . "' value='" . $amoutSplit . "'></td></tr>";
+				$articles .= "<td class='text-center'>";
+				$articles .= "<input type='number' class='form-control' name='splitamount" . $count . "' id='splitamount" . $count . "' size='4' min='0' max='" . $amountMax . "' value='" . $amoutSplit . "'>";
+				$articles .= "</td></tr>";
 			}
 			$form->addElement(new XoopsFormHidden('itemorder' . $count, $i));
 		}
