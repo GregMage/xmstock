@@ -55,6 +55,7 @@ define('_MI_XMSTOCK_BLOCK_OVERDRAFT_DESC', 'Afficher les articles qui ont attein
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>Général</span>");
 define('_MI_XMSTOCK_PREF_GENERALITEMPERPAGE', 'Nombre d\'éléments par page dans la vue générale');
 define('_MI_XMSTOCK_PREF_PRICE', 'Gestion des prix');
+define('_MI_XMSTOCK_PREF_PRICE_DESC', 'Option qui permet de savoir comment sont gérés les prix lors des transferts');
 define('_MI_XMSTOCK_PREF_PRICE_0', 'Désactivé');
 define('_MI_XMSTOCK_PREF_PRICE_1', 'Activé, écrase le prix enregistré');
 define('_MI_XMSTOCK_PREF_PRICE_2', 'Activé, prend le prix existant et le moyenne avec le nouveau');
