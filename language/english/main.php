@@ -224,7 +224,9 @@ define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'The quantity requested for items with
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'If the desired item is in stock but not in sufficient quantity and you wish to obtain the quantity in stock before the total, please split the order into 2.');
 
 // caddy
+define('_MA_XMSTOCK_CADDY_NEEDSYEARS', 'Need');
 define('_MA_XMSTOCK_CADDY_LENGHT', 'Lenght');
+define('_MA_XMSTOCK_CADDY_WIDTH', 'Width');
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
 define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');

@@ -49,7 +49,7 @@ define('_MI_XMSTOCK_BLOCK_MYLOANS_DESC', 'Show loans from user');
 define('_MI_XMSTOCK_BLOCK_LOANS', 'Outstanding loans');
 define('_MI_XMSTOCK_BLOCK_LOANS_DESC', 'Show loans under user management');
 define('_MI_XMSTOCK_BLOCK_OVERDRAFT', 'Articles stock minimum');
-define('_MI_XMSTOCK_BLOCK_OVERDRAFT', 'Minimum stock items');define('_MI_XMSTOCK_BLOCK_OVERDRAFT_DESC', 'Show items that have reached minimum stock');
+define('_MI_XMSTOCK_BLOCK_OVERDRAFT_DESC', 'Show items that have reached minimum stock');
 
 // Pref
 define('_MI_XMSTOCK_PREF_HEAD_GENERAL', "<span style='font-size: large; font-weight: bold;'>General< /span>");
