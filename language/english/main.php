@@ -139,7 +139,7 @@ define('_MA_XMSTOCK_STOCK_ORDER', 'Désactiver la commande');
 define('_MA_XMSTOCK_STOCK_ORDER_DESC', 'Cette option permet de désactiver la commande');
 define('_MA_XMSTOCK_STOCK_SURFACE', 'Surface (mm²)');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
-define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.');
+define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.<br>L\'option libre service désactive le suivi des quantité.<br>L\'option surface (mm²) est utilisée pour de la matière stocké sous forme de plaque.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
 define('_MA_XMSTOCK_STOCK_WIDTH', 'Larg. (mm)');
 
