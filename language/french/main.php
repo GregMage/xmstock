@@ -86,7 +86,7 @@ define('_MA_XMSTOCK_ERROR_SPLIT', 'Vous ne pouvez pas spliter l\'article complet
 define('_MA_XMSTOCK_ERROR_TRANSFER_AR_AREAID', 'Il n\'y a pas de stock de destination sélectionné');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_AREAID', 'Il n\'y a pas de stock de départ sélectionné');
 define('_MA_XMSTOCK_ERROR_TRANSFER_ST_TO_AR', 'Les stocks de départ et d\'arrivée sont identiques');
-define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUT', 'Vous devez choisir un déstinataire externe <b>ou</b> interne. Pas les deux!');
+define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUT', 'Vous devez choisir un destinataire externe <b>ou</b> interne. Pas les deux!');
 define('_MA_XMSTOCK_ERROR_TRANSFER_OUTPUTID', 'Il n\'y a pas de sortie sélectionnée');
 define('_MA_XMSTOCK_ERROR_TRANSFER_NOARTICLE', 'L\'article sélectionné n\'est pas disponible dans le stock sélectionné');
 define('_MA_XMSTOCK_ERROR_TRANSFER_TBAMOUNT', 'La quantité demandée (%s) est plus importante que celle disponible (%s)');
@@ -133,13 +133,13 @@ define('_MA_XMSTOCK_STOCK_LENGHT', 'Long. (mm)');
 define('_MA_XMSTOCK_STOCK_LOAN', '<span class="fa fa-exchange"></span> Emprunt');
 define('_MA_XMSTOCK_STOCK_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_STOCK_MINI', 'Stock minimum');
-define('_MA_XMSTOCK_STOCK_MINI_DSC', 'Valeur qui défini le stock minimum (utilisé si il est nécessaire de faire un suivi de stock mini). Mettre la valeur 0 pour ne pas faire de suivi');
+define('_MA_XMSTOCK_STOCK_MINI_DSC', 'Valeur qui définit le stock minimum (utilisé si il est nécessaire de faire un suivi de stock mini). Mettre la valeur 0 pour ne pas faire de suivi.');
 define('_MA_XMSTOCK_STOCK_ML', 'Linéaire (mml)');
 define('_MA_XMSTOCK_STOCK_ORDER', 'Désactiver la commande');
 define('_MA_XMSTOCK_STOCK_ORDER_DESC', 'Cette option permet de désactiver la commande');
 define('_MA_XMSTOCK_STOCK_SURFACE', 'Surface (mm²)');
 define('_MA_XMSTOCK_STOCK_TYPE', 'Type');
-define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.<br>L\'option libre service désactive le suivi des quantité.<br>L\'option surface (mm²) est utilisée pour de la matière stocké sous forme de plaque.');
+define('_MA_XMSTOCK_STOCK_TYPE_DESC', 'L\'option linéaire (mml) est utilisée pour de la matière stocké sous forme de profilé linéaire.<br>L\'option emprunt permet d\'activer le système de prêt de l\'article.<br>L\'option libre service désactive le suivi des quantités.<br>L\'option surface (mm²) est utilisée pour de la matière stocké sous forme de plaque.');
 define('_MA_XMSTOCK_STOCK_STANDARD', 'Standard (Qté)');
 define('_MA_XMSTOCK_STOCK_WIDTH', 'Larg. (mm)');
 
@@ -151,7 +151,7 @@ define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Poids');
 
 //transfer
 define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Quantité');
-define('_MA_XMSTOCK_TRANSFER_AMOUNT_DSC', 'Si il s\'agit d\'une quantité en "linéaire", il faut entrer la quantité en [mm]');
+define('_MA_XMSTOCK_TRANSFER_AMOUNT_DSC', 'Si il s\'agit d\'une quantité en "Linéaire (mml)", il faut entrer la quantité en millimètre. Pour "Surface (mm²)" en millimètre²');
 define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Stock de destination');
 define('_MA_XMSTOCK_TRANSFER_ARTICLE', 'Article à transférer');
 define('_MA_XMSTOCK_TRANSFER_DATE', 'Date');
@@ -165,12 +165,12 @@ define('_MA_XMSTOCK_TRANSFER_LOCATION', 'Emplacement');
 define('_MA_XMSTOCK_TRANSFER_LOCATION_DSC', 'Emplacement de l\'article dans le stock');
 define('_MA_XMSTOCK_TRANSFER_NEEDSYEAR', 'Période du besoin');
 define('_MA_XMSTOCK_TRANSFER_NEEDSYEAR_DSC', 'Cet article est dans le plan de production, vous devez indiquer pour quelle période est votre besoin');
-define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Déstinataire');
-define('_MA_XMSTOCK_TRANSFER_OUTPUT_DSC', 'Vous devez choisir un déstinataire externe ou interne. Un seul choix entre les deux possibilités');
-define('_MA_XMSTOCK_TRANSFER_OUTPUTID', 'Déstinataire externe');
-define('_MA_XMSTOCK_TRANSFER_OUTPUTUSERID', 'Déstinataire interne');
+define('_MA_XMSTOCK_TRANSFER_OUTPUT', 'Destinataire');
+define('_MA_XMSTOCK_TRANSFER_OUTPUT_DSC', 'Vous devez choisir un destinataire externe ou interne. Un seul choix entre les deux possibilités');
+define('_MA_XMSTOCK_TRANSFER_OUTPUTID', 'Destinataire externe');
+define('_MA_XMSTOCK_TRANSFER_OUTPUTUSERID', 'Destinataire interne');
 define('_MA_XMSTOCK_TRANSFER_PRICE', 'Prix');
-define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à tranférer. Une valeur à 0 n\'enregistrera pas de prix (si un prix existe déjà dans le stock, il sera utilisé)');
+define('_MA_XMSTOCK_TRANSFER_PRICE_DSC', 'Indiquez le prix du lot à transférer. Une valeur à 0 n\'enregistrera pas de prix (si un prix existe déjà dans le stock, il sera utilisé)');
 define('_MA_XMSTOCK_TRANSFER_REF', 'Référence de transfert');
 define('_MA_XMSTOCK_TRANSFER_STOCK', 'Stock: ');
 define('_MA_XMSTOCK_TRANSFER_SUREDEL', 'Voulez-vous vraiment supprimer ce transfert ? %s');
@@ -340,7 +340,7 @@ define('_MA_XMSTOCK_LOAN_STATUS_L', 'En prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt cloturé');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_DESC', 'Prêt du %s avec le numéro %s');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_REF', 'Prêt %s');
-define('_MA_XMSTOCK_LOAN_USERID', 'Déstinataire du prêt');
+define('_MA_XMSTOCK_LOAN_USERID', 'Destinataire du prêt');
 define('_MA_XMSTOCK_LOAN_USERSLIST', 'Liste des emprunteurs');
 
 //overdraft.php
