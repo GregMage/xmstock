@@ -150,6 +150,7 @@ define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Sure to delete this output? %s');
 define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Weight');
 
 //transfer
+define('_MA_XMSTOCK_TRANSFER_ALL', 'Tous les transferts');
 define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Amount');
 define('_MA_XMSTOCK_TRANSFER_AMOUNT_DSC', 'If this is a "linear" quantity, enter the quantity in [mm].');
 define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Destination stock');

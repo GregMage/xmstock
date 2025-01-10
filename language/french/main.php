@@ -150,6 +150,7 @@ define('_MA_XMSTOCK_OUTPUT_SUREDEL', 'Voulez-vous vraiment supprimer cette sorti
 define('_MA_XMSTOCK_OUTPUT_WEIGHT', 'Poids');
 
 //transfer
+define('_MA_XMSTOCK_TRANSFER_ALL', 'Tous les transferts');
 define('_MA_XMSTOCK_TRANSFER_AMOUNT', 'Quantité');
 define('_MA_XMSTOCK_TRANSFER_AMOUNT_DSC', 'Si il s\'agit d\'une quantité en "Linéaire (mml)", il faut entrer la quantité en millimètre. Pour "Surface (mm²)" en millimètre²');
 define('_MA_XMSTOCK_TRANSFER_ARAREA', 'Stock de destination');
@@ -337,7 +338,7 @@ define('_MA_XMSTOCK_LOAN_LIST', 'Liste des prêts');
 define('_MA_XMSTOCK_LOAN_RDATE', 'Date de retour');
 define('_MA_XMSTOCK_LOAN_STATUS', 'Statut du prêt');
 define('_MA_XMSTOCK_LOAN_STATUS_L', 'En prêt');
-define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt cloturé');
+define('_MA_XMSTOCK_LOAN_STATUS_C', 'Prêt clôturé');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_DESC', 'Prêt du %s avec le numéro %s');
 define('_MA_XMSTOCK_LOAN_TRANSFERT_REF', 'Prêt %s');
 define('_MA_XMSTOCK_LOAN_USERID', 'Destinataire du prêt');

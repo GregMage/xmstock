@@ -98,6 +98,7 @@
 					<{/foreach}>
 				</tbody>
 			</table>
+			<a href="<{$xoops_url}>/modules/xmstock/transfer.php" class="btn btn-secondary" title="<{$smarty.const._MA_XMSTOCK_VIEW}>"><span class="fa fa-list-alt"></span> <{$smarty.const._MA_XMSTOCK_TRANSFER_ALL}></a>
 		<{else}>
 			<div class="alert alert-warning" role="alert">
 				<{$smarty.const._MB_XMSTOCK_NOTRANSFER}>
