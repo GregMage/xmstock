@@ -310,7 +310,7 @@ define('_MA_XMSTOCK_ACTION_SPLIT_TEXT', 'Cette commande est une commande divisé
 define('_MA_XMSTOCK_ACTION_TRANSFERT_REF', 'Commande %s');
 define('_MA_XMSTOCK_ACTION_TRANSFERT_DESC', 'Commande du %s avec le numéro %s');
 define('_MA_XMSTOCK_ACTION_WARNING_STATUS2', 'Une fois ce formulaire validé, les articles seront décomptés du stock!');
-define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la commande sera considérée comme livrée (article livrés ou retirés).');
+define('_MA_XMSTOCK_ACTION_WARNING_STATUS3', 'Une fois ce formulaire validé, la commande sera considérée comme livrée (articles livrés ou retirés).');
 
 // viewprice.php
 define('_MA_XMSTOCK_VIEWPRICE_AMOUNT', 'Quantité transférée');
