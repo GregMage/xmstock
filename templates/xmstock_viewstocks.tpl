@@ -28,7 +28,7 @@
 								<a href="<{$xoops_url}>/modules/xmstock/transfer.php?article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}>"><span class="fa fa-search"></span></a>
 							<{/if}>
 						<{/if}>
-						<{if $stock.loan|default:false == true && $stock.amount == 0}>
+						<{if $stock.infoloan|default:false == true}>
 							<span class="fa fa-exchange" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_LOAN_USERSLIST}>: <{$stock.borrower|default:''}>"></span>
 						<{/if}>
 						<{if $stock.order|default:false == true && $stock.type != 4}>

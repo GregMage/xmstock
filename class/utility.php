@@ -461,14 +461,23 @@ class XmstockUtility
 					$stock_type = $stock['type'];
 				}
 				if (in_array($stock['area_id'], $orderPermissionArea) == true){
-					if ($stock['type'] == 3) {
+					$stock['borrower'] = implode(', ', self::getBorrowerPerArticle($stock['area_id'], $article_id));
+					if ($stock['type'] == 3 && $stock['borrower'] != '') {
 						$stock['order'] = false;
-						$stock['loan']  = true;
-						$stock['borrower'] = implode(', ', self::getBorrowerPerArticle($stock['area_id'], $article_id));
+						$stock['loan'] = true;
+						if ($stock['amount'] == 0){
+							$stock['infoloan'] = true;
+						} else {
+							$stock['infoloan'] = false;
+						}
+					} elseif ($stock['type'] != 3 && $stock['borrower'] != ''){
+						$stock['order'] = true;
+						$stock['loan'] 	= false;
+						$stock['infoloan'] = true;;
 					} else {
 						$stock['order'] = true;
 						$stock['loan'] 	= false;
-						$stock['borrower'] = '';
+						$stock['infoloan'] = false;
 					}
 				} else {
 					$stock['order'] 	= false;
