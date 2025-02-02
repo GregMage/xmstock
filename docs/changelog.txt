@@ -4,6 +4,7 @@ Date:    02.02.2025
 -------------------------------------------------
 Correction de bogues:
 	- Pas de visualisationn des emprunteurs si le type d'article n'est pas sur emprunt
+	- La colonne action est supprimée dans la liste des commandes livrées (en gestion de commande)
 
 Améliorations:
 	- Ajout du nom du stock dans les blocs

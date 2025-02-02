@@ -297,7 +297,9 @@
 						<{if $status == 'all'}>
 						<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_STATUS}></th>
 						<{/if}>
+						<{if $status != 4}>
 						<th class="text-center width20" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
+						<{/if}>
 					</tr>
 				</thead>
 				<tbody>
@@ -323,6 +325,7 @@
 						<{if $status == 'all'}>
 						<td class="text-center"><{$order.status_text}></td>
 						<{/if}>
+						<{if $status != 4}>
 						<td class="text-center">
 							<{if $order.status > 0 && $order.status < 4}>
 							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_PROCESS}>"><span class="fa fa-angle-double-right"></span></a>
@@ -331,6 +334,7 @@
 							<a href="<{$xoops_url}>/modules/xmstock/action.php?op=edit&order_id=<{$order.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_EDIT}>"><span class="fa fa-edit"></span></a>
 							<{/if}>
 						</td>
+						<{/if}>
 					</tr>
 					<{/foreach}>
 				</tbody>
