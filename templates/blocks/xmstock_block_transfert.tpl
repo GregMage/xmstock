@@ -7,6 +7,7 @@
 						<th class="text-center" scope="col">#</th>
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_DATE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_ARTICLE}></th>
+						<th><{$smarty.const._MA_XMSTOCK_TRANSFER_DESTINATION}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
 					</tr>
 				</thead>
@@ -20,6 +21,7 @@
 						</th>
 						<td><{$blocktransfer.date}></td>
 						<td><{$blocktransfer.article}></td>
+						<td><{$blocktransfer.starea}></td>
 						<td class="text-center">
 							<{if $blocktransfer.action == true}>
 							<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=valid&transfer_id=<{$blocktransfer.id}>" class="btn btn-secondary btn-sm" title="<{$smarty.const._MA_XMSTOCK_VALID}>"><span class="fa fa-check-square-o"></span></a>

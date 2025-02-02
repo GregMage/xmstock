@@ -7,6 +7,7 @@
 						<th class="text-center" scope="col">#</th>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_DATE}></th>
 						<th><{$smarty.const._MA_XMSTOCK_LOAN_LARTICLE}></th>
+						<th><{$smarty.const._MA_XMSTOCK_LOAN_AREA}></th>
 						<th class="text-center"><{$smarty.const._MA_XMSTOCK_LOAN_AMOUNT}></th>
 					</tr>
 				</thead>
@@ -16,6 +17,9 @@
 						<th class="text-center" scope="row"><{$blockloan.id}></th>
 						<td><{$blockloan.date}></td>
 						<td><{$blockloan.article}></td>
+						<td>
+							<span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$blockloan.area_name}>
+						</td>
 						<td class="text-center"><{$blockloan.amount}></td>
 					</tr>
 				<{/foreach}>

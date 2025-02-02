@@ -27,7 +27,18 @@ function block_xmstock_show($options) {
 
 	// Get Permission to manage
 	$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
-
+	//area
+	$area = array();
+	$area[0] = '';
+	$criteria = new CriteriaCompo();
+	$criteria->setSort('area_weight ASC, area_name');
+	$criteria->setOrder('ASC');
+	$area_arr = $areaHandler->getall($criteria);
+	if (count($area_arr) > 0) {
+		foreach (array_keys($area_arr) as $i) {
+			$area[$i] = $area_arr[$i]->getVar('area_name');
+		}
+	}
 	$block = array();
 	$criteria = new CriteriaCompo();
 	switch ($options[4]) {
@@ -57,6 +68,7 @@ function block_xmstock_show($options) {
 					$order['id']              = $order_arr[$i]->getVar('order_id');
 					$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
 					$order['dorder']          = formatTimestamp($order_arr[$i]->getVar('order_dorder'), 's');
+					$order['area_name']   	  = $area[$order_arr[$i]->getVar('order_areaid')];
 					switch ($order_arr[$i]->getVar('order_status')) {
 						case 1:
 							$order['status_text'] = _MA_XMSTOCK_ORDER_STATUS_1;
@@ -86,17 +98,6 @@ function block_xmstock_show($options) {
 			break;
 
 		case 'transfert':
-			//area
-			$area = array();
-			$area[0] = '';
-			$criteria->setSort('area_weight ASC, area_name');
-			$criteria->setOrder('ASC');
-			$area_arr = $areaHandler->getall($criteria);
-			if (count($area_arr) > 0) {
-				foreach (array_keys($area_arr) as $i) {
-					$area[$i] = $area_arr[$i]->getVar('area_name');
-				}
-			}
 			$criteria->setSort('transfer_date');
 			$criteria->setOrder($options[1]);
 			$criteria->add(new Criteria('transfer_status', $options[2]));
@@ -171,6 +172,7 @@ function block_xmstock_show($options) {
 					$loan['amount']        = $loan_arr[$i]->getVar('loan_amount');
 					$loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $loan_arr[$i]->getVar('article_cid') . '&article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('article_reference') . ')';
 					$loan['user']     	   = XoopsUser::getUnameFromId($loan_arr[$i]->getVar('loan_userid'));
+					$loan['area_name']     = $area[$loan_arr[$i]->getVar('loan_areaid')];
 					$block['loan'][] = $loan;
 					unset($loan);
 				}
@@ -180,17 +182,6 @@ function block_xmstock_show($options) {
 			break;
 
 		case 'overdraft':
-			//area
-			$area = array();
-			$area[0] = '';
-			$criteria->setSort('area_weight ASC, area_name');
-			$criteria->setOrder('ASC');
-			$area_arr = $areaHandler->getall($criteria);
-			if (count($area_arr) > 0) {
-				foreach (array_keys($area_arr) as $i) {
-					$area[$i] = $area_arr[$i]->getVar('area_name');
-				}
-			}
 			$criteria->setSort('stock_amount');
 			$criteria->setOrder($options[1]);
 			$criteria->add(new Criteria('stock_amount', '`stock_mini`', '<='));

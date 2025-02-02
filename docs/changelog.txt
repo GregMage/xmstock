@@ -6,7 +6,7 @@ Correction de bogues:
 	- Pas de visualisationn des emprunteurs si le type d'article n'est pas sur emprunt
 
 Améliorations:
-	-
+	- Ajout du nom du stock dans les blocs
 
 Sécurités:
 	- /

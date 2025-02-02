@@ -9,13 +9,16 @@
 				<a href="<{$xoops_url}>/modules/xmstock/action.php?op=next&&order_id=<{$blockorder.id}>" class="list-group-item list-group-item-action">
 				<{/if}>
 					<div class="row">
-						<div class="col-3 col-sm-3 text-left">
+						<div class="col-12 col-sm-4 col-lg-3 text-left">
 							<b><{$smarty.const._MA_XMSTOCK_VIEWORDER_ORDER}> <{$blockorder.id}></b>
 						</div>
-						<div class="col-6 col-sm-4 text-left">
-							<span class="fa fa-calendar fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}> <{$blockorder.dorder}>
+						<div class="col-12 col-sm-4 col-lg-3 text-left">
+							<span class="fa fa-calendar fa-fw" aria-hidden="true"></span> <{$blockorder.dorder}>
 						</div>
-						<div class="col-3 col-sm-5 text-right">
+						<div class="col-12 col-sm-4 col-lg-3 text-left">
+							<span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$blockorder.area_name}>
+						</div>
+						<div class="col-12 col-sm-12 col-lg-3 text-right">
 							<span class="badge badge-secondary fa-lg text-primary">
 							<small><{$blockorder.status_icon}> <{$blockorder.status_text}></small>
 							</span>
