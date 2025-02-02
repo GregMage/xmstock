@@ -288,7 +288,7 @@ $modversion['config'][] = [
 ];
 
 // About stuff
-$modversion['release_date']  = '2025/01/10';
+$modversion['release_date']  = '2025/02/02';
 
 $modversion['developer_lead']      = 'Mage';
 $modversion['module_website_url']  = 'github.com/GregMage';
