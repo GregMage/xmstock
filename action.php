@@ -45,6 +45,7 @@ function listOrder($obj, $order_id)
 		$xoopsTpl->assign('ddesired', formatTimestamp($obj->getVar('order_ddesired'), 's'));
 		$xoopsTpl->assign('dorder', formatTimestamp($obj->getVar('order_dorder'), 'm'));
 		$xoopsTpl->assign('user', XoopsUser::getUnameFromId($obj->getVar('order_userid')));
+		$xoopsTpl->assign('area_name', XmstockUtility::getAreaName($obj->getVar('order_areaid'), false, false));
 		$xoopsTpl->assign('delivery', $obj->getVar('order_delivery'));
 		$xoopsTpl->assign('status', $obj->getVar('order_status'));
 		$xoopsTpl->assign('ddelivery', formatTimestamp($obj->getVar('order_ddelivery'), 's'));

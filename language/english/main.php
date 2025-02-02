@@ -225,7 +225,9 @@ define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY', 'The quantity requested for items with
 define('_MA_XMSTOCK_CHECKOUT_WARNINGQTY2', 'Si l\'article désiré est en stock mais pas en quantité suffissante et que vous désirez obtenir la quantité en stock avant la totalité, merci de spliter la commande en 2.');
 
 // caddy
+define('_MA_XMSTOCK_CADDY_NEEDSYEARS', 'Besoin');
 define('_MA_XMSTOCK_CADDY_LENGHT', 'Lenght');
+define('_MA_XMSTOCK_CADDY_WIDTH', 'Largeur');
 define('_MA_XMSTOCK_CADDY_EMPTY', 'Empty cart');
 define('_MA_XMSTOCK_CADDY_AREA', 'Areas');
 define('_MA_XMSTOCK_CADDY_STEP1', '1- Add to cart');
@@ -285,6 +287,7 @@ define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Order #');
 // management
 define('_MA_XMSTOCK_MANAGEMENT', 'Orders management');
 define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'All orders');
+define('_MA_XMSTOCK_MANAGEMENT_AREA', 'Stock');
 define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Canceled orders');
 define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Customer');
 define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Orders delivered');

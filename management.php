@@ -32,6 +32,19 @@ if (empty($managePermissionArea)) {
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
+//area
+$area = array();
+$area[0] = '';
+$criteria = new CriteriaCompo();
+$criteria->setSort('area_weight ASC, area_name');
+$criteria->setOrder('ASC');
+$area_arr = $areaHandler->getall($criteria);
+if (count($area_arr) > 0) {
+	foreach (array_keys($area_arr) as $i) {
+		$area[$i] = $area_arr[$i]->getVar('area_name');
+	}
+}
+
 $op = Request::getCmd('op', 'list');
 $xoopsTpl->assign('op', $op);
 switch ($op) {
@@ -50,6 +63,7 @@ switch ($op) {
 		if (!empty($order_1_arr)) {
 			foreach (array_keys($order_1_arr) as $i) {
 				$order_1['id']              = $order_1_arr[$i]->getVar('order_id');
+				$order_1['area_name']       = $area[$order_1_arr[$i]->getVar('order_areaid')];
 				$order_1['ddesired']        = formatTimestamp($order_1_arr[$i]->getVar('order_ddesired'), 's');
 				$order_1['dorder']          = formatTimestamp($order_1_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_1', $order_1);
@@ -71,6 +85,7 @@ switch ($op) {
 		if (!empty($order_2_arr)) {
 			foreach (array_keys($order_2_arr) as $i) {
 				$order_2['id']          = $order_2_arr[$i]->getVar('order_id');
+				$order_2['area_name']   = $area[$order_2_arr[$i]->getVar('order_areaid')];
 				$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_ddelivery'), 's');
 				$order_2['dorder']      = formatTimestamp($order_2_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_2', $order_2);
@@ -92,6 +107,7 @@ switch ($op) {
 		if (!empty($order_3_arr)) {
 			foreach (array_keys($order_3_arr) as $i) {
 				$order_3['id']              = $order_3_arr[$i]->getVar('order_id');
+				$order_3['area_name']       = $area[$order_3_arr[$i]->getVar('order_areaid')];
 				$order_3['dready']        	= formatTimestamp($order_3_arr[$i]->getVar('order_dready'), 's');
 				$order_3['dorder']          = formatTimestamp($order_3_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_3', $order_3);
@@ -113,6 +129,7 @@ switch ($op) {
 		if (!empty($order_4_arr)) {
 			foreach (array_keys($order_4_arr) as $i) {
 				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
+				$order_4['area_name']       = $area[$order_4_arr[$i]->getVar('order_areaid')];
 				$order_4['delivery_r']  	= formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
 				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_4', $order_4);
@@ -134,7 +151,8 @@ switch ($op) {
 		if (!empty($order_0_arr)) {
 			foreach (array_keys($order_0_arr) as $i) {
 				$order_0['id']              = $order_0_arr[$i]->getVar('order_id');
-				$order_0['dcancellation']        = formatTimestamp($order_0_arr[$i]->getVar('order_dcancellation'), 's');
+				$order_0['area_name']       = $area[$order_0_arr[$i]->getVar('order_areaid')];
+				$order_0['dcancellation']   = formatTimestamp($order_0_arr[$i]->getVar('order_dcancellation'), 's');
 				$order_0['dorder']          = formatTimestamp($order_0_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_0', $order_0);
 				unset($order_0);
@@ -243,6 +261,7 @@ switch ($op) {
 			foreach (array_keys($order_arr) as $i) {
 				$order_id                 = $order_arr[$i]->getVar('order_id');
 				$order['id']              = $order_id;
+				$order['area_name']       = $area[$order_arr[$i]->getVar('order_areaid')];
 				$order['user']     		  = XoopsUser::getUnameFromId($order_arr[$i]->getVar('order_userid'));
 				$order['ddesired']        = formatTimestamp($order_arr[$i]->getVar('order_ddesired'), 's');
 				$order['ddelivery']		  = formatTimestamp($order_arr[$i]->getVar('order_ddelivery'), 's');

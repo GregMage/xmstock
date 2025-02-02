@@ -287,6 +287,7 @@ define('_MA_XMSTOCK_VIEWORDER_ORDER', 'Commande #');
 // management
 define('_MA_XMSTOCK_MANAGEMENT', 'Gestion des commandes');
 define('_MA_XMSTOCK_MANAGEMENT_ALLORDERS', 'Toutes les commandes');
+define('_MA_XMSTOCK_MANAGEMENT_AREA', 'Stock');
 define('_MA_XMSTOCK_MANAGEMENT_CANCELED', 'Commandes annulées');
 define('_MA_XMSTOCK_MANAGEMENT_CUSTOMER', 'Client');
 define('_MA_XMSTOCK_MANAGEMENT_DELIVRED', 'Commandes livrées');

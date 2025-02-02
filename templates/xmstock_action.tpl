@@ -73,8 +73,12 @@
 						</figure>
 						<{/if}>
 						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
-							  <span class="fa fa fa-user" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}>
-							  <figcaption class="figure-caption text-center"><{$user}></figcaption>
+							<span class="fa fa fa-user fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}>
+							<figcaption class="figure-caption text-center"><{$user}></figcaption>
+						</figure>
+						<figure class="figure text-muted my-1 pr-2 text-center border-right border-secondary">
+							<span class="fa fa-folder fa-fw" aria-hidden="true"></span> <{$smarty.const._MA_XMSTOCK_MANAGEMENT_AREA}>
+							<figcaption class="figure-caption text-center"><{$area_name}></figcaption>
 						</figure>
 					</div>
 					<div class="card-body">
