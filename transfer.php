@@ -52,6 +52,7 @@ switch ($op) {
 		$xoopsTpl->assign('filter', $filter);
 		//external filters
 		$article_id = Request::getInt('article_id', 0);
+		$xoopsTpl->assign('article_id', $article_id);
 
 		//area
 		$area = array();
