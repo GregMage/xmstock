@@ -47,7 +47,7 @@
 				<tbody>
 					<{foreach item=overdraft from=$overdrafts}>
 					<tr>
-						<td><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$overdraft.article_cid}>&article_id=<{$overdraft.article_id}>"><b><{$overdraft.article_ref}></b> <{$overdraft.article_name}></a></td>
+						<td><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?article_id=<{$overdraft.article_id}>"><b><{$overdraft.article_ref}></b> <{$overdraft.article_name}></a></td>
 						<{if $area_id == 0}>
 						<td class="text-center"><span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$overdraft.area_name}></td>
 						<{/if}>

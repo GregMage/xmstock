@@ -69,7 +69,7 @@ switch ($op) {
 					$stock_id               = $myrow['stock_id'];
 					$stock['id']            = $stock_id;
 					$stock['area']          = $myrow['area_name'];
-					$stock['article']       = '<a href="../../xmarticle/viewarticle.php?category_id=' . $myrow['article_cid'] . '&article_id=' . $myrow['article_id'] . '" title="' . $myrow['article_name'] . '" target="_blank">' . $myrow['article_name'] . '</a> (' . $myrow['article_reference'] . ')';
+					$stock['article']       = '<a href="../../xmarticle/viewarticle.php?article_id=' . $myrow['article_id'] . '" title="' . $myrow['article_name'] . '" target="_blank">' . $myrow['article_name'] . '</a> (' . $myrow['article_reference'] . ')';
 					$stock['amount']        = $myrow['stock_amount'];
 					$xoopsTpl->appendByRef('stocks', $stock);
 					unset($stock);

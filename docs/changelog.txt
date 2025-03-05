@@ -10,6 +10,7 @@ Correction de bogues:
 Améliorations:
 	- Ajout du nom du stock dans les blocs
 	- Ajout du nom du stock dans les commandes
+	- L'id de la catégorie n'est plus nécessaire dans le lien d'un article (xmarticle).
 
 Sécurités:
 	- /

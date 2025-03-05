@@ -136,7 +136,7 @@
 								<{foreach item=article from=$item}>
 								<tr>
 									<td>
-										<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$article.cid}>&article_id=<{$article.id}>" title="<{$article.name}>" target="_blank">
+										<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?article_id=<{$article.id}>" title="<{$article.name}>" target="_blank">
 											<{$article.name}>
 										</a>
 										(<{$article.reference}>)

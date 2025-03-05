@@ -241,7 +241,7 @@ class xmstock_order extends XoopsObject
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
 			$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
-			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
+			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			$articles .= "<td><div class='form-row'>";
 			$articles .= "<div class='form-group col-4'><input class='form-control' type='number' name='amount" . $count . "' id='amount" . $count . "' value='" . $itemorder_arr[$i]->getVar('itemorder_amount') . "'>";
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
@@ -542,7 +542,7 @@ class xmstock_order extends XoopsObject
 		$articles .= "</tr></thead><tbody>";
 		foreach (array_keys($itemorder_arr) as $i) {
 			$count++;
-			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?category_id=" . $itemorder_arr[$i]->getVar('article_cid') . "&article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
+			$articles .= "<tr><th scope='row'><a href='" . XOOPS_URL . "/modules/xmarticle/viewarticle.php?article_id=" . $itemorder_arr[$i]->getVar('itemorder_articleid') . "' title='" . $itemorder_arr[$i]->getVar('article_name') . "' target='_blank'>" . $itemorder_arr[$i]->getVar('article_name') . "</a></th>";
 			$area_name = XmstockUtility::getAreaName($this->getVar('order_areaid'), true, false);
 			$amoutArea = XmstockUtility::articleAmountPerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);
 			$type = XmstockUtility::articleTypePerArea($this->getVar('order_areaid'), $itemorder_arr[$i]->getVar('itemorder_articleid'), $stock_arr);

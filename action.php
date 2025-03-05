@@ -208,7 +208,7 @@ if ($op == 'next' || $op == 'edit' || $op == 'editstock' || $op == 'del' || $op 
             }
 			$return = Request::getString('return', 'stock');
 			if ($return == 'article') {
-				$action = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $stock_areaid . '&article_id=' . $obj->getVar('stock_articleid');
+				$action = XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $obj->getVar('stock_articleid');
 			} else {
 				$action = XOOPS_URL . '/modules/xmstock/viewarea.php?area_id=' . $stock_areaid;
 			}

@@ -118,7 +118,7 @@ function block_xmstock_show($options) {
 					$transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
 					$transfer['id']            = $transfer_id;
 					$transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
-					$transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
+					$transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
 					$transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
 					$transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');
 					$transfer['description']   = $transfer_arr[$i]->getVar('transfer_description');
@@ -170,7 +170,7 @@ function block_xmstock_show($options) {
 					$loan['id']            = $loan_id;
 					$loan['date']          = formatTimestamp($loan_arr[$i]->getVar('loan_date'), 's');
 					$loan['amount']        = $loan_arr[$i]->getVar('loan_amount');
-					$loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $loan_arr[$i]->getVar('article_cid') . '&article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('article_reference') . ')';
+					$loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('article_reference') . ')';
 					$loan['user']     	   = XoopsUser::getUnameFromId($loan_arr[$i]->getVar('loan_userid'));
 					$loan['area_name']     = $area[$loan_arr[$i]->getVar('loan_areaid')];
 					$block['loan'][] = $loan;

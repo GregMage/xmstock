@@ -3,7 +3,7 @@
 		<{if $block.overdraft|default:'' != ''}>
 		<div class="list-group">
 			<{foreach item=blockoverdraft from=$block.overdraft}>
-				<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$blockoverdraft.article_cid}>&article_id=<{$blockoverdraft.article_id}>" class="list-group-item list-group-item-action">
+				<a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?article_id=<{$blockoverdraft.article_id}>" class="list-group-item list-group-item-action">
 					<div class="row">
 						<div class="col-7 text-left">
 							<b><{$blockoverdraft.article_ref}></b> <{$blockoverdraft.article_name}>

@@ -115,7 +115,7 @@ switch ($op) {
 				} else {
 					$loan['rdate']     = formatTimestamp($loan_arr[$i]->getVar('loan_rdate'), 's');
 				}
-                $loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $loan_arr[$i]->getVar('article_cid') . '&article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('article_reference') . ')';
+                $loan['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $loan_arr[$i]->getVar('article_id') . '" title="' . $loan_arr[$i]->getVar('article_name') . '" target="_blank">' . $loan_arr[$i]->getVar('article_name') . '</a> (' . $loan_arr[$i]->getVar('article_reference') . ')';
 
                 $loan['user']     	   = XoopsUser::getUnameFromId($loan_arr[$i]->getVar('loan_userid'));
 				if ($loan['status'] == 0) {

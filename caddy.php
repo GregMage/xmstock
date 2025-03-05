@@ -54,7 +54,7 @@ function listCart($sessionHelper, $session_name, $article_id, $stockHandler)
 		$articleHandler   = $helperArticle->getHandler('xmarticle_article');
 		$article  = $articleHandler->get($article_id);
 		if (isset($article)){
-			$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $article->getVar('article_cid') . '&article_id=' . $article_id;
+			$return_url = XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $article_id;
 		} else {
 			$return_url = XOOPS_URL . '/modules/xmarticle';
 		}

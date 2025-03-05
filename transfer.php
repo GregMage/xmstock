@@ -98,7 +98,7 @@ switch ($op) {
                 $transfer_w_id               = $transfer_w_arr[$i]->getVar('transfer_id');
                 $transfer_w['id']            = $transfer_w_id;
                 $transfer_w['date']          = formatTimestamp($transfer_w_arr[$i]->getVar('transfer_date'), 'm');
-                $transfer_w['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_w_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_w_arr[$i]->getVar('article_id') . '" title="' . $transfer_w_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_w_arr[$i]->getVar('article_name') . '</a> (' . $transfer_w_arr[$i]->getVar('article_reference') . ')';
+                $transfer_w['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $transfer_w_arr[$i]->getVar('article_id') . '" title="' . $transfer_w_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_w_arr[$i]->getVar('article_name') . '</a> (' . $transfer_w_arr[$i]->getVar('article_reference') . ')';
                 $transfer_w['ref']           = $transfer_w_arr[$i]->getVar('transfer_ref');
                 $transfer_w['amount']        = $transfer_w_arr[$i]->getVar('transfer_amount');
 				$transfer_w['description']   = $transfer_w_arr[$i]->getVar('transfer_description');
@@ -154,7 +154,7 @@ switch ($op) {
                 $transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
                 $transfer['id']            = $transfer_id;
                 $transfer['date']          = formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm');
-                $transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $transfer_arr[$i]->getVar('article_cid') . '&article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
+                $transfer['article']       = '<a href="' . XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $transfer_arr[$i]->getVar('article_id') . '" title="' . $transfer_arr[$i]->getVar('article_name') . '" target="_blank">' . $transfer_arr[$i]->getVar('article_name') . '</a> (' . $transfer_arr[$i]->getVar('article_reference') . ')';
                 $transfer['ref']           = $transfer_arr[$i]->getVar('transfer_ref');
                 $transfer['description']   = $transfer_arr[$i]->getVar('transfer_description');
                 $transfer['amount']        = $transfer_arr[$i]->getVar('transfer_amount');

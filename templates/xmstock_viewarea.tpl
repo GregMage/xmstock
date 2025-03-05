@@ -30,7 +30,7 @@
 			<li class="list-group-item">
 				<div class="row">
 					<div class="col-8 text-left">
-						<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?category_id=<{$stock.article_cid}>&article_id=<{$stock.article_id}>" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_AREA_LOCATION}>: <{$stock.location_s}>"><{$stock.name}></a></span> (<{$stock.reference}>)
+						<span class="xm-stock-general-bold"><a href="<{$xoops_url}>/modules/xmarticle/viewarticle.php?article_id=<{$stock.article_id}>" data-toggle="tooltip" data-placement="top" title="<{$smarty.const._MA_XMSTOCK_AREA_LOCATION}>: <{$stock.location_s}>"><{$stock.name}></a></span> (<{$stock.reference}>)
 						<{if $stock.price != ''}>
 							<a href="<{$xoops_url}>/modules/xmstock/viewprice.php?article_id=<{$stock.article_id}>&amp;area_id=<{$area_id}>" class="badge badge-info" target="_blank"><{$stock.price}></a>
 						<{/if}>
