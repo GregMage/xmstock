@@ -8,6 +8,7 @@ Correction de bogues:
 	- Sur la page de transfert avec la visulisation des transferts d'un article, l'utilisation des filtres perdait l'article sélectionné.
 
 Améliorations:
+	- Améliortation de la description du type stockage (ajout libre service et surface)
 	- Ajout du nom du stock dans les blocs
 	- Ajout du nom du stock dans les commandes
 	- L'id de la catégorie n'est plus nécessaire dans le lien d'un article (xmarticle).
