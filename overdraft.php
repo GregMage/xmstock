@@ -75,7 +75,7 @@ if ($area_id != 0) {
 	$criteria->add(new Criteria('stock_areaid', $area_id));
 }
 $criteria->add(new Criteria('stock_amount', '`stock_mini`', '<='));
-$criteria->add(new Criteria('stock_amount', 0, '!='));
+$criteria->add(new Criteria('stock_mini', 0, '!='));
 $criteria->add(new Criteria('article_status', 1));
 $stockHandler->table_link = $stockHandler->db->prefix("xmarticle_article");
 $stockHandler->field_link = "article_id";
