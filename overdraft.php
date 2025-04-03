@@ -39,10 +39,12 @@ $start = Request::getInt('start', 0);
 //filters
 $area_id = Request::getInt('area_id', 0);
 $xoopsTpl->assign('area_id', $area_id);
-$sort = Request::getString('sort', 'ASC');
+$sort = Request::getString('sort', 'NASC');
 $xoopsTpl->assign('sort', $sort);
 $filter = Request::getInt('filter', 10);
 $xoopsTpl->assign('filter', $filter);
+$name = Request::getString('name', '');
+$xoopsTpl->assign('name', $name);
 //area
 $area = array();
 $area[0] = '';
@@ -64,10 +66,26 @@ if (count($area_arr) > 0) {
 
 // Criteria overdraft
 $criteria = new CriteriaCompo();
-$criteria->setSort('stock_amount');
+switch ($sort) {
+	case 'NASC':
+		$criteria->setSort('stock_amount');
+		$criteria->setOrder('ASC');
+		break;
+	case 'NDESC':
+		$criteria->setSort('stock_amount');
+		$criteria->setOrder('DESC');
+		break;
+	case 'ASC':
+		$criteria->setSort('article_name');
+		$criteria->setOrder('ASC');
+		break;
+	case 'DESC':
+	default:
+		$criteria->setSort('article_name');
+		$criteria->setOrder('DESC');
+}
 $criteria->setStart($start);
 $criteria->setLimit($filter);
-$criteria->setOrder($sort);
 if (!empty($managePermissionArea)) {
 	$criteria->add(new Criteria('stock_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
 }
@@ -77,6 +95,9 @@ if ($area_id != 0) {
 $criteria->add(new Criteria('stock_amount', '`stock_mini`', '<='));
 $criteria->add(new Criteria('stock_mini', 0, '!='));
 $criteria->add(new Criteria('article_status', 1));
+if ($name != '') {
+	$criteria->add(new Criteria('article_name', '%' . $name . '%', 'LIKE'));
+}
 $stockHandler->table_link = $stockHandler->db->prefix("xmarticle_article");
 $stockHandler->field_link = "article_id";
 $stockHandler->field_object = "stock_articleid";
@@ -98,7 +119,7 @@ if ($stock_count > 0 && !empty($managePermissionArea)) {
 	}
 	// Display Page Navigation
 	if ($stock_count > $filter) {
-		$nav = new XoopsPageNav($stock_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&filter=' . $filter);
+		$nav = new XoopsPageNav($stock_count, $filter, $start, 'start', 'area_id=' . $area_id .'&sort=' . $sort . '&name=' . $name . '&filter=' . $filter);
 		$xoopsTpl->assign('nav_menu', $nav->renderNav(4));
 	}
 }

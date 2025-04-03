@@ -10,19 +10,29 @@
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group mr-2">
 				<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_STOCK_AREA}> </label>
-				<select class="form-control form-control-sm" id="area_filter" onchange="location='overdraft.php?sort=<{$sort}>&filter=<{$filter}>&area_id='+this.options[this.selectedIndex].value">
+				<select class="form-control form-control-sm" id="area_filter" onchange="location='overdraft.php?sort=<{$sort}>&name=<{$name}>&filter=<{$filter}>&area_id='+this.options[this.selectedIndex].value">
 					<{$area_options}>
 				</select>
 				&nbsp;<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_OVERDRAFT_AMOUNT}>&nbsp;</label>
 				<div class="form-check form-check-inline">
-					&nbsp;<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" <{if $sort == 'DESC'}>checked<{/if}> onchange="location='overdraft.php?area_id=<{$area_id}>&sort=DESC&filter=<{$filter}>'">
+					&nbsp;<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" <{if $sort == 'NDESC'}>checked<{/if}> onchange="location='overdraft.php?area_id=<{$area_id}>&sort=NDESC&name=<{$name}>&filter=<{$filter}>'">
 					<label class="form-check-label" for="inlineRadio1"><span class="fa fa-sort-numeric-desc"></span></label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" <{if $sort == 'ASC'}>checked<{/if}> onchange="location='overdraft.php?area_id=<{$area_id}>&sort=ASC&filter=<{$filter}>'">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" <{if $sort == 'NASC'}>checked<{/if}> onchange="location='overdraft.php?area_id=<{$area_id}>&sort=NASC&name=<{$name}>&filter=<{$filter}>'">
 					<label class="form-check-label" for="inlineRadio2"><span class="fa fa-sort-numeric-asc"></span></label></label>
 				</div>
-				<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_FILTER}> </label>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" <{if $sort == 'DESC'}>checked<{/if}> onchange="location='overdraft.php?area_id=<{$area_id}>&sort=DESC&name=<{$name}>&filter=<{$filter}>'">
+					<label class="form-check-label" for="inlineRadio3"><span class="fa fa-sort-alpha-desc"></span></label></label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" <{if $sort == 'ASC'}>checked<{/if}> onchange="location='overdraft.php?area_id=<{$area_id}>&sort=ASC&name=<{$name}>&filter=<{$filter}>'">
+					<label class="form-check-label" for="inlineRadio4"><span class="fa fa-sort-alpha-asc"></span></label></label>
+				</div>
+				<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_OVERDRAFT_ARTICLE}> </label>
+				<input class="form-control form-control-sm" type="text" id="name_filter" value="<{$name}>" onchange="location='overdraft.php?area_id=<{$area_id}>&sort=<{$sort}>&filter=<{$filter}>&name='+this.value">
+				&nbsp;<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_FILTER}> </label>
 				<select class="form-control form-control-sm" id="nb_filter" onchange="location='overdraft.php?area_id=<{$area_id}>&sort=<{$sort}>&filter='+this.options[this.selectedIndex].value">
 					<option value=10 <{if $filter == 10}>selected="selected"<{/if}>>10&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 					<option value=20 <{if $filter == 20}>selected="selected"<{/if}>>20&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
