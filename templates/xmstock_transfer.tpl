@@ -340,6 +340,7 @@
 			</table>
 		</div>
 	<{/if}>
+	<{if $form|default:'' == ''}>
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h2 class="h2"><{$smarty.const._MA_XMSTOCK_TRANSFER_LIST}></h2>
 		<div class="btn-toolbar mb-2 mb-md-0">
@@ -368,6 +369,7 @@
 			<button type="button" class="btn btn-sm btn-secondary" onclick="saveData()"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}></button>
 		</div>
 	</div>
+	<{/if}>
 	<{if $transfer_count|default:0 != 0}>
 		<script>
 			let export_data = '<{$export_head}>';
