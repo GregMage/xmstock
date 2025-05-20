@@ -1,4 +1,19 @@
 ﻿-------------------------------------------------
+Version: 1.4.0 Stable
+Date:    20.05.2025
+-------------------------------------------------
+Correction de bogues:
+	- Erreur d'affichage, les filtres n'étaient pas affichés si un stock était vide (après un filtre sur un stock).
+	- fix erreur stock mini si quantité en stock est à 0.
+
+Améliorations:
+	- Ajout de possibilité de filtre pour les découverts.
+	- Améliortation de la description du type stockage (ajout libre service et surface)
+	- Ajout de liens d'export sur xmstats, l'ancien système d'export est supprimé.
+
+Sécurités:
+	- /
+-------------------------------------------------
 Version: 1.3.1 Stable
 Date:    05.03.2025
 -------------------------------------------------
