@@ -24,15 +24,13 @@ $GLOBALS['xoopsOption']['template_main'] = 'xmstock_loan.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
-$xoTheme->addScript('modules/xmstock/assets/js/FileSaver.js');
-$xoTheme->addScript('modules/xmstock/assets/js/export.js');
-
 // Get Permission to manage
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 
 if (empty($managePermissionArea)) {
 	redirect_header('index.php', 2, _NOPERM);
 }
+$xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
@@ -101,7 +99,6 @@ switch ($op) {
         $loan_arr = $loanHandler->getByLink($criteria);
         $loan_count = $loanHandler->getCountByLink($criteria);
         $xoopsTpl->assign('loan_count', $loan_count);
-		$xoopsTpl->assign('export_head', '#;' . _MA_XMSTOCK_LOAN_DATE . ';' . _MA_XMSTOCK_LOAN_LARTICLE . ';'. _MA_XMSTOCK_LOAN_AMOUNT . ';' . _MA_XMSTOCK_LOAN_RDATE . ';' . _MA_XMSTOCK_LOAN_USERID . ';' . _MA_XMSTOCK_LOAN_STATUS . '\n');
         if ($loan_count > 0 && !empty($managePermissionArea)) {
             foreach (array_keys($loan_arr) as $i) {
                 $loan_id               = $loan_arr[$i]->getVar('loan_id');
@@ -123,7 +120,6 @@ switch ($op) {
 				} else {
 					$loan['text_status'] = _MA_XMSTOCK_LOAN_STATUS_L;
 				}
-				$loan['export'] = $loan_id . ';' . $loan['date'] . ';' . $loan_arr[$i]->getVar('article_name') . '(' . $loan_arr[$i]->getVar('article_reference') . ')' . ';' . $loan['amount'] . ';' . $loan['rdate'] . ';' . $loan['user'] . ';' . $loan['text_status'] . '\n';
                 $xoopsTpl->appendByRef('loans', $loan);
                 unset($loan);
             }

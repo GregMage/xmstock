@@ -26,9 +26,7 @@ include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
 $xoTheme->addScript('modules/xmstock/assets/js/chart.min.js');
-$xoTheme->addScript('modules/xmstock/assets/js/FileSaver.js');
 $xoTheme->addScript('modules/xmstock/assets/js/price.js');
-$xoTheme->addScript('modules/xmstock/assets/js/export.js');
 
 $area_id = Request::getInt('area_id', 0);
 $article_id = Request::getInt('article_id', 0);

@@ -50,6 +50,7 @@ if (!empty($orderPermissionArea)) {
 	$xoopsTpl->assign('order', false);
 }
 
+$xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
 // Get stock
 $criteria = new CriteriaCompo();
 $stock_arr = $stockHandler->getall($criteria);

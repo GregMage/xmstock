@@ -31,7 +31,7 @@ $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 if (empty($managePermissionArea)) {
 	redirect_header('index.php', 2, _NOPERM);
 }
-
+$xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
 // Get start pager

@@ -57,13 +57,13 @@
 					<option value=100 <{if $filter == 100}>selected="selected"<{/if}>>100&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 				</select>
 			</div>
-			<button type="button" class="btn btn-sm btn-secondary" onclick="saveData()"><{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}></button>
+			<{if $export == true}>
+			<a href="<{xoAppUrl 'modules/xmstats/export.php?op=loan'}>" class="btn btn-sm btn-secondary">
+				<{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}>
+			</a>
+			<{/if}>
 		</div>
 	</div>
-	<script>
-		let export_data = "<{$export_head}>";
-		let name = 'Pret';
-	</script>
 	<{/if}>
 	<{if $loan_count|default:0 != 0}>
 		<div class="row justify-content-center">
@@ -110,9 +110,6 @@
 						</td>
 						<{/if}>
 					</tr>
-					<script>
-						export_data += '<{$loan.export}>';
-					</script>
 					<{/foreach}>
 				</tbody>
 			</table>

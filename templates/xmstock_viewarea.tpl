@@ -25,6 +25,14 @@
 			  $('[data-toggle="tooltip"]').tooltip()
 			})
 		</script>
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1 class="h2"><{$smarty.const._MA_XMSTOCK_STOCK_ARTICLE}></h1>
+			<{if $export == true && $manage == true}>
+			<a href="<{xoAppUrl 'modules/xmstats/export.php?op=stock'}>" class="btn btn-sm btn-secondary">
+				<{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}>
+			</a>
+			<{/if}>
+		</div>
 		<ul class="list-group">
 		<{foreach item=stock from=$stocks}>
 			<li class="list-group-item">

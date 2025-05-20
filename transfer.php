@@ -24,8 +24,6 @@ $GLOBALS['xoopsOption']['template_main'] = 'xmstock_transfer.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/assets/css/styles.css', null);
-$xoTheme->addScript('modules/xmstock/assets/js/FileSaver.js');
-$xoTheme->addScript('modules/xmstock/assets/js/export.js');
 
 // Get Permission to manage
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
@@ -33,6 +31,7 @@ $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
 if (empty($managePermissionArea)) {
 	redirect_header('index.php', 2, _NOPERM);
 }
+$xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
 
 $xoopsTpl->assign('index_module', $helper->getModule()->getVar('name'));
 
@@ -148,7 +147,6 @@ switch ($op) {
         $transfer_arr = $transferHandler->getByLink($criteria);
         $transfer_count = $transferHandler->getCountByLink($criteria);
         $xoopsTpl->assign('transfer_count', $transfer_count);
-		$xoopsTpl->assign('export_head', '#;' . _MA_XMSTOCK_TRANSFER_DESC . ';' . _MA_XMSTOCK_TRANSFER_ARTICLE . ';' . _MA_XMSTOCK_TRANSFER_REF . ';' . _MA_XMSTOCK_TRANSFER_TYPE . ';' . _MA_XMSTOCK_TRANSFER_DATE . ';' . _MA_XMSTOCK_TRANSFER_TIME . ';' . _MA_XMSTOCK_TRANSFER_AMOUNT . ';' . _MA_XMSTOCK_TRANSFER_DESTINATION . ';' . _MA_XMSTOCK_TRANSFER_USER . '\n');
         if ($transfer_count > 0) {
             foreach (array_keys($transfer_arr) as $i) {
                 $transfer_id               = $transfer_arr[$i]->getVar('transfer_id');
@@ -161,14 +159,12 @@ switch ($op) {
                 $transfer['code_type']     = $transfer_arr[$i]->getVar('transfer_type');
                 $transfer['needsyear']     = $transfer_arr[$i]->getVar('transfer_needsyear');
                 $transfer['user']     	   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, true);
-                $transfer['user-export']   = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_userid'), 0, false);
 				switch ($transfer_arr[$i]->getVar('transfer_type')) {
 					default:
 					case 'E':
 						$transfer['type'] 	= _MA_XMSTOCK_TRANSFER_ENTRYINSTOCK;
 						$transfer['starea'] = '';
 						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
-						$transfer['destination-export'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						break;
 
 					case 'O':
@@ -180,21 +176,17 @@ switch ($op) {
 							} else {
 								$transfer['destination'] = '';
 							}
-							$transfer['destination-export'] = $transfer['destination'];
 						} else {
 							$transfer['destination'] = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_outputuserid'), false, true);
-							$transfer['destination-export'] = XoopsUser::getUnameFromId($transfer_arr[$i]->getVar('transfer_outputuserid'), false, false);
 						}
 						break;
 
 					case 'T':
 						$transfer['type']   = _MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK;
 						$transfer['destination'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
-						$transfer['destination-export'] = _MA_XMSTOCK_TRANSFER_STOCK . $area[$transfer_arr[$i]->getVar('transfer_ar_areaid')];
 						$transfer['starea'] = $area[$transfer_arr[$i]->getVar('transfer_st_areaid')];
 						break;
 				}
-				$transfer['export'] = $transfer_id . ';' . $transfer['description'] . ';' . $transfer_arr[$i]->getVar('article_name') . '(' . $transfer_arr[$i]->getVar('article_reference') . ')' . ';' . $transfer['ref'] . ';' . $transfer['type'] . ';' . formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 's') . ';' . substr(formatTimestamp($transfer_arr[$i]->getVar('transfer_date'), 'm'), -5) . ';' . $transfer['amount'] . ';' . $transfer['destination-export'] . ';' . $transfer['user-export'] . '\n';
                 $xoopsTpl->appendByRef('transfers', $transfer);
                 unset($transfer);
             }

@@ -63,6 +63,7 @@ if (in_array($area_id, $managePermissionArea) == true){
 } else {
 	$xoopsTpl->assign('manage', false);
 }
+$xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
 // Area
 $xoopsTpl->assign('area_id', $area_id);
 $xoopsTpl->assign('name', $area->getVar('area_name'));

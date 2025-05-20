@@ -5,8 +5,8 @@
 			<li class="breadcrumb-item active" aria-current="page"><{$smarty.const._MI_XMSTOCK_SUB_OVERDRAFT}></li>
 		</ol>
 	</nav>
+	<h2 class="h2"><{$smarty.const._MI_XMSTOCK_SUB_OVERDRAFT}></h2>
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="h2"><{$smarty.const._MI_XMSTOCK_SUB_OVERDRAFT}></h2>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<div class="btn-group mr-2">
 				<label class="my-1 mr-2"><{$smarty.const._MA_XMSTOCK_STOCK_AREA}> </label>
@@ -40,6 +40,11 @@
 					<option value=100 <{if $filter == 100}>selected="selected"<{/if}>>100&nbsp;<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PERPAGE}></option>
 				</select>
 			</div>
+			<{if $export == true}>
+			<a href="<{xoAppUrl 'modules/xmstats/export.php?op=overdraft'}>" class="btn btn-sm btn-secondary">
+				<{$smarty.const._MA_XMSTOCK_VIEWPRICE_EXPORT}>
+			</a>
+			<{/if}>
 		</div>
 	</div>
 	<{if $overdraft_count|default:0 != 0}>

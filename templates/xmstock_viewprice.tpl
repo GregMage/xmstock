@@ -38,8 +38,6 @@
 	<div class="table-responsive">
 		<script>
 			addChart();
-			let export_data = '<{$smarty.const._MA_XMSTOCK_VIEWPRICE_DATE}>' + ';' + '<{$smarty.const._MA_XMSTOCK_VIEWPRICE_PRICECHF}>' + '\n';
-			let name = '<{$file_name}>';
 		</script>
 		<{foreach item=graph from=$price_graph}>
 			<script>
@@ -48,7 +46,6 @@
 					dataset.data.push(<{$graph.price}>);
 				});
 				myChart.update();
-				export_data += '<{$graph.date}>' + ';' + <{$graph.price}> + '\n';
 			</script>
 		<{/foreach}>
 		<table class="table table-striped table-sm">
