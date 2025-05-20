@@ -10,6 +10,7 @@ Améliorations:
 	- Ajout de possibilité de filtre pour les découverts.
 	- Améliortation de la description du type stockage (ajout libre service et surface)
 	- Ajout de liens d'export sur xmstats, l'ancien système d'export est supprimé.
+	- Pour plus de clarté, le terme "article" est remplacé par "composant"
 
 Sécurités:
 	- /
