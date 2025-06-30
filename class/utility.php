@@ -476,7 +476,7 @@ class XmstockUtility
 						$stock['infoloan'] = true;;
 					} else {
 						$stock['order'] = true;
-						$stock['loan'] 	= false;
+						$stock['loan'] 	= true;
 						$stock['infoloan'] = false;
 					}
 				} else {
