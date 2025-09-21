@@ -141,6 +141,8 @@ class XmstockUtility
 						$obj->setVar('stock_price', number_format($price_stock, 2, '.', ''));
 						$error_message .= self::setPrice($articleid, $ar_areaid, $amount, $price);
 					}
+					//order
+					$obj->setVar('stock_order', 0);
 					if ($error_message == '') {
 						if ($stockHandler->insert($obj)) {
 							return '';
