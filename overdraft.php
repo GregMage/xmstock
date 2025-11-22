@@ -103,7 +103,6 @@ $stockHandler->field_link = "article_id";
 $stockHandler->field_object = "stock_articleid";
 $stock_arr = $stockHandler->getByLink($criteria);
 $stock_count = $stockHandler->getCountByLink($criteria);
-
 $xoopsTpl->assign('overdraft_count', $stock_count);
 if ($stock_count > 0 && !empty($managePermissionArea)) {
 	foreach (array_keys($stock_arr) as $i) {

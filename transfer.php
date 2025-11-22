@@ -87,6 +87,9 @@ switch ($op) {
         $criteria->setSort('transfer_date');
 		$criteria->setOrder('ASC');
 		$criteria->add(new Criteria('transfer_status', 0));
+		if (!empty($managePermissionArea)) {
+			$criteria->add(new Criteria('transfer_ar_areaid', '(' . implode(',', $managePermissionArea) . ')', 'IN'));
+		}
 		$transferHandler->table_link = $transferHandler->db->prefix("xmarticle_article");
         $transferHandler->field_link = "article_id";
         $transferHandler->field_object = "transfer_articleid";
