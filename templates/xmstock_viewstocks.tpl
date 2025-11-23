@@ -41,6 +41,9 @@
 							<a href="<{$xoops_url}>/modules/xmstock/caddy.php?op=add&amp;article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>" class="btn btn-light btn-sm <{if $stock.permorder|default:0 == 1}>disabled<{/if}>"><span class="fa fa-shopping-cart"></span> <{$smarty.const._MA_XMSTOCK_LOAN}></a>
 							<{/if}>
 						<{/if}>
+						<{if $stock.outflow == true && $stock.amount != 0}>
+							<a href="<{$xoops_url}>/modules/xmstock/transfer.php?op=add&type=O&article_id=<{$article_id}>&amp;area_id=<{$stock.area_id}>&outflow=true" class="btn btn-light btn-sm" title="<{$smarty.const._MA_XMSTOCK_TRANSFER_OUTFLOW}>"><span class="fa fa-sign-out"></span> <{$smarty.const._MA_XMSTOCK_TRANSFER_OUTFLOW}></a>
+						<{/if}>
 					</div>
 					<div class="col-2 text-center">
 						<{if $stock.manage|default:false == true}>

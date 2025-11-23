@@ -27,6 +27,7 @@ define('_MA_XMSTOCK_STOCK_LIST', 'stock list');
 define('_MA_XMSTOCK_TRANSFER_ENTRYINSTOCK', 'Entry in stock');
 define('_MA_XMSTOCK_TRANSFER_LIST', 'Transfer list');
 define('_MA_XMSTOCK_TRANSFER_OUTOFSTOCK', 'Out of stock');
+define('_MA_XMSTOCK_TRANSFER_OUTFLOW', 'Sortie directe');
 define('_MA_XMSTOCK_TRANSFER_TRANSFEROFSTOCK', 'Transfer of stock');
 
 // Shared
@@ -186,10 +187,13 @@ define('_MA_XMSTOCK_PERMISSION_MANAGE', 'Manage Permissions');
 define('_MA_XMSTOCK_PERMISSION_MANAGE_DSC', 'Select groups that can manage this area');
 define('_MA_XMSTOCK_PERMISSION_ORDER', 'Order permission');
 define('_MA_XMSTOCK_PERMISSION_ORDER_DSC', 'Select groups that can order an article in this area');
+define('_MA_XMSTOCK_PERMISSION_OUTFLOW', 'Autorisation de sortie de stock direct');
+define('_MA_XMSTOCK_PERMISSION_OUTFLOW_DSC', 'Choisissez les groupes qui peuvent faire une sortie de stock direct des composants dans ces zones de stockage');
 define('_MA_XMSTOCK_PERMISSION_OTHER', 'Other permissions');
 define('_MA_XMSTOCK_PERMISSION_OTHER_DSC', 'Select groups that can:');
 define('_MA_XMSTOCK_PERMISSION_OTHER_4', 'Permission de voir le prix');
 define('_MA_XMSTOCK_PERMISSION_OTHER_8', 'Permission de voir les statistiques prix');
+define('_MA_XMSTOCK_PERMISSION_OTHER_16', 'Permission de faire des sorties de stock');
 define('_MA_XMSTOCK_PERMISSION_VIEW', 'View Permissions');
 define('_MA_XMSTOCK_PERMISSION_VIEW_DSC', 'Select groups that can view in this area');
 

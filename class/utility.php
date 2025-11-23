@@ -430,6 +430,8 @@ class XmstockUtility
 		$orderPermissionArea = self::getPermissionArea('xmstock_order');
 		// Get Permission to manage
 		$managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+		// Get Permission to outflow
+		$outflowPermissionArea = XmstockUtility::getPermissionArea('xmstock_outflow');
 
 		$area = array();
 
@@ -490,6 +492,11 @@ class XmstockUtility
 					$stock['manage']  	= true;
 				} else {
 					$stock['manage']  	= false;
+				}
+				if (in_array($stock['area_id'], $outflowPermissionArea) == true){
+					$stock['outflow']  	= true;
+				} else {
+					$stock['outflow']  	= false;
 				}
 				if ($stock['type'] != 4) {
 					$total_amount += $stock_arr[$i]->getVar('stock_amount');

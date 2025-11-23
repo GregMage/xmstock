@@ -34,10 +34,10 @@ $permission = Request::getInt('permission', 1);
 $criteria = new CriteriaCompo();
 $area_arr = $areaHandler->getall($criteria);
 if (count($area_arr) > 0) {
-    $tab_perm = array(1 => _MA_XMSTOCK_PERMISSION_MANAGE, 2 => _MA_XMSTOCK_PERMISSION_VIEW, 3 => _MA_XMSTOCK_PERMISSION_ORDER, 4 => _MA_XMSTOCK_PERMISSION_OTHER);
+    $tab_perm = array(1 => _MA_XMSTOCK_PERMISSION_MANAGE, 2 => _MA_XMSTOCK_PERMISSION_VIEW, 3 => _MA_XMSTOCK_PERMISSION_ORDER, 4 => _MA_XMSTOCK_PERMISSION_OUTFLOW, 5 => _MA_XMSTOCK_PERMISSION_OTHER);
 } else {
-    $tab_perm = [4 => _MA_XMSTOCK_PERMISSION_OTHER];
-    $permission = 4;
+    $tab_perm = [5 => _MA_XMSTOCK_PERMISSION_OTHER];
+    $permission = 5;
 }
 if (isset($tab_perm)){
     $permission_options = '';
@@ -74,7 +74,16 @@ if (isset($tab_perm)){
             }
             break;
 
-		case 4:    // Other permission
+        case 4:    // outflow permission
+            $formTitle = _MA_XMSTOCK_PERMISSION_OUTFLOW;
+            $permissionName = 'xmstock_outflow';
+            $permissionDescription = _MA_XMSTOCK_PERMISSION_OUTFLOW_DSC;
+            foreach (array_keys($area_arr) as $i) {
+                $global_perms_array[$i] = $area_arr[$i]->getVar('area_name');
+            }
+            break;
+
+		case 5:    // Other permission
 			$formTitle = _MA_XMSTOCK_PERMISSION_OTHER;
 			$permissionName = 'xmstock_other';
 			$permissionDescription = _MA_XMSTOCK_PERMISSION_OTHER_DSC;

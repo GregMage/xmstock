@@ -27,8 +27,10 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 
 // Get Permission to manage
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+// Get Permission to outflow
+$outflowPermissionArea = XmstockUtility::getPermissionArea('xmstock_outflow');
 
-if (empty($managePermissionArea)) {
+if (empty($managePermissionArea) && empty($outflowPermissionArea)) {
 	redirect_header('index.php', 2, _NOPERM);
 }
 $xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
@@ -40,6 +42,9 @@ $op = Request::getCmd('op', 'list');
 $xoopsTpl->assign('op', $op);
 switch ($op) {
     case 'list':
+		if (empty($managePermissionArea)) {
+			redirect_header('index.php', 2, _NOPERM);
+		}
         // Get start pager
         $start = Request::getInt('start', 0);
 		//filters
@@ -205,13 +210,14 @@ switch ($op) {
     case 'add':
         // Form
 		$type = Request::getString('type', 'E');
+		$outflow = Request::getBool('outflow', false);
         $obj  = $transferHandler->create();
 		$obj->setVar('transfer_articleid', Request::getInt('article_id', 0));
 		if ($type == 'E'){
 			$obj->setVar('transfer_ar_areaid', Request::getInt('area_id', 0));
 		}
 		$obj->setVar('transfer_st_areaid', Request::getInt('area_id', 0));
-        $form = $obj->getForm($type);
+        $form = $obj->getForm($type, 1, $outflow);
 		$xoopsTpl->assign('type', $type);
 		$payload = array(
             'aud' => 'stockajax.php',
@@ -267,12 +273,17 @@ switch ($op) {
             redirect_header('transfer.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         $transfer_id = Request::getInt('transfer_id', 0);
+		$outflow = Request::getBool('outflow', false);
         if ($transfer_id == 0) {
             $obj = $transferHandler->create();
         } else {
             $obj = $transferHandler->get($transfer_id);
         }
-        $error_message = $obj->saveTransfer($transferHandler, 'transfer.php');
+		if ($outflow == true){
+			$error_message = $obj->saveTransfer($transferHandler, 'index.php');
+		} else {
+			$error_message = $obj->saveTransfer($transferHandler, 'transfer.php');
+		}
         if ($error_message != ''){
             $xoopsTpl->assign('error_message', $error_message);
 			$payload = array(

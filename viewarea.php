@@ -39,6 +39,8 @@ $permHelper->checkPermissionRedirect('xmstock_view', $area_id, 'index.php', 2, _
 $orderPermissionArea = XmstockUtility::getPermissionArea('xmstock_order');
 // Get Permission to manage
 $managePermissionArea = XmstockUtility::getPermissionArea('xmstock_manage');
+// Get Permission to outflow
+$outflowPermissionArea = XmstockUtility::getPermissionArea('xmstock_outflow');
 
 $area  = $areaHandler->get($area_id);
 
@@ -62,6 +64,12 @@ if (in_array($area_id, $managePermissionArea) == true){
 	$xoopsTpl->assign('manage', true);
 } else {
 	$xoopsTpl->assign('manage', false);
+}
+
+if (in_array($area_id, $outflowPermissionArea) == true){
+	$xoopsTpl->assign('outflow', true);
+} else {
+	$xoopsTpl->assign('outflow', false);
 }
 $xoopsTpl->assign('export', xoops_isActiveModule('xmstats'));
 // Area

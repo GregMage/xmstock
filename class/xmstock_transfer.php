@@ -212,7 +212,7 @@ class xmstock_transfer extends XoopsObject
      * @param bool $action
      * @return XoopsThemeForm
      */
-    public function getForm($type = 'E', $status = 1, $action = false)
+    public function getForm($type = 'E', $status = 1, $outflow = false, $action = false)
     {
         $helper = \Xmf\Module\Helper::getHelper('xmstock');
         if ($action === false) {
@@ -221,7 +221,7 @@ class xmstock_transfer extends XoopsObject
         include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         include __DIR__ . '/../include/common.php';
 		include __DIR__ . '/formselectstock.php';
-
+		global $xoopsUser;
         //form title
 		switch($type) {
 			case 'E':
@@ -245,9 +245,11 @@ class xmstock_transfer extends XoopsObject
 			if (empty($transfer_stocktype)){
 				$transfer_stocktype = 1;
 			}
+			$outputuserid = $this->getVar('transfer_outputuserid');
         } else {
 			$price = 0;
 			$transfer_stocktype = 1;
+			$outputuserid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
 		}
 		if ($status == 1) {
 			//articleid
@@ -267,7 +269,11 @@ class xmstock_transfer extends XoopsObject
 
 			if ($type != 'E'){
 				// st_areaid
-				$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true, true), true);
+				if ($outflow == true){
+					$form->addElement(new XoopsFormHidden('transfer_st_areaid', $this->getVar('transfer_st_areaid')));
+				} else {
+					$form->addElement(new XmstockFormSelectArea(_MA_XMSTOCK_TRANSFER_STAREA, 'transfer_st_areaid', $this->getVar('transfer_st_areaid'), true, true), true);
+				}
 			} else {
 				$form->addElement(new XoopsFormHidden('transfer_st_areaid', 0));
 			}
@@ -285,13 +291,18 @@ class xmstock_transfer extends XoopsObject
 
 			if ($type == 'O'){
 				// outputid
-				$output 		= new XoopsFormElementTray(_MA_XMSTOCK_TRANSFER_OUTPUT, '');
-				$outputid 		= new XmstockFormSelectOutput(_MA_XMSTOCK_TRANSFER_OUTPUTID, 'transfer_outputid', $this->getVar('transfer_outputid'), true);
-				$outputuserid 	= new XoopsFormSelectUser(_MA_XMSTOCK_TRANSFER_OUTPUTUSERID, 'transfer_outputuserid', true, $this->getVar('transfer_outputuserid'));
-				$output->addElement($outputid);
-				$output->addElement($outputuserid);
-				$output->setDescription(_MA_XMSTOCK_TRANSFER_OUTPUT_DSC);
-				$form->addElement($output);
+				if ($outflow == true){
+					$form->addElement(new XoopsFormHidden('transfer_outputid', 0));
+					$form->addElement(new XoopsFormHidden('transfer_outputuserid', $outputuserid));
+				} else {
+					$output 		= new XoopsFormElementTray(_MA_XMSTOCK_TRANSFER_OUTPUT, '');
+					$outputid 		= new XmstockFormSelectOutput(_MA_XMSTOCK_TRANSFER_OUTPUTID, 'transfer_outputid', $this->getVar('transfer_outputid'), true);
+					$outputuserid 	= new XoopsFormSelectUser(_MA_XMSTOCK_TRANSFER_OUTPUTUSERID, 'transfer_outputuserid', true, $outputuserid);
+					$output->addElement($outputid);
+					$output->addElement($outputuserid);
+					$output->setDescription(_MA_XMSTOCK_TRANSFER_OUTPUT_DSC);
+					$form->addElement($output);
+				}
 			} else {
 				$form->addElement(new XoopsFormHidden('transfer_outputid', 0));
 				$form->addElement(new XoopsFormHidden('transfer_outputuserid', 0));
@@ -372,6 +383,7 @@ class xmstock_transfer extends XoopsObject
 		}
 		$form->addElement(new XoopsFormHidden('transfer_type', $type));
 		$form->addElement(new XoopsFormHidden('transfer_status', $status));
+		$form->addElement(new XoopsFormHidden('outflow', $outflow));
         $form->addElement(new XoopsFormHidden('op', 'save'));
         // submit
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
