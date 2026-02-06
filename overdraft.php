@@ -112,7 +112,8 @@ if ($stock_count > 0 && !empty($managePermissionArea)) {
 		$overdraft['article_ref']	= $stock_arr[$i]->getVar('article_reference');
 		$overdraft['area_name']		= $area[$stock_arr[$i]->getVar('stock_areaid')];
 		$overdraft['amount']		= $stock_arr[$i]->getVar('stock_amount');
-		$overdraft['mini']	= $stock_arr[$i]->getVar('stock_mini');
+		$overdraft['mini']			= $stock_arr[$i]->getVar('stock_mini');
+		$overdraft['type'] 			= $stock_arr[$i]->getVar('stock_type');
 		$xoopsTpl->appendByRef('overdrafts', $overdraft);
 		unset($overdraft);
 	}

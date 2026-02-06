@@ -208,6 +208,7 @@ function block_xmstock_show($options) {
 					$stock['area_name']   	= $area[$stock_arr[$i]->getVar('stock_areaid')];
 					$stock['amount']        = $stock_arr[$i]->getVar('stock_amount');
 					$stock['mini']   		= $stock_arr[$i]->getVar('stock_mini');
+					$stock['type']   		= $stock_arr[$i]->getVar('stock_type');
 					$block['overdraft'][] = $stock;
 					unset($stock);
 				}

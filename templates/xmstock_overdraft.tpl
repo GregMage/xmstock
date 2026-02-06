@@ -72,7 +72,7 @@
 							<{else}>
 							<span class="badge badge-pill badge-danger">
 							<{/if}>
-							<{$overdraft.amount}>/<{$overdraft.mini}>
+							<{$overdraft.amount}>/<{$overdraft.mini}> <{if $overdraft.type == 2}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}><{if $overdraft.type == 5}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}><{/if}>
 							</span>
 						</td>
 					</tr>

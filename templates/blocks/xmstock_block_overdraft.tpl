@@ -17,7 +17,7 @@
 							<{else}>
 							<span class="badge badge-pill badge-danger">
 							<{/if}>
-							<{$blockoverdraft.amount}>/<{$blockoverdraft.mini}>
+							<{$blockoverdraft.amount}>/<{$blockoverdraft.mini}> <{if $blockoverdraft.type == 2}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNIT}><{/if}><{if $blockoverdraft.type == 5}><{$smarty.const._MA_XMSTOCK_CHECKOUT_UNITS}><{/if}>
 							</span>
 						</div>
 					</div>
