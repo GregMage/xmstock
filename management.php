@@ -65,6 +65,7 @@ switch ($op) {
 			foreach (array_keys($order_1_arr) as $i) {
 				$order_1['id']              = $order_1_arr[$i]->getVar('order_id');
 				$order_1['area_name']       = $area[$order_1_arr[$i]->getVar('order_areaid')];
+				$order_1['customer']       	= XoopsUser::getUnameFromId($order_1_arr[$i]->getVar('order_userid'));
 				$order_1['ddesired']        = formatTimestamp($order_1_arr[$i]->getVar('order_ddesired'), 's');
 				$order_1['dorder']          = formatTimestamp($order_1_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_1', $order_1);
@@ -87,6 +88,7 @@ switch ($op) {
 			foreach (array_keys($order_2_arr) as $i) {
 				$order_2['id']          = $order_2_arr[$i]->getVar('order_id');
 				$order_2['area_name']   = $area[$order_2_arr[$i]->getVar('order_areaid')];
+				$order_2['customer']    = XoopsUser::getUnameFromId($order_2_arr[$i]->getVar('order_userid'));
 				$order_2['delivery']    = formatTimestamp($order_2_arr[$i]->getVar('order_ddelivery'), 's');
 				$order_2['dorder']      = formatTimestamp($order_2_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_2', $order_2);
@@ -109,6 +111,7 @@ switch ($op) {
 			foreach (array_keys($order_3_arr) as $i) {
 				$order_3['id']              = $order_3_arr[$i]->getVar('order_id');
 				$order_3['area_name']       = $area[$order_3_arr[$i]->getVar('order_areaid')];
+				$order_3['customer']       	= XoopsUser::getUnameFromId($order_3_arr[$i]->getVar('order_userid'));
 				$order_3['dready']        	= formatTimestamp($order_3_arr[$i]->getVar('order_dready'), 's');
 				$order_3['dorder']          = formatTimestamp($order_3_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_3', $order_3);
@@ -131,6 +134,7 @@ switch ($op) {
 			foreach (array_keys($order_4_arr) as $i) {
 				$order_4['id']              = $order_4_arr[$i]->getVar('order_id');
 				$order_4['area_name']       = $area[$order_4_arr[$i]->getVar('order_areaid')];
+				$order_4['customer']       	= XoopsUser::getUnameFromId($order_4_arr[$i]->getVar('order_userid'));
 				$order_4['delivery_r']  	= formatTimestamp($order_4_arr[$i]->getVar('order_ddelivery_r'), 's');
 				$order_4['dorder']          = formatTimestamp($order_4_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_4', $order_4);
@@ -153,6 +157,7 @@ switch ($op) {
 			foreach (array_keys($order_0_arr) as $i) {
 				$order_0['id']              = $order_0_arr[$i]->getVar('order_id');
 				$order_0['area_name']       = $area[$order_0_arr[$i]->getVar('order_areaid')];
+				$order_0['customer']        = XoopsUser::getUnameFromId($order_0_arr[$i]->getVar('order_userid'));
 				$order_0['dcancellation']   = formatTimestamp($order_0_arr[$i]->getVar('order_dcancellation'), 's');
 				$order_0['dorder']          = formatTimestamp($order_0_arr[$i]->getVar('order_dorder'), 's');
 				$xoopsTpl->appendByRef('orders_0', $order_0);

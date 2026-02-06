@@ -40,6 +40,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_AREA}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDESIRED}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
@@ -50,6 +51,7 @@
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_1.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_1.id}></a></th>
 											<td class="text-center"><span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$order_1.area_name}></td>
+											<td class="text-center"><{$order_1.customer}></td>
 											<td class="text-center"><{$order_1.dorder}></td>
 											<td class="text-center"><{$order_1.ddesired}></td>
 											<td class="text-center">
@@ -81,6 +83,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_AREA}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
@@ -91,6 +94,7 @@
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_2.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_2.id}></a></th>
 											<td class="text-center"><span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$order_2.area_name}></td>
+											<td class="text-center"><{$order_2.customer}></td>
 											<td class="text-center"><{$order_2.dorder}></td>
 											<td class="text-center"><{$order_2.delivery}></td>
 											<td class="text-center">
@@ -122,6 +126,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_AREA}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEREADY}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
@@ -132,6 +137,7 @@
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_3.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_3.id}></a></th>
 											<td class="text-center"><span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$order_3.area_name}></td>
+											<td class="text-center"><{$order_3.customer}></td>
 											<td class="text-center"><{$order_3.dorder}></td>
 											<td class="text-center"><{$order_3.dready}></td>
 											<td class="text-center">
@@ -162,6 +168,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_AREA}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEDELIVERYWITHDRAWAL_R}> <span class="fa fa-long-arrow-down"></th>
 										</tr>
@@ -171,6 +178,7 @@
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_4.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_4.id}></a></th>
 											<td class="text-center"><span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$order_4.area_name}></td>
+											<td class="text-center"><{$order_4.customer}></td>
 											<td class="text-center"><{$order_4.dorder}></td>
 											<td class="text-center"><{$order_4.delivery_r}></td>
 										</tr>
@@ -198,6 +206,7 @@
 										<tr>
 											<th class="text-center" scope="col">#</th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_AREA}></th>
+											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_MANAGEMENT_CUSTOMER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATEORDER}></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ORDER_DATECANCELLATION}> <span class="fa fa-long-arrow-down"></th>
 											<th class="text-center" scope="col"><{$smarty.const._MA_XMSTOCK_ACTION}></th>
@@ -208,6 +217,7 @@
 										<tr>
 											<th class="text-center" scope="row"><a href="<{$xoops_url}>/modules/xmstock/vieworder.php?op=view&order_id=<{$order_0.id}>&opt=man" title="<{$smarty.const._MA_XMSTOCK_VIEW}>" target="_blank"><{$order_0.id}></a></th>
 											<td class="text-center"><span class="fa fa-folder-o fa-fw" aria-hidden="true"></span><{$order_0.area_name}></td>
+											<td class="text-center"><{$order_0.customer}></td>
 											<td class="text-center"><{$order_0.dorder}></td>
 											<td class="text-center"><{$order_0.dcancellation}></td>
 											<td class="text-center">
