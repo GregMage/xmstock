@@ -69,6 +69,7 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTACTIVATE', 'Vous devez activer 
 // Error message
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'Amount must be a number');
 define('_MA_XMSTOCK_ERROR_ARTICLEID', 'There is no article selected');
+define('_MA_XMSTOCK_ERROR_DELSTOCK', 'You cannot delete this stock because there are orders in progress for this stock!');
 define('_MA_XMSTOCK_ERROR_LOCATION', 'L\'emplacement n\'est pas défini');
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Error: Disable content!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'There are no areas in the database');

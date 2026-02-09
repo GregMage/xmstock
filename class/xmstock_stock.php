@@ -151,19 +151,36 @@ class xmstock_stock extends XoopsObject
 
         if ($error_message == '') {
             if ($del == 1) {
-                //on vide la table de prix
+                // on vérifie si il n'y a pas de commandes en cours pour ce stock
                 $criteria = new CriteriaCompo();
-                $criteria->add(new Criteria('price_areaid', $this->getVar('stock_areaid')));
-                $criteria->add(new Criteria('price_articleid', $this->getVar('stock_articleid')));
-                $price_count = $priceHandler->getCount($criteria);
-                if ($price_count > 0) {
-                    $priceHandler->deleteAll($criteria);
-                }
-                // on enlève la ligne dans le stock
-                if ($stockHandler->delete($this)) {
-                    redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
-                }  else {
-                    $error_message =  $this->getHtmlErrors();
+                $criteria->add(new Criteria('itemorder_areaid', $this->getVar('stock_areaid')));
+                $criteria->add(new Criteria('itemorder_articleid', $this->getVar('stock_articleid')));
+                $criteria->add(new Criteria('order_status', '(1,2)', 'IN'));
+                $itemorderHandler->table_link = $itemorderHandler->db->prefix('xmstock_order');
+                $itemorderHandler->field_link = 'order_id';
+                $itemorderHandler->field_object = 'itemorder_orderid';
+                $order_arr = $itemorderHandler->getByLink($criteria);
+                echo 'order_count : ' . count($order_arr);
+                if (count($order_arr) > 0) {
+                    $error_message .= _MA_XMSTOCK_ERROR_DELSTOCK . '<br>';
+                    foreach (array_keys($order_arr) as $i) {
+                        $error_message .= ' - ' . sprintf(_MA_XMSTOCK_ORDER_ORDER, $order_arr[$i]->getVar('itemorder_orderid')) . '<br>';
+                    }
+                } else {
+                    //on vide la table de prix
+                    $criteria = new CriteriaCompo();
+                    $criteria->add(new Criteria('price_areaid', $this->getVar('stock_areaid')));
+                    $criteria->add(new Criteria('price_articleid', $this->getVar('stock_articleid')));
+                    $price_count = $priceHandler->getCount($criteria);
+                    if ($price_count > 0) {
+                        $priceHandler->deleteAll($criteria);
+                    }
+                    // on enlève la ligne dans le stock
+                    if ($stockHandler->delete($this)) {
+                        redirect_header($action, 2, _MA_XMSTOCK_REDIRECT_SAVE);
+                    }  else {
+                        $error_message =  $this->getHtmlErrors();
+                    }
                 }
             } else {
                 if ($stockHandler->insert($this)) {

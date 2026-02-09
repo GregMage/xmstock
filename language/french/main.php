@@ -69,6 +69,7 @@ define('_MA_XMSTOCK_INDEXCONFIG_XMPROD_WARNINGNOTACTIVATE', 'Vous devez activer 
 // Error message
 define('_MA_XMSTOCK_ERROR_AMOUNT', 'La Quantité doit être un nombre');
 define('_MA_XMSTOCK_ERROR_ARTICLEID', 'Il n\'y a pas de composant sélectionné');
+define('_MA_XMSTOCK_ERROR_DELSTOCK', 'Vous ne pouvez pas supprimer ce stock car des commandes en cours existent pour ce stock!');
 define('_MA_XMSTOCK_ERROR_LOCATION', 'L\'emplacement n\'est pas défini');
 define('_MA_XMSTOCK_ERROR_NACTIVE', 'Erreur: Le contenu est désactivé!');
 define('_MA_XMSTOCK_ERROR_NOAREA', 'Il n\'y a pas de zones de stockage dans la base de données');
